@@ -8,5 +8,11 @@ To run / build the environment
 ```console
 $ npm run build
 
-```
+```  
+
+To deploy to firebase hosting / build the environment  
+```console  
+$ firebase deploy --only hosting  
+
+```  
 
