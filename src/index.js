@@ -13,4 +13,4 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig)
 
-console.log('hello from index.js');
+console.log('hello from index.js tucked away');
