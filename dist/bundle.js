@@ -30,13 +30,33 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/footer.html":
+/*!*************************!*\
+  !*** ./src/footer.html ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n// Module\nvar code = \"<p>Startup Studio Footer</p>\";\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);\n\n//# sourceURL=webpack://startup-agency/./src/footer.html?");
+
+/***/ }),
+
+/***/ "./src/header.html":
+/*!*************************!*\
+  !*** ./src/header.html ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n// Module\nvar code = \"<h1>Startup Agency Placeholder Page</h1>\";\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);\n\n//# sourceURL=webpack://startup-agency/./src/header.html?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/index.esm.js\");\n// For Firebase JS SDK v7.20.0 and later, measurementId is optional\n\n\nconst firebaseConfig = {\n  apiKey: \"AIzaSyAq7-QGjZ8O1RVe_seOfdYjVLCjLdwrHYE\",\n  authDomain: \"studio-freelancer-agency.firebaseapp.com\",\n  projectId: \"studio-freelancer-agency\",\n  storageBucket: \"studio-freelancer-agency.appspot.com\",\n  messagingSenderId: \"487647550435\",\n  appId: \"1:487647550435:web:474b8fb15c9412fb005ed6\",\n  measurementId: \"G-TXX5XFWWN6\"\n};\n\n(0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig)\n\nconsole.log('hello from index.js tucked away');\n\n//# sourceURL=webpack://startup-agency/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _header_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./header.html */ \"./src/header.html\");\n/* harmony import */ var _footer_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./footer.html */ \"./src/footer.html\");\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/index.esm.js\");\n\n\ndocument.getElementById(\"header\").innerHTML = _header_html__WEBPACK_IMPORTED_MODULE_0__[\"default\"];\ndocument.getElementById(\"footer\").innerHTML = _footer_html__WEBPACK_IMPORTED_MODULE_1__[\"default\"];\n\n\n// For Firebase JS SDK v7.20.0 and later, measurementId is optional\n\n\nconst firebaseConfig = {\n  apiKey: \"AIzaSyAq7-QGjZ8O1RVe_seOfdYjVLCjLdwrHYE\",\n  authDomain: \"studio-freelancer-agency.firebaseapp.com\",\n  projectId: \"studio-freelancer-agency\",\n  storageBucket: \"studio-freelancer-agency.appspot.com\",\n  messagingSenderId: \"487647550435\",\n  appId: \"1:487647550435:web:474b8fb15c9412fb005ed6\",\n  measurementId: \"G-TXX5XFWWN6\"\n};\n\n(0,firebase_app__WEBPACK_IMPORTED_MODULE_2__.initializeApp)(firebaseConfig)\n\nconsole.log('hello from index.js tucked away');\n\n//# sourceURL=webpack://startup-agency/./src/index.js?");
 
 /***/ }),
 

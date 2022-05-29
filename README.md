@@ -16,6 +16,9 @@ $ firebase deploy --only hosting
 
 ```  
 
+## Live web site  
+https://studio-freelancer-agency.web.app/  
+
 ## Tutorials
 Setup the local devlopment environment:  
 Follow video 1 & 2  
