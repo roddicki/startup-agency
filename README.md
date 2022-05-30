@@ -23,3 +23,6 @@ https://studio-freelancer-agency.web.app/
 Setup the local devlopment environment:  
 Follow video 1 & 2  
 https://youtu.be/9zdvmgGsww0  
+
+Also install the webpack html-loader  
+https://webpack.js.org/loaders/html-loader/  
