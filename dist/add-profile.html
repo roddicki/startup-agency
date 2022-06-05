@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- image uploader -->
+  <link rel="stylesheet" href="image-uploader/image-uploader.min.css">
+  <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <title>Startup Agency - build profile</title>
+</head>
+
+<body>
+
+<header id="header">
+    <!-- header + nav from src/header.html -->
+</header>
+
+
+
+<div class="container">
+  <div>
+    <h2>Welcome <span class='welcome-name'></span>, thanks for registering</h2>
+    <h2>Why not build your profile</h2>
+
+    <form class="addbio">
+      <div class="input-field form-group">
+          <label class="active">Add images of your work</label>
+          <div class="input-images-1" style="padding-top: .5rem;"></div>
+      </div>
+      
+
+      <div class="form-group">
+        <label for="bio">Add a bio</label>
+        <textarea class="form-control" name="bio" id="bio"  placeholder="Add bio" rows="5"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="website">Add a link to your web site</label>
+        <input type="text" class="form-control" name="website" id="website"  placeholder="https://www.mywebsite.com">
+      </div>
+      <button type="button" class="btn btn-outline-primary show-preview" data-bs-toggle="modal" data-bs-target="#exampleModal">Profile preview</button>
+      <button class="btn btn-primary">Submit</button>
+    </form> 
+  </div>
+
+</div>
+
+<!-- preview modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="exampleModalLabel">Preview only</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h5 class="modal-title" id="exampleModalLabel">Profile page placeholder</h5>
+        <div class="gallery"></div>
+        <div class="bio"></div>
+        <div class="link"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer id="footer">
+  <!-- footer from src/footer.html -->
+</footer>
+
+
+  
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!-- image uploader -->
+<script type="text/javascript" src="image-uploader/image-uploader.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('.input-images-1').imageUploader();
+
+    const previewBtn = document.querySelector('.show-preview');
+    const profileForm = document.querySelector('.addbio');
+    const gallery = document.querySelector('.gallery');
+    const bio = document.querySelector('.bio');
+    const link = document.querySelector('.link');
+
+
+    function buildPreview(){
+      const imageDivs = document.querySelectorAll('.uploaded-image');
+      gallery.innerHTML = "";
+
+      for (var i = 0; i < imageDivs.length; i++) {
+        console.log(imageDivs[i].querySelector('img').src);
+        let image = document.createElement('img');
+        image.src = imageDivs[i].querySelector('img').src;
+        image.className = 'img-fluid';
+        image.style = 'width:25%;padding: 10px';
+        
+        gallery.appendChild(image);
+      }
+
+      bio.innerHTML = profileForm.bio.value;
+      link.innerHTML = profileForm.website.value;
+    }
+    
+    previewBtn.addEventListener('click', buildPreview)
+
+  });
+</script>
+<!-- custom JS -->
+<script src="bundle.js"></script>
+</body>

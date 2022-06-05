@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <title>Startup Agency</title>
+</head>
+
+<body>
+
+<header id="header">
+    <!-- header + nav from src/header.html -->
+</header>
+
+
+<div class="container">
+  <div>
+    <h2>Sign up</h2>
+    <form class="signup">
+      <div class="form-group">
+        <label for="forename">First name</label>
+        <input type="text" class="form-control" name="forename" id="forename"  placeholder="Enter first name">
+      </div>
+
+      <div class="form-group">
+        <label for="surname">Surname</label>
+        <input type="text" class="form-control" name="surname" id="surname" placeholder="Enter surname">
+      </div>
+
+      <div class="form-group">
+        <label for="studentid">Student ID</label>
+        <input type="text" class="form-control" name="studentid" id="studentid" placeholder="Enter student ID">
+      </div>
+
+      <div class="form-group">
+        <label for="course">Course studied</label>
+        <input type="text" class="form-control" name="course" id="course" placeholder="Enter course name">
+      </div>
+
+      <div class="form-group">
+        <label for="graduation">Graduation year</label>
+        <input type="number" class="form-control" name="graduation" id="graduation" maxlength="4" placeholder="2021">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone no</label>
+        <input type="number" class="form-control" name="phone" id="phone" placeholder="Enter phone number">
+      </div>
+    
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+      </div>
+
+      <button class="btn btn-primary">Signup</button>
+    </form> 
+  </div>
+
+
+  <div>
+    <h2>Sign in</h2>
+    <form class="login">
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+      </div>
+    
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+      </div>
+
+      <button class="btn btn-primary">Login</button>
+    </form>
+  </div>
+
+</div>
+
+
+<footer id="footer">
+  <!-- footer from src/footer.html -->
+</footer>
+
+
+  
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!-- custom JS -->
+<script src="bundle.js"></script>
+</body>
