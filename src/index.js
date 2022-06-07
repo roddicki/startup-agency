@@ -26,10 +26,13 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 const auth = getAuth();
 
+let currentUserData = {};
+
 //*****************************************
 // sign up user
 function signUpUser(e) {
   e.preventDefault();
+  const signupForm = document.querySelector('.signup');
   let email = signupForm.email.value;
   let password = signupForm.password.value;
   createUserWithEmailAndPassword(auth, email, password)
@@ -37,7 +40,6 @@ function signUpUser(e) {
         console.log('user created:', cred.user);
         // create doc for user
         createUserDoc(cred.user.uid, email);
-        signupForm.reset();
       })
       .catch(function(err) {
         console.log(err.message);
@@ -47,6 +49,7 @@ function signUpUser(e) {
 // create doc for user
 function createUserDoc(uid, userEmail) {
   console.log(uid, userEmail);
+  const signupForm = document.querySelector('.signup');
   setDoc(doc(db, "users", uid), {
     forename: signupForm.forename.value,
     surname: signupForm.surname.value,
@@ -72,24 +75,28 @@ function signOutUser(e) {
   signOut(auth)
     .then(function(){
       console.log("Signed out");
+      // go to add profile on completion
+      window.location.href = "index.html";
     })
 }
 
+// >> TO DO - go to profile page 
 // login
 function signInUser(e) {
   e.preventDefault();
-    let email = loginForm.email.value;
-    let password = loginForm.password.value;
-    signInWithEmailAndPassword(auth, email, password)
-      .then(function(cred){
-        console.log("Signed in", cred.user);
-        loginForm.reset();
-        // go to profile page
-        
-      })
+  const loginForm = document.querySelector('.login');
+  let email = loginForm.email.value;
+  let password = loginForm.password.value;
+  signInWithEmailAndPassword(auth, email, password)
+    .then(function(cred){
+      console.log("Signed in", cred.user);
+      loginForm.reset();
+      // go to profile page
+      
+    })
 }
 
-
+// >> TO DO add getCurrentUserDetails to update currentUserData
 // on login state change
 onAuthStateChanged(auth, function(user) {
   if (user) {
@@ -140,23 +147,17 @@ async function getUserUid() {
 }
 
 
-async function getCurrentUserName(uid) {
-  // match a single doc in the collection
-  //let uid = 'SI3PcDZK8LRPhuugHP91SixwrGt1';//auth.currentUser.uid;
+async function getCurrentUserDetails(uid) {
   const docRef = doc(db, 'users', uid);
   const singleDoc = await getDoc(docRef);
-
   if (singleDoc.exists()) {
     console.log("Document data:", singleDoc.data());
-    return singleDoc.data().forename;
+    currentUserData = singleDoc.data();
+    return singleDoc.data();
   } else {
     // doc.data() will be undefined in this case
     console.log("No such document!");
   }
-  /*getDoc(docRef)
-  .then(function(doc){
-    console.log(doc.data(), doc.id);
-  })*/
 }
 
 // add user data to the user's doc
@@ -257,15 +258,39 @@ function showSignedOutUser() {
   }
 }
 
-//add-profile page
-/*function showSignedInName() {
+// show profile preview
+function buildPreview(){
+  const profileForm = document.querySelector('.addbio');
+  const gallery = document.querySelector('.gallery');
+  const bio = document.querySelector('.bio');
+  const link = document.querySelector('.link');
+  const userData = document.querySelector('.user-data');
+  const imageDivs = document.querySelectorAll('.uploaded-image');
+  gallery.innerHTML = "";
 
-}*/
+  for (var i = 0; i < imageDivs.length; i++) {
+    let image = document.createElement('img');
+    image.src = imageDivs[i].querySelector('img').src;
+    image.className = 'img-fluid';
+    image.style = 'width:25%;padding:10px;';
+    
+    gallery.appendChild(image);
+  }
+
+  bio.innerHTML = profileForm.bio.value;
+  link.innerHTML = profileForm.website.value;
+  let data = "";
+  for (const property in currentUserData) {
+    data += `${property}: ${currentUserData[property]}<br>`
+  }
+  userData.innerHTML = data;
+}
 
 //===========DOM ELEMENTS===================
+const page = document.body.getAttribute('data-page');
 const logOut = document.querySelector('.sign-out');
-const loginForm = document.querySelector('.login');
-const signupForm = document.querySelector('.signup');
+//const loginForm = document.querySelector('.login');
+//const signupForm = document.querySelector('.signup');
 const userSection = document.querySelector('.user-data');
 const addUserDataForm = document.querySelector('.add-user-data');
 const allUserData = document.querySelector('.all-user-data');
@@ -276,33 +301,33 @@ const signedInName = document.querySelector('.welcome-name');
 
 //===========EVENT LISTENERS===================
 
-// general
+// general all pages
 if (logOut) {
   logOut.addEventListener('click', signOutUser);
 }
 
-if (loginForm) {
+// login page
+if (page == "login") {
+  console.log("login page");
+  const loginForm = document.querySelector('.login');
+  loginForm.addEventListener('submit', signInUser);
+
+  const signupForm = document.querySelector('.signup');
+  signupForm.addEventListener('submit', signUpUser);
+};
+
+/*if (loginForm) {
   loginForm.addEventListener('submit', signInUser);
 }
 if (signupForm) {
   signupForm.addEventListener('submit', signUpUser);
-}
+}*/
 //addUserDataForm.addEventListener('submit', addUserData);
 
+//===========PAGE SPECIFIC EVENT LISTENERS===================
 
-// show name on page load on add-profile page
-onAuthStateChanged(auth, function(user) {
-  if (user) {
-      // User logged in already or has just logged in.
-      console.log(user.uid, "user x logged in");
-      getCurrentUserName(user.uid).then(function(vals){
-        if (signedInName) {
-          signedInName.innerHTML = vals;
-        }
-      });
-    } 
-})
 
+// edit this so it is page specific
 // add listeners if dom element present
 window.addEventListener('DOMContentLoaded', function(){
   //getTag();
@@ -311,7 +336,29 @@ window.addEventListener('DOMContentLoaded', function(){
       displayAllUserData(userData);
     });
   }
-
 });
+
+
+// add profile page code
+if (page == "add-profile") {
+  // show name on page load on add-profile page
+  onAuthStateChanged(auth, function(user) {
+    if (user) {
+        // User logged in already or has just logged in.
+        console.log(user.uid, "user x logged in");
+        getCurrentUserDetails(user.uid).then(function(vals){
+          if (signedInName) {
+            signedInName.innerHTML = vals.forename;
+            console.log(currentUserData);
+          }
+        });
+      } 
+  })
+
+  // show profile preview 
+  const previewBtn = document.querySelector('.show-preview');
+  previewBtn.addEventListener('click', buildPreview);
+}
+
 
 console.log('hello from index.js tucked at the bottom');
