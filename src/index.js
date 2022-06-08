@@ -286,7 +286,66 @@ function buildPreview(){
   userData.innerHTML = data;
 }
 
+// create tag checkboxes
+function createTagCheckboxes() {
+  let checkboxContainer = document.querySelector("#tag-checkboxes");
+  for (var i = 0; i < tags.length; i++) {
+    let str = tags[i].replaceAll("-", ' ');
+    let div = document.createElement("div");
+    div.className = "form-check";
+
+    let checkbox = document.createElement("input");
+    checkbox.className = "form-check-input";
+    checkbox.type = "checkbox";
+    checkbox.value = "";
+    checkbox.dataset.label = tags[i];
+    checkbox.name = "tag"+tags[i];
+    checkbox.id = "tag"+tags[i];
+    checkbox.onchange = addTagBadge;
+
+    let label = document.createElement("label");
+    label.className = "form-check-label";
+    label.for = "tag"+tags[i];
+    label.innerHTML = str;
+
+    div.appendChild(checkbox);
+    div.appendChild(label);
+
+    checkboxContainer.appendChild(div);
+  }
+}
+
+// add tag badge
+function addTagBadge(){
+  const tagList = document.querySelector('#tag-list');
+  let name = this.dataset.label;
+  let checkbox = document.querySelector("input[data-label='"+name+"']");
+  let badge;
+  if (!checkbox.checked) {
+    // remove tag
+    badge = document.querySelector("span[data-label='"+name+"']");
+    if (badge) {
+      badge.remove();
+    }
+  }
+  else {
+    // create tag
+    badge = document.createElement("span");
+    //badge.href = "#";
+    badge.className = "badge rounded-pill bg-secondary";
+    badge.style = "margin: 3px;"
+    badge.dataset.label = name;
+    badge.innerHTML = name.replaceAll("-", ' ');
+
+    tagList.appendChild(badge);
+  }
+}
+
+
 //===========DOM ELEMENTS===================
+// tag categories
+const tags = ["Animation", "Visual-Effects", "Graphic-Design", "Games-design-and-production", "Video", "Audio-production"];
+
 const page = document.body.getAttribute('data-page');
 const logOut = document.querySelector('.sign-out');
 //const loginForm = document.querySelector('.login');
@@ -339,7 +398,7 @@ window.addEventListener('DOMContentLoaded', function(){
 });
 
 
-// add profile page code
+// add-profile page code
 if (page == "add-profile") {
   // show name on page load on add-profile page
   onAuthStateChanged(auth, function(user) {
@@ -358,6 +417,12 @@ if (page == "add-profile") {
   // show profile preview 
   const previewBtn = document.querySelector('.show-preview');
   previewBtn.addEventListener('click', buildPreview);
+}
+
+// post-a-job page
+if (page == "post-job") {
+  console.log("post-job page");
+  createTagCheckboxes();
 }
 
 
