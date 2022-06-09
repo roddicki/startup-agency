@@ -21,6 +21,7 @@
   <h2>Post job </h2>
   <div>Instructions...</div>
 
+  <h3>Your Details</h3>
   <form class="jobDetails">
     <div class="form-group">
       <label for="forename">First name</label>
@@ -52,34 +53,35 @@
 
     <hr>
 
+    <h3>The Job Details</h3>
     <div class="form-group">
       <label for="title">Job Brief Title</label>
       <input type="text" class="form-control" name="title" id="title" placeholder="eg: Animator wanted for advert">
     </div>
 
     <div class="form-group">
-      <label for="short-description">Short description</label>
-      <textarea class="form-control" name="short-description" id="short-description"  placeholder="Add the who, what, where, when" rows="5"></textarea>
-      <small id="short-description-help" class="form-text text-muted">The who, what, where in a sentence.</small>
+      <label for="shortdescription">Short description</label>
+      <textarea class="form-control" name="shortdescription" id="shortdescription"  placeholder="Add the who, what, where, when" rows="5"></textarea>
+      <small id="shortdescription-help" class="form-text text-muted">The who, what, where in a sentence.</small>
     </div>
 
     <div class="form-group">
-      <label for="long-description">Long description</label>
-      <textarea class="form-control" name="long-description" id="long-description"  placeholder="Add more details" rows="15"></textarea>
-      <small id="long-description-help" class="form-text text-muted">Long description intructions.</small>
+      <label for="longdescription">Long description</label>
+      <textarea class="form-control" name="longdescription" id="longdescription"  placeholder="Add more details" rows="15"></textarea>
+      <small id="longdescription-help" class="form-text text-muted">Long description intructions.</small>
     </div>
     
     <!-- tags -->
     <div class="form-group">
-      <label for="tags">tag the skills that you are looking for</label>
+      <label for="tags">Tag and add the skills that the job requires</label>
       <div>
-         <small id="long-description-help" class="form-text text-muted">We use your tags to source the best suited freelancers. We only send job briefs out to freelancers that have the required skills and knowledge; this way you know that every proposal you recieve will be applicable and tailored. i.e. Animation, rigging .</small>
+         <small id="tags-help" class="form-text text-muted">We use your tags to source the best suited freelancers. We only send job briefs out to freelancers that have the required skills and knowledge; this way you know that every proposal you recieve will be applicable and tailored. i.e. Animation, rigging .</small>
       </div>
      
       <div class="tags" id="tag-list"></div>
       <div>
         <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#add-tags" aria-expanded="false" aria-controls="add-tags">
-          Add skills you are looking for
+          Add skills tags
         </button>
       </div>
       <div class="collapse" id="add-tags">
@@ -106,12 +108,15 @@
     </div>
 
     <div class="form-group">
-      <label for="application-deadline">Application deadline</label>
+      <label for="applicationdeadline">Application deadline</label>
       <div>
          <small class="form-text text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</small>
       </div>
-      <input id="application-deadline" name="application-deadline" class="form-control" type="date" />
+      <input id="applicationdeadline" name="applicationdeadline" class="form-control" type="date" />
     </div>
+
+    <hr>
+    <h3>Preview</h3>
 
     <div class="form-group">
       <label for="tc">Confirm terms and conditions</label>
@@ -126,7 +131,8 @@
       </div>
     </div>
 
-    <button class="btn btn-primary">Submit</button>
+    <a href="#" id="test-btn">click</a>
+    <button class="btn btn-primary" disabled id="submit">Submit</button>
   </form> 
 
 
@@ -148,68 +154,32 @@
 <!-- custom JS -->
 <script src="bundle.js"></script>
 <script>
-  // tag categories
-  //const tags = ["Animation", "Visual-Effects", "Graphic-Design", "Games-design-and-production", "Video", "Audio-production"];
+  function createJobDoc() {
+    const jobDetailsForm = document.querySelector('.jobDetails');
+    // get tags checked
 
-  //const jobForm = document.querySelector('.jobDetails');
-  //const tagList = document.querySelector('#tag-list');
-
-  // create tag checkboxes
-  /*function createTagCheckboxes() {
-    let checkboxContainer = document.querySelector("#tag-checkboxes");
-    for (var i = 0; i < tags.length; i++) {
-      let str = tags[i].replaceAll("-", ' ');
-      let div = document.createElement("div");
-      div.className = "form-check";
-
-      let checkbox = document.createElement("input");
-      checkbox.className = "form-check-input";
-      checkbox.type = "checkbox";
-      checkbox.value = "";
-      checkbox.dataset.label = tags[i];
-      checkbox.name = "tag"+tags[i];
-      checkbox.id = "tag"+tags[i];
-      checkbox.onchange = addTagBadge;
-
-      let label = document.createElement("label");
-      label.className = "form-check-label";
-      label.for = "tag"+tags[i];
-      label.innerHTML = str;
-
-      div.appendChild(checkbox);
-      div.appendChild(label);
-
-      checkboxContainer.appendChild(div);
-    }
+    console.log(
+      jobDetailsForm.forename.value,
+      jobDetailsForm.surname.value,
+      jobDetailsForm.company.value,
+      jobDetailsForm.email.value,
+      jobDetailsForm.phone.value,
+      jobDetailsForm.title.value,
+      jobDetailsForm.shortdescription.value,
+      jobDetailsForm.longdescription.value,
+      jobDetailsForm.budget.value,
+      jobDetailsForm.deadline.value,
+      jobDetailsForm.applicationdeadline.value,
+      jobDetailsForm.tc.checked
+      );
   }
 
-  // add tag badge
-  function addTagBadge(){
-    const tagList = document.querySelector('#tag-list');
-    let name = this.dataset.label;
-    let checkbox = document.querySelector("input[data-label='"+name+"']");
-    if (!checkbox.checked) {
-      // remove tag
-      let badge = document.querySelector("span[data-label='"+name+"']");
-      if (badge) {
-        badge.remove();
-      }
-    }
-    else {
-      // create tag
-      badge = document.createElement("span");
-      //badge.href = "#";
-      badge.className = "badge rounded-pill bg-secondary";
-      badge.style = "margin: 3px;"
-      badge.dataset.label = name;
-      badge.innerHTML = name.replaceAll("-", ' ');
+  createJobDoc();
 
-      tagList.appendChild(badge);
-    }
-  }
-
-  createTagCheckboxes();*/
-
+  /*const jobDetailsForm = document.querySelector('.jobDetails');
+  jobDetailsForm.addEventListener('submit', createJobDoc);*/
+  const jobDetailsTest = document.querySelector('#test-btn');
+  jobDetailsTest.addEventListener('click', createJobDoc);
 
 </script>
 </body>

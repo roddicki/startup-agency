@@ -258,6 +258,7 @@ function showSignedOutUser() {
   }
 }
 
+// CREATE AND EDIT PROFILE FUNCTIONS
 // show profile preview
 function buildPreview(){
   const profileForm = document.querySelector('.addbio');
@@ -286,6 +287,7 @@ function buildPreview(){
   userData.innerHTML = data;
 }
 
+// POST JOB FUNCTIONS
 // create tag checkboxes
 function createTagCheckboxes() {
   let checkboxContainer = document.querySelector("#tag-checkboxes");
@@ -338,6 +340,19 @@ function addTagBadge(){
     badge.innerHTML = name.replaceAll("-", ' ');
 
     tagList.appendChild(badge);
+  }
+}
+
+// enable / disable post job submit btn
+function enableSubmitJob() {
+  const tc = document.querySelector("#tc");
+  console.log(tc.checked);
+  if (tc.checked) {
+    const submit = document.querySelector('#submit');
+    submit.active = true;
+    submit.disabled = false;
+  } else {
+    submit.disabled = true;
   }
 }
 
@@ -422,7 +437,13 @@ if (page == "add-profile") {
 // post-a-job page
 if (page == "post-job") {
   console.log("post-job page");
+
+  // creat tag system
   createTagCheckboxes();
+
+  // allow submission after tc checked
+  const tc = document.querySelector("#tc");
+  tc.addEventListener('change', enableSubmitJob)
 }
 
 
