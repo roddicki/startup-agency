@@ -293,13 +293,14 @@ function createTagCheckboxes() {
   let checkboxContainer = document.querySelector("#tag-checkboxes");
   for (var i = 0; i < tags.length; i++) {
     let str = tags[i].replaceAll("-", ' ');
+    let val = tags[i].toLowerCase();
     let div = document.createElement("div");
     div.className = "form-check";
 
     let checkbox = document.createElement("input");
-    checkbox.className = "form-check-input";
+    checkbox.className = "form-check-input tag";
     checkbox.type = "checkbox";
-    checkbox.value = "";
+    checkbox.value = val;
     checkbox.dataset.label = tags[i];
     checkbox.name = "tag"+tags[i];
     checkbox.id = "tag"+tags[i];
@@ -317,7 +318,7 @@ function createTagCheckboxes() {
   }
 }
 
-// add tag badge
+// add tag badge on change
 function addTagBadge(){
   const tagList = document.querySelector('#tag-list');
   let name = this.dataset.label;
@@ -341,6 +342,34 @@ function addTagBadge(){
 
     tagList.appendChild(badge);
   }
+}
+
+// show hide post a job form
+function showHide() {
+	const yourDetails = document.querySelector('.your-details');
+  	const jobDetails = document.querySelector('.job-details');
+  	const jobSummary = document.querySelector('.job-summary');
+	
+	console.log('btn');
+	console.log(this.classList);
+	/*let testClass = this.className.contains();
+
+	switch (testClass) {
+	  case "class1":
+	    test.innerHTML = "I have class1";
+	    break;
+	  case "class2":
+	    test.innerHTML = "I have class2";
+	    break;
+	  case "class3":
+	    test.innerHTML = "I have class3";
+	    break;
+	  case "class4":
+	    test.innerHTML = "I have class4";
+	    break;
+	  default:
+	    test.innerHTML = "";
+	}*/
 }
 
 // enable / disable post job submit btn
@@ -443,7 +472,24 @@ if (page == "post-job") {
 
   // allow submission after tc checked
   const tc = document.querySelector("#tc");
-  tc.addEventListener('change', enableSubmitJob)
+  tc.addEventListener('change', enableSubmitJob);
+
+  // display add job details
+  const showAddJobDetails = document.querySelector('.show-job-details');
+  showAddJobDetails.addEventListener('click', showHide);
+
+  /*showAddJobDetails.addEventListener('click', function(){
+  	console.log('clicked');
+  	showHide(this);
+  	// show add details
+  	const yourDetails = document.querySelector('.your-details');
+  	const jobDetails = document.querySelector('.job-details');
+  	yourDetails.style.display = "none";
+  	jobDetails.style.display = "initial";
+  	const jobSummary = document.querySelector('.job-summary');
+
+  });*/
+
 }
 
 
