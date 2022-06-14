@@ -344,7 +344,7 @@ function addTagBadge(){
   }
 }
 
-// show hide post a job form
+// show hide elements of the 'post a job' form
 function showHide() {
 	const yourDetails = document.querySelector('.your-details');
   	const jobDetails = document.querySelector('.job-details');
