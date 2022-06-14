@@ -28,7 +28,8 @@ const auth = getAuth();
 
 let currentUserData = {};
 
-//*****************************************
+//*******************************************
+//===============Firebase functions==========
 // sign up user
 function signUpUser(e) {
   e.preventDefault();
@@ -111,7 +112,7 @@ onAuthStateChanged(auth, function(user) {
 })
 
 //*****************************************
-// user functions
+// firebase general user functions
 // 
 // retrieve and update user data 
 function getUserData(uid){
@@ -179,8 +180,8 @@ async function getCurrentUserDetails(uid) {
       });
 }*/
 
-//******
-// generic functions
+//*****************************************
+// firebase generic functions
 // 
 // get all users data
 function getAllUserData(tag, fn) {
@@ -214,7 +215,8 @@ function getTag() {
   }
 }
 
-
+//===========================================
+//===========================================
 //===========DOM FUNCTIONS===================
 function displayAllUserData(usersCollection) {
   let userData = "";
@@ -258,7 +260,7 @@ function showSignedOutUser() {
   }
 }
 
-// CREATE AND EDIT PROFILE FUNCTIONS
+// ======CREATE AND EDIT PROFILE FUNCTIONS======
 // show profile preview
 function buildPreview(){
   const profileForm = document.querySelector('.addbio');
@@ -287,7 +289,7 @@ function buildPreview(){
   userData.innerHTML = data;
 }
 
-// POST JOB FUNCTIONS
+// ======POST JOB FUNCTIONS======
 // create tag checkboxes
 function createTagCheckboxes() {
   let checkboxContainer = document.querySelector("#tag-checkboxes");
@@ -344,33 +346,64 @@ function addTagBadge(){
   }
 }
 
-// show hide elements of the 'post a job' form
-function showHide() {
-	const yourDetails = document.querySelector('.your-details');
-  	const jobDetails = document.querySelector('.job-details');
-  	const jobSummary = document.querySelector('.job-summary');
-	
-	console.log('btn');
-	console.log(this.classList);
-	/*let testClass = this.className.contains();
 
-	switch (testClass) {
-	  case "class1":
-	    test.innerHTML = "I have class1";
-	    break;
-	  case "class2":
-	    test.innerHTML = "I have class2";
-	    break;
-	  case "class3":
-	    test.innerHTML = "I have class3";
-	    break;
-	  case "class4":
-	    test.innerHTML = "I have class4";
-	    break;
-	  default:
-	    test.innerHTML = "";
-	}*/
+// show hide / next - prev sections of the 'post a job' form to create multiple steps
+function showHide(evt) {
+  evt.preventDefault();
+	const yourDetails = document.querySelector('.your-details');
+  const jobDetails = document.querySelector('.job-details');
+  const jobSummary = document.querySelector('.job-summary');
+	
+  if (this.className.includes('show-job-details')) {
+    yourDetails.style.display = "none";
+    jobDetails.style.display = "initial";
+  } 
+  else if (this.className.includes('show-your-details')) {
+    yourDetails.style.display = "initial";
+    jobDetails.style.display = "none";
+  } 
+  else if (this.className.includes('back-job-details')) {
+    jobDetails.style.display = "initial";
+    jobSummary.style.display = "none";
+  }
+  else if (this.className.includes('show-summary')) {
+    jobDetails.style.display = "none";
+    jobSummary.style.display = "initial";
+  } 
 }
+
+// return checked tags
+function getTags(){
+  let tags = [];
+  // get tags
+  const tagCheckboxes = document.querySelector('#tag-checkboxes').getElementsByTagName('input');
+  for (var i = 0; i < tagCheckboxes.length; i++) {
+    if (tagCheckboxes[i].checked) {
+      tags.push(tagCheckboxes[i].value);
+    }
+  }
+  return tags;
+}
+
+// return job form elements
+function getJobForm() {
+  const jobDetailsForm = document.querySelector('.jobDetails');
+  let formValues = "some stuff";
+  for (let i = 0; i < jobDetailsForm.length; i++) {
+    if (jobDetailsForm.elements[i].type != 'checkbox') {
+      formValues += jobDetailsForm.elements[i].name+ " : " +jobDetailsForm.elements[i].value + "<br>";
+    }
+  }
+  return formValues;
+}
+
+// create preview of job details
+function previewJob(e, tags, formValues) {
+  e.preventDefault();
+  document.querySelector(".preview").innerHTML = formValues + "tag: " + tags;
+}
+
+
 
 // enable / disable post job submit btn
 function enableSubmitJob() {
@@ -428,9 +461,6 @@ if (signupForm) {
 //addUserDataForm.addEventListener('submit', addUserData);
 
 //===========PAGE SPECIFIC EVENT LISTENERS===================
-
-
-// edit this so it is page specific
 // add listeners if dom element present
 window.addEventListener('DOMContentLoaded', function(){
   //getTag();
@@ -442,7 +472,7 @@ window.addEventListener('DOMContentLoaded', function(){
 });
 
 
-// add-profile page code
+// add-profile page 
 if (page == "add-profile") {
   // show name on page load on add-profile page
   onAuthStateChanged(auth, function(user) {
@@ -463,6 +493,7 @@ if (page == "add-profile") {
   previewBtn.addEventListener('click', buildPreview);
 }
 
+
 // post-a-job page
 if (page == "post-job") {
   console.log("post-job page");
@@ -470,26 +501,26 @@ if (page == "post-job") {
   // creat tag system
   createTagCheckboxes();
 
+  // show hide post a job form
+  const showJobDetails = document.querySelector('.show-job-details');
+  showJobDetails.addEventListener('click', showHide);
+  
+  const showYourDetails = document.querySelector('.show-your-details');
+  showYourDetails.addEventListener('click', showHide);
+  
+  const showSummary = document.querySelector('.show-summary');
+  showSummary.addEventListener('click', showHide);
+  // preview job listing
+  showSummary.addEventListener('click', function (e) {
+    previewJob(e, getTags(), getJobForm());
+  });
+
+  const backJobDetails = document.querySelector('.back-job-details');
+  backJobDetails.addEventListener('click', showHide);
+
   // allow submission after tc checked
   const tc = document.querySelector("#tc");
   tc.addEventListener('change', enableSubmitJob);
-
-  // display add job details
-  const showAddJobDetails = document.querySelector('.show-job-details');
-  showAddJobDetails.addEventListener('click', showHide);
-
-  /*showAddJobDetails.addEventListener('click', function(){
-  	console.log('clicked');
-  	showHide(this);
-  	// show add details
-  	const yourDetails = document.querySelector('.your-details');
-  	const jobDetails = document.querySelector('.job-details');
-  	yourDetails.style.display = "none";
-  	jobDetails.style.display = "initial";
-  	const jobSummary = document.querySelector('.job-summary');
-
-  });*/
-
 }
 
 

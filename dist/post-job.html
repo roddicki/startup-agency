@@ -125,7 +125,7 @@
         <input id="applicationdeadline" name="applicationdeadline" class="form-control" type="date" />
       </div>
 
-      <button class="btn btn-primary">Back</button> <button class="btn btn-primary show-summary">Next - See summary</button>
+      <button class="btn btn-primary show-your-details">Back</button> <button class="btn btn-primary show-summary">Next - See summary</button>
     </div>
 
     <!-- Job Summary -->
@@ -145,8 +145,7 @@
         </div>
       </div>
 
-      <a href="#" id="test-btn">click</a>
-      <button class="btn btn-primary" disabled id="submit">Submit</button>
+      <button class="btn btn-primary back-job-details">Back</button> <button class="btn btn-primary" disabled id="submit">Post Job</button>
     </div>
 
   </form> 
@@ -171,23 +170,9 @@
 <script src="bundle.js"></script>
 <script>
 
-  // preview job details
-  function previewJob(e) {
-    e.preventDefault();
-    const jobDetailsForm = document.querySelector('.jobDetails');
-    let text = "";
-    for (let i = 0; i < jobDetailsForm.length; i++) {
-      if (jobDetailsForm.elements[i].type == 'checkbox' && jobDetailsForm.elements[i].checked) {
-        text += "tag : " +jobDetailsForm.elements[i].value + "<br>";
-      }
-      else if (jobDetailsForm.elements[i].type != 'checkbox') {
-        text += jobDetailsForm.elements[i].name+ " : " +jobDetailsForm.elements[i].value + "<br>";
-      }
-      
-    }
-    document.querySelector(".preview").innerHTML = text;
-  }
+  
 
+  // create job post doc in fb
   function createJobDoc() {
     // get all checked checkboxes
     let tags = [];
@@ -222,12 +207,12 @@
 
   createJobDoc();
 
-  const seeSummary = document.querySelector('.show-summary');
-  seeSummary.addEventListener('click', previewJob);
+  /*const seeSummary = document.querySelector('.show-summary');
+  seeSummary.addEventListener('click', previewJob);*/
   /*const jobDetailsForm = document.querySelector('.jobDetails');
   jobDetailsForm.addEventListener('submit', createJobDoc);*/
-  const jobDetailsTest = document.querySelector('#test-btn');
+  /*const jobDetailsTest = document.querySelector('#test-btn');
   jobDetailsTest.addEventListener('click', createJobDoc);
-
+*/
 </script>
 </body>
