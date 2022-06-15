@@ -215,6 +215,35 @@ function getTag() {
   }
 }
 
+// RUN THIS
+// create doc for job 
+function createJobDoc(uid, tags) {
+  console.log(uid, tags);
+  const jobDetailsForm = document.querySelector('.jobDetails');
+  setDoc(doc(db, "jobs", uid), {
+    forename: jobDetailsForm.forename.value,
+    surname: jobDetailsForm.surname.value,
+    company: jobDetailsForm.company.value,
+    email: jobDetailsForm.email.value,
+    phone: jobDetailsForm.phone.value,
+    title: jobDetailsForm.title.value,
+    shortdescription: jobDetailsForm.shortdescription.value,
+    longdescription: jobDetailsForm.longdescription.value,
+    budget: jobDetailsForm.budget.value,
+    deadline: jobDetailsForm.deadline.value,
+    applicationdeadline: jobDetailsForm.applicationdeadline.value,
+    tc: jobDetailsForm.tc.checked,
+    createdAt: serverTimestamp(),
+    approved: 'false'
+  })
+  .then(function(){
+    console.log("successfully created");
+    // go to add profile on completion
+    window.location.href = "index.html";
+  });
+}
+
+
 //===========================================
 //===========================================
 //===========DOM FUNCTIONS===================
@@ -349,27 +378,27 @@ function addTagBadge(){
 
 // show hide / next - prev sections of the 'post a job' form to create multiple steps
 function showHide(evt) {
-  evt.preventDefault();
+	evt.preventDefault();
 	const yourDetails = document.querySelector('.your-details');
-  const jobDetails = document.querySelector('.job-details');
-  const jobSummary = document.querySelector('.job-summary');
+  	const jobDetails = document.querySelector('.job-details');
+  	const jobSummary = document.querySelector('.job-summary');
 	
-  if (this.className.includes('show-job-details')) {
-    yourDetails.style.display = "none";
-    jobDetails.style.display = "initial";
-  } 
-  else if (this.className.includes('show-your-details')) {
-    yourDetails.style.display = "initial";
-    jobDetails.style.display = "none";
-  } 
-  else if (this.className.includes('back-job-details')) {
-    jobDetails.style.display = "initial";
-    jobSummary.style.display = "none";
-  }
-  else if (this.className.includes('show-summary')) {
-    jobDetails.style.display = "none";
-    jobSummary.style.display = "initial";
-  } 
+	if (this.className.includes('show-job-details')) {
+		yourDetails.style.display = "none";
+		jobDetails.style.display = "initial";
+	} 
+	else if (this.className.includes('show-your-details')) {
+		yourDetails.style.display = "initial";
+		jobDetails.style.display = "none";
+	} 
+	else if (this.className.includes('back-job-details')) {
+		jobDetails.style.display = "initial";
+		jobSummary.style.display = "none";
+	}
+	else if (this.className.includes('show-summary')) {
+		jobDetails.style.display = "none";
+		jobSummary.style.display = "initial";
+	} 
 }
 
 // return checked tags
