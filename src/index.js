@@ -203,7 +203,33 @@ function getAllUserData(tag, fn) {
     console.log(usersCollection);
     fn(usersCollection); // callback to 'return' result
   });
+}
 
+
+function getAllJobData(fn) {
+  // collection ref - in this case books
+  const colRef = collection(db, 'jobs');
+
+  // example of how to order by date
+  const orderByDate = query(colRef, orderBy('surname'))
+
+  // get collection data - only runs on page load / refresh
+  // getDocs(colRef)
+  getDocs(orderByDate)
+    .then(function(snapshot) {
+      //console.log(snapshot.docs);
+      let jobCollection = [];
+      for (let i = 0; i < snapshot.docs.length; i++) {
+        let job = snapshot.docs[i].data();
+        job.id = snapshot.docs[i].id;
+        jobCollection.push(job);
+      }
+      console.log(jobCollection);
+      fn(jobCollection)
+    })
+    .catch(function(err) {
+      console.log(err.message);
+    });
 }
 
 // get query string tag
@@ -249,6 +275,14 @@ function createJobDoc(tags) {
 //===========================================
 //===========================================
 //===========DOM FUNCTIONS===================
+// show all jobs - jobs page
+function displayAllJobs (jobCollection) {
+  const jobData = document.querySelector('.all-job-data');
+  jobData.innerHTML = jobCollection;
+}
+
+
+// show all user data - this is the basis for the front page
 function displayAllUserData(usersCollection) {
   let userData = "";
   for (var i = 0; i < usersCollection.length; i++) {
@@ -563,6 +597,18 @@ if (page == "post-job") {
     e.preventDefault();
     createJobDoc(getTags());
   });
+}
+
+// job board page
+if (page == "jobs") {
+  console.log("jobs page");
+  // get and show all jobs
+  getAllJobData(function(jobData){
+    displayAllJobs(jobData);
+  });
+
+  getAllJobData();
+
 }
 
 
