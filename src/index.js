@@ -6,7 +6,7 @@ document.getElementById("footer").innerHTML = footer;
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc, doc, query, where, orderBy, getDoc, serverTimestamp, updateDoc, setDoc } from 'firebase/firestore';
+import { getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc, doc, query, where, orderBy, getDoc, serverTimestamp, updateDoc, setDoc,  Timestamp} from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -215,12 +215,12 @@ function getTag() {
   }
 }
 
-// RUN THIS
 // create doc for job 
-function createJobDoc(uid, tags) {
-  console.log(uid, tags);
+function createJobDoc(tags) {
   const jobDetailsForm = document.querySelector('.jobDetails');
-  setDoc(doc(db, "jobs", uid), {
+  let jobDeadline = new Date(jobDetailsForm.deadline.value);
+  let applicationDeadline = new Date(jobDetailsForm.applicationdeadline.value);
+  addDoc(collection(db, "jobs"), {
     forename: jobDetailsForm.forename.value,
     surname: jobDetailsForm.surname.value,
     company: jobDetailsForm.company.value,
@@ -230,16 +230,18 @@ function createJobDoc(uid, tags) {
     shortdescription: jobDetailsForm.shortdescription.value,
     longdescription: jobDetailsForm.longdescription.value,
     budget: jobDetailsForm.budget.value,
-    deadline: jobDetailsForm.deadline.value,
-    applicationdeadline: jobDetailsForm.applicationdeadline.value,
+    deadline: Timestamp.fromDate(jobDeadline),
+    applicationdeadline: Timestamp.fromDate(applicationDeadline),
     tc: jobDetailsForm.tc.checked,
+    tags: tags,
     createdAt: serverTimestamp(),
-    approved: 'false'
+    approved: false
   })
   .then(function(){
-    console.log("successfully created");
+    alert("Thank you "+ jobDetailsForm.forename.value +". Your job "+ jobDetailsForm.title.value +" has been successfully submitted");
+    console.log("successfully created new job");
     // go to add profile on completion
-    window.location.href = "index.html";
+    //window.location.href = "index.html";
   });
 }
 
@@ -417,7 +419,7 @@ function getTags(){
 // return job form elements
 function getJobForm() {
   const jobDetailsForm = document.querySelector('.jobDetails');
-  let formValues = "some stuff";
+  let formValues = "";
   for (let i = 0; i < jobDetailsForm.length; i++) {
     if (jobDetailsForm.elements[i].type != 'checkbox') {
       formValues += jobDetailsForm.elements[i].name+ " : " +jobDetailsForm.elements[i].value + "<br>";
@@ -429,6 +431,9 @@ function getJobForm() {
 // create preview of job details
 function previewJob(e, tags, formValues) {
   e.preventDefault();
+  /*const jobDetailsForm = document.querySelector('.jobDetails');
+  let jobDeadline = new Date(jobDetailsForm.deadline.value);
+  console.log(jobDeadline);*/
   document.querySelector(".preview").innerHTML = formValues + "tag: " + tags;
 }
 
@@ -450,7 +455,7 @@ function enableSubmitJob() {
 
 //===========DOM ELEMENTS===================
 // tag categories
-const tags = ["Animation", "Visual-Effects", "Graphic-Design", "Games-design-and-production", "Video", "Audio-production"];
+const tags = ["Animation", "Visual-Effects", "Graphic-Design", "Games-Design-and-Production", "Video", "Audio-Production", "Journalism", "Photography", "Theatre-Dance"];
 
 const page = document.body.getAttribute('data-page');
 const logOut = document.querySelector('.sign-out');
@@ -544,12 +549,20 @@ if (page == "post-job") {
     previewJob(e, getTags(), getJobForm());
   });
 
+  // go back
   const backJobDetails = document.querySelector('.back-job-details');
   backJobDetails.addEventListener('click', showHide);
 
   // allow submission after tc checked
   const tc = document.querySelector("#tc");
   tc.addEventListener('change', enableSubmitJob);
+
+  // submit job to db
+  const submitJob = document.querySelector('.submit-job-details');
+  submitJob.addEventListener('click', function (e) {
+    e.preventDefault();
+    createJobDoc(getTags());
+  });
 }
 
 
