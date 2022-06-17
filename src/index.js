@@ -206,6 +206,7 @@ function getAllUserData(tag, fn) {
 }
 
 
+// get all current jobs and order by deadline date
 function getAllJobData(fn) {
   // collection ref - in this case books
   const colRef = collection(db, 'jobs');
@@ -231,11 +232,28 @@ function getAllJobData(fn) {
     });
 }
 
+
+// get single job details - - only runs on page load / refresh
+function getSingleJob (id, fn) {
+  // match a single doc in the collection
+  const docRef = doc(db, 'jobs', id);
+  // get that doc once
+  getDoc(docRef)
+    .then(function(doc){
+      //console.log(doc.data(), doc.id);
+      fn(doc.data());
+    })
+    .catch(function(err) {
+      console.log(err.message);
+    });
+}
+
+
 // get query string tag
-function getTag() {
+function getParam() {
   const urlParams = new URLSearchParams(location.search);
   for (const [key, value] of urlParams) {
-      console.log(`${key}:${value}`);
+      //console.log(`${key}:${value}`);
       return value; // only works with one param at the mo
   }
 }
@@ -299,20 +317,66 @@ function displayAllJobs (jobCollection) {
 	  	deadline.className = "card-text";
 	  	deadline.innerHTML = date.toDateString();
 
+      let descriptionText = jobCollection[i].shortdescription;
+      let shortenedText = descriptionText.substring(0, 75); // 75 chars
 	  	let shortdescription = document.createElement("p");
 	  	shortdescription.className = "card-text";
-	  	shortdescription.innerHTML = jobCollection[i].shortdescription;
+	  	shortdescription.innerHTML = shortenedText;
+
+      let link = document.createElement("a");
+      link.className = "btn btn-primary stretched-link";
+      link.href="job-details.html?id=" + jobCollection[i].id;
+      link.innerHTML = "More..."
 
 	  	cardBody.appendChild(title);
 	  	cardBody.appendChild(subtitle);
 	  	cardBody.appendChild(deadline);
 	  	cardBody.appendChild(shortdescription);
+      cardBody.appendChild(link);
 	  	card.appendChild(cardBody);
 
 	  	document.querySelector(".all-job-data").appendChild(card);
   	}
   }
   console.log(jobCollection);
+}
+
+// display single job
+function displaySingleJob(jobData) {
+  console.log(jobData);
+  console.log(jobData.surname);
+  let date = new Date(jobData.deadline.seconds*1000);
+    
+  let card = document.createElement("div");
+  card.className = "card";
+
+  let cardBody = document.createElement("div");
+  cardBody.className = "card-body";
+
+  let title = document.createElement("h5");
+  title.className = "card-title";
+  title.innerHTML = jobData.title;
+
+  let subtitle = document.createElement("h6");
+  subtitle.className = "card-subtitle mb-2 text-muted";
+  subtitle.innerHTML = "£"+jobData.budget;
+
+  let deadline = document.createElement("p");
+  deadline.className = "card-text";
+  deadline.innerHTML = date.toDateString();
+
+  let description = document.createElement("p");
+  description.className = "card-text";
+  description.innerHTML = jobData.longdescription;;
+
+
+  cardBody.appendChild(title);
+  cardBody.appendChild(subtitle);
+  cardBody.appendChild(deadline);
+  cardBody.appendChild(description);
+  card.appendChild(cardBody);
+
+  document.querySelector(".single-job-data").appendChild(card);
 }
 
 
@@ -641,6 +705,18 @@ if (page == "jobs") {
     displayAllJobs(jobData);
   });
 }
+
+// job details page
+if (page == "job-details") {
+  console.log("job details page");
+  // get and show all jobs
+  console.log(getParam());
+  getSingleJob(getParam(), function(jobData){
+    displaySingleJob(jobData);
+  });
+}
+
+
 
 
 console.log('hello from index.js tucked at the bottom');
