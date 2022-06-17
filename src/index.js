@@ -211,7 +211,7 @@ function getAllJobData(fn) {
   const colRef = collection(db, 'jobs');
 
   // example of how to order by date
-  const orderByDate = query(colRef, orderBy('surname'))
+  const orderByDate = query(colRef, orderBy('deadline'))
 
   // get collection data - only runs on page load / refresh
   // getDocs(colRef)
@@ -224,7 +224,6 @@ function getAllJobData(fn) {
         job.id = snapshot.docs[i].id;
         jobCollection.push(job);
       }
-      console.log(jobCollection);
       fn(jobCollection)
     })
     .catch(function(err) {
@@ -275,10 +274,45 @@ function createJobDoc(tags) {
 //===========================================
 //===========================================
 //===========DOM FUNCTIONS===================
+
 // show all jobs - jobs page
 function displayAllJobs (jobCollection) {
-  const jobData = document.querySelector('.all-job-data');
-  jobData.innerHTML = jobCollection;
+  for (var i = 0; i < jobCollection.length; i++) {
+  	if (jobCollection[i].approved) {
+  		let date = new Date(jobCollection[i].deadline.seconds*1000);
+  	
+	  	let card = document.createElement("div");
+	  	card.className = "card";
+
+	  	let cardBody = document.createElement("div");
+	  	cardBody.className = "card-body";
+
+	  	let title = document.createElement("h5");
+	  	title.className = "card-title";
+	  	title.innerHTML = jobCollection[i].title;
+
+	  	let subtitle = document.createElement("h6");
+	  	subtitle.className = "card-subtitle mb-2 text-muted";
+	  	subtitle.innerHTML = "£"+jobCollection[i].budget;
+
+	  	let deadline = document.createElement("p");
+	  	deadline.className = "card-text";
+	  	deadline.innerHTML = date.toDateString();
+
+	  	let shortdescription = document.createElement("p");
+	  	shortdescription.className = "card-text";
+	  	shortdescription.innerHTML = jobCollection[i].shortdescription;
+
+	  	cardBody.appendChild(title);
+	  	cardBody.appendChild(subtitle);
+	  	cardBody.appendChild(deadline);
+	  	cardBody.appendChild(shortdescription);
+	  	card.appendChild(cardBody);
+
+	  	document.querySelector(".all-job-data").appendChild(card);
+  	}
+  }
+  console.log(jobCollection);
 }
 
 
@@ -606,9 +640,6 @@ if (page == "jobs") {
   getAllJobData(function(jobData){
     displayAllJobs(jobData);
   });
-
-  getAllJobData();
-
 }
 
 
