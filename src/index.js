@@ -344,7 +344,6 @@ function displayAllJobs (jobCollection) {
 // display single job
 function displaySingleJob(jobData) {
   console.log(jobData);
-  console.log(jobData.surname);
   let date = new Date(jobData.deadline.seconds*1000);
     
   let card = document.createElement("div");
@@ -631,7 +630,7 @@ if (signupForm) {
 window.addEventListener('DOMContentLoaded', function(){
   //getTag();
   if(allUserData) {
-    getAllUserData(getTag(), function(userData){
+    getAllUserData(getParam(), function(userData){
       displayAllUserData(userData);
     });
   }
