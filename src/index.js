@@ -281,7 +281,7 @@ function createJobDoc(tags) {
     approved: false
   })
   .then(function(){
-    alert("Thank you "+ jobDetailsForm.forename.value +". Your job "+ jobDetailsForm.title.value +" has been successfully submitted");
+    alert("Placeholder alert box. This will probably be a modal or overlay...tbc... Thank you "+ jobDetailsForm.forename.value +". Your job "+ jobDetailsForm.title.value +" has been successfully submitted");
     console.log("successfully created new job");
     // go to add profile on completion
     //window.location.href = "index.html";
