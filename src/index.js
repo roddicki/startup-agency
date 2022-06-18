@@ -6,7 +6,9 @@ document.getElementById("footer").innerHTML = footer;
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc, doc, query, where, orderBy, getDoc, serverTimestamp, updateDoc, setDoc,  Timestamp} from 'firebase/firestore';
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+
+import { getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc, doc, query, where, orderBy, getDoc, serverTimestamp, updateDoc, setDoc,  Timestamp, arrayUnion} from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -25,6 +27,8 @@ initializeApp(firebaseConfig);
 // init services
 const db = getFirestore();
 const auth = getAuth();
+const storage = getStorage();
+
 
 let currentUserData = {};
 
@@ -104,6 +108,8 @@ onAuthStateChanged(auth, function(user) {
       // User logged in already or has just logged in.
       console.log(user.uid, user.email, "logged in");
       showSignedInUser(user.email);
+      currentUserData.uid = user.uid;
+      currentUserData.email = user.email;
     } else {
       // User not logged in or has just logged out.
       console.log("logged out");
@@ -152,8 +158,9 @@ async function getCurrentUserDetails(uid) {
   const docRef = doc(db, 'users', uid);
   const singleDoc = await getDoc(docRef);
   if (singleDoc.exists()) {
-    console.log("Document data:", singleDoc.data());
+    console.log("Logged in user document data:", singleDoc.data());
     currentUserData = singleDoc.data();
+    currentUserData.uid = uid;
     return singleDoc.data();
   } else {
     // doc.data() will be undefined in this case
@@ -289,9 +296,48 @@ function createJobDoc(tags) {
 }
 
 
+// upload image - argument is an object - {upload url : blob url}
+function uploadImage(urls) {
+  console.log(urls);
+
+  let i = 0;
+
+  for (const [uploadUrl, blobUrl] of Object.entries(urls)) {
+    console.log(`${uploadUrl}: ${blobUrl}`);
+    let myRequest = new Request(blobUrl);
+    i++;
+    fetch(blobUrl)
+      .then((response) => response.blob())
+      .then(function(blob) {
+        console.log(blob.type);
+        // upload
+        const storageRef = ref(storage, uploadUrl);
+        // 'file' comes from the Blob or File API
+        uploadBytes(storageRef, blob).then(function(snapshot) {
+          console.log('Uploaded a blob or file!');
+          // update user data with image urls
+          let docRef = doc(db, 'users', currentUserData.uid);
+
+          updateDoc(docRef, {
+            images: arrayUnion(uploadUrl)
+          })
+        })
+        .then(function () {
+          console.log("upload complete");
+        })
+        .catch(function(err) {
+          console.log(err.message);
+        });
+      })
+  }
+}
+
+
 //===========================================
 //===========================================
 //===========DOM FUNCTIONS===================
+
+
 
 // show all jobs - jobs page
 function displayAllJobs (jobCollection) {
@@ -449,6 +495,22 @@ function buildPreview(){
     data += `${property}: ${currentUserData[property]}<br>`
   }
   userData.innerHTML = data;
+}
+
+// get image urls - return an object with all the user image urls to upload
+function getImageUrls(e) {
+  e.preventDefault();
+  const imageDivs = document.querySelectorAll('.uploaded-image');
+
+  let images = {};
+
+  for (var i = 0; i < imageDivs.length; i++) {
+    //console.log(imageDivs[i].querySelector('img').src);
+    let blobUrl = imageDivs[i].querySelector('img').src;
+    let uploadUrl = "images/"+currentUserData.uid+ "/img-" + i +".png";
+    images[uploadUrl] = blobUrl;
+  }
+  return images;
 }
 
 // ======POST JOB FUNCTIONS======
@@ -643,11 +705,10 @@ if (page == "add-profile") {
   onAuthStateChanged(auth, function(user) {
     if (user) {
         // User logged in already or has just logged in.
-        console.log(user.uid, "user x logged in");
+        console.log("user "+user.uid+" logged in");
         getCurrentUserDetails(user.uid).then(function(vals){
           if (signedInName) {
             signedInName.innerHTML = vals.forename;
-            console.log(currentUserData);
           }
         });
       } 
@@ -656,6 +717,13 @@ if (page == "add-profile") {
   // show profile preview 
   const previewBtn = document.querySelector('.show-preview');
   previewBtn.addEventListener('click', buildPreview);
+
+  // upload and save
+  const uploadBtn = document.querySelector('.save-and-upload');
+  //uploadBtn.addEventListener('click', uploadImage); 
+  uploadBtn.addEventListener('click', function(e){
+    uploadImage(getImageUrls(e));
+  }); 
 }
 
 
