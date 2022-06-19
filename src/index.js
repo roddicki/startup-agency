@@ -505,12 +505,29 @@ function getImageUrls(e) {
   let images = {};
 
   for (var i = 0; i < imageDivs.length; i++) {
-    //console.log(imageDivs[i].querySelector('img').src);
+  	console.log(imageDivs[i].querySelector('img').src);
     let blobUrl = imageDivs[i].querySelector('img').src;
-    let uploadUrl = "images/"+currentUserData.uid+ "/img-" + i +".png";
+    let fileSuffix = ".png";
+  	let uploadUrl = "images/"+currentUserData.uid+ "/img-" + i + fileSuffix;
+
+  	/*let myRequest = new Request(blobUrl);
+  	// get blob file type from url and change suffix
+    fetch(blobUrl)
+      .then((response) => response.blob())
+      .then(function(blob) {
+	      	if (blob.type.includes('jpeg')) {
+	      		fileSuffix = ".jpg";
+	      	}
+	      	let uploadUrl = "images/"+currentUserData.uid+ "/img-" + i + fileSuffix;
+    		// add to object
+    		console.log(uploadUrl, blobUrl);
+    		images[uploadUrl] = blobUrl;
+    		//console.log(images);
+      })*/
+    console.log(uploadUrl, blobUrl);
     images[uploadUrl] = blobUrl;
   }
-  return images;
+  return images; // doesn't work
 }
 
 // ======POST JOB FUNCTIONS======
@@ -722,7 +739,8 @@ if (page == "add-profile") {
   const uploadBtn = document.querySelector('.save-and-upload');
   //uploadBtn.addEventListener('click', uploadImage); 
   uploadBtn.addEventListener('click', function(e){
-    uploadImage(getImageUrls(e));
+  	console.log(getImageUrls(e));
+    //uploadImage(getImageUrls(e));
   }); 
 }
 
