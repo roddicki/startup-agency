@@ -295,6 +295,31 @@ function createJobDoc(tags) {
 }
 
 
+// upload image - argument is an object - {upload url : blob url}
+// inserts a reference to the uploaded image/s into the logged in users profile
+async function uploadImage(urls) {
+  console.log(urls);
+
+  for (const [uploadUrl, blobUrl] of Object.entries(urls)) {
+    console.log(`${uploadUrl}: ${blobUrl}`);
+    let blob = await fetch(blobUrl).then(response => response.blob());
+    // upload
+    const storageRef = ref(storage, uploadUrl);
+    // upload file - 'blob' comes from the Blob or File API
+    uploadBytes(storageRef, blob).then(function(snapshot) {
+      console.log('Uploaded a blob or file!');
+      // update user data with image urls
+      let docRef = doc(db, 'users', currentUserData.uid);
+
+      updateDoc(docRef, {
+        images: arrayUnion(uploadUrl)
+      })
+      .then(function () {
+        console.log("upload complete");
+      })
+    });
+  }
+}
 
 
 
@@ -462,76 +487,31 @@ function buildPreview(){
   userData.innerHTML = data;
 }
 
-// get image urls - return an object with all the user image urls to upload
-function getImageUrls(e) {
-  e.preventDefault();
-  const imageDivs = document.querySelectorAll('.uploaded-image');
 
+// get upload image urls - return an object with all the new upload image urls
+async function getImageUrls(e){
+  e.preventDefault();
+  const suffix = {'image/jpeg':'jpg', 'image/png':'png', 'image/gif':'gif'};
+  // all upload images
+  const imageDivs = document.querySelectorAll('.uploaded-image');
   let images = {};
 
   for (var i = 0; i < imageDivs.length; i++) {
-  	console.log(imageDivs[i].querySelector('img').src);
-    let blobUrl = imageDivs[i].querySelector('img').src;
-    let fileSuffix = ".png";
-  	let uploadUrl = "images/"+currentUserData.uid+ "/img-" + i + fileSuffix;
-
-  	/*let myRequest = new Request(blobUrl);
-  	// get blob file type from url and change suffix
-    fetch(blobUrl)
-      .then((response) => response.blob())
-      .then(function(blob) {
-	      	if (blob.type.includes('jpeg')) {
-	      		fileSuffix = ".jpg";
-	      	}
-	      	let uploadUrl = "images/"+currentUserData.uid+ "/img-" + i + fileSuffix;
-    		// add to object
-    		console.log(uploadUrl, blobUrl);
-    		images[uploadUrl] = blobUrl;
-    		//console.log(images);
-      })*/
-    console.log(uploadUrl, blobUrl);
-    images[uploadUrl] = blobUrl;
+    let url = imageDivs[i].querySelector('img').src;
+    let blob = await fetch(url).then(response => response.blob());
+    // match image blob type > add filename suffix
+    let fileSuffix = suffix[blob.type];
+    let uploadUrl = "images/"+currentUserData.uid+ "/img-" + i + "." + fileSuffix;
+    images[uploadUrl] = url;
   }
+  //console.log(images);
   return images; 
 }
 
-// upload image - argument is an object - {upload url : blob url}
-function uploadImage(urls) {
-  console.log(urls);
 
-  let i = 0;
 
-  for (const [uploadUrl, blobUrl] of Object.entries(urls)) {
-    console.log(`${uploadUrl}: ${blobUrl}`);
-    let myRequest = new Request(blobUrl);
-    i++;
-    fetch(blobUrl)
-      .then((response) => response.blob())
-      .then(function(blob) {
-        console.log(blob.type);
-        return blob.type;
-        // upload
-        /*const storageRef = ref(storage, uploadUrl);
-        // 'file' comes from the Blob or File API
-        uploadBytes(storageRef, blob).then(function(snapshot) {
-          console.log('Uploaded a blob or file!');
-          // update user data with image urls
-          let docRef = doc(db, 'users', currentUserData.uid);
 
-          updateDoc(docRef, {
-            images: arrayUnion(uploadUrl)
-          })
-        })
-        .then(function () {
-          console.log("upload complete");
-        })
-        .catch(function(err) {
-          console.log(err.message);
-        });*/
 
-      })
-  }
-}
 
 // ======POST JOB FUNCTIONS======
 // create tag checkboxes
@@ -742,13 +722,11 @@ if (page == "add-profile") {
   const uploadBtn = document.querySelector('.save-and-upload');
   //uploadBtn.addEventListener('click', uploadImage); 
   uploadBtn.addEventListener('click', function(e){
-  	//console.log(getImageUrls(e));
-    // return list of images - blob urls
-    let images = getImageUrls(e);
-    // for each image get blob type, make upload url
-    // upload image, return on success
-    // upload image url to user profile
-    uploadImage(getImageUrls(e));
+  	// get urls of images to upload - resolve promise > upload
+    getImageUrls(e).then(function(result) { 
+         console.log(result);
+         uploadImage(result);
+      });
   }); 
 }
 
