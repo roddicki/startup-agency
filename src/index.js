@@ -101,7 +101,6 @@ function signInUser(e) {
     })
 }
 
-// >> TO DO add getCurrentUserDetails to update currentUserData
 // on login state change
 onAuthStateChanged(auth, function(user) {
   if (user) {
@@ -296,41 +295,7 @@ function createJobDoc(tags) {
 }
 
 
-// upload image - argument is an object - {upload url : blob url}
-function uploadImage(urls) {
-  console.log(urls);
 
-  let i = 0;
-
-  for (const [uploadUrl, blobUrl] of Object.entries(urls)) {
-    console.log(`${uploadUrl}: ${blobUrl}`);
-    let myRequest = new Request(blobUrl);
-    i++;
-    fetch(blobUrl)
-      .then((response) => response.blob())
-      .then(function(blob) {
-        console.log(blob.type);
-        // upload
-        const storageRef = ref(storage, uploadUrl);
-        // 'file' comes from the Blob or File API
-        uploadBytes(storageRef, blob).then(function(snapshot) {
-          console.log('Uploaded a blob or file!');
-          // update user data with image urls
-          let docRef = doc(db, 'users', currentUserData.uid);
-
-          updateDoc(docRef, {
-            images: arrayUnion(uploadUrl)
-          })
-        })
-        .then(function () {
-          console.log("upload complete");
-        })
-        .catch(function(err) {
-          console.log(err.message);
-        });
-      })
-  }
-}
 
 
 //===========================================
@@ -527,7 +492,45 @@ function getImageUrls(e) {
     console.log(uploadUrl, blobUrl);
     images[uploadUrl] = blobUrl;
   }
-  return images; // doesn't work
+  return images; 
+}
+
+// upload image - argument is an object - {upload url : blob url}
+function uploadImage(urls) {
+  console.log(urls);
+
+  let i = 0;
+
+  for (const [uploadUrl, blobUrl] of Object.entries(urls)) {
+    console.log(`${uploadUrl}: ${blobUrl}`);
+    let myRequest = new Request(blobUrl);
+    i++;
+    fetch(blobUrl)
+      .then((response) => response.blob())
+      .then(function(blob) {
+        console.log(blob.type);
+        return blob.type;
+        // upload
+        /*const storageRef = ref(storage, uploadUrl);
+        // 'file' comes from the Blob or File API
+        uploadBytes(storageRef, blob).then(function(snapshot) {
+          console.log('Uploaded a blob or file!');
+          // update user data with image urls
+          let docRef = doc(db, 'users', currentUserData.uid);
+
+          updateDoc(docRef, {
+            images: arrayUnion(uploadUrl)
+          })
+        })
+        .then(function () {
+          console.log("upload complete");
+        })
+        .catch(function(err) {
+          console.log(err.message);
+        });*/
+
+      })
+  }
 }
 
 // ======POST JOB FUNCTIONS======
@@ -681,7 +684,7 @@ const signedInName = document.querySelector('.welcome-name');
 
 //===========EVENT LISTENERS===================
 
-// general all pages
+// GENERAL ALL PAGES
 if (logOut) {
   logOut.addEventListener('click', signOutUser);
 }
@@ -704,7 +707,7 @@ if (signupForm) {
 }*/
 //addUserDataForm.addEventListener('submit', addUserData);
 
-//===========PAGE SPECIFIC EVENT LISTENERS===================
+//===========PAGE SPECIFIC EVENT LISTENERS AND PROCESSES===================
 // add listeners if dom element present
 window.addEventListener('DOMContentLoaded', function(){
   //getTag();
@@ -716,7 +719,7 @@ window.addEventListener('DOMContentLoaded', function(){
 });
 
 
-// add-profile page 
+// ADD PROFILE PAGE
 if (page == "add-profile") {
   // show name on page load on add-profile page
   onAuthStateChanged(auth, function(user) {
@@ -739,13 +742,18 @@ if (page == "add-profile") {
   const uploadBtn = document.querySelector('.save-and-upload');
   //uploadBtn.addEventListener('click', uploadImage); 
   uploadBtn.addEventListener('click', function(e){
-  	console.log(getImageUrls(e));
-    //uploadImage(getImageUrls(e));
+  	//console.log(getImageUrls(e));
+    // return list of images - blob urls
+    let images = getImageUrls(e);
+    // for each image get blob type, make upload url
+    // upload image, return on success
+    // upload image url to user profile
+    uploadImage(getImageUrls(e));
   }); 
 }
 
 
-// post-a-job page
+// POST JOB PAGE
 if (page == "post-job") {
   console.log("post-job page");
 
@@ -782,7 +790,7 @@ if (page == "post-job") {
   });
 }
 
-// job board page
+// JOB BOARD PAGE
 if (page == "jobs") {
   console.log("jobs page");
   // get and show all jobs
@@ -791,7 +799,7 @@ if (page == "jobs") {
   });
 }
 
-// job details page
+// JOB DETAILS PAGE
 if (page == "job-details") {
   console.log("job details page");
   // get and show all jobs
