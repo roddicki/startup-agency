@@ -576,6 +576,7 @@ async function getImageUrls(e){
   let images = {};
 
   for (var i = 0; i < imageDivs.length; i++) {
+    // add an if to detect http - existing - images
     let url = imageDivs[i].querySelector('img').src;
     let blob = await fetch(url).then(response => response.blob());
     // match image blob type > add filename suffix
@@ -614,19 +615,42 @@ function showProfileData(userData) {
   }
 
   // if images exist get url and show
-  /*if (userData.images) {
+  if (userData.images) {
+    const uploadedDiv = document.querySelector('.existing-images');
+    const imageUploaderDiv = document.querySelector('.image-uploader');
+    //imageUploaderDiv.classList.add("has-files");
     // show images
     for (var i = 0; i < userData.images.length; i++) {
+      let uploadedImageDiv = document.createElement('div');
+      uploadedImageDiv.className = 'uploaded-image';
+      uploadedImageDiv.dataset.index = i;
+      //uploadedImageDiv.style.zIndex = '100';
+
+      let btn = document.createElement('button');
+      btn.className = 'delete-image';
+      btn.onclick = function(e) {
+        e.preventDefault();
+        console.log(this);
+      }
+
+      let icon = document.createElement('i');
+      icon.className = 'material-icons';
+      icon.innerHTML = 'clear';
+      btn.appendChild(icon);
+
       // get image
       getDownloadURL(ref(storage, userData.images[i]))
         .then((url) => {
           let imageTag = document.createElement('img');
           imageTag.src = url;
           console.log(url);
-          gallery.appendChild(imageTag);
+          uploadedImageDiv.appendChild(imageTag);
+          uploadedImageDiv.appendChild(btn);
+          uploadedDiv.appendChild(uploadedImageDiv);
+          //$(".material-icons").off()
         })
     }
-  }*/
+  }
 }
 
 
@@ -897,10 +921,10 @@ if (page == "add-profile") {
       } 
   })
 
-  // creat tag system
+  // create tag system
   createTagCheckboxes();
 
-  // load any exsiting profile info
+  // load any existing profile info
   getUserData(getParam()).then(function(vals){
       showProfileData(vals);
     });
@@ -915,7 +939,7 @@ if (page == "add-profile") {
   const uploadBtn = document.querySelector('.save-and-upload');
   //uploadBtn.addEventListener('click', uploadImage); 
   uploadBtn.addEventListener('click', function(e){
-    // add prile info
+    // add profile info
     addToProfile(e, getTags());
   	// get urls of images to upload - resolve promise > upload
     getImageUrls(e).then(function(result) { 
