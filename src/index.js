@@ -94,10 +94,10 @@ function signInUser(e) {
   let password = loginForm.password.value;
   signInWithEmailAndPassword(auth, email, password)
     .then(function(cred){
-      console.log("Signed in", cred.user);
+      console.log("Signed in", cred.user.uid);
       loginForm.reset();
       // go to profile page
-      
+      window.location.href = "profile.html?id="+cred.user.uid;
     })
 }
 
@@ -106,7 +106,7 @@ onAuthStateChanged(auth, function(user) {
   if (user) {
       // User logged in already or has just logged in.
       console.log(user.uid, user.email, "logged in");
-      showSignedInUser(user.email);
+      showSignedInUser(user.email, user.uid);
       currentUserData.uid = user.uid;
       currentUserData.email = user.email;
     } else {
@@ -481,22 +481,48 @@ function displayAllUserData(usersCollection) {
 }
 
 // show signed in user
-function showSignedInUser(user) {
-  if(signInLink) {
-      signInLink.style.display = 'none';
-      signedInLink.style.display = 'initial';
-      signedInLink.innerHTML = 'Signed In:<br>'+user;
-      logOut.style.display = 'initial';
-  }
+function showSignedInUser(user, id) {
+  const accountDropdown = document.querySelector('.dropdown-menu');
+  // delete drop down contents
+  accountDropdown.innerHTML = "";
+  // create drop down contents
+  let li = document.createElement('li');
+  let span = document.createElement('span');
+  span.className = 'dropdown-item signed-in';
+  span.innerHTML = user;
+  li.appendChild(span);
+  accountDropdown.appendChild(li);
+
+  let profileLink = document.createElement('a');
+  profileLink.className = 'dropdown-item my-profile';
+  profileLink.href = 'profile.html?id='+id;
+  profileLink.innerHTML = 'My Profile';
+  li.appendChild(profileLink);
+  accountDropdown.appendChild(li);
+
+  let signoutLink = document.createElement('a');
+  signoutLink.className = 'dropdown-item sign-out';
+  signoutLink.href = '#';
+  signoutLink.innerHTML = 'Sign Out';
+  li.appendChild(signoutLink);
+  accountDropdown.appendChild(li);
+  signoutLink.addEventListener('click', signOutUser);
 }
 
 // show signed out user
 function showSignedOutUser() {
-  if(signedInLink) {
-      signInLink.style.display = 'initial';
-      signedInLink.style.display = 'none';
-      logOut.style.display = 'none';
-  }
+  const accountDropdown = document.querySelector('.dropdown-menu');
+  // delete drop down contents
+  accountDropdown.innerHTML = "";
+  // create drop down contents
+  let li = document.createElement('li');
+
+  let a = document.createElement('a');
+  a.className = 'dropdown-item sign-in';
+  a.href = 'login.html';
+  a.innerHTML = 'Sign In / Create Account';
+  li.appendChild(a);
+  accountDropdown.appendChild(li);
 }
 
 // ======CREATE AND EDIT PROFILE FUNCTIONS======
@@ -586,7 +612,23 @@ function showProfileData(userData) {
     }
     
   }
+
+  // if images exist get url and show
+  /*if (userData.images) {
+    // show images
+    for (var i = 0; i < userData.images.length; i++) {
+      // get image
+      getDownloadURL(ref(storage, userData.images[i]))
+        .then((url) => {
+          let imageTag = document.createElement('img');
+          imageTag.src = url;
+          console.log(url);
+          gallery.appendChild(imageTag);
+        })
+    }
+  }*/
 }
+
 
 
 // ======PROFILE FUNCTIONS======
@@ -605,6 +647,8 @@ function showProfile(userData) {
   forename.innerHTML = userData.forename;
   surname.innerHTML = userData.surname;
   bio.innerHTML = userData.bio;
+  course.innerHTML = userData.course;
+  website.innerHTML = userData.website;
 
   // if tags exist create badges
   if (userData.tags) {
@@ -635,13 +679,13 @@ function showProfile(userData) {
         })
     }
   }
-  
 }
+
 
 // add edit btn to current user
 function showEditBtn (userID, paramID) {
   if (userID == paramID) {
-    console.log(userID, paramID, "showEditBtn current user id");
+    //console.log(userID, paramID, "showEditBtn current user id");
     const container = document.querySelector('.edit');
     let btn = document.createElement('button');
     btn.className = "btn btn-primary edit-profile-btn";
@@ -799,25 +843,16 @@ function enableSubmitJob() {
 const tags = ["Animation", "Visual-Effects", "Graphic-Design", "Games-Design-and-Production", "Video", "Audio-Production", "Journalism", "Photography", "Theatre-Dance"];
 
 const page = document.body.getAttribute('data-page');
-const logOut = document.querySelector('.sign-out');
-//const loginForm = document.querySelector('.login');
-//const signupForm = document.querySelector('.signup');
 const userSection = document.querySelector('.user-data');
 const addUserDataForm = document.querySelector('.add-user-data');
 const allUserData = document.querySelector('.all-user-data');
-const signInLink = document.querySelector('.dropdown-item.sign-in');
-const signedInLink = document.querySelector('.dropdown-item.signed-in');
 const signedInName = document.querySelector('.welcome-name');
 
 
 //===========EVENT LISTENERS===================
 
-// GENERAL ALL PAGES
-if (logOut) {
-  logOut.addEventListener('click', signOutUser);
-}
 
-// login page
+// LOGIN PAGE
 if (page == "login") {
   console.log("login page");
   const loginForm = document.querySelector('.login');
