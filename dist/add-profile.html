@@ -23,10 +23,11 @@
 
 <div class="container">
   <div>
-    <h2>Welcome <span class='welcome-name'></span>, thanks for registering</h2>
-    <h2>Why not build your profile</h2>
+    <h2>Welcome <span class='welcome-name'></span>, 
+      <span class='welcome-msg'>thanks for registering<br>Why not build your profile</span>
+    </h2>
 
-    <form class="addbio">
+    <form class="add-profile">
       <div class="input-field form-group">
           <label class="active">Add images of your work</label>
           <div class="input-images-1" style="padding-top: .5rem;"></div>
@@ -38,9 +39,24 @@
         <textarea class="form-control" name="bio" id="bio"  placeholder="Add bio" rows="5"></textarea>
       </div>
 
+      <!-- tags -->
       <div class="form-group">
-        <label for="tags">Tag your skills</label>
-        <textarea class="form-control" name="tags" id="tags"  placeholder="Drag tags here" rows="2"></textarea>
+        <label for="tags">Add tags for your skills</label>
+        <div>
+           <small id="tags-help" class="form-text text-muted">We use your tags tInteger fermentum vulputate sem, at faucibus tortor maximus quis. Quisque ultrices tincidunt vulputate. Donec vehicula ante eget ante tempus mattis.</small>
+        </div>
+       
+        <div class="tags" id="tag-list"></div>
+        <div>
+          <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#add-tags" aria-expanded="false" aria-controls="add-tags">
+            Add skills tags
+          </button>
+        </div>
+        <div class="collapse" id="add-tags">
+          <div class="card card-body" id="tag-checkboxes">
+            <!-- tag checkboxes insterted here by JS -->
+          </div> 
+        </div>
       </div>
 
       <div class="form-group">
@@ -68,6 +84,7 @@
         <div class="bio"></div>
         <div class="user-data"></div>
         <div class="link"></div>
+        <div class="selected-tags"></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>

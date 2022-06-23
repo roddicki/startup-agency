@@ -6,7 +6,7 @@ document.getElementById("footer").innerHTML = footer;
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import { initializeApp } from 'firebase/app';
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import { getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc, doc, query, where, orderBy, getDoc, serverTimestamp, updateDoc, setDoc,  Timestamp, arrayUnion} from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
@@ -119,20 +119,18 @@ onAuthStateChanged(auth, function(user) {
 //*****************************************
 // firebase general user functions
 // 
-// retrieve and update user data 
-function getUserData(uid){
-  // match a single doc in the collection
+
+// retrieve user data - single doc in the collection
+async function getUserData(uid) {
   const docRef = doc(db, 'users', uid);
-  // subscribe to changes in that doc
-  onSnapshot(docRef, function(doc){
-    console.log(doc.data());
-    // add to DOM
-    let userData = "";
-    for (const [key, value] of Object.entries(doc.data())) {
-      userData += key+": "+value+"</br>";
-    }
-    userSection.innerHTML = userData;
-  })
+  const singleDoc = await getDoc(docRef);
+  if (singleDoc.exists()) {
+    //console.log("requested document exists:", singleDoc.data());
+    return singleDoc.data();
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
 }
 
 // Returns the signed-in user's email 
@@ -146,11 +144,18 @@ function isUserSignedIn() {
 }
 
 
-// Returns the signed-in user's uid.
-async function getUserUid() {
-  const id = await auth;
-  return id;
+// Returns the signed-in user's uid. // does not work on page load // unreliable
+function getUserUid() {
+  // on login state change
+  onAuthStateChanged(auth, function(user) {
+    if (user) {
+        // User logged in already or has just logged in.
+        console.log(user.uid, "current use id");
+      } 
+  })
 }
+
+
 
 
 async function getCurrentUserDetails(uid) {
@@ -166,6 +171,8 @@ async function getCurrentUserDetails(uid) {
     console.log("No such document!");
   }
 }
+
+
 
 // add user data to the user's doc
 /*function addUserData(e) {
@@ -204,6 +211,7 @@ function getAllUserData(tag, fn) {
     let usersCollection = [];
       for (let i = 0; i < snapshot.docs.length; i++) {
         let user = snapshot.docs[i].data();
+        user.id = snapshot.docs[i].id;
         usersCollection.push(user);
     }
     console.log(usersCollection);
@@ -276,8 +284,8 @@ function createJobDoc(tags) {
     email: jobDetailsForm.email.value,
     phone: jobDetailsForm.phone.value,
     title: jobDetailsForm.title.value,
-    shortdescription: jobDetailsForm.shortdescription.value,
-    longdescription: jobDetailsForm.longdescription.value,
+    shortdescription: jobDetailsForm.shortdescription.value.replace(/\n\r?/g, '<br>'),
+    longdescription: jobDetailsForm.longdescription.value.replace(/\n\r?/g, '<br>'),
     budget: jobDetailsForm.budget.value,
     deadline: Timestamp.fromDate(jobDeadline),
     applicationdeadline: Timestamp.fromDate(applicationDeadline),
@@ -298,27 +306,57 @@ function createJobDoc(tags) {
 // upload image - argument is an object - {upload url : blob url}
 // inserts a reference to the uploaded image/s into the logged in users profile
 async function uploadImage(urls) {
-  console.log(urls);
+  // update user data with image urls
+  let docRef = doc(db, 'users', currentUserData.uid);
+  // delete image urls from user profile
+  updateDoc(docRef, {
+    images: []
+  })
+  .then(function () {
+    console.log("deleted image references");
+  })
 
   for (const [uploadUrl, blobUrl] of Object.entries(urls)) {
-    console.log(`${uploadUrl}: ${blobUrl}`);
+    //console.log(`${uploadUrl}: ${blobUrl}`);
     let blob = await fetch(blobUrl).then(response => response.blob());
     // upload
     const storageRef = ref(storage, uploadUrl);
     // upload file - 'blob' comes from the Blob or File API
     uploadBytes(storageRef, blob).then(function(snapshot) {
-      console.log('Uploaded a blob or file!');
-      // update user data with image urls
-      let docRef = doc(db, 'users', currentUserData.uid);
-
+      console.log('Uploaded image blob file!');
+      
+      // update user profile with image urls
       updateDoc(docRef, {
         images: arrayUnion(uploadUrl)
       })
       .then(function () {
-        console.log("upload complete");
+        console.log("added image reference to user profile");
       })
     });
   }
+}
+
+
+// add to profile 
+function addToProfile(e, tags) {
+  e.preventDefault()
+  const profileForm = document.querySelector('.add-profile');
+  let bio = profileForm.bio.value.replace(/\n\r?/g, '<br>');
+  let docRef = doc(db, 'users', currentUserData.uid);
+  //console.log(tags, bio);
+
+  updateDoc(docRef, {
+    bio: bio,
+    website: profileForm.website.value,
+    tags: tags,
+    profileCreatedAt: serverTimestamp(),
+    profileApproved: false
+  })
+  .then(function(){
+    console.log("successfully added bio and tags to profile");
+    // go to profile on completion
+    //window.location.href = "index.html";
+  });
 }
 
 
@@ -328,7 +366,7 @@ async function uploadImage(urls) {
 //===========DOM FUNCTIONS===================
 
 
-
+// ======SHOW JOB FUNCTIONS======
 // show all jobs - jobs page
 function displayAllJobs (jobCollection) {
   for (var i = 0; i < jobCollection.length; i++) {
@@ -414,7 +452,7 @@ function displaySingleJob(jobData) {
   document.querySelector(".single-job-data").appendChild(card);
 }
 
-
+// ======SHOW USER DATA FUNCTIONS======
 // show all user data - this is the basis for the front page
 function displayAllUserData(usersCollection) {
   let userData = "";
@@ -427,6 +465,9 @@ function displayAllUserData(usersCollection) {
           userData += '<a href="index.html?'+params+'">'+value[j]+'</a> ';
         };
         userData += "</br>";
+      }
+      else if (key == "id") {
+        userData += '<a href="profile.html?id='+value+'">see profile</a> ';
       }
       else {
         userData += key+": "+value+"</br>";
@@ -460,12 +501,13 @@ function showSignedOutUser() {
 
 // ======CREATE AND EDIT PROFILE FUNCTIONS======
 // show profile preview
-function buildPreview(){
-  const profileForm = document.querySelector('.addbio');
+function showPreview(selectedTags){
+  const profileForm = document.querySelector('.add-profile');
   const gallery = document.querySelector('.gallery');
   const bio = document.querySelector('.bio');
   const link = document.querySelector('.link');
   const userData = document.querySelector('.user-data');
+  const tags = document.querySelector('.selected-tags');
   const imageDivs = document.querySelectorAll('.uploaded-image');
   gallery.innerHTML = "";
 
@@ -478,7 +520,18 @@ function buildPreview(){
     gallery.appendChild(image);
   }
 
-  bio.innerHTML = profileForm.bio.value;
+  for (var i = 0; i < selectedTags.length; i++) {
+    // create tag
+    let badge = document.createElement("span");
+    //badge.href = "#";
+    badge.className = "badge rounded-pill bg-secondary";
+    badge.style = "margin: 3px;"
+    badge.innerHTML = selectedTags[i].replaceAll("-", ' ');
+
+    tags.appendChild(badge);
+  }
+
+  bio.innerHTML = profileForm.bio.value.replace(/\n\r?/g, '<br>');
   link.innerHTML = profileForm.website.value;
   let data = "";
   for (const property in currentUserData) {
@@ -508,6 +561,97 @@ async function getImageUrls(e){
   return images; 
 }
 
+// show existing profile data in form fields
+function showProfileData(userData) {
+  console.log("show user data", userData.tags);
+  const welcomeMsg = document.querySelector('.welcome-msg');
+  const profileForm = document.querySelector('.add-profile');
+  welcomeMsg.innerHTML = "edit your profile";
+  profileForm.website.value = userData.website;
+  profileForm.bio.value = userData.bio.replace(/<br>/gi, '\n');
+  const tagList = document.querySelector('#tag-list');
+  // check check box tags
+  const checkboxes = document.querySelectorAll('.form-check-input.tag');
+  for (var i = 0; i < checkboxes.length; i++) {
+    if (userData.tags.includes(checkboxes[i].value)) {
+      checkboxes[i].checked = true; // check checkbox
+      // add badge
+      let badge = document.createElement("span");
+      //badge.href = "#";
+      badge.className = "badge rounded-pill bg-secondary";
+      badge.style = "margin: 3px;"
+      badge.dataset.label = checkboxes[i].value;
+      badge.innerHTML = checkboxes[i].value.replaceAll("-", ' ');
+      tagList.appendChild(badge);
+    }
+    
+  }
+}
+
+
+// ======PROFILE FUNCTIONS======
+
+// show profile 
+function showProfile(userData) {
+  console.log(userData);
+  const forename = document.querySelector('.single-profile .forename');
+  const surname = document.querySelector('.single-profile .surname');
+  const bio = document.querySelector('.single-profile .bio');
+  const tagList = document.querySelector('.single-profile .tags');
+  const website = document.querySelector('.single-profile .website');
+  const course = document.querySelector('.single-profile .course');
+  const gallery = document.querySelector('.single-profile .gallery');
+
+  forename.innerHTML = userData.forename;
+  surname.innerHTML = userData.surname;
+  bio.innerHTML = userData.bio;
+
+  // if tags exist create badges
+  if (userData.tags) {
+    // create tag badges
+    for (var i = 0; i < userData.tags.length; i++) {
+      // create tag
+      let badge = document.createElement("span");
+      //badge.href = "#";
+      badge.className = "badge rounded-pill bg-secondary";
+      badge.style = "margin: 3px;"
+      badge.dataset.label = userData.tags[i];
+      badge.innerHTML = userData.tags[i].replaceAll("-", ' ');
+      tagList.appendChild(badge);
+    }
+  }
+
+  // if images exist get url and show
+  if (userData.images) {
+    // show images
+    for (var i = 0; i < userData.images.length; i++) {
+      // get image
+      getDownloadURL(ref(storage, userData.images[i]))
+        .then((url) => {
+          let imageTag = document.createElement('img');
+          imageTag.src = url;
+          console.log(url);
+          gallery.appendChild(imageTag);
+        })
+    }
+  }
+  
+}
+
+// add edit btn to current user
+function showEditBtn (userID, paramID) {
+  if (userID == paramID) {
+    console.log(userID, paramID, "showEditBtn current user id");
+    const container = document.querySelector('.edit');
+    let btn = document.createElement('button');
+    btn.className = "btn btn-primary edit-profile-btn";
+    btn.innerHTML = "Edit profile";
+    container.appendChild(btn);
+    btn.addEventListener('click', function (e) {
+      window.location.href = "add-profile.html?id="+userID;
+    })
+  }
+}
 
 
 
@@ -614,7 +758,11 @@ function getJobForm() {
   const jobDetailsForm = document.querySelector('.jobDetails');
   let formValues = "";
   for (let i = 0; i < jobDetailsForm.length; i++) {
-    if (jobDetailsForm.elements[i].type != 'checkbox') {
+    if (jobDetailsForm.elements[i].name == 'longdescription' || jobDetailsForm.elements[i].name == 'shortdescription') {
+      console.log(jobDetailsForm.elements[i].value);
+      formValues += jobDetailsForm.elements[i].value.replace(/\n\r?/g, '<br>');
+    }
+    else if (jobDetailsForm.elements[i].type != 'checkbox') {
       formValues += jobDetailsForm.elements[i].name+ " : " +jobDetailsForm.elements[i].value + "<br>";
     }
   }
@@ -699,7 +847,7 @@ window.addEventListener('DOMContentLoaded', function(){
 });
 
 
-// ADD PROFILE PAGE
+// ADD / EDIT PROFILE PAGE
 if (page == "add-profile") {
   // show name on page load on add-profile page
   onAuthStateChanged(auth, function(user) {
@@ -714,20 +862,51 @@ if (page == "add-profile") {
       } 
   })
 
+  // creat tag system
+  createTagCheckboxes();
+
+  // load any exsiting profile info
+  getUserData(getParam()).then(function(vals){
+      showProfileData(vals);
+    });
+
   // show profile preview 
   const previewBtn = document.querySelector('.show-preview');
-  previewBtn.addEventListener('click', buildPreview);
+  previewBtn.addEventListener('click', function () {
+    showPreview(getTags());
+  });
 
   // upload and save
   const uploadBtn = document.querySelector('.save-and-upload');
   //uploadBtn.addEventListener('click', uploadImage); 
   uploadBtn.addEventListener('click', function(e){
+    // add prile info
+    addToProfile(e, getTags());
   	// get urls of images to upload - resolve promise > upload
     getImageUrls(e).then(function(result) { 
          console.log(result);
          uploadImage(result);
       });
   }); 
+}
+
+
+// SHOW PROFILE
+if (page == "single-profile") {
+  console.log("profile page");
+  // show profile passed as param
+  getUserData(getParam()).then(function(vals){
+      showProfile(vals);
+    });
+  
+  // add edit my profile btn
+  onAuthStateChanged(auth, function(user) {
+    if (user) {
+        // User logged in already or has just logged in.
+        console.log("profile page logged in user is", user.uid);
+        showEditBtn(user.uid, getParam());
+      } 
+  })
 }
 
 
