@@ -317,22 +317,37 @@ async function uploadImage(urls) {
   })
 
   for (const [uploadUrl, blobUrl] of Object.entries(urls)) {
-    //console.log(`${uploadUrl}: ${blobUrl}`);
-    let blob = await fetch(blobUrl).then(response => response.blob());
-    // upload
-    const storageRef = ref(storage, uploadUrl);
-    // upload file - 'blob' comes from the Blob or File API
-    uploadBytes(storageRef, blob).then(function(snapshot) {
-      console.log('Uploaded image blob file!');
-      
-      // update user profile with image urls
-      updateDoc(docRef, {
-        images: arrayUnion(uploadUrl)
-      })
-      .then(function () {
-        console.log("added image reference to user profile");
-      })
-    });
+    console.log(`${uploadUrl}: ${blobUrl}`);
+    // upload new blob image & upload reference
+    if (blobUrl.includes('blob')) {
+    	console.log(blobUrl);
+    	let blob = await fetch(blobUrl).then(response => response.blob());
+	    // upload
+	    const storageRef = ref(storage, uploadUrl);
+	    // upload file - 'blob' comes from the Blob or File API
+	    uploadBytes(storageRef, blob).then(function(snapshot) {
+	      console.log('Uploaded image blob file!');
+	      
+	      // update user profile with image urls
+	      updateDoc(docRef, {
+			images: arrayUnion(uploadUrl)
+	      })
+	      .then(function () {
+	        console.log("added new image reference to user profile");
+	      })
+	    });
+    }
+    // existing iamge - upload reference only
+    else {
+		// update user profile with image urls
+		updateDoc(docRef, {
+			images: arrayUnion(uploadUrl)
+		})
+		.then(function () {
+			console.log("added existing image reference to user profile");
+		})
+    }
+    
   }
 }
 
@@ -574,15 +589,26 @@ async function getImageUrls(e){
   // all upload images
   const imageDivs = document.querySelectorAll('.uploaded-image');
   let images = {};
+  let uploadUrl = "";
 
   for (var i = 0; i < imageDivs.length; i++) {
-    // add an if to detect http - existing - images
     let url = imageDivs[i].querySelector('img').src;
-    let blob = await fetch(url).then(response => response.blob());
-    // match image blob type > add filename suffix
-    let fileSuffix = suffix[blob.type];
-    let uploadUrl = "images/"+currentUserData.uid+ "/img-" + i + "." + fileSuffix;
-    images[uploadUrl] = url;
+    // if http - existing - images
+    if (url.includes('https://firebasestorage.googleapis.com')) {
+    	uploadUrl = url.split('/o/').pop().split('?')[0];
+    	uploadUrl = uploadUrl.replace(/%2F/g, "/")
+    	images[uploadUrl] = url;
+    }
+    // blob url
+    else {
+	    let blob = await fetch(url).then(response => response.blob());
+	    // get blob filename suffix
+	    let fileSuffix = suffix[blob.type];
+	    let randStr = Math.random().toString(36).substr(2, 5);
+	    uploadUrl = "images/"+currentUserData.uid+ "/img-" + randStr + "." + fileSuffix;
+    	images[uploadUrl] = url;
+    }
+    
   }
   //console.log(images);
   return images; 
@@ -596,6 +622,8 @@ function showProfileData(userData) {
   welcomeMsg.innerHTML = "edit your profile";
   profileForm.website.value = userData.website;
   profileForm.bio.value = userData.bio.replace(/<br>/gi, '\n');
+  profileForm.bio.style.height = profileForm.bio.scrollHeight+3+'px';
+
   const tagList = document.querySelector('#tag-list');
   // check check box tags
   const checkboxes = document.querySelectorAll('.form-check-input.tag');
@@ -622,7 +650,7 @@ function showProfileData(userData) {
     // show images
     for (var i = 0; i < userData.images.length; i++) {
       let uploadedImageDiv = document.createElement('div');
-      uploadedImageDiv.className = 'uploaded-image';
+      uploadedImageDiv.className = 'uploaded-image image-'+i;
       uploadedImageDiv.dataset.index = i;
       //uploadedImageDiv.style.zIndex = '100';
 
@@ -630,7 +658,7 @@ function showProfileData(userData) {
       btn.className = 'delete-image';
       btn.onclick = function(e) {
         e.preventDefault();
-        console.log(this);
+        this.parentElement.remove();
       }
 
       let icon = document.createElement('i');
@@ -643,11 +671,9 @@ function showProfileData(userData) {
         .then((url) => {
           let imageTag = document.createElement('img');
           imageTag.src = url;
-          console.log(url);
           uploadedImageDiv.appendChild(imageTag);
           uploadedImageDiv.appendChild(btn);
           uploadedDiv.appendChild(uploadedImageDiv);
-          //$(".material-icons").off()
         })
     }
   }
@@ -698,7 +724,6 @@ function showProfile(userData) {
         .then((url) => {
           let imageTag = document.createElement('img');
           imageTag.src = url;
-          console.log(url);
           gallery.appendChild(imageTag);
         })
     }
@@ -937,14 +962,15 @@ if (page == "add-profile") {
 
   // upload and save
   const uploadBtn = document.querySelector('.save-and-upload');
-  //uploadBtn.addEventListener('click', uploadImage); 
   uploadBtn.addEventListener('click', function(e){
     // add profile info
     addToProfile(e, getTags());
   	// get urls of images to upload - resolve promise > upload
     getImageUrls(e).then(function(result) { 
          console.log(result);
-         uploadImage(result);
+         uploadImage(result).then(function(){
+         	console.log('complete');
+         });
       });
   }); 
 }
