@@ -933,6 +933,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
 // ADD / EDIT PROFILE PAGE
 if (page == "add-profile") {
+  console.log("add-profile page");
   // show name on page load on add-profile page
   onAuthStateChanged(auth, function(user) {
     if (user) {
@@ -973,6 +974,35 @@ if (page == "add-profile") {
          });
       });
   }); 
+
+
+  // add edit icon to each new upload image
+  const observer = new MutationObserver(function(mutations_list) {
+    mutations_list.forEach(function(mutation) {
+      mutation.addedNodes.forEach(function(added_node) {
+        if(added_node.className == 'uploaded-image') {
+          let btn = document.createElement('button');
+          btn.className = 'edit-image';
+          btn.onclick = function(e) {
+            e.preventDefault();
+            console.log('clicked icon');
+          }
+
+          let icon = document.createElement('i');
+          icon.className = 'material-icons';
+          icon.innerHTML = 'edit';
+          btn.appendChild(icon);
+          added_node.appendChild(btn);
+
+
+          console.log('#child has been added');
+          //observer.disconnect();
+        }
+      });
+    });
+  });
+
+  observer.observe(document.querySelector("#image-uploader"), { subtree: true, childList: true });
 }
 
 
