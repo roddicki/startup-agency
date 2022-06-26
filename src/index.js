@@ -540,7 +540,43 @@ function showSignedOutUser() {
   accountDropdown.appendChild(li);
 }
 
+
+
+
 // ======CREATE AND EDIT PROFILE FUNCTIONS======
+
+// watch for new uploaded images add edit caption icon
+function uploadImageWatcher(){
+  const captionImg = document.querySelector('#caption-image');
+  // add edit icon to each new upload image
+  const observer = new MutationObserver(function(mutations_list) {
+    mutations_list.forEach(function(mutation) {
+      mutation.addedNodes.forEach(function(added_node) {
+        if(added_node.className == 'uploaded-image') {
+          let btn = document.createElement('button');
+          btn.className = 'edit-image';
+          btn.onclick = function(e) {
+            e.preventDefault();
+            captionImg.src = this.parentElement.querySelector('img').src;
+            $("#captionModal").modal("show");
+          }
+
+          let icon = document.createElement('i');
+          icon.className = 'material-icons';
+          icon.innerHTML = 'edit';
+          btn.appendChild(icon);
+          added_node.appendChild(btn);
+
+          console.log('#child has been added');
+          //observer.disconnect();
+        }
+      });
+    });
+  });
+
+  observer.observe(document.querySelector("#image-uploader"), { subtree: true, childList: true });
+}
+
 // show profile preview
 function showPreview(selectedTags){
   const profileForm = document.querySelector('.add-profile');
@@ -950,6 +986,9 @@ if (page == "add-profile") {
   // create tag system
   createTagCheckboxes();
 
+  // watch for new uploaded images add edit caption icon
+  uploadImageWatcher();
+
   // load any existing profile info
   getUserData(getParam()).then(function(vals){
       showProfileData(vals);
@@ -975,34 +1014,6 @@ if (page == "add-profile") {
       });
   }); 
 
-
-  // add edit icon to each new upload image
-  const observer = new MutationObserver(function(mutations_list) {
-    mutations_list.forEach(function(mutation) {
-      mutation.addedNodes.forEach(function(added_node) {
-        if(added_node.className == 'uploaded-image') {
-          let btn = document.createElement('button');
-          btn.className = 'edit-image';
-          btn.onclick = function(e) {
-            e.preventDefault();
-            console.log('clicked icon');
-          }
-
-          let icon = document.createElement('i');
-          icon.className = 'material-icons';
-          icon.innerHTML = 'edit';
-          btn.appendChild(icon);
-          added_node.appendChild(btn);
-
-
-          console.log('#child has been added');
-          //observer.disconnect();
-        }
-      });
-    });
-  });
-
-  observer.observe(document.querySelector("#image-uploader"), { subtree: true, childList: true });
 }
 
 
