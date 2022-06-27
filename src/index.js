@@ -495,6 +495,7 @@ function displayAllUserData(usersCollection) {
   allUserData.innerHTML = userData;
 }
 
+
 // show signed in user
 function showSignedInUser(user, id) {
   const accountDropdown = document.querySelector('.dropdown-menu');
@@ -523,6 +524,7 @@ function showSignedInUser(user, id) {
   accountDropdown.appendChild(li);
   signoutLink.addEventListener('click', signOutUser);
 }
+
 
 // show signed out user
 function showSignedOutUser() {
@@ -553,12 +555,22 @@ function uploadImageWatcher(){
     mutations_list.forEach(function(mutation) {
       mutation.addedNodes.forEach(function(added_node) {
         if(added_node.className == 'uploaded-image') {
+          let randStr = Math.random().toString(36).substr(2, 5);
+          // create hidden input to store caption
+          let captionInput = document.createElement('input');
+          captionInput.type = 'hidden';
+          captionInput.className = 'form-control';
+          captionInput.name = 'caption-'+randStr;
+          added_node.appendChild(captionInput);
+
           let btn = document.createElement('button');
           btn.className = 'edit-image';
           btn.onclick = function(e) {
             e.preventDefault();
             captionImg.src = this.parentElement.querySelector('img').src;
+            document.querySelector('#captionModal #caption').value = captionInput.value;
             $("#captionModal").modal("show");
+            document.querySelector('#captionModal #caption').name = 'caption-'+randStr;
           }
 
           let icon = document.createElement('i');
@@ -575,6 +587,18 @@ function uploadImageWatcher(){
   });
 
   observer.observe(document.querySelector("#image-uploader"), { subtree: true, childList: true });
+}
+
+// save edited caption from caption modal to hidden input for upload image
+function saveCaption(e) {
+	e.preventDefault();
+	// copy value from caption modal input to hidden imput
+	const captionModalInput = document.querySelector('#captionModal #caption');
+	const hiddenInputName = captionModalInput.name;
+	const hiddenInput = document.querySelector('.add-profile [name="'+hiddenInputName+'"]');
+	hiddenInput.value = captionModalInput.value;
+	// close modal
+	$("#captionModal").modal("hide");	
 }
 
 // show profile preview
@@ -690,6 +714,14 @@ function showProfileData(userData) {
       uploadedImageDiv.dataset.index = i;
       //uploadedImageDiv.style.zIndex = '100';
 
+      // create hidden input to store caption
+      let randStr = Math.random().toString(36).substr(2, 5);
+      let captionInput = document.createElement('input');
+      captionInput.type = 'hidden';
+      captionInput.className = 'form-control';
+      captionInput.name = 'caption-'+randStr;
+      uploadedImageDiv.appendChild(captionInput);
+
       let btn = document.createElement('button');
       btn.className = 'delete-image';
       btn.onclick = function(e) {
@@ -702,6 +734,22 @@ function showProfileData(userData) {
       icon.innerHTML = 'clear';
       btn.appendChild(icon);
 
+      let editBtn = document.createElement('button');
+      editBtn.className = 'edit-image';
+      editBtn.onclick = function(e) {
+        e.preventDefault();
+        const captionImg = document.querySelector('#caption-image');
+        captionImg.src = this.parentElement.querySelector('img').src;
+        document.querySelector('#captionModal #caption').value = captionInput.value;
+        $("#captionModal").modal("show");
+        document.querySelector('#captionModal #caption').name = 'caption-'+randStr;
+      }
+
+      let editIcon = document.createElement('i');
+      editIcon.className = 'material-icons';
+      editIcon.innerHTML = 'edit';
+      editBtn.appendChild(editIcon);
+
       // get image
       getDownloadURL(ref(storage, userData.images[i]))
         .then((url) => {
@@ -709,6 +757,7 @@ function showProfileData(userData) {
           imageTag.src = url;
           uploadedImageDiv.appendChild(imageTag);
           uploadedImageDiv.appendChild(btn);
+          uploadedImageDiv.appendChild(editBtn);
           uploadedDiv.appendChild(uploadedImageDiv);
         })
     }
@@ -993,6 +1042,10 @@ if (page == "add-profile") {
   getUserData(getParam()).then(function(vals){
       showProfileData(vals);
     });
+
+  // save edited caption from modal
+  const captionModal = document.querySelector('#captionModal .save-caption');
+  captionModal.addEventListener('click', saveCaption);
 
   // show profile preview 
   const previewBtn = document.querySelector('.show-preview');
