@@ -559,7 +559,7 @@ function uploadImageWatcher(){
           // create hidden input to store caption
           let captionInput = document.createElement('input');
           captionInput.type = 'hidden';
-          captionInput.className = 'form-control';
+          captionInput.className = 'form-control caption-text';
           captionInput.name = 'caption-'+randStr;
           added_node.appendChild(captionInput);
 
@@ -648,16 +648,24 @@ async function getImageUrls(e){
   const suffix = {'image/jpeg':'jpg', 'image/png':'png', 'image/gif':'gif'};
   // all upload images
   const imageDivs = document.querySelectorAll('.uploaded-image');
-  let images = {};
+  let images = [];
   let uploadUrl = "";
 
   for (var i = 0; i < imageDivs.length; i++) {
+    let img = {};
+    let caption = imageDivs[i].querySelector('.caption-text').value;
+    img.caption = caption;
+    img.hero = false;
+
     let url = imageDivs[i].querySelector('img').src;
     // if http - existing - images
     if (url.includes('https://firebasestorage.googleapis.com')) {
     	uploadUrl = url.split('/o/').pop().split('?')[0];
     	uploadUrl = uploadUrl.replace(/%2F/g, "/")
-    	images[uploadUrl] = url;
+    	//images[uploadUrl] = url;
+      img.url = uploadUrl;
+      img.sourceUrl = url;
+      images.push(img);
     }
     // blob url
     else {
@@ -666,7 +674,10 @@ async function getImageUrls(e){
 	    let fileSuffix = suffix[blob.type];
 	    let randStr = Math.random().toString(36).substr(2, 5);
 	    uploadUrl = "images/"+currentUserData.uid+ "/img-" + randStr + "." + fileSuffix;
-    	images[uploadUrl] = url;
+    	//images[uploadUrl] = url;
+      img.url = uploadUrl;
+      img.sourceUrl = url;
+      images.push(img);
     }
     
   }
@@ -674,7 +685,7 @@ async function getImageUrls(e){
   return images; 
 }
 
-// show existing profile data in form fields
+// show all existing profile data in form fields
 function showProfileData(userData) {
   console.log("show user data", userData.tags);
   const welcomeMsg = document.querySelector('.welcome-msg');
@@ -718,10 +729,10 @@ function showProfileData(userData) {
       let randStr = Math.random().toString(36).substr(2, 5);
       let captionInput = document.createElement('input');
       captionInput.type = 'hidden';
-      captionInput.className = 'form-control';
+      captionInput.className = 'form-control caption-text';
       captionInput.name = 'caption-'+randStr;
       uploadedImageDiv.appendChild(captionInput);
-
+      // create delete image btn & icon
       let btn = document.createElement('button');
       btn.className = 'delete-image';
       btn.onclick = function(e) {
@@ -734,6 +745,7 @@ function showProfileData(userData) {
       icon.innerHTML = 'clear';
       btn.appendChild(icon);
 
+      // create edit caption btn & icon
       let editBtn = document.createElement('button');
       editBtn.className = 'edit-image';
       editBtn.onclick = function(e) {
@@ -1061,9 +1073,9 @@ if (page == "add-profile") {
   	// get urls of images to upload - resolve promise > upload
     getImageUrls(e).then(function(result) { 
          console.log(result);
-         uploadImage(result).then(function(){
+         /*uploadImage(result).then(function(){
          	console.log('complete');
-         });
+         });*/
       });
   }); 
 
