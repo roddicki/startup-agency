@@ -857,12 +857,17 @@ function showProfile(userData) {
   if (userData.images) {
     // show images
     for (var i = 0; i < userData.images.length; i++) {
+      // caption
+      let caption = userData.images[i].caption;
       // get image
-      getDownloadURL(ref(storage, userData.images[i]))
+      getDownloadURL(ref(storage, userData.images[i].url))
         .then((url) => {
           let imageTag = document.createElement('img');
           imageTag.src = url;
           gallery.appendChild(imageTag);
+          let captionTag = document.createElement('span');
+          captionTag.innerHTML = "caption: " + caption;
+          gallery.appendChild(captionTag);
         })
     }
   }
