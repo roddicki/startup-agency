@@ -316,7 +316,47 @@ async function uploadImage(urls) {
     console.log("deleted image references");
   })
 
-  for (const [uploadUrl, blobUrl] of Object.entries(urls)) {
+  for (var i = 0; i < urls.length; i++) {
+    console.log(urls[i]);
+    let uploadUrl = urls[i].url;
+    let newImageRef = {};
+    newImageRef.url = uploadUrl;
+    newImageRef.hero = urls[i].hero;
+    newImageRef.caption = urls[i].caption;
+    console.log(newImageRef);
+    // upload new blob image & upload reference
+    if (urls[i].sourceUrl.includes('blob')) {
+      let blobUrl = urls[i].sourceUrl;
+      console.log(blobUrl);
+      let blob = await fetch(blobUrl).then(response => response.blob());
+      // upload
+      const storageRef = ref(storage, uploadUrl);
+      // upload file - 'blob' comes from the Blob or File API
+      uploadBytes(storageRef, blob).then(function(snapshot) {
+        console.log('Uploaded image blob file!');
+        
+        // update user profile with image urls
+        updateDoc(docRef, {
+          images: arrayUnion(newImageRef)
+        })
+        .then(function () {
+          console.log("added new image reference to user profile");
+        })
+      });
+    }
+    // existing imgae - upload reference only
+    else {
+      // update user profile with image urls
+      updateDoc(docRef, {
+        images: arrayUnion(newImageRef)
+      })
+      .then(function () {
+        console.log("added existing image reference to user profile");
+      })
+    }
+  }
+
+  /*for (const [uploadUrl, blobUrl] of Object.entries(urls)) {
     console.log(`${uploadUrl}: ${blobUrl}`);
     // upload new blob image & upload reference
     if (blobUrl.includes('blob')) {
@@ -339,16 +379,16 @@ async function uploadImage(urls) {
     }
     // existing iamge - upload reference only
     else {
-		// update user profile with image urls
-		updateDoc(docRef, {
-			images: arrayUnion(uploadUrl)
-		})
-		.then(function () {
-			console.log("added existing image reference to user profile");
-		})
+  		// update user profile with image urls
+  		updateDoc(docRef, {
+  			images: arrayUnion(uploadUrl)
+  		})
+  		.then(function () {
+  			console.log("added existing image reference to user profile");
+  		})
     }
     
-  }
+  }*/
 }
 
 
@@ -731,6 +771,7 @@ function showProfileData(userData) {
       captionInput.type = 'hidden';
       captionInput.className = 'form-control caption-text';
       captionInput.name = 'caption-'+randStr;
+      captionInput.value = userData.images[i].caption;
       uploadedImageDiv.appendChild(captionInput);
       // create delete image btn & icon
       let btn = document.createElement('button');
@@ -763,7 +804,7 @@ function showProfileData(userData) {
       editBtn.appendChild(editIcon);
 
       // get image
-      getDownloadURL(ref(storage, userData.images[i]))
+      getDownloadURL(ref(storage, userData.images[i].url))
         .then((url) => {
           let imageTag = document.createElement('img');
           imageTag.src = url;
@@ -1072,10 +1113,10 @@ if (page == "add-profile") {
     addToProfile(e, getTags());
   	// get urls of images to upload - resolve promise > upload
     getImageUrls(e).then(function(result) { 
-         console.log(result);
-         /*uploadImage(result).then(function(){
+         //console.log(result);
+         uploadImage(result).then(function(){
          	console.log('complete');
-         });*/
+         });
       });
   }); 
 
