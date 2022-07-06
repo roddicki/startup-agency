@@ -356,39 +356,6 @@ async function uploadImage(urls) {
     }
   }
 
-  /*for (const [uploadUrl, blobUrl] of Object.entries(urls)) {
-    console.log(`${uploadUrl}: ${blobUrl}`);
-    // upload new blob image & upload reference
-    if (blobUrl.includes('blob')) {
-    	console.log(blobUrl);
-    	let blob = await fetch(blobUrl).then(response => response.blob());
-	    // upload
-	    const storageRef = ref(storage, uploadUrl);
-	    // upload file - 'blob' comes from the Blob or File API
-	    uploadBytes(storageRef, blob).then(function(snapshot) {
-	      console.log('Uploaded image blob file!');
-	      
-	      // update user profile with image urls
-	      updateDoc(docRef, {
-			images: arrayUnion(uploadUrl)
-	      })
-	      .then(function () {
-	        console.log("added new image reference to user profile");
-	      })
-	    });
-    }
-    // existing iamge - upload reference only
-    else {
-  		// update user profile with image urls
-  		updateDoc(docRef, {
-  			images: arrayUnion(uploadUrl)
-  		})
-  		.then(function () {
-  			console.log("added existing image reference to user profile");
-  		})
-    }
-    
-  }*/
 }
 
 
@@ -603,14 +570,23 @@ function uploadImageWatcher(){
           captionInput.name = 'caption-'+randStr;
           added_node.appendChild(captionInput);
 
+          // create hidden input to stor hero image
+          let heroInput = document.createElement('input');
+          heroInput.type = 'hidden';
+          heroInput.className = 'form-control hero-image';
+          heroInput.name = 'hero-'+randStr;
+          added_node.appendChild(heroInput);
+
           let btn = document.createElement('button');
           btn.className = 'edit-image';
           btn.onclick = function(e) {
             e.preventDefault();
             captionImg.src = this.parentElement.querySelector('img').src;
             document.querySelector('#captionModal #caption').value = captionInput.value;
-            $("#captionModal").modal("show");
             document.querySelector('#captionModal #caption').name = 'caption-'+randStr;
+            document.querySelector('#captionModal #hero-image-switch').value = heroInput.value;
+            document.querySelector('#captionModal #hero-image-switch').name = 'hero-'+randStr;
+            $("#captionModal").modal("show");
           }
 
           let icon = document.createElement('i');
@@ -639,6 +615,19 @@ function saveCaption(e) {
 	hiddenInput.value = captionModalInput.value;
 	// close modal
 	$("#captionModal").modal("hide");	
+}
+
+// save edited hero switch from caption modal to hidden input for upload image
+function saveHero(e) {
+  e.preventDefault();
+  // copy switch value from caption modal input to hidden imput
+  const heroModalSwitch = document.querySelector('#captionModal #hero-image-switch');
+  const hiddenInputName = heroModalSwitch.name;
+  const hiddenInput = document.querySelector('.add-profile [name="'+hiddenInputName+'"]');
+  hiddenInput.value = heroModalSwitch.checked;
+  // if checked is true set all others to not checked / false
+  console.log(hiddenInputName, hiddenInput.value);
+  
 }
 
 // show profile preview
@@ -695,7 +684,8 @@ async function getImageUrls(e){
     let img = {};
     let caption = imageDivs[i].querySelector('.caption-text').value;
     img.caption = caption;
-    img.hero = false;
+    let hero = imageDivs[i].querySelector('.hero-image').value;
+    img.hero = hero;
 
     let url = imageDivs[i].querySelector('img').src;
     // if http - existing - images
@@ -765,14 +755,25 @@ function showProfileData(userData) {
       uploadedImageDiv.dataset.index = i;
       //uploadedImageDiv.style.zIndex = '100';
 
-      // create hidden input to store caption
+      // create random string
       let randStr = Math.random().toString(36).substr(2, 5);
+      // create hidden input to store caption
       let captionInput = document.createElement('input');
       captionInput.type = 'hidden';
       captionInput.className = 'form-control caption-text';
       captionInput.name = 'caption-'+randStr;
       captionInput.value = userData.images[i].caption;
       uploadedImageDiv.appendChild(captionInput);
+
+      // create hidden input to stor hero image
+      let heroInput = document.createElement('input');
+      heroInput.type = 'hidden';
+      heroInput.className = 'form-control hero-image';
+      heroInput.name = 'hero-'+randStr;
+      heroInput.value = userData.images[i].hero;
+      uploadedImageDiv.appendChild(heroInput);
+
+
       // create delete image btn & icon
       let btn = document.createElement('button');
       btn.className = 'delete-image';
@@ -791,11 +792,19 @@ function showProfileData(userData) {
       editBtn.className = 'edit-image';
       editBtn.onclick = function(e) {
         e.preventDefault();
+        // populate modal with existing image, caption and hero bool
         const captionImg = document.querySelector('#caption-image');
         captionImg.src = this.parentElement.querySelector('img').src;
         document.querySelector('#captionModal #caption').value = captionInput.value;
-        $("#captionModal").modal("show");
         document.querySelector('#captionModal #caption').name = 'caption-'+randStr;
+        //console.log('hero-'+randStr+' : '+heroInput.value);
+        if (heroInput.value === 'true') {
+          document.querySelector('#captionModal #hero-image-switch').checked = true;
+        } else {
+          document.querySelector('#captionModal #hero-image-switch').checked = false;
+        }
+        document.querySelector('#captionModal #hero-image-switch').name = 'hero-'+randStr;
+        $("#captionModal").modal("show");
       }
 
       let editIcon = document.createElement('i');
@@ -857,12 +866,17 @@ function showProfile(userData) {
   if (userData.images) {
     // show images
     for (var i = 0; i < userData.images.length; i++) {
+      // caption
+      let caption = userData.images[i].caption;
       // get image
-      getDownloadURL(ref(storage, userData.images[i]))
+      getDownloadURL(ref(storage, userData.images[i].url))
         .then((url) => {
           let imageTag = document.createElement('img');
           imageTag.src = url;
           gallery.appendChild(imageTag);
+          let captionTag = document.createElement('span');
+          captionTag.innerHTML = "caption: " + caption;
+          gallery.appendChild(captionTag);
         })
     }
   }
@@ -1099,6 +1113,8 @@ if (page == "add-profile") {
   // save edited caption from modal
   const captionModal = document.querySelector('#captionModal .save-caption');
   captionModal.addEventListener('click', saveCaption);
+  const captionSwitch = document.querySelector('#captionModal #hero-image-switch');
+  captionSwitch.addEventListener('change', saveHero);
 
   // show profile preview 
   const previewBtn = document.querySelector('.show-preview');
