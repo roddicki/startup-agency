@@ -158,7 +158,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*******************************/
 /***/ (() => {
 
-eval("console.log(\"another module loaded\");\n\n//# sourceURL=webpack://startup-agency/./src/another-module.js?");
+eval("console.log(\"another module loaded.. hello world\");\n\n//# sourceURL=webpack://startup-agency/./src/another-module.js?");
 
 /***/ }),
 
