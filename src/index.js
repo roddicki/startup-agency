@@ -584,7 +584,12 @@ function uploadImageWatcher(){
             captionImg.src = this.parentElement.querySelector('img').src;
             document.querySelector('#captionModal #caption').value = captionInput.value;
             document.querySelector('#captionModal #caption').name = 'caption-'+randStr;
-            document.querySelector('#captionModal #hero-image-switch').value = heroInput.value;
+            if (heroInput.value == 'true') {
+              document.querySelector('#captionModal #hero-image-switch').checked = true;
+            } else {
+              document.querySelector('#captionModal #hero-image-switch').checked = false;
+            }
+            //document.querySelector('#captionModal #hero-image-switch').value = heroInput.value;
             document.querySelector('#captionModal #hero-image-switch').name = 'hero-'+randStr;
             $("#captionModal").modal("show");
           }
@@ -627,7 +632,14 @@ function saveHero(e) {
   hiddenInput.value = heroModalSwitch.checked;
   // if checked is true set all others to not checked / false
   console.log(hiddenInputName, hiddenInput.value);
-  
+  if (heroModalSwitch.checked == true) {
+    const div = document.querySelectorAll('.uploaded-image');
+    for (var i = 0; i < div.length; i++) {
+      if (div[i].querySelector('.hero-image').name != hiddenInputName) {
+        div[i].querySelector('.hero-image').value = 'false';
+      }
+    }
+  }
 }
 
 // show profile preview
