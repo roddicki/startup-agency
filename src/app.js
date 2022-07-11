@@ -1,4 +1,7 @@
 
+import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, isUserSignedIn, getUserUid, getAllJobData, getSingleJob, getAllUserData} from './firebase-library.js';
+
+loadCheck();
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import { initializeApp } from 'firebase/app';
@@ -25,10 +28,9 @@ const db = getFirestore();
 const auth = getAuth();
 const storage = getStorage();
 
+
 let currentUserData = {};
 
-//*******************************************
-//===============Firebase functions==========
 
 // on login state change
 onAuthStateChanged(auth, function(user) {
@@ -45,11 +47,145 @@ onAuthStateChanged(auth, function(user) {
     }
 })
 
+// get profile data for signed in user
+async function getCurrentUserDetails(uid) {
+  const docRef = doc(db, 'users', uid);
+  const singleDoc = await getDoc(docRef);
+  if (singleDoc.exists()) {
+    console.log("Logged in user document data:", singleDoc.data());
+    currentUserData = singleDoc.data();
+    currentUserData.uid = uid;
+    return singleDoc.data();
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
+}
+
+
+// create doc for job 
+function createJobDoc(tags) {
+  const jobDetailsForm = document.querySelector('.jobDetails');
+  let jobDeadline = new Date(jobDetailsForm.deadline.value);
+  let applicationDeadline = new Date(jobDetailsForm.applicationdeadline.value);
+  addDoc(collection(db, "jobs"), {
+    forename: jobDetailsForm.forename.value,
+    surname: jobDetailsForm.surname.value,
+    company: jobDetailsForm.company.value,
+    email: jobDetailsForm.email.value,
+    phone: jobDetailsForm.phone.value,
+    title: jobDetailsForm.title.value,
+    shortdescription: jobDetailsForm.shortdescription.value.replace(/\n\r?/g, '<br>'),
+    longdescription: jobDetailsForm.longdescription.value.replace(/\n\r?/g, '<br>'),
+    budget: jobDetailsForm.budget.value,
+    deadline: Timestamp.fromDate(jobDeadline),
+    applicationdeadline: Timestamp.fromDate(applicationDeadline),
+    tc: jobDetailsForm.tc.checked,
+    tags: tags,
+    createdAt: serverTimestamp(),
+    approved: false
+  })
+  .then(function(){
+    alert("Placeholder alert box. This will probably be a modal or overlay...tbc... Thank you "+ jobDetailsForm.forename.value +". Your job "+ jobDetailsForm.title.value +" has been successfully submitted");
+    console.log("successfully created new job");
+    // go to add profile on completion
+    //window.location.href = "index.html";
+  });
+}
+
+
+// upload image - argument is an object - {upload url : blob url}
+// inserts a reference to the uploaded image/s into the logged in users profile
+async function uploadImage(urls) {
+  // update user data with image urls
+  let docRef = doc(db, 'users', currentUserData.uid);
+  // delete image urls from user profile
+  updateDoc(docRef, {
+    images: []
+  })
+  .then(function () {
+    console.log("deleted image references");
+  })
+
+  for (var i = 0; i < urls.length; i++) {
+    console.log(urls[i]);
+    let uploadUrl = urls[i].url;
+    let newImageRef = {};
+    newImageRef.url = uploadUrl;
+    newImageRef.hero = urls[i].hero;
+    newImageRef.caption = urls[i].caption;
+    console.log(newImageRef);
+    // upload new blob image & upload reference
+    if (urls[i].sourceUrl.includes('blob')) {
+      let blobUrl = urls[i].sourceUrl;
+      console.log(blobUrl);
+      let blob = await fetch(blobUrl).then(response => response.blob());
+      // upload
+      const storageRef = ref(storage, uploadUrl);
+      // upload file - 'blob' comes from the Blob or File API
+      uploadBytes(storageRef, blob).then(function(snapshot) {
+        console.log('Uploaded image blob file!');
+        
+        // update user profile with image urls
+        updateDoc(docRef, {
+          images: arrayUnion(newImageRef)
+        })
+        .then(function () {
+          console.log("added new image reference to user profile");
+        })
+      });
+    }
+    // existing imgae - upload reference only
+    else {
+      // update user profile with image urls
+      updateDoc(docRef, {
+        images: arrayUnion(newImageRef)
+      })
+      .then(function () {
+        console.log("added existing image reference to user profile");
+      })
+    }
+  }
+
+}
+
+
+// add to profile 
+function addToProfile(e, tags) {
+  e.preventDefault()
+  const profileForm = document.querySelector('.add-profile');
+  let bio = profileForm.bio.value.replace(/\n\r?/g, '<br>');
+  let docRef = doc(db, 'users', currentUserData.uid);
+  //console.log(tags, bio);
+
+  updateDoc(docRef, {
+    bio: bio,
+    website: profileForm.website.value,
+    tags: tags,
+    profileCreatedAt: serverTimestamp(),
+    profileApproved: false
+  })
+  .then(function(){
+    console.log("successfully added bio and tags to profile");
+    // go to profile on completion
+    //window.location.href = "index.html";
+  });
+}
+
+
 
 //===========================================
 //===========================================
 //===========DOM FUNCTIONS===================
 
+// get query string tag
+function getParam() {
+  const urlParams = new URLSearchParams(location.search);
+  for (const [key, value] of urlParams) {
+      //console.log(`${key}:${value}`);
+      return value; // only works with one param at the mo
+  }
+}
 
 // ======SHOW JOB FUNCTIONS======
 // show all jobs - jobs page

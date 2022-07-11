@@ -1,8 +1,4 @@
 
-import {sayHi, getAllUserData} from './another-module.js';
-
-sayHi();
-
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import { initializeApp } from 'firebase/app';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -176,7 +172,7 @@ async function getCurrentUserDetails(uid) {
 // firebase generic functions
 // 
 // get all users data
-/*function getAllUserData(tag, fn) {
+function getAllUserData(tag, fn) {
   // collection ref - in this case users
   const colRef = collection(db, 'users');
   // query
@@ -196,7 +192,7 @@ async function getCurrentUserDetails(uid) {
     console.log(usersCollection);
     fn(usersCollection); // callback to 'return' result
   });
-}*/
+}
 
 
 // get all current jobs and order by deadline date
