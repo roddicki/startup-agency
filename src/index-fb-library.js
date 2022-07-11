@@ -1,34 +1,5 @@
+console.log("loading fb library");
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-import { initializeApp } from 'firebase/app';
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
-import { getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc, doc, query, where, orderBy, getDoc, serverTimestamp, updateDoc, setDoc,  Timestamp, arrayUnion} from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAq7-QGjZ8O1RVe_seOfdYjVLCjLdwrHYE",
-  authDomain: "studio-freelancer-agency.firebaseapp.com",
-  projectId: "studio-freelancer-agency",
-  storageBucket: "studio-freelancer-agency.appspot.com",
-  messagingSenderId: "487647550435",
-  appId: "1:487647550435:web:474b8fb15c9412fb005ed6",
-  measurementId: "G-TXX5XFWWN6"
-};
-
-// init firebase
-initializeApp(firebaseConfig);
-
-// init services
-const db = getFirestore();
-const auth = getAuth();
-const storage = getStorage();
-
-
-let currentUserData = {};
-
-//*******************************************
-//===============Firebase functions==========
 // sign up user
 function signUpUser(e) {
   e.preventDefault();
@@ -96,21 +67,6 @@ function signInUser(e) {
     })
 }
 
-// on login state change
-onAuthStateChanged(auth, function(user) {
-  if (user) {
-      // User logged in already or has just logged in.
-      console.log(user.uid, user.email, "logged in");
-      showSignedInUser(user.email, user.uid);
-      currentUserData.uid = user.uid;
-      currentUserData.email = user.email;
-    } else {
-      // User not logged in or has just logged out.
-      console.log("logged out");
-      showSignedOutUser();
-    }
-})
-
 //*****************************************
 // firebase general user functions
 // 
@@ -167,26 +123,6 @@ async function getCurrentUserDetails(uid) {
   }
 }
 
-
-
-// add user data to the user's doc
-/*function addUserData(e) {
-  const colRef = collection(db, 'users');
-  e.preventDefault();
-  let uid = getUserUid();
-  // create tags array
-  let tagList = addUserDataForm.tags.value.trim().split(",");
-  console.log(tagList);
-  // add form vals
-  setDoc(doc(db, "users", uid), {
-      name: addUserDataForm.name.value,
-      bio: addUserDataForm.bio.value,
-      tags: tagList
-    }, { merge: true })
-    .then(function(){
-          addUserDataForm.reset();
-      });
-}*/
 
 //*****************************************
 // firebase generic functions
@@ -378,8 +314,3 @@ function addToProfile(e, tags) {
 
 
 
-
-
-
-
-console.log('hello from firebase-library.js at the bottom');
