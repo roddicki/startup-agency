@@ -3,12 +3,12 @@ const path = require('path')
 module.exports = {
   mode: 'development',
   entry: {
-    bundle: ['./src/app.js'],
+    admin: ['./src/admin.js'],
     app: ['./src/app.js'],
   },
   output: {
     path: path.resolve(__dirname, 'dist/scripts'),
-    filename: '[name].js'
+    filename: '[name].bundle.js'
   },
   module: {
     rules: [
