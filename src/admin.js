@@ -41,9 +41,25 @@ onAuthStateChanged(auth, function(user) {
     } else {
       // User not logged in or has just logged out.
       console.log("logged out");
-      showSignedOutUser();
+      redirectSignedOutUser();
     }
 })
+
+
+// login
+function signInAdmin(e) {
+  e.preventDefault();
+  const loginForm = document.querySelector('.login');
+  let email = loginForm.email.value;
+  let password = loginForm.password.value;
+  signInWithEmailAndPassword(auth, email, password)
+    .then(function(cred){
+      console.log("Signed in", cred.user.uid);
+      loginForm.reset();
+      // go to profile page
+      window.location.href = "jobboard.html";
+    })
+}
 
 // show signed in user
 function showSignedInUser(user, id) {
@@ -79,18 +95,31 @@ async function getCurrentUserDetails(uid) {
   }
 }
 
-// show signed out user
-function showSignedOutUser() {
-  const accountDropdown = document.querySelector('.dropdown-menu');
-  // delete drop down contents
-  accountDropdown.innerHTML = "";
-  // create drop down contents
-  let li = document.createElement('li');
-
-  let a = document.createElement('a');
-  a.className = 'dropdown-item sign-in';
-  a.href = 'login.html';
-  a.innerHTML = 'Sign In / Create Account';
-  li.appendChild(a);
-  accountDropdown.appendChild(li);
+// redirect signed out user
+function redirectSignedOutUser() {
+  if (page != "login") {
+    window.location.href = "index.html";
+  };
+  
 }
+
+
+
+//===========PAGE EVENT LISTENERS===================
+const page = document.body.getAttribute('data-page');
+
+// ALL PAGES
+window.addEventListener('DOMContentLoaded', function(){
+  const logoutBtn = document.querySelector('.logout-btn');
+  if (logoutBtn) {
+      logoutBtn.addEventListener('click', signOutUser);
+  }
+});
+
+// LOGIN PAGE
+if (page == "login") {
+  console.log("login page");
+  const loginForm = document.querySelector('.login');
+  loginForm.addEventListener('submit', signInAdmin);
+};
+
