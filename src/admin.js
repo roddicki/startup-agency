@@ -119,7 +119,19 @@ window.addEventListener('DOMContentLoaded', function(){
 // LOGIN PAGE
 if (page == "login") {
   console.log("login page");
+  // submit login
   const loginForm = document.querySelector('.login');
   loginForm.addEventListener('submit', signInAdmin);
+  
+  // remember password if checked
+  const rememberMe = document.querySelector('.form-check-input');
+  const fields = document.querySelectorAll('input[type="password"]');
+  for (var i = 0; i < fields.length; i++) {
+    if (rememberMe.checked) {
+      fields[i].autocomplete="on";
+    } else {
+      fields[i].autocomplete="off";
+    }
+  }
 };
 
