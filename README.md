@@ -16,7 +16,7 @@ $ npm i webpack webpack-cli - D
 3. Also install the webpack html-loader  
 https://webpack.js.org/loaders/html-loader/  
 ```console  
-npm install --save-dev html-loader
+$ npm install --save-dev html-loader
 ``` 
 4. Install firebase
 ```console  
