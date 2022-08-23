@@ -1,0 +1,12 @@
+/* custom styles for whole site */
+
+@font-face {
+    font-family: 'Myriad Pro Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Myriad Pro Regular'), url('MYRIADPRO-REGULAR.woff') format('woff');
+  }
+
+body, div, p, li {
+	font-family: 'Myriad Pro Regular';
+}
