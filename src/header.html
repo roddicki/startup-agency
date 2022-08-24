@@ -1,9 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid py-1 mb-4 border-bottom">
     
-      <a class="navbar-brand" href="#">
-        <img src="http://[::]:8000/dist/assets/img/820_312px.png" width="280"  alt="">
-      </a>
+      <a class="navbar-brand" href="index.html"></a>
     
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -11,7 +9,7 @@
 
       
 
-      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse justify-content-end my-3" id="navbarSupportedContent">
         <ul class="navbar-nav align-items-end">
           <li class="nav-item">
               <a class="nav-link active" href="#">Portfolios</a>
@@ -29,20 +27,33 @@
       		    <a class="nav-link" href="#">How it works</a>
       		</li>
 
-      		<li class="nav-item">
+      		<li class="nav-item last-item pe-3 me-3">
       		 	<a class="nav-link" href="#">Contact</a>
       		</li>
-          
 
+          <!-- <li class="nav-item pe-3">
+            <button type="button" class="btn btn-outline-primary">Sign in</button>
+          </li>
+
+          <li class="nav-item">
+            <button type="button" class="btn btn-primary">Post job</button>
+          </li> -->
+          
+          <li class="nav-item profile-pic">
+            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle"> 
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-               <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle"> email@email.com
+               
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item sign-in" href="login.html">Sign In / Create Account</a></li>
-              <!-- <li><a class="dropdown-item signed-in" href="#">Signed in</a></li>
-              <li><a class="dropdown-item signed-in" href="#">Another item</a></li>
-              <li><a class="dropdown-item sign-out" href="#">Sign Out</a></li> -->
+              <li><a class="dropdown-item dashboard" href="#">Dashboard</a></li>
+              <hr>
+              <li><a class="dropdown-item portfolio" href="#">Portfolio profile</a></li>
+              <hr>
+              <li><a class="dropdown-item account" href="#">Account settings</a></li>
+              <hr>
+              <li><a class="dropdown-item sign-out" href="#">Sign Out</a></li>
             </ul>
           </li>
 

@@ -37,15 +37,18 @@ onAuthStateChanged(auth, function(user) {
   if (user) {
       // User logged in already or has just logged in.
       console.log(user.uid, user.email, "logged in");
-      showSignedInUser(user.email, user.uid);
       currentUserData.uid = user.uid;
       currentUserData.email = user.email;
+      getCurrentUserDetails(user.uid).then(function(vals){
+        showSignedInUser(user.email, user.uid, vals.forename, vals.surname);
+      });
     } else {
       // User not logged in or has just logged out.
       console.log("logged out");
       showSignedOutUser();
     }
 })
+
 
 // get profile data for signed in user
 async function getCurrentUserDetails(uid) {
@@ -303,49 +306,57 @@ function displayAllUserData(usersCollection) {
 
 
 // show signed in user
-function showSignedInUser(user, id) {
+function showSignedInUser(user, id, forename, surname) {
+  // get name
+
+  // get profile pic
+
+  // get profile pic
   const accountDropdown = document.querySelector('.dropdown-menu');
-  // delete drop down contents
-  accountDropdown.innerHTML = "";
-  // create drop down contents
-  let li = document.createElement('li');
-  let span = document.createElement('span');
-  span.className = 'dropdown-item signed-in';
-  span.innerHTML = user;
-  li.appendChild(span);
-  accountDropdown.appendChild(li);
+  // edit drop down contents
+  const name = document.querySelector('.dropdown-toggle');
+  name.innerHTML = forename + " " + surname;
 
-  let profileLink = document.createElement('a');
-  profileLink.className = 'dropdown-item my-profile';
-  profileLink.href = 'profile.html?id='+id;
-  profileLink.innerHTML = 'My Profile';
-  li.appendChild(profileLink);
-  accountDropdown.appendChild(li);
 
-  let signoutLink = document.createElement('a');
-  signoutLink.className = 'dropdown-item sign-out';
-  signoutLink.href = '#';
-  signoutLink.innerHTML = 'Sign Out';
-  li.appendChild(signoutLink);
-  accountDropdown.appendChild(li);
+  const dashboardLink = document.querySelector('.dropdown-menu .dashboard');
+  dashboardLink.href = 'profile.html?id='+id;
+
+  const portfolioLink = document.querySelector('.dropdown-menu .portfolio');
+  portfolioLink.href = 'profile.html?id='+id;
+
+  const accountLink = document.querySelector('.dropdown-menu .account');
+  accountLink.href = 'profile.html?id='+id;
+
+  const signoutLink = document.querySelector('.dropdown-menu .sign-out');
   signoutLink.addEventListener('click', signOutUser);
 }
 
 
 // show signed out user
 function showSignedOutUser() {
-  const accountDropdown = document.querySelector('.dropdown-menu');
-  // delete drop down contents
+  const profilePic = document.querySelector('.navbar .profile-pic');
+  const accountDropdown = document.querySelector('.navbar .dropdown');
+  const navbar = document.querySelector('.navbar .navbar-nav');
+  // delete drop down contents & profile pic
+  profilePic.innerHTML = ""
   accountDropdown.innerHTML = "";
-  // create drop down contents
+  // create sign in and post job buttons
   let li = document.createElement('li');
-
   let a = document.createElement('a');
-  a.className = 'dropdown-item sign-in';
+  a.className = 'btn btn-outline-primary sign-in';
   a.href = 'login.html';
-  a.innerHTML = 'Sign In / Create Account';
+  a.innerHTML = 'Sign in';
+  li.className = 'nav-item pe-3';
   li.appendChild(a);
-  accountDropdown.appendChild(li);
+  navbar.appendChild(li);
+  li = document.createElement('li');
+  a = document.createElement('a');
+  a.className = 'btn btn-primary post-job';
+  a.href = 'post-job.html';
+  a.innerHTML = 'Post job';
+  li.className = 'nav-item';
+  li.appendChild(a);
+  navbar.appendChild(li);
 }
 
 
