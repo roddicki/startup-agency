@@ -1,5 +1,7 @@
 /* custom styles for whole site */
 
+/* ===================================== */
+
 /* ===SITE WIDE=== */
 @font-face {
     font-family: 'Myriad Pro Regular';
@@ -12,9 +14,51 @@ body, div, p, li {
 	font-family: 'Myriad Pro Regular';
 }
 
+body .container {
+	padding-bottom: 30px;
+}
 
+
+body {
+    /* The image used */
+    background-image: url("../assets/img/background.svg");
+  
+    /* Set a specific height */
+    /*min-height: 500px; */
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: left -10px;
+    background-repeat: no-repeat;
+    background-size: 75%;
+  }
+
+  /*site wide button styles*/
+  .btn-primary {
+  	background-color: #572F88;
+  	border-color: #572F88;
+  }
+
+  .btn-outline-primary {
+    color: #000000;
+    border-color: #572F88;
+    border-width: 2px;
+}
+
+
+
+/* ===================================== */
 /* ===NAV=== */
-.navbar-brand {
+header .container-fluid {
+	background: #ffffff;
+}
+
+.navbar {
+	padding-top: 0px;
+}
+
+/*nav and footer*/
+.navbar .logo, footer .logo {
 	background-image: url("../assets/img/560_102px.png"); 
 	background-color: #cccccc; 
 	width: 280px; 
@@ -37,5 +81,11 @@ body, div, p, li {
 	vertical-align: text-bottom;
 }
 
-
+/* ===================================== */
 /* ===FOOTER=== */
+footer {
+	background: #ffffff;
+	/*margin-top: 330px;*/
+	border-top: 1px solid #dee2e6;
+} 
+
