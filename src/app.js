@@ -344,7 +344,9 @@ function showSignedOutUser() {
   let li = document.createElement('li');
   let a = document.createElement('a');
   a.className = 'btn btn-outline-primary sign-in';
-  a.href = 'login.html';
+  //a.href = 'login.html';
+  a.dataset.bsToggle = 'modal';
+  a.dataset.bsTarget = '#exampleModal';
   a.innerHTML = 'Sign in';
   li.className = 'nav-item pe-3';
   li.appendChild(a);
