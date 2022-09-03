@@ -29,8 +29,9 @@ body {
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: left -10px;
-    background-repeat: no-repeat;
-    background-size: 75%;
+	background-size: 75%;
+    background-repeat: repeat;
+	background-repeat: repeat-y;
   }
 
   /*site wide button styles*/
@@ -43,7 +44,95 @@ body {
     color: #000000;
     border-color: #572F88;
     border-width: 2px;
+
 }
+	.btn-inactive {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		padding: 16px 24px;
+		gap: 10px;
+
+		width: 380px;
+		height: 54px;
+
+
+		background: #EDEBEE;
+		border-radius: 5px;
+		flex: none;
+		order: 1;
+		flex-grow: 0;
+				
+	}
+
+.modal-content{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 80px 125px;
+	gap: 45px;
+	isolation: isolate;
+
+	position: relative;
+	width: 630px;
+	height: 812px;
+
+	background: #FFFFFF;
+	/* shadow */
+
+	box-shadow: 0px 4px 36px 20px rgba(206, 206, 206, 0.25);
+	border-radius: 20px;
+}
+
+.signinclosebutton{
+	position: absolute;
+	left: 89.68%;
+	right: 5.56%;
+	top: 4.31%;
+	bottom: 92%;
+
+
+	/* Inside auto layout */
+
+	flex: none;
+	order: 3;
+	flex-grow: 0;
+	z-index: 3;
+}
+
+.signinheader{
+	width: 147px;
+	height: 58px;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 48px;
+	line-height: 58px;
+}
+.signincontent{
+		box-sizing: border-box;
+
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		padding: 16px;
+		gap: 10px;
+
+		width: 380px;
+		height: 52px;
+		background: #FFFFFF;
+		border: 1px solid #EDEBEE;
+		border-radius: 6px;
+
+		/* Inside auto layout */
+
+		flex: none;
+		order: 1;
+		flex-grow: 0;
+
+		margin-bottom: 1rem;
+}
+
 
 
 
