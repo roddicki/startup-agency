@@ -1,64 +1,25 @@
-<nav class="navbar navbar-expand-lg navbar-light">
-  <div class="container-fluid py-1 mb-4 border-bottom">
-    
-      <a class="navbar-brand logo" href="index.html"></a>
-    
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      
-
-      <div class="collapse navbar-collapse justify-content-end my-3" id="navbarSupportedContent">
-        <ul class="navbar-nav align-items-end">
-          <li class="nav-item">
-              <a class="nav-link active" href="#">Portfolios</a>
-          </li>
-
-        	<li class="nav-item">
-      		    <a class="nav-link" href="jobs.html">Job Board</a>
-      		</li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#">About Stiwdio</a>
-          </li>
-
-      		<li class="nav-item">
-      		    <a class="nav-link" href="#">How it works</a>
-      		</li>
-
-      		<li class="nav-item last-item pe-3 me-3">
-      		 	<a class="nav-link" href="#">Contact</a>
-      		</li>
-
-          <!-- <li class="nav-item pe-3">
-            <button type="button" class="btn btn-outline-primary">Sign in</button>
-          </li>
-
-          <li class="nav-item">
-            <button type="button" class="btn btn-primary">Post job</button>
-          </li> -->
-          
-          <li class="nav-item profile-pic">
-            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle"> 
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-               
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item dashboard" href="#">Dashboard</a></li>
-              <hr>
-              <li><a class="dropdown-item portfolio" href="#">Portfolio profile</a></li>
-              <hr>
-              <li><a class="dropdown-item account" href="#">Account settings</a></li>
-              <hr>
-              <li><a class="dropdown-item sign-out" href="#">Sign Out</a></li>
-            </ul>
-          </li>
-
-        </ul>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title signinheader" id="exampleModalLabel">Sign In</h2>
+        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-    
+      <div class="modal-body">
+        <p>Email</p>
+        <input type="text" class="form-control signincontent" aria-label="Username">
+        <p>Password</p>
+        <input type="text" class="form-control signincontent" aria-label="Username">
+
+        <a href=""><p>Forgotten your password?</p></a>
+
+        <button class="btn btn-inactive disabled" type="button"> Login </button>
+
+       <!--  <p>OR</p>-->
+      </div>
+      <div class="modal-footer mx-auto">
+        <p>New to <strong>stiwdio agency</strong>? <a href="">Register now</a></p>
+      </div>
+    </div>
   </div>
-</nav>
+</div>
