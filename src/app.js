@@ -869,7 +869,7 @@ import footer from './footer.html'
 import signinmodal from './signinmodal.html'
 document.getElementById("header").innerHTML = header;
 document.getElementById("footer").innerHTML = footer;
-document.getElementById("footer").innerHTML = signinmodal;
+document.getElementById("signinmodal").innerHTML = signinmodal;
 
 // tag categories
 const tags = ["Animation", "Visual-Effects", "Graphic-Design", "Games-Design-and-Production", "Video", "Audio-Production", "Journalism", "Photography", "Theatre-Dance"];
