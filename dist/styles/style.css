@@ -73,10 +73,9 @@ body {
 	padding: 80px 125px;
 	gap: 45px;
 	isolation: isolate;
-
 	position: relative;
-	width: 630px;
-	height: 812px;
+	//width: 630px;
+	//height: 812px;
 
 	background: #FFFFFF;
 	/* shadow */
@@ -118,8 +117,8 @@ body {
 		padding: 16px;
 		gap: 10px;
 
-		width: 380px;
-		height: 52px;
+		//width: 380px;
+		//height: 52px;
 		background: #FFFFFF;
 		border: 1px solid #EDEBEE;
 		border-radius: 6px;
