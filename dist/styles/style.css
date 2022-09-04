@@ -127,7 +127,57 @@ body {
 
 		margin-bottom: 1rem;
 }
+.parallax {
+    /* The image used */
+    background-image: url("../assets/img/background.svg");
+  
+    /* Set a specific height */
+    min-height: 500px; 
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
+  .content-blocks{
+    background-color: rgba(255, 255, 255, .9);
+    border: 1px black;
+    border-radius: 10px;
+    padding: 15px 10px 15px 10px;
+    opacity: 1;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, .05);
+  }
+
+  .profile-img{
+    width: 100%;
+    padding-top: 25px;
+  }
+
+  @media (max-width: 767px){
+    .carousel-inner 
+    .carousel-item >div{display: none}
+    .carousel-inner 
+    .carousel-item >div:first-child{display: block}}
+    .carousel-inner .carousel-item.active, 
+    .carousel-inner .carousel-item-next, 
+    .carousel-inner .carousel-item-prev{display: flex}
+    
+    @media (min-width: 768px){
+      .carousel-inner 
+      .carousel-item-end.active, 
+      .carousel-inner 
+      .carousel-item-next{transform: translateX(25%)}
+      .carousel-inner 
+      .carousel-item-start.active, 
+      .carousel-inner 
+      .carousel-item-prev{transform: translateX(-25%)}}
+      .carousel-inner 
+      .carousel-item-end, 
+      .carousel-inner 
+      .carousel-item-start{transform: translateX(0)}
+      
 
 
 
