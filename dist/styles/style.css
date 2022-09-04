@@ -28,7 +28,7 @@ body {
   
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
-    background-position: left -10px;
+    /*background-position: left -10px;*/
 	background-size: 75%;
     background-repeat: repeat;
 	background-repeat: repeat-y;
@@ -90,6 +90,9 @@ body {
 	border-radius: 20px;
 }
 
+.form-control{
+	//width: 95%;
+}
 .signinclosebutton{
 	position: absolute;
 	left: 89.68%;
