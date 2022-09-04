@@ -32,6 +32,14 @@ body {
 	background-size: 75%;
     background-repeat: repeat;
 	background-repeat: repeat-y;
+	    /* Set a specific height */
+		min-height: 500px; 
+  
+		/* Create the parallax scrolling effect */
+		background-attachment: fixed;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
   }
 
   /*site wide button styles*/
@@ -131,14 +139,7 @@ body {
     /* The image used */
     background-image: url("../assets/img/background.svg");
   
-    /* Set a specific height */
-    min-height: 500px; 
-  
-    /* Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+
   }
 
   .content-blocks{
