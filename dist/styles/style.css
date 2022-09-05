@@ -90,9 +90,7 @@ body {
 	border-radius: 20px;
 }
 
-.form-control{
-	//width: 95%;
-}
+
 .signinclosebutton{
 	position: absolute;
 	left: 89.68%;
@@ -146,12 +144,39 @@ body {
   }
 
   .content-blocks{
-    background-color: rgba(255, 255, 255, .9);
+    background-color: rgba(255, 255, 255, .95);
+	
     border: 1px black;
     border-radius: 10px;
     padding: 15px 10px 15px 10px;
     opacity: 1;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, .05);
+	margin-right: 15px;
+	
+  }
+
+  .content-blocks-9{
+    background-color: rgba(255, 255, 255, .95);
+    border: 1px black;
+    border-radius: 10px;
+    padding: 15px 10px 15px 10px;
+    opacity: 1;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, .05);
+	margin-right: 15px;
+	width: 65%;
+	margin-left:10px;
+	
+  }
+
+  .project-showcase-text{
+	float:left;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 19px;
+	text-transform: uppercase;
+	color: #244F8E;
+	
   }
 
   .profile-img{
