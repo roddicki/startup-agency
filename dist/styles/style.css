@@ -152,20 +152,23 @@ body {
     opacity: 1;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, .05);
 	margin-right: 15px;
-	
+	margin-bottom: 10px;
   }
 
-  .content-blocks-9{
-    background-color: rgba(255, 255, 255, .95);
-    border: 1px black;
-    border-radius: 10px;
-    padding: 15px 10px 15px 10px;
-    opacity: 1;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, .05);
-	margin-right: 15px;
-	width: 65%;
-	margin-left:10px;
-	
+  
+
+  .gap{
+	margin-top: 30px;
+  }
+
+  .line{
+	border: 1px solid #EDEBEE;
+  	height: 1px;
+	margin-top: 10px;
+  }
+
+  .ortext{
+	color: #EDEBEE;
   }
 
   .project-showcase-text{
