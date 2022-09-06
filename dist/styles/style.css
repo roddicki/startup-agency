@@ -187,6 +187,60 @@ body {
     padding-top: 25px;
   }
 
+  .paginationnav{
+	float: right;
+	padding-right: 40px;
+	color:#000000;
+	
+  }
+
+  .page-link{
+	color: #000000;
+	border-radius: 2px;
+	margin: 4px;
+	border: 1px solid #EDEBEE;
+  }
+  .sortbyform{
+	border-color: #FFFFFF;
+	margin-top: 10px;
+	float: right;
+  }
+
+  select{
+	background-color: #fff;
+	border: none;
+	color: #572F88;
+
+  }
+
+  .postjobbutton{
+	float: left;
+	width: 75%;
+  }
+
+  .jobblock{
+	box-sizing: border-box;
+	padding: 30px;
+	gap: 24px;
+	background: rgba(255, 255, 255, 0.95);
+	border: 1px solid #EDEBEE;
+	border-radius: 20px;
+	margin-top: 15px;
+  }
+
+  .lineheightjob{
+	line-height: 10px;
+  }
+
+  .timetext{
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 12px;
+	color: #7E7984;
+	float: right;
+	margin-top: 6px;
+  }
+
   @media (max-width: 767px){
     .carousel-inner 
     .carousel-item >div{display: none}
