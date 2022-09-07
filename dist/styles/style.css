@@ -201,6 +201,9 @@ a:active {
 	
   }
 
+  .jobboardheader{
+	margin-top:20px ;
+  }
   .profile-img{
     width: 100%;
     padding-top: 25px;
