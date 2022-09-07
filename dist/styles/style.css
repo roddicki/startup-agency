@@ -196,7 +196,9 @@ a:active {
 	line-height: 19px;
 	text-transform: uppercase;
 	color: #244F8E;
-	margin-bottom: 10px;	
+	margin-bottom: 10px;
+	margin-top: 10px;
+	
   }
 
   .profile-img{
@@ -221,6 +223,7 @@ a:active {
 	border-color: #FFFFFF;
 	margin-top: 10px;
 	float: right;
+	margin-bottom: 15px;
   }
 
   select{
@@ -232,8 +235,9 @@ a:active {
 
   .postjobbutton{
 	float: left;
-	width: 75%;
+	/*width: 75%; */
 	white-space: nowrap;
+	
   }
 
   .jobblock{
