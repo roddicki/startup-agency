@@ -41,7 +41,25 @@ body {
 		background-repeat: no-repeat;
 		background-size: cover;
   }
+  a:link {
+	text-decoration: none;
+}
 
+a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+a:active {
+	text-decoration: none;
+}
+  
+  .btn {
+    white-space: nowrap;
+}
   /*site wide button styles*/
   .btn-primary {
   	background-color: #572F88;
@@ -145,10 +163,9 @@ body {
 
   .content-blocks{
     background-color: rgba(255, 255, 255, .95);
-	
     border: 1px black;
     border-radius: 10px;
-    padding: 15px 10px 15px 10px;
+    padding: 25px 20px 25px 20px;
     opacity: 1;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, .05);
 	margin-right: 15px;
@@ -216,6 +233,7 @@ body {
   .postjobbutton{
 	float: left;
 	width: 75%;
+	white-space: nowrap;
   }
 
   .jobblock{
@@ -225,9 +243,17 @@ body {
 	background: rgba(255, 255, 255, 0.95);
 	border: 1px solid #EDEBEE;
 	border-radius: 20px;
-	margin-top: 15px;
+	margin-top: 10px;
+	margin-bottom: 5px;
   }
 
+  .filtertag{
+	padding: 8px 16px;
+	gap: 10px;
+	border-radius: 30px;
+	background: #572F88;
+	border-radius: 30px;
+  }
   .lineheightjob{
 	line-height: 10px;
   }
@@ -239,6 +265,22 @@ body {
 	color: #7E7984;
 	float: right;
 	margin-top: 6px;
+  }
+
+  .warningtext{
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 12px;
+	color: #E41B1F;
+	margin-top: 20px;
+  }
+
+  .backtext{
+	line-height: 17px;
+	text-decoration:none;
+	/* Indigo */
+
+	color: #572F88;
   }
 
   @media (max-width: 767px){
