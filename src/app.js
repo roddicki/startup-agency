@@ -193,27 +193,60 @@ function getParam() {
 // ======SHOW JOB FUNCTIONS======
 // show all jobs - jobs page
 function displayAllJobs (jobCollection) {
+  // add no of available jobs
+  document.querySelector(".jobs-available").innerHTML = "AVALABLE JOBS (" + jobCollection.length +")";
+
+  // create cards for each job
   for (var i = 0; i < jobCollection.length; i++) {
   	if (jobCollection[i].approved) {
+      // get time since creation
+      const created = new Date(jobCollection[i].createdAt.seconds*1000);
+      const now = new Date();
+      const timeSinceCreated = new Date(now - created);
+
+      console.log(timeSinceCreated);
+
+      const formattedDate = created.toLocaleString("en-GB", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
+      });
+
+      console.log(formattedDate);
+
   		let date = new Date(jobCollection[i].deadline.seconds*1000);
-  	
+  	 
 	  	let card = document.createElement("div");
-	  	card.className = "card";
+	  	card.className = "col-xl-3 col-lg-4 col-md-6 col-sm-12";
 
 	  	let cardBody = document.createElement("div");
-	  	cardBody.className = "card-body";
+	  	cardBody.className = "jobblock";
 
-	  	let title = document.createElement("h5");
-	  	title.className = "card-title";
-	  	title.innerHTML = jobCollection[i].title;
+	  	let title = document.createElement("h3");
+	  	title.innerHTML = "<Strong>"+jobCollection[i].title+"</Strong>";
 
-	  	let subtitle = document.createElement("h6");
-	  	subtitle.className = "card-subtitle mb-2 text-muted";
-	  	subtitle.innerHTML = "£"+jobCollection[i].budget;
+	  	let subtitle = document.createElement("h5");
+      subtitle.innerHTML = jobCollection[i].company;
+	  	//subtitle.innerHTML = "£"+jobCollection[i].budget;
 
-	  	let deadline = document.createElement("p");
-	  	deadline.className = "card-text";
-	  	deadline.innerHTML = date.toDateString();
+      let jobDetails = document.createElement("div");
+      jobDetails.className = "lineheightjob";
+
+      let budget = document.createElement("p");
+      budget.innerHTML = "<i class='fa-solid fa-database'></i>  Budget: <strong>£"+jobCollection[i].budget+"</strong>";
+      let applyBy = document.createElement("p");
+      applyBy.innerHTML = "<i class='fa-regular fa-clock'></i>  Apply by: <strong>DATE</strong>";
+      let location = document.createElement("p");
+      location.innerHTML = "<i class='fa-solid fa-location-dot'></i>  Location: <strong>LOCATION</strong>";
+      let completion = document.createElement("p");
+      completion.innerHTML = "<i class='fa-solid fa-arrow-trend-up'></i>  Completion: <strong>"+date.toDateString()+"</strong>";
+
+      jobDetails.appendChild(budget);
+      jobDetails.appendChild(applyBy);
+      jobDetails.appendChild(location);
+      jobDetails.appendChild(completion);
 
       let descriptionText = jobCollection[i].shortdescription;
       let shortenedText = descriptionText.substring(0, 75); // 75 chars
@@ -221,16 +254,25 @@ function displayAllJobs (jobCollection) {
 	  	shortdescription.className = "card-text";
 	  	shortdescription.innerHTML = shortenedText;
 
+      let row = document.createElement("div");
+      row.className = "row";
+      let col1 = document.createElement("div");
+      col1.className = "col-8";
+      let col2 = document.createElement("div");
+      col2.className = "col-4";
+      col2.innerHTML = "<p class='timetext'>5 min ago</p>";
       let link = document.createElement("a");
-      link.className = "btn btn-primary stretched-link";
       link.href="job-details.html?id=" + jobCollection[i].id;
-      link.innerHTML = "More..."
+      link.innerHTML = "View more details"
+      col1.appendChild(link);
+      row.appendChild(col1);
+      row.appendChild(col2);
+
 
 	  	cardBody.appendChild(title);
 	  	cardBody.appendChild(subtitle);
-	  	cardBody.appendChild(deadline);
-	  	cardBody.appendChild(shortdescription);
-      cardBody.appendChild(link);
+      cardBody.appendChild(jobDetails);
+      cardBody.appendChild(row);
 	  	card.appendChild(cardBody);
 
 	  	document.querySelector(".all-job-data").appendChild(card);
