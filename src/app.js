@@ -193,31 +193,14 @@ function getParam() {
 // ======SHOW JOB FUNCTIONS======
 // show all jobs - jobs page
 function displayAllJobs (jobCollection) {
-  // add no of available jobs
-  document.querySelector(".jobs-available").innerHTML = "AVALABLE JOBS (" + jobCollection.length +")";
-
+  let jobsAvailable = 0;
   // create cards for each job
   for (var i = 0; i < jobCollection.length; i++) {
   	if (jobCollection[i].approved) {
       // get time since creation
       const created = new Date(jobCollection[i].createdAt.seconds*1000);
       const now = new Date();
-      const timeSinceCreated = new Date(now - created);
 
-      console.log(timeSinceCreated);
-
-      const formattedDate = created.toLocaleString("en-GB", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-        hour: "numeric",
-        minute: "2-digit"
-      });
-
-      console.log(formattedDate);
-
-  		let date = new Date(jobCollection[i].deadline.seconds*1000);
-  	 
 	  	let card = document.createElement("div");
 	  	card.className = "col-xl-3 col-lg-4 col-md-6 col-sm-12";
 
@@ -229,30 +212,42 @@ function displayAllJobs (jobCollection) {
 
 	  	let subtitle = document.createElement("h5");
       subtitle.innerHTML = jobCollection[i].company;
-	  	//subtitle.innerHTML = "£"+jobCollection[i].budget;
 
       let jobDetails = document.createElement("div");
       jobDetails.className = "lineheightjob";
 
+      let cost;
+      if(jobCollection[i].budget != null) {
+        cost = "£"+jobCollection[i].budget;
+      } 
+      else if(jobCollection[i].hourlyrate != null){
+        cost = jobCollection[i].hourlyrate + " p/h";
+      }
       let budget = document.createElement("p");
-      budget.innerHTML = "<i class='fa-solid fa-database'></i>  Budget: <strong>£"+jobCollection[i].budget+"</strong>";
+      budget.innerHTML = "<i class='fa-solid fa-database'></i>  Budget: <strong>"+cost+"</strong>";
+      
+      let applicationDeadline = new Date(jobCollection[i].applicationdeadline.seconds*1000);
+      let applicationDeadlineStr = applicationDeadline.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"});
       let applyBy = document.createElement("p");
-      applyBy.innerHTML = "<i class='fa-regular fa-clock'></i>  Apply by: <strong>DATE</strong>";
+      applyBy.innerHTML = "<i class='fa-regular fa-clock'></i>  Apply by: <strong>"+applicationDeadlineStr+"</strong>";
+      
       let location = document.createElement("p");
-      location.innerHTML = "<i class='fa-solid fa-location-dot'></i>  Location: <strong>LOCATION</strong>";
+      location.innerHTML = "<i class='fa-solid fa-location-dot'></i>  Location: <strong>"+jobCollection[i].location+"</strong>";
+      
+      let completionVal;
+      if(jobCollection[i].deadline != null){
+        let completionDate = new Date(jobCollection[i].deadline.seconds*1000);
+        completionVal = completionDate.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"});
+      } else if(jobCollection[i].duration != null){
+        completionVal = jobCollection[i].duration + " days";
+      }
       let completion = document.createElement("p");
-      completion.innerHTML = "<i class='fa-solid fa-arrow-trend-up'></i>  Completion: <strong>"+date.toDateString()+"</strong>";
+      completion.innerHTML = "<i class='fa-solid fa-arrow-trend-up'></i>  Completion: <strong>"+completionVal+"</strong>";
 
       jobDetails.appendChild(budget);
       jobDetails.appendChild(applyBy);
       jobDetails.appendChild(location);
       jobDetails.appendChild(completion);
-
-      let descriptionText = jobCollection[i].shortdescription;
-      let shortenedText = descriptionText.substring(0, 75); // 75 chars
-	  	let shortdescription = document.createElement("p");
-	  	shortdescription.className = "card-text";
-	  	shortdescription.innerHTML = shortenedText;
 
       let row = document.createElement("div");
       row.className = "row";
@@ -275,9 +270,18 @@ function displayAllJobs (jobCollection) {
       cardBody.appendChild(row);
 	  	card.appendChild(cardBody);
 
-	  	document.querySelector(".all-job-data").appendChild(card);
+      // is job in the future
+      let nowInt = now.getTime();
+      let applicationDeadlineInt = applicationDeadline.getTime();
+      if ( (applicationDeadlineInt - nowInt) > 0) {
+        document.querySelector(".all-job-data").appendChild(card);
+        jobsAvailable++;
+      };
+	  	
   	}
   }
+  // add no of available jobs
+  document.querySelector(".jobs-available").innerHTML = "AVALABLE JOBS (" + jobsAvailable +")";
   console.log(jobCollection);
 }
 
@@ -1075,6 +1079,8 @@ if (page == "jobs") {
   console.log("jobs page");
   // get and show all jobs
   getAllJobData(function(jobData){
+    // TO DO 
+    // Sort job data by newest or oldest
     displayAllJobs(jobData);
   });
 }
