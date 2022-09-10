@@ -1,5 +1,5 @@
 
-import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, isUserSignedIn, getUserUid, getAllJobData, getSingleJob, getAllUserData} from './firebase-library.js';
+import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, isUserSignedIn, getUserUid, getAllJobData, getAllCurrentJobData, getSingleJob, getAllUserData} from './firebase-library.js';
 
 loadCheck();
 
@@ -193,14 +193,12 @@ function getParam() {
 // ======SHOW JOB FUNCTIONS======
 // show all jobs - jobs page
 function displayAllJobs (jobCollection) {
+  let jobContainer = document.querySelector(".all-job-data");
+  jobContainer.innerHTML = "";
   let jobsAvailable = 0;
   // create cards for each job
   for (var i = 0; i < jobCollection.length; i++) {
   	if (jobCollection[i].approved) {
-      // get time since creation
-      const created = new Date(jobCollection[i].createdAt.seconds*1000);
-      const now = new Date();
-
 	  	let card = document.createElement("div");
 	  	card.className = "col-xl-3 col-lg-4 col-md-6 col-sm-12";
 
@@ -249,13 +247,34 @@ function displayAllJobs (jobCollection) {
       jobDetails.appendChild(location);
       jobDetails.appendChild(completion);
 
+      // job posted at
+      let now = new Date();
+      let timeSinceCreated;
+      // created days / hours / mins ago - 86400s in a day, 3600s in an hr
+      let secondsSinceCreation = (now.getTime()/1000) - (jobCollection[i].createdAt.seconds);
+      if (secondsSinceCreation/3600 > 24) {
+        timeSinceCreated = Math.round(secondsSinceCreation/86400) + " days";
+      }
+      else if (secondsSinceCreation/60 > 60) {
+        timeSinceCreated = Math.round(secondsSinceCreation/3600) + " hours";
+      }
+      else if (secondsSinceCreation/60 > 1) {
+        timeSinceCreated = Math.round(secondsSinceCreation/60) + " mins";
+      }
+      else {
+        timeSinceCreated = "Just now";
+      }
+
+
+
+      // last row
       let row = document.createElement("div");
       row.className = "row";
       let col1 = document.createElement("div");
       col1.className = "col-8";
       let col2 = document.createElement("div");
       col2.className = "col-4";
-      col2.innerHTML = "<p class='timetext'>5 min ago</p>";
+      col2.innerHTML = "<p class='timetext'>"+timeSinceCreated+"</p>";
       let link = document.createElement("a");
       link.href="job-details.html?id=" + jobCollection[i].id;
       link.innerHTML = "View more details"
@@ -270,19 +289,13 @@ function displayAllJobs (jobCollection) {
       cardBody.appendChild(row);
 	  	card.appendChild(cardBody);
 
-      // is job in the future
-      let nowInt = now.getTime();
-      let applicationDeadlineInt = applicationDeadline.getTime();
-      if ( (applicationDeadlineInt - nowInt) > 0) {
-        document.querySelector(".all-job-data").appendChild(card);
-        jobsAvailable++;
-      };
-	  	
+    
+      jobContainer.appendChild(card);
+      jobsAvailable++;	  	
   	}
   }
   // add no of available jobs
   document.querySelector(".jobs-available").innerHTML = "AVALABLE JOBS (" + jobsAvailable +")";
-  console.log(jobCollection);
 }
 
 // display single job
@@ -1077,10 +1090,16 @@ if (page == "post-job") {
 // JOB BOARD PAGE
 if (page == "jobs") {
   console.log("jobs page");
+  const sortJobsSelect = document.querySelector('.sort-jobs');
+  let sortVal = "applyby";
+  sortJobsSelect.addEventListener('change', function (e) {
+    sortVal = e.target.value;
+    getAllCurrentJobData(sortVal, function(jobData){
+      displayAllJobs(jobData);
+    });
+  }); 
   // get and show all jobs
-  getAllJobData(function(jobData){
-    // TO DO 
-    // Sort job data by newest or oldest
+  getAllCurrentJobData(sortVal, function(jobData){
     displayAllJobs(jobData);
   });
 }

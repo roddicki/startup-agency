@@ -157,13 +157,54 @@ export function getUserUid() {
 //*****************************************
 // firebase general  functions
 
-// get all current jobs and order by deadline date
+// get all current jobs and order by application deadline date
+export function getAllCurrentJobData(sort, fn) {
+  // collection ref - in this case books
+  const colRef = collection(db, 'jobs');
+  const dateNow = new Date();
+  // find and sort jobs that have an application deadline in the future
+  let orderByDate = query(colRef, where('applicationdeadline', '>', dateNow), orderBy('applicationdeadline'));
+
+  // get collection data - only runs on page load / refresh
+  // getDocs(colRef)
+  getDocs(orderByDate)
+    .then(function(snapshot) {
+      //console.log(snapshot.docs);
+      let jobCollection = [];
+      for (let i = 0; i < snapshot.docs.length; i++) {
+        let job = snapshot.docs[i].data();
+        job.id = snapshot.docs[i].id;
+        jobCollection.push(job);
+      }
+      // sort results based on incoming parameter
+      let sortedArr = jobCollection;
+      if (sort == 'oldest') {
+        sortedArr = jobCollection.sort(
+          (objA, objB) => Number(objA.createdAt) - Number(objB.createdAt),
+        );
+      }
+      else if (sort == 'recent') {
+        sortedArr = jobCollection.sort(
+          (objA, objB) => Number(objB.createdAt) - Number(objA.createdAt),
+        );
+      }
+      else {
+        sortedArr = jobCollection;
+      }  
+      fn(sortedArr);
+    })
+    .catch(function(err) {
+      console.log(err.message);
+    });
+}
+
+// get all jobs and order by createdAt date
 export function getAllJobData(fn) {
   // collection ref - in this case books
   const colRef = collection(db, 'jobs');
 
   // example of how to order by date
-  const orderByDate = query(colRef, orderBy('deadline'))
+  const orderByDate = query(colRef, orderBy('createdAt'))
 
   // get collection data - only runs on page load / refresh
   // getDocs(colRef)
