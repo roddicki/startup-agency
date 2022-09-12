@@ -40,7 +40,7 @@
               </form>  
           </div>
           <div class="col-lg-2 col-md-4 col-sm-12 d-grid ">
-            <button class="btn btn-primary btn-lg btn-block postjobbutton">Post Job</button>
+            <button class="btn btn-primary btn-lg btn-block postjobbutton" data-bs-toggle= "modal" data-bs-target="#postmodal"">Post Job</button>
           </div>
         </div>
       
@@ -311,6 +311,46 @@
 
   
 </section>
+
+<!--Modals-->
+
+<div class="modal fade" id="postmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content modalcontentleft">
+      
+        <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Post a job</h2>
+        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+            <p>We know how important for you is to find the right person for the job. The way you frame the job brief it is significant to find the right applicant. </p>
+
+            <p>We often find that even though people know what their needed outcome is, they don’t always know what and who they are looking for exacly to meet the desired delivery. </p>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="modal-border">
+              <h3>I know what I'm looking for!</h3>
+              <p>I have enough experience to clearly specify who I’m looking for for this job brief and I’m fine to carry on by myself.</p>
+              <p>I’m happy to fill the job brief myself.</p>
+              <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#submitted" data-bs-dismiss="modal" >Apply for this job</button>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="modal-border">
+              <h3>I need a little help</h3>
+              <p>I know what I need, but I don’t know who and what skills I need for this to be deliver successfuly.</p>
+              <p>I would like to discuss my job brief with someone and get directions.</p>
+              <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#submitted" data-bs-dismiss="modal" >Get in touch</button>
+            </div>
+          </div>
+        </div>
+        
+       
+          
+          
+    
+    </div>
+  </div>
+</div>
 
 <span id="signinmodal">
   <!--Import sign in modal-->

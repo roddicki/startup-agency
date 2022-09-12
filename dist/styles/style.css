@@ -92,6 +92,14 @@ a:active {
 				
 	}
 
+.btn-secondary{
+	color: #000;
+    border-color: #572F88;
+	background-color: #fff;
+    border-width: 2px;
+	margin-right: 20px;
+}
+
 .modal-content{
 	display: flex;
 	flex-direction: column;
@@ -303,9 +311,36 @@ a:active {
 	float: left;
 	justify-content: left;
   }
+  .modalheaddrmid{
+	width: 100%;
+
+	justify-content: center;
+  }
 
   .modalcontentleft{
 	align-items:unset !important;
+	gap:20px;
+  }
+
+  .set-content-right{
+	float: right;
+	justify-content: right;
+	margin-top: 20px;
+  }
+
+  .warning-border{
+	background-color: rgba(240, 162, 5, 0.05) ;
+	border: 1px solid #F0A205;
+	border-radius: 5px;
+	color: #000;
+	padding-top: 12px;
+  }
+
+  .modal-border{
+	border: 1px solid #EDEBEE;
+	border-radius: 20px;
+	padding:40px;
+	margin-bottom: 20px;
   }
 
   @media (max-width: 767px){
