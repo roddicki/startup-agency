@@ -378,7 +378,7 @@ function displaySingleJob(jobData) {
   jobTitle.innerHTML = jobData.title;
 
   let company = document.querySelector(".job-name");
-  company.innerHTML = jobData.company;
+  company.innerHTML = "<strong>"+jobData.company+"</strong>";
 
   let jobDetails = document.querySelector(".quickjobspec");
   let cost;
