@@ -192,12 +192,23 @@ function getParam() {
 
 // ======SHOW JOB FUNCTIONS======
 // show all jobs - jobs page
-function displayAllJobs (jobCollection) {
+function displayAllJobs (itemsPerPage, page, jobCollection) {
   let jobContainer = document.querySelector(".all-job-data");
   jobContainer.innerHTML = "";
-  let jobsAvailable = 0;
+  let jobsAvailable = jobCollection.length;
+
+  // get start and end items for each page param
+  let start = 0;
+  let end = itemsPerPage;
+  // get start and end items for each page using ?page=x param
+  if(page) {
+    page = page-1;
+    start = page*itemsPerPage;
+    end = (start+itemsPerPage > jobCollection.length ? jobCollection.length : start+itemsPerPage);
+  }
+
   // create cards for each job
-  for (var i = 0; i < jobCollection.length; i++) {
+  for (var i = start; i < end; i++) {
   	if (jobCollection[i].approved) {
 	  	let card = document.createElement("div");
 	  	card.className = "col-xl-3 col-lg-4 col-md-6 col-sm-12";
@@ -265,8 +276,6 @@ function displayAllJobs (jobCollection) {
         timeSinceCreated = "Just now";
       }
 
-
-
       // last row
       let row = document.createElement("div");
       row.className = "row";
@@ -282,58 +291,159 @@ function displayAllJobs (jobCollection) {
       row.appendChild(col1);
       row.appendChild(col2);
 
-
 	  	cardBody.appendChild(title);
 	  	cardBody.appendChild(subtitle);
       cardBody.appendChild(jobDetails);
       cardBody.appendChild(row);
 	  	card.appendChild(cardBody);
 
-    
       jobContainer.appendChild(card);
-      jobsAvailable++;	  	
   	}
   }
   // add no of available jobs
   document.querySelector(".jobs-available").innerHTML = "AVALABLE JOBS (" + jobsAvailable +")";
 }
 
-// display single job
-function displaySingleJob(jobData) {
-  console.log(jobData);
-  let date = new Date(jobData.deadline.seconds*1000);
+
+// create jobs page pagination links
+function createPagination(pageParam, itemsPerPage, jobs) {
+  // set forward and previous
+  let totalPages = Math.ceil(jobs/itemsPerPage);
+  let currentPage = parseInt(pageParam);
+  let forward;
+  if (pageParam && currentPage != totalPages) {
+    forward = parseInt(pageParam)+1;
+  } 
+  else if (pageParam && currentPage == totalPages) {
+    forward = currentPage;
+  }
+  else {
+    forward = 2;
+  }
+  console.log("forward " + forward);
+  let previous;
+  if (pageParam && currentPage != 1) {
+    previous = parseInt(pageParam)-1;
+  } 
+  else {
+    previous = 1;
+  }
+  console.log("previous" + previous);
+  
+  
+  let nav = document.querySelector(".pagination-nav"); 
+  nav.innerHTML = "";
+  let paginationUl = document.createElement("ul");
+  paginationUl.className = "pagination paginationnav";
+  
+  // create page links / li elements
+  let pageLinksLength = totalPages+2;
+  console.log("no of pages", totalPages);
+
+  for (var i = 0; i < pageLinksLength; i++) {    
+    let pageLi = document.createElement("li");
+    pageLi.className = "page-item";
+    let pageLink = document.createElement("a");
+    pageLink.className = "page-link";
+    // previous
+    if(i == 0) {
+      pageLink.setAttribute("aria-label", "Previous");
+      pageLink.href = "?page="+previous;
+      pageLink.innerHTML = '<span aria-hidden="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>';
+    }
+    // next
+    else if (i == pageLinksLength-1) {
+      pageLink.setAttribute("aria-label", "Next");
+      pageLink.href = "?page="+forward;
+      pageLink.innerHTML = '<span aria-hidden="true"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>';
+    }
+    // page links
+    else {
+      pageLink.href = "?page="+i;
+      pageLink.innerHTML = i;
+    }
     
-  let card = document.createElement("div");
-  card.className = "card";
+    pageLi.appendChild(pageLink);
+    paginationUl.appendChild(pageLi);
+  }
 
-  let cardBody = document.createElement("div");
-  cardBody.className = "card-body";
-
-  let title = document.createElement("h5");
-  title.className = "card-title";
-  title.innerHTML = jobData.title;
-
-  let subtitle = document.createElement("h6");
-  subtitle.className = "card-subtitle mb-2 text-muted";
-  subtitle.innerHTML = "£"+jobData.budget;
-
-  let deadline = document.createElement("p");
-  deadline.className = "card-text";
-  deadline.innerHTML = date.toDateString();
-
-  let description = document.createElement("p");
-  description.className = "card-text";
-  description.innerHTML = jobData.longdescription;;
-
-
-  cardBody.appendChild(title);
-  cardBody.appendChild(subtitle);
-  cardBody.appendChild(deadline);
-  cardBody.appendChild(description);
-  card.appendChild(cardBody);
-
-  document.querySelector(".single-job-data").appendChild(card);
+  nav.appendChild(paginationUl);
 }
+
+
+// display single job
+function displaySingleJob(jobData) {  
+  console.log(jobData);
+  let jobTitle = document.querySelector(".jobboardheader");
+  jobTitle.innerHTML = jobData.title;
+
+  let company = document.querySelector(".job-name");
+  company.innerHTML = jobData.company;
+
+  let jobDetails = document.querySelector(".quickjobspec");
+  let cost;
+  if(jobData.budget != null) {
+    cost = "£"+jobData.budget;
+  } 
+  else if(jobData.hourlyrate != null){
+    cost = jobData.hourlyrate + " p/h";
+  }
+  let budget = document.createElement("p");
+  budget.innerHTML = "<i class='fa-solid fa-database'></i>  Budget: <strong>"+cost+"</strong>";
+  
+  let applicationDeadline = new Date(jobData.applicationdeadline.seconds*1000);
+  let applicationDeadlineStr = applicationDeadline.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"});
+  let applyBy = document.createElement("p");
+  applyBy.innerHTML = "<i class='fa-regular fa-clock'></i>  Apply by: <strong>"+applicationDeadlineStr+"</strong>";
+  
+  let location = document.createElement("p");
+  location.innerHTML = "<i class='fa-solid fa-location-dot'></i>  Location: <strong>"+jobData.location+"</strong>";
+  
+  let completionVal;
+  if(jobData.deadline != null){
+    let completionDate = new Date(jobData.deadline.seconds*1000);
+    completionVal = completionDate.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"});
+  } else if(jobData.duration != null){
+    completionVal = jobData.duration + " days";
+  }
+  let completion = document.createElement("p");
+  completion.innerHTML = "<i class='fa-solid fa-arrow-trend-up'></i>  Completion: <strong>"+completionVal+"</strong>";
+
+  jobDetails.appendChild(budget);
+  jobDetails.appendChild(applyBy);
+  jobDetails.appendChild(location);
+  jobDetails.appendChild(completion);
+
+  let jobDescription = document.querySelector(".job-description");
+  jobDescription.innerHTML = jobData.longdescription;;
+
+  let tagContainer = document.querySelector(".tag-container");
+  for (var i = 0; i < jobData.tags.length; i++) {
+    let tag = jobData.tags[i];
+    let tagStr = tag.replace(/-/g, " ");
+    let tagBtn = document.createElement("a");
+    tagBtn.setAttribute("style", "text-transform: capitalize;");
+    tagBtn.className = "btn btn-primary filtertag";
+    tagBtn.href = "#";
+    tagBtn.innerHTML = tagStr;
+
+    tagContainer.appendChild(tagBtn);
+  }
+}
+
+// activate apply for this job button
+function activateApplyBtn(action){
+  let applyBtn = document.querySelector('.apply-btn');
+  let warningText = document.querySelector('.warningtext');
+  if (action == "activate") {
+    applyBtn.removeAttribute('disabled');
+    warningText.innerHTML = "";
+  } else {
+    applyBtn.setAttribute('disabled', '');
+    warningText.innerHTML = "<p>Sign in before applying for this job. Only active stwidio members are allowed to apply for the jobs posted on the platform</p>";
+  }
+}
+
 
 // ======SHOW USER DATA FUNCTIONS======
 // show all user data - this is the basis for the front page
@@ -1039,7 +1149,7 @@ if (page == "single-profile") {
       showProfile(vals);
     });
   
-  // add edit my profile btn
+  // on login add edit my profile btn
   onAuthStateChanged(auth, function(user) {
     if (user) {
         // User logged in already or has just logged in.
@@ -1091,22 +1201,45 @@ if (page == "post-job") {
 if (page == "jobs") {
   console.log("jobs page");
   const sortJobsSelect = document.querySelector('.sort-jobs');
-  let sortVal = "applyby";
+  let sortVal = "applyby";  // initial sort value
+  const itemsPerPage = 12;   // jobs per page
   sortJobsSelect.addEventListener('change', function (e) {
     sortVal = e.target.value;
+    // retrieve all current jobs and display on select change
     getAllCurrentJobData(sortVal, function(jobData){
-      displayAllJobs(jobData);
+      displayAllJobs(itemsPerPage, getParam(), jobData);
+      createPagination(getParam(), itemsPerPage, jobData.length);
     });
   }); 
-  // get and show all jobs
+  // retrieve all current jobs and display
   getAllCurrentJobData(sortVal, function(jobData){
-    displayAllJobs(jobData);
+    displayAllJobs(itemsPerPage, getParam(), jobData);
+    createPagination(getParam(), itemsPerPage, jobData.length);
   });
 }
 
 // JOB DETAILS PAGE
 if (page == "job-details") {
   console.log("job details page");
+  // on login add / remove disabled from apply btn
+  onAuthStateChanged(auth, function(user) {
+    if (user) {
+      // User logged in already or has just logged in.
+      activateApplyBtn("activate");
+    } else {
+      activateApplyBtn("disable");
+    }
+  })
+  // set go back link
+  const goBack = document.querySelector('.go-back');
+  goBack.addEventListener('click', function (e) {
+    e.preventDefault();
+    if(document.referrer.includes("jobs")) {
+      history.back();
+    } else {
+      location.href = "jobs.html";
+    }
+  });
   // get and show all jobs
   console.log(getParam());
   getSingleJob(getParam(), function(jobData){
