@@ -108,6 +108,11 @@ a:active {
 	border-radius: 20px;
 }
 
+.bottom{
+    bottom: 0%;
+    position: relative;
+}
+
 
 .signinclosebutton{
 	position: absolute;
@@ -252,6 +257,7 @@ a:active {
 	border-radius: 20px;
 	margin-top: 10px;
 	margin-bottom: 5px;
+	height:380px;
   }
 
   .filtertag{
@@ -290,6 +296,16 @@ a:active {
   .quickjobspec{
 	margin-top: 25px;
 	margin-bottom: 25px;
+  }
+
+  .modalheaddrapply{
+	width: 100%;
+	float: left;
+	justify-content: left;
+  }
+
+  .modalcontentleft{
+	align-items:unset !important;
   }
 
   @media (max-width: 767px){
