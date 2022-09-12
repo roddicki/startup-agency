@@ -313,7 +313,7 @@
 </section>
 
 <!--Modals-->
-
+<!--Step 1-->
 <div class="modal fade" id="postmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modalcontentleft">
@@ -331,7 +331,7 @@
               <h3>I know what I'm looking for!</h3>
               <p>I have enough experience to clearly specify who I’m looking for for this job brief and I’m fine to carry on by myself.</p>
               <p>I’m happy to fill the job brief myself.</p>
-              <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#submitted" data-bs-dismiss="modal" >Apply for this job</button>
+              <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#step1" data-bs-dismiss="modal" >Apply for this job</button>
             </div>
           </div>
           <div class="col-lg-6 col-md-12 col-sm-12">
@@ -348,6 +348,262 @@
           
           
     
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="step1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content modalcontentleft">
+      
+        <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Post a job</h2>
+        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+            <p>First we need some of your personal details. to make sure we can contact you with matching freelancers and provide support if required. Your details not be shared publicly on the platform. </p>
+          </div>
+
+          <div class="col-md-12 col-sm-12">
+            <p class="project-showcase-text">Personal Details</p>
+          </div>
+          <div class="col-md-6 col-sm-12 gap">
+            <label for="FirstName1" class="form-label">First Name*</label>
+            <input type="FirstName" class="form-control" id="FirstName1" aria-describedby="FirstNameHelp">
+          </div>
+          <div class="col-md-6 col-sm-12 gap">
+            <label for="LastName1" class="form-label">Last Name*</label>
+            <input type="LastName" class="form-control" id="LastName1" aria-describedby="LastNameHelp">
+          </div>
+          <div class="col-md-6 col-sm-12 gap">
+            <label for="LastName1" class="form-label">Your email*</label>
+            <input type="Email" class="form-control" id="email1" aria-describedby="EmailHelp">
+          </div>
+          <div class="col-md-6 col-sm-12 gap">
+            <label for="LastName1" class="form-label">Phone number</label>
+            <input type="LastName" class="form-control" id="LastName1" aria-describedby="LastNameHelp">
+          </div>
+          <div class="col-12">
+            <div class="set-content-right gap">
+              <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#step1">Cancel</button>
+              <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#step2" data-bs-dismiss="modal" >Next Step</button>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+<!--Step 2-->
+<div class="modal fade" id="step2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content modalcontentleft">
+      
+        <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Add job brief</h2>
+        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+            <p>Now we actually need more details on the job itself. The job title should be a short summary of the job itself. In brief please describe all essential details of the job including job background, who are you looking for, when and where but also any required skills or software expertise if applicable. </p>
+          </div>
+
+          <div class="col-md-12 col-sm-12">
+            <p class="project-showcase-text">JOB DETIALS i</p>
+          </div>
+          <div class="col-md-12 col-sm-12 gap">
+            <label for="FirstName1" class="form-label">Job title*</label>
+            <input type="FirstName" class="form-control" id="FirstName1" aria-describedby="FirstNameHelp">
+            <div id="emailHelp" class="form-text">Max 50 characters</div>
+          </div>
+          <div class="col-md-6 col-sm-12 gap">
+            <label for="LastName1" class="form-label">Company name*</label>
+            <input type="LastName" class="form-control" id="LastName1" aria-describedby="LastNameHelp">
+          </div>
+          <div class="row"></div>
+
+          <!--Budget Radios-->
+          <div class="col-md-6 col-sm-12 gap">
+              <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Set budget
+              </label>
+            </div>
+            <input type="FirstName" class="form-control" id="FirstName1" aria-describedby="FirstNameHelp">
+          </div>
+          <div class="col-md-6 col-sm-12 gap">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Hourly Rate
+              </label>
+            </div>
+            <input type="FirstName" class="form-control" id="FirstName1" aria-describedby="FirstNameHelp">
+          </div>
+          <!--App Deadline need to do date-->
+          <div class="col-md-6 col-sm-12 gap">
+            <label for="LastName1" class="form-label">Company name*</label>
+            <input type="LastName" class="form-control" id="LastName1" aria-describedby="LastNameHelp">
+          </div>
+          <div class="row"></div>
+          <!--Location-->
+          <div class="col-md-6 col-sm-12 gap">
+            <label for="LastName1" class="form-label">Job location*</label>
+            <input type="LastName" class="form-control" id="LastName1" aria-describedby="LastNameHelp">
+          </div>
+          <div class="col-md-6 col-sm-12 gap">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">
+                Remote Job
+              </label>
+            </div>
+          </div>
+          <!--Completion radios-->
+          <div class="col-md-6 col-sm-12 gap">
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault2">
+            <label class="form-check-label" for="flexRadioDefault2">
+              Completion date
+            </label>
+          </div>
+          <input type="FirstName" class="form-control" id="FirstName1" aria-describedby="FirstNameHelp">
+        </div>
+        <div class="col-md-6 col-sm-12 gap">
+          <div class="form-check">
+          <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault2">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Duration period 
+          </label>
+        </div>
+        <input type="FirstName" class="form-control" id="FirstName1" aria-describedby="FirstNameHelp">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Job brief*</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <label for="exampleFormControlTextarea1"><p class="timetext">Max. 500 characters</p></label>
+      </div>
+      <div class="col-12">
+        <label>Related categories* </label>
+      </div>
+      <div class="col-12">
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D Design</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Computer Animation</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Fashion</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Graphic design</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Music & Sound</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Performance</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Photography</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Film & Video Production</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Video Games</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Visual Effects</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Web Development</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Writing & Copy</button>
+      </div>
+          <div class="col-12">
+            <div class="set-content-right gap">
+              <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#applymodal">Cancel</button>
+              <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#step3" data-bs-dismiss="modal" >Next Step</button>
+            </div>
+          </div>
+          
+        </div>
+    </div>
+  </div>
+</div>
+<!--Step 3-->
+<div class="modal fade" id="step3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content modalcontentleft">
+      
+        <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Post a job</h2>
+        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+            <p>Finally, check if all details are correct before submiting the job.</p>
+          </div>
+
+          <div class="col-md-12 col-sm-12">
+            <p class="project-showcase-text">JOB OVERVIEW</p>
+          </div>
+
+          <div class="col-md-12 col-sm-12">
+            <p class="post-grey">Job title</p>
+            <p class="post-black">Animator to create an explainer video for new business</p>
+          </div>
+
+          <div class="col-md-12 col-sm-12">
+            <p class="post-grey">Company Name</p>
+            <p class="post-black">Umberlla Corp</p>
+          </div>
+          <div class="col-md-12 col-sm-12">
+            <p class="post-grey">Budget</p>
+            <p class="post-black">Set budget - £1500</p>
+          </div>
+          <div class="col-md-12 col-sm-12">
+            <p class="post-grey">Job Location</p>
+            <p class="post-black">Remote</p>
+          </div>
+          <div class="col-md-12 col-sm-12">
+            <p class="post-grey">Completion</p>
+            <p class="post-black">Completion deadline - 23/08/2022</p>
+          </div>
+          <div class="col-md-12 col-sm-12">
+            <p class="post-grey">Job description</p>
+            <p class="post-black">Turpis porta accumsan id sit sapien, enim diam ornare eu. Commodo sagittis, ornare et amet, lectus. Dignissim lectus scelerisque aliquam dui elit mauris faucibus quam. Turpis quisque aenean egestas sit fusce congue. Nibh morbi sed duis mollis non tortor. Quis etiam justo amet, cursus odio tincidunt at facilisi. A risus faucibus facilisis proin sed diam quisque a.
+              Convallis non sit interdum morbi tristique nulla. 
+              
+              Sed elementum vitae felis tortor egestas. Nunc, tristique accumsan gravida ut elementum ac. Habitant arcu viverra fermentum ipsum fusce id iaculis. Amet id vel placerat vestibulum amet, tristique. Sit cum faucibus vel at. Ac vitae egestas scelerisque convallis eu tellus. Mauris nisl fringilla duis eros, etiam. Sed pharetra arcu volutpat aliquam, enim platea. Posuere libero sed lectus ac mi augue nisl donec. 
+              
+              Ornare mauris nec feugiat sit malesuada hendrerit. Gravida commodo tellus urna rhoncus vulputate ut risus hendrerit volutpat. Faucibus quis a euismod lorem dapibus felis a. Tincidunt nibh varius pharetra bibendum.</p>
+          </div>
+          <div class="col-md-12 col-sm-12">
+            <p class="post-grey">Related catagories</p>
+            <span class="btn btn-primary filtertag">Visual Effects</span>
+            <span class="btn btn-primary filtertag">Fashion</span>
+
+            <div class="col-12 warning-border">
+              <p><i class="fa-solid fa-triangle-exclamation"></i> Your application will be forwarded first to the moderator before sending it to the client. By submitting your application, you agree you have read stiwdio <a href="">Terms and Conditions</a>. </p>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="set-content-right gap">
+              <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#applymodal">Cancel</button>
+              <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#submit" data-bs-dismiss="modal" >Submit job</button>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="submit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+        <img src="/dist/assets/img/Tickcircle.svg" height="150">
+        <div class="row">
+          <div class="col-12">
+        <h2 class="modal-title signinheader modalheaddrmid" id="exampleModalLabel">Thank you for your submission!</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <p>
+              We will review and publish your job shortly. If we find any issues with submission we will get in touch with you to exlain why and work with you to fix it.  
+            </p>
+            <p>
+              After the application deadline, we will forward to you all freelancers who applied for the job so you can select the successful applicant(s). Then we will arrange the contact between you to discuss any other details.
+            </p>
+      </div>
+      </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="set-content-right">
+              <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#submit">Close</button>
+             
+            </div>
+          </div>
+        </div>
+        
+      </div>
     </div>
   </div>
 </div>
