@@ -183,6 +183,7 @@ a:active {
     box-shadow: 5px 5px 5px rgba(0, 0, 0, .05);
 	margin-right: 15px;
 	margin-bottom: 10px;
+	min-height: 250px;
   }
 
   
