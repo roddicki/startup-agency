@@ -191,6 +191,7 @@ export function getAllCurrentJobData(sort, fn) {
       else {
         sortedArr = jobCollection;
       }  
+      console.log(sortedArr);
       fn(sortedArr);
     })
     .catch(function(err) {

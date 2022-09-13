@@ -195,7 +195,10 @@ function getParam() {
 function displayAllJobs (itemsPerPage, page, jobCollection) {
   let jobContainer = document.querySelector(".all-job-data");
   jobContainer.innerHTML = "";
-  let jobsAvailable = jobCollection.length;
+  // display total jobs available
+  let jobCount = document.querySelector(".jobs-available");
+  jobCount.innerHTML = "AVALABLE JOBS ("+jobCollection.length+")";
+
 
   // get start and end items for each page param
   let start = 0;
@@ -300,8 +303,6 @@ function displayAllJobs (itemsPerPage, page, jobCollection) {
       jobContainer.appendChild(card);
   	}
   }
-  // add no of available jobs
-  document.querySelector(".jobs-available").innerHTML = "AVALABLE JOBS (" + jobsAvailable +")";
 }
 
 
@@ -1197,6 +1198,7 @@ if (page == "post-job") {
   });
 }
 
+
 // JOB BOARD PAGE
 if (page == "jobs") {
   console.log("jobs page");
@@ -1213,7 +1215,7 @@ if (page == "jobs") {
   }); 
   // retrieve all current jobs and display
   getAllCurrentJobData(sortVal, function(jobData){
-    displayAllJobs(itemsPerPage, getParam(), jobData);
+    //displayAllJobs(itemsPerPage, getParam(), jobData); // err
     createPagination(getParam(), itemsPerPage, jobData.length);
   });
 }
