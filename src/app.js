@@ -200,14 +200,25 @@ function displayAllJobs (itemsPerPage, page, jobCollection) {
   jobCount.innerHTML = "AVALABLE JOBS ("+jobCollection.length+")";
 
 
-  // get start and end items for each page param
+  // get initial start and end items 
   let start = 0;
-  let end = itemsPerPage;
-  // get start and end items for each page using ?page=x param
+  let end;
+  if (itemsPerPage < jobCollection.length) {
+    end = itemsPerPage;
+  }
+  else {
+    end = jobCollection.length;
+  }
+  // get start and end items for each page if using ?page=x param
   if(page) {
-    page = page-1;
-    start = page*itemsPerPage;
-    end = (start+itemsPerPage > jobCollection.length ? jobCollection.length : start+itemsPerPage);
+    page = page -1;
+    start = page * itemsPerPage;
+    end = start + itemsPerPage;
+    if (start + itemsPerPage > jobCollection.length) {
+      end = jobCollection.length; 
+    }
+    /*end = (start+itemsPerPage > jobCollection.length ? jobCollection.length : start+itemsPerPage);*/
+    console.log("page info", page, start, end);
   }
 
   // create cards for each job
@@ -1215,7 +1226,7 @@ if (page == "jobs") {
   }); 
   // retrieve all current jobs and display
   getAllCurrentJobData(sortVal, function(jobData){
-    //displayAllJobs(itemsPerPage, getParam(), jobData); // err
+    displayAllJobs(itemsPerPage, getParam(), jobData); // err
     createPagination(getParam(), itemsPerPage, jobData.length);
   });
 }
