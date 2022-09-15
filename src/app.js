@@ -1227,8 +1227,9 @@ if (page == "jobs") {
   const itemsPerPage = 12;   // jobs per page
   const sortJobsSelect = document.querySelector('.sort-jobs');
   let sortVal = "applyby";  // initial sort value
+  // sort parameter set this as the db query
   if (getParamKey("sort")) {
-    sortJobsSelect.value = getParamKey("sort");
+    sortJobsSelect.value = getParamKey("sort"); // change select menu to match
     sortVal = getParamKey("sort"); // param sort value
   }
   // retrieve all current jobs and display
@@ -1237,9 +1238,8 @@ if (page == "jobs") {
     createPagination(getParamKey("page"), itemsPerPage, jobData.length);
   });
 
-  // on select reload  page and add sort param
+  // on select change reload  page and add sort param
   sortJobsSelect.addEventListener('change', function (e) {
-    sortVal = e.target.value;
     window.location.href = "jobs.html?sort="+e.target.value;
   });  
 }
