@@ -181,7 +181,14 @@ function addToProfile(e, tags) {
 //===========================================
 //===========DOM FUNCTIONS===================
 
-// get query string tag
+// get query by param key
+function getParamKey(key) {
+  const urlParams = new URLSearchParams(location.search);
+  const val = urlParams.get(key)
+  return val;
+}
+
+// get first query string tag
 function getParam() {
   const urlParams = new URLSearchParams(location.search);
   for (const [key, value] of urlParams) {
@@ -217,8 +224,6 @@ function displayAllJobs (itemsPerPage, page, jobCollection) {
     if (start + itemsPerPage > jobCollection.length) {
       end = jobCollection.length; 
     }
-    /*end = (start+itemsPerPage > jobCollection.length ? jobCollection.length : start+itemsPerPage);*/
-    console.log("page info", page, start, end);
   }
 
   // create cards for each job
@@ -321,27 +326,26 @@ function displayAllJobs (itemsPerPage, page, jobCollection) {
 function createPagination(pageParam, itemsPerPage, jobs) {
   // set forward and previous
   let totalPages = Math.ceil(jobs/itemsPerPage);
-  let currentPage = parseInt(pageParam);
+  let currentPageNo = parseInt(pageParam);
   let forward;
-  if (pageParam && currentPage != totalPages) {
+  if (pageParam && currentPageNo != totalPages) {
     forward = parseInt(pageParam)+1;
   } 
-  else if (pageParam && currentPage == totalPages) {
-    forward = currentPage;
+  else if (pageParam && currentPageNo == totalPages) {
+    forward = currentPageNo;
   }
   else {
     forward = 2;
   }
   console.log("forward " + forward);
   let previous;
-  if (pageParam && currentPage != 1) {
+  if (pageParam && currentPageNo != 1) {
     previous = parseInt(pageParam)-1;
   } 
   else {
     previous = 1;
   }
   console.log("previous" + previous);
-  
   
   let nav = document.querySelector(".pagination-nav"); 
   nav.innerHTML = "";
@@ -352,7 +356,9 @@ function createPagination(pageParam, itemsPerPage, jobs) {
   let pageLinksLength = totalPages+2;
   console.log("no of pages", totalPages);
 
-  for (var i = 0; i < pageLinksLength; i++) {    
+  for (var i = 0; i < pageLinksLength; i++) {  
+    // set pagination urls
+    let currentUrl = new URL(window.location);  
     let pageLi = document.createElement("li");
     pageLi.className = "page-item";
     let pageLink = document.createElement("a");
@@ -360,26 +366,31 @@ function createPagination(pageParam, itemsPerPage, jobs) {
     // previous
     if(i == 0) {
       pageLink.setAttribute("aria-label", "Previous");
-      pageLink.href = "?page="+previous;
+      currentUrl.searchParams.append('page', previous);
+      pageLink.href = currentUrl.href;
       pageLink.innerHTML = '<span aria-hidden="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>';
     }
     // next
     else if (i == pageLinksLength-1) {
       pageLink.setAttribute("aria-label", "Next");
-      pageLink.href = "?page="+forward;
+      currentUrl.searchParams.append('page', forward);
+      pageLink.href = currentUrl.href;
       pageLink.innerHTML = '<span aria-hidden="true"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>';
     }
     // page links
     else {
-      pageLink.href = "?page="+i;
+      currentUrl.searchParams.append('page', i);
+      pageLink.href = currentUrl.href;
       pageLink.innerHTML = i;
     }
     
     pageLi.appendChild(pageLink);
     paginationUl.appendChild(pageLi);
   }
-
-  nav.appendChild(paginationUl);
+  // only display if there is more than one page
+  if (totalPages > 1) {
+    nav.appendChild(paginationUl);
+  }
 }
 
 
@@ -1213,22 +1224,24 @@ if (page == "post-job") {
 // JOB BOARD PAGE
 if (page == "jobs") {
   console.log("jobs page");
+  const itemsPerPage = 12;   // jobs per page
   const sortJobsSelect = document.querySelector('.sort-jobs');
   let sortVal = "applyby";  // initial sort value
-  const itemsPerPage = 12;   // jobs per page
-  sortJobsSelect.addEventListener('change', function (e) {
-    sortVal = e.target.value;
-    // retrieve all current jobs and display on select change
-    getAllCurrentJobData(sortVal, function(jobData){
-      displayAllJobs(itemsPerPage, getParam(), jobData);
-      createPagination(getParam(), itemsPerPage, jobData.length);
-    });
-  }); 
+  if (getParamKey("sort")) {
+    sortJobsSelect.value = getParamKey("sort");
+    sortVal = getParamKey("sort"); // param sort value
+  }
   // retrieve all current jobs and display
   getAllCurrentJobData(sortVal, function(jobData){
-    displayAllJobs(itemsPerPage, getParam(), jobData); // err
-    createPagination(getParam(), itemsPerPage, jobData.length);
+    displayAllJobs(itemsPerPage, getParamKey("page"), jobData); // err
+    createPagination(getParamKey("page"), itemsPerPage, jobData.length);
   });
+
+  // on select reload  page and add sort param
+  sortJobsSelect.addEventListener('change', function (e) {
+    sortVal = e.target.value;
+    window.location.href = "jobs.html?sort="+e.target.value;
+  });  
 }
 
 // JOB DETAILS PAGE
