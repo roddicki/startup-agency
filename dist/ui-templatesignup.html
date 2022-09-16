@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="styles/style.css" rel="stylesheet">
+
+  <title>Startup Agency</title>
+</head>
+
+<body data-page="" class="d-flex flex-column min-vh-100">
+
+<header id="header">
+  <!-- imports header + nav from src/header.html -->
+</header>
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <button type="button" class="btn-primary" data-bs-toggle= "modal" data-bs-target="#signupmodal">Sign up</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--Reg Welcome Modal-->
+<div class="modal fade" id="signupmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title signinheader" id="exampleModalLabel">Welcome!</h2>
+        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>First, we need some details...</p>
+        <p>First name*</p>
+        <input type="text" class="form-control signincontent" aria-label="Username">
+        <p>Last Name</p>
+        <input type="text" class="form-control signincontent" aria-label="Username">
+
+        <p>Course*</p>
+        <select class="form-select select-spacing" aria-label="Default select example">
+          <option selected>Select</option>
+          <option value="Digital Media">Digital Media</option>
+          <option value="Video & Film">Video & Film</option>
+          <option value="Fashion">Fashion/option>
+        </select>
+
+        <p>Graduation Year</p>
+        <select class="form-select select-spacing" aria-label="Default select example">
+          <option selected>Select</option>
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
+          <option value="2020">2020</option>
+          <option value="2019">2019</option>
+          <option value="2018">2018</option>
+          <option value="2017">2017</option>
+          <option value="2016">2016</option>
+          <option value="2015">2015</option>
+          <option value="2014">2014</option>
+          <option value="2013">2013</option>
+          <option value="2012">2012</option>
+        </select>
+        
+
+        <button class="btn btn-inactive " type="button" data-bs-toggle= "modal" data-bs-target="#almosttheremodal" data-bs-dismiss="modal"> Next </button>
+        <div class="gap"></div>
+
+        <p class="center-text">Already got an account? <a href="">Sign in</a></p>
+      </div>
+  
+    </div>
+  </div>
+</div>
+<!--Reg Welcome modal end-->
+
+<!--Reg second Modal-->
+<div class="modal fade" id="almosttheremodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title signinheader" id="exampleModalLabel">Almost there...</h2>
+        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Please add your email and a password to create your account.</p>
+        <p>Email*</p>
+        <input type="text" class="form-control signincontent" aria-label="Username">
+        <p>Password</p>
+        <input type="text" class="form-control signincontent" aria-label="Password">
+        <p class="timetext modalheaddrapply">Your password must be at least 8 characters and include a mixture of both uppercase, lowercase letters and numbers</p>
+        <div class="gap"></div>
+        <button class="btn btn-inactive" type="button"> Create your account</button>
+        <div class="gap"></div>
+        <div class="row">
+          <div class="col-5 line"></div>
+          <div class="col-2 text-center ortext"><p>OR</p></div>
+          <div class="col-5 line"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          <a href="">
+            <img src="/dist/assets/img/GoogleSocial.svg"  style="width:56px;height:56px;">
+          </a>
+        </div>
+        <div class="col-4">
+          <a href="">
+            <img src="/dist/assets/img/FaceBookIcon.svg"  style="width:56px;height:56px;">
+          </a>
+        </div>
+        <div class="col-4">
+          <a href="">
+            <img src="/dist/assets/img/AppleIcon.svg"  style="width:56px;height:56px;">
+          </a>
+        </div>
+      </div>
+
+        <p>Already got an account? <a href="">Sign in</a></p>
+      </div>
+  
+    </div>
+  </div>
+</div>
+<!--End of Reg second modal-->
+
+<span id="signinmodal">
+  <!--Import sign in modal-->
+</span>
+
+<footer id="footer" class="mt-auto">
+  <!-- imports footer from src/footer.html -->
+</footer>
+
+
+  
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!-- custom JS -->
+<script src="scripts/app.bundle.js"></script>
+<!-- event listeners -->
+
+</body>

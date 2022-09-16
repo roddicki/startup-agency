@@ -59,6 +59,7 @@ a:active {
   
   .btn {
     white-space: nowrap;
+	width: 100%;
 }
   /*site wide button styles*/
   .btn-primary {
@@ -80,7 +81,7 @@ a:active {
 		padding: 16px 24px;
 		gap: 10px;
 
-		width: 380px;
+		//width: 380px;
 		height: 54px;
 
 
@@ -139,8 +140,7 @@ a:active {
 }
 
 .signinheader{
-	width: 147px;
-	height: 58px;
+	
 	font-style: normal;
 	font-weight: 700;
 	font-size: 48px;
@@ -278,6 +278,7 @@ a:active {
 	margin-right: 10px;
 	margin-top: 10px;
   }
+
   .lineheightjob{
 	line-height: 10px;
   }
@@ -309,6 +310,9 @@ a:active {
 	margin-bottom: 25px;
   }
 
+  .modal-body{
+	width: 100%;
+  }
   .modalheaddrapply{
 	width: 100%;
 	float: left;
@@ -360,9 +364,12 @@ a:active {
 	font-size: 16px;
 	line-height: 20px;
 	color: #0C0B0D;
-
-
   }
+
+  .center-text{
+	text-align: center;
+  }
+
 
 
   @media (max-width: 767px){
@@ -423,6 +430,12 @@ header .container-fluid {
 
 .profile-pic img {
 	vertical-align: text-bottom;
+}
+
+.select-spacing{
+	margin-bottom: 15px;
+	padding: 16px;
+	border-color: #EDEBEE ;
 }
 
 /* ===================================== */
