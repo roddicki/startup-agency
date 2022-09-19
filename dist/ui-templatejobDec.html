@@ -82,11 +82,11 @@
     </div>
   </div>
 </section>
+
 <!--modal for applying-->
 <div class="modal fade" id="applymodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modalcontentleft">
-      
         <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Apply for the job</h2>
         <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
         <h3 class="project-showcase-text">YOUR APPLICATION</h3>
@@ -144,7 +144,8 @@
           <div class="col-12">
             <div class="set-content-right">
               <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#applymodal">Cancel</button>
-              <button type="submit" class="btn btn-primary btn-lg btn-block disabled"  data-bs-toggle= "modal" data-bs-target="#submitted" data-bs-dismiss="modal" >Apply for this job</button>
+               <button type="submit" class="btn btn-primary btn-lg btn-block">Apply for this job</button>
+             <!--  <button type="submit" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#submitted" data-bs-dismiss="modal" >Apply for this job</button> -->
             </div>
           </div>
         </form>
@@ -204,26 +205,25 @@
 <!-- custom JS -->
 <!--Jamie js-->
 <script>
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(() => {
-  'use strict'
-
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   const forms = document.querySelectorAll('.needs-validation')
 
   // Loop over them and prevent submission
   Array.from(forms).forEach(form => {
     form.addEventListener('submit', event => {
+      console.log("checking");
       if (!form.checkValidity()) {
         event.preventDefault()
         event.stopPropagation()
       }
 
-      fo20rm.classList.add('was-validated')
+      form.classList.add('was-validated')
     }, false)
   })
-})()
+
 </script>
+
 <script src="scripts/app.bundle.js"></script>
 <!-- event listeners -->
 <script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous"></script>
