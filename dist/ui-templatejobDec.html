@@ -114,7 +114,7 @@
             <p>http:/dtiwdio-freelance.co.uk</p>
           </div> 
         </div>
-        <form class="row needs-validation novalidate">
+        <form class="row needs-validation apply-form novalidate">
           <div class="col-12">
            
             <div class="form-group">
@@ -144,8 +144,8 @@
           <div class="col-12">
             <div class="set-content-right">
               <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#applymodal">Cancel</button>
-               <button type="submit" class="btn btn-primary btn-lg btn-block">Apply for this job</button>
-             <!--  <button type="submit" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#submitted" data-bs-dismiss="modal" >Apply for this job</button> -->
+              <button type="button" class="btn btn-primary btn-lg btn-block apply-btn">Apply for this job</button>
+              <!-- <button type="submit" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#submitted" data-bs-dismiss="modal" >Apply for this job</button> -->
             </div>
           </div>
         </form>
@@ -205,22 +205,27 @@
 <!-- custom JS -->
 <!--Jamie js-->
 <script>
-  // Example starter JavaScript for disabling form submissions if there are invalid fields
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.needs-validation')
+  // Fetch the form we want to apply custom Bootstrap validation styles to
+  const applyForm = document.querySelector('.apply-form');
+  // get the elements you want to check
+  const textfield1 = applyForm.querySelector('#validationCustom03');
+  const textfield2 = applyForm.querySelector('#exampleFormControlTextarea1');
+  const submitApplication = document.querySelector('.apply-btn');
 
-  // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      console.log("checking");
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
+  submitApplication.addEventListener('click', function (event) {
+    // if textfield1 or textfield2 is not valid
+    if (!textfield1.validity.valid || !textfield2.validity.valid) {
+      event.preventDefault();
+      event.stopPropagation();
+    } 
+    else {
+      console.log("sucess valid");
+      // do other stuff such as close modal / submit data etc
+    }
 
-      form.classList.add('was-validated')
-    }, false)
-  })
+    applyForm.classList.add('was-validated');
+
+  }, false)
 
 </script>
 
