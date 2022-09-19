@@ -36,14 +36,15 @@
         <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <form class="needs-validation" novalidate">
         <p>First, we need some details...</p>
         <p>First name*</p>
-        <input type="text" class="form-control signincontent" aria-label="Username">
+        <input type="text" id="validationCustom01" class="form-control signincontent" name="firstname" aria-label="firstname" >
         <p>Last Name</p>
-        <input type="text" class="form-control signincontent" aria-label="Username">
+        <input type="text" id="validationCustom02" class="form-control signincontent" name="lastname" aria-label="lastname">
 
         <p>Course*</p>
-        <select class="form-select select-spacing" aria-label="Default select example">
+        <select class="form-select select-spacing" id="validationCustom03" name="course" aria-label="Default select example" required>
           <option selected>Select</option>
           <option value="Digital Media">Digital Media</option>
           <option value="Video & Film">Video & Film</option>
@@ -51,7 +52,7 @@
         </select>
 
         <p>Graduation Year</p>
-        <select class="form-select select-spacing" aria-label="Default select example">
+        <select class="form-select select-spacing"  id="validationCustom04" name="graduation" aria-label="Default select example">
           <option selected>Select</option>
           <option value="2022">2022</option>
           <option value="2021">2021</option>
@@ -67,9 +68,9 @@
         </select>
         
 
-        <button class="btn btn-inactive " type="button" data-bs-toggle= "modal" data-bs-target="#almosttheremodal" data-bs-dismiss="modal"> Next </button>
+        <button class="btn btn-inactive " type="submit" data-bs-toggle= "modal" data-bs-target="#almosttheremodal" data-bs-dismiss="modal"> Next </button>
         <div class="gap"></div>
-
+      </form>
         <p class="center-text">Already got an account? <a href="">Sign in</a></p>
       </div>
   
@@ -136,7 +137,28 @@
   <!-- imports footer from src/footer.html -->
 </footer>
 
+<!--jamie Script-->
+<script>
+(function () {
+  'use strict'
 
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>
   
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -266,7 +266,7 @@ a:active {
 	border-radius: 20px;
 	margin-top: 10px;
 	margin-bottom: 5px;
-	height:380px;
+	height:100%;
   }
 
   .filtertag{
@@ -370,6 +370,10 @@ a:active {
 	text-align: center;
   }
 
+  .portfolio-image{
+	height: 85px;
+	width: 85px;
+  }
 
 
   @media (max-width: 767px){
