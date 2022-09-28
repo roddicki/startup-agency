@@ -59,7 +59,7 @@ a:active {
   
   .btn {
     white-space: nowrap;
-	width: 100%;
+	/*width: 100%; */
 }
   /*site wide button styles*/
   .btn-primary {
@@ -81,7 +81,7 @@ a:active {
 		padding: 16px 24px;
 		gap: 10px;
 
-		//width: 380px;
+		/*width: 380px;*/
 		height: 54px;
 
 
@@ -373,6 +373,16 @@ a:active {
   .portfolio-image{
 	height: 85px;
 	width: 85px;
+  }
+
+  .btn-collapse{
+	border-radius: 1px red;
+  }
+
+  .drop-down{
+	border:none;
+	border-radius:0px;
+	border-bottom: solid #EDEBEE;
   }
 
 
