@@ -387,6 +387,9 @@ a:active {
 
 
   @media (max-width: 767px){
+	.modal-content {
+		padding: 40px 35px;
+	}
     .carousel-inner 
     .carousel-item >div{display: none}
     .carousel-inner 
