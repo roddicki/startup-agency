@@ -362,7 +362,47 @@
           <div class="col-md-12 col-sm-12">
             <p>First we need some of your personal details. to make sure we can contact you with matching freelancers and provide support if required. Your details not be shared publicly on the platform. </p>
           </div>
-          <form class="row needs-validation apply-form novalidate"> 
+          <form class="row g-3 needs-validation test-form" novalidate>
+            <div class="col-md-6 col-sm-12">
+              <label for="validationCustom01" class="form-label">First name*</label>
+              <input type="text" class="form-control" id="validationCustom01" required>
+              <div class="invalid-feedback">
+                  Please add your forename.
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <label for="validationCustom02" class="form-label">Last name*</label>
+              <input type="text" class="form-control" id="validationCustom02" required>
+              <div class="invalid-feedback">
+                  Please add your surname.
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <label for="validationCustom03" class="form-label">Email*</label>
+              <input type="text" class="form-control" id="validationCustom03" required>
+              <div class="invalid-feedback">
+                Please provide a valid Email.
+              </div>
+            </div>
+            
+            <div class="col-md-6 col-sm-12">
+              <label for="validationCustom05" class="form-label">Phone Number*</label>
+              <input type="text" class="form-control" id="validationCustom05" required>
+              <div class="invalid-feedback">
+                Please provide a valid zip.
+              </div>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary" type="submit">Submit form</button>
+              <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal" data-bs-target="#step2" data-bs-dismiss="modal" >Next Step</button>
+            </div>
+          </form>
+
+
+
+
+
+          <!-- <form class="row g-3 needs-validation test-form" novalidate" novalidate> 
               <div class="col-md-12 col-sm-12">
                 <p class="project-showcase-text">Personal Details</p>
               </div>
@@ -398,7 +438,7 @@
                   <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal" data-bs-target="#step2" data-bs-dismiss="modal" >Next Step</button>
                 </div>
               </div>
-           </form>
+           </form> -->
         </div>
     </div>
   </div>
@@ -415,7 +455,7 @@
           <div class="col-md-12 col-sm-12">
             <p>Now we actually need more details on the job itself. The job title should be a short summary of the job itself. In brief please describe all essential details of the job including job background, who are you looking for, when and where but also any required skills or software expertise if applicable. </p>
           </div>
-        <form class="row needs-validation apply-form novalidate"> 
+        <!-- <form class="row needs-validation apply-form novalidate"> 
           <div class="col-md-12 col-sm-12">
             <p class="project-showcase-text">JOB DETIALS i</p>
           </div>
@@ -437,7 +477,7 @@
           </div>
           <div class="row"></div>
 
-          <!--Budget Radios-->
+          <!--Budget Radios
           <div class="col-md-6 col-sm-12 gap">
               <div class="form-check">
               <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
@@ -456,14 +496,14 @@
             </div>
             <textarea class="form-control" id="validationCustom03" rows="1" required></textarea>
           </div>
-          <!--App Deadline need to do date-->
+          <!--App Deadline need to do date
           <div class="col-md-6 col-sm-12 gap">
             <label for="LastName1" class="form-label">Application Deadline*</label>
             <textarea class="form-control" id="validationCustom03" rows="1" required></textarea>
             
           </div>
           <div class="row"></div>
-          <!--Location-->
+          <!--Location
           <div class="col-md-6 col-sm-12 gap">
             <label for="LastName1" class="form-label">Job location*</label>
             <textarea class="form-control" id="validationCustom03" rows="1" required></textarea>
@@ -476,7 +516,7 @@
               </label>
             </div>
           </div>
-          <!--Completion radios-->
+          <!--Completion radios
           <div class="col-md-6 col-sm-12 gap">
             <div class="form-check">
             <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault2">
@@ -526,11 +566,133 @@
               <button type="button" class="btn btn-primary btn-lg btn-block apply-btn">Next Step</button>
             </div>
           </div>
+          </form> -->
+
+          
+
+          <form class="row g-3 needs-validation test-form1" novalidate>
+            <div class="col-md-12">
+              <label for="validationCustom06" class="form-label">Job title*</label>
+              <input type="text" class="form-control" id="validationCustom06" required>
+              <div class="invalid-feedback">
+                  Please add a job title
+                </div>
+            </div>
+
+            <div class="col-md-12">
+              <label for="validationCustom04" class="form-label">Company name*</label>
+              <input type="text" class="form-control" id="validationCustom07" required>
+              <div class="invalid-feedback">
+                  Please add your company name
+                </div>
+            </div>
+
+            <!--Completion radios -->
+            <div class="col-md-6 col-sm-12 gap">
+              <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Set budget
+              </label>
+            </div>
+            <textarea class="form-control" id="validationCustom03" rows="1" required></textarea>
+          </div>
+          <div class="col-md-6 col-sm-12 gap">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Hourly Rate
+              </label>
+            </div>
+            <textarea class="form-control" id="validationCustom03" rows="1" required></textarea>
+          </div>
+
+          <div class="col-md-12">
+            <label for="validationCustom04" class="form-label">Application Deadline*</label>
+            <input type="text" class="form-control" id="validationCustom07" required>
+            <div class="invalid-feedback">
+                Please add a application deadline
+              </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="validationCustom04" class="form-label">Job location*</label>
+            <input type="text" class="form-control" id="validationCustom07" required>
+            <div class="invalid-feedback">
+                Please tell us if we need a location
+              </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 gap remotejob">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">
+                Remote Job
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 gap">
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault2">
+            <label class="form-check-label" for="flexRadioDefault2">
+              Completion date
+            </label>
+          </div>
+          <textarea class="form-control" id="validationCustom03" rows="1" required></textarea>
+        </div>
+        <div class="col-md-6 col-sm-12 gap">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault2">
+            <label class="form-check-label" for="flexRadioDefault2">
+              Duration period 
+            </label>
+        </div>
+        <textarea class="form-control" id="validationCustom03" rows="1" required></textarea>
+      </div>
+
+      <div class="col-md-12">
+        <label for="validationCustom04" class="form-label">Job brief*</label>
+        <input type="text" class="form-control" id="validationCustom07" rows="3" required>
+        <div class="invalid-feedback">
+            Please tell us about the job
+          </div>
+      </div>
+          
+      <div class="col-12">
+        <label>Related categories* </label>
+      </div>
+      <div class="col-12">
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D Design</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Computer Animation</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Fashion</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Graphic design</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Music & Sound</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Performance</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Photography</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Film & Video Production</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Video Games</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Visual Effects</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Web Development</button>
+         <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Writing & Copy</button>
+      </div>
+            
+          <div class="col-12">
+              <button class="btn btn-primary" type="submit">Submit form</button>
+          </div>
+          <div class="col-12">
+            <div class="set-content-right gap">
+              <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#applymodal">Cancel</button>
+              <button type="button" class="btn btn-primary btn-lg btn-block apply-btn">Next Step</button>
+            </div>
+          </div>
           </form>
         </div>
     </div>
   </div>
 </div>
+
+
 <!--Step 3-->
 <div class="modal fade" id="step3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -647,7 +809,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <!-- custom JS -->
 <script src="scripts/app.bundle.js"></script>
-<script>
+<!-- <script>
   // Fetch the form we want to apply custom Bootstrap validation styles to
   const applyForm = document.querySelector('.apply-form');
   // get the elements you want to check
@@ -670,7 +832,7 @@
 
   }, false)
 
-</script>
+</script> -->
 
 <!-- <script>
   // Fetch the form we want to apply custom Bootstrap validation styles to
@@ -696,6 +858,60 @@
   }, false)
 
 </script> -->
+
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+
+  // Fetch the forms we want to apply custom Bootstrap validation styles to
+  const myForm = document.querySelector('.test-form');
+
+  // Loop over them and prevent submission
+  myForm.addEventListener('submit', function (event) {
+    if (!myForm.checkValidity()) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+
+    myForm.classList.add('was-validated')
+  }, false)
+
+</script>
+
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+
+  // Fetch the forms we want to apply custom Bootstrap validation styles to
+  const myForm1 = document.querySelector('.test-form1');
+
+  // Loop over them and prevent submission
+  myForm1.addEventListener('submit', function (event) {
+    if (!myForm1.checkValidity()) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+
+    myForm1.classList.add('was-validated')
+  }, false)
+
+</script>
+
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+
+  // Fetch the forms we want to apply custom Bootstrap validation styles to
+  const myForm2 = document.querySelector('.test-form2');
+
+  // Loop over them and prevent submission
+  myForm2.addEventListener('submit', function (event) {
+    if (!myForm2.checkValidity()) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+
+    myForm2.classList.add('was-validated')
+  }, false)
+
+</script>
 
 <!-- event listeners -->
 <script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous"></script>
