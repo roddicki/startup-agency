@@ -385,11 +385,72 @@ a:active {
 	border-bottom: solid #EDEBEE;
   }
 
+  .step-active{
+	border-radius: 100%;
+	border-color: #572F88;
+	background: #8F346C;
+	width:80px;
+	height:80px;
+  }
+
+  .step-inactive{
+	border-radius: 100%;
+	border-color: #572F88;
+	background: #EDEBEE;;
+	width:80px;
+	height:80px;
+	
+  }
+ 
+
+  .step-text-active{
+	/* position: absolute;
+	width: 20px;
+	height: 37px;
+	left: 31px;
+	top: 22px; */
+	margin-top:25px;
+	color: #ffffff;
+	font-weight: 700;
+	font-size: 35px;
+	text-align: center;
+  }
+  .step-inactive{
+	/* position: absolute;
+	width: 20px;
+	height: 37px;
+	left: 31px;
+	top: 22px; */
+	margin-top:25px;
+	color: #000;
+	font-weight: 700;
+	font-size: 35px;
+	text-align: center;
+  }
+
+  .step-lines-inactive{
+	position:relative;
+	width: 100%;
+	top: -50px;
+	z-index: -1;
+	left:50px;
+	border: 3px solid #EDEBEE
+  }
+
+  .step-lines-active{
+	position:relative;
+	width: 100%;
+	top: -50px;
+	z-index: -1;
+	left:50px;
+	border: 3px solid #8F346C;
+  }
+  
+
+
 
   @media (max-width: 767px){
-	.modal-content {
-		padding: 40px 35px;
-	}
+	.modal-content {padding: 40px 35px;}
     .carousel-inner 
     .carousel-item >div{display: none}
     .carousel-inner 
