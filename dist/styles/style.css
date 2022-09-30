@@ -105,7 +105,7 @@ a:active {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 80px 125px;
+	padding: 80px 80px;
 	gap: 45px;
 	isolation: isolate;
 	position: relative;
@@ -414,6 +414,7 @@ a:active {
 	font-weight: 700;
 	font-size: 35px;
 	text-align: center;
+	padding-top:13px;
   }
   .step-inactive{
 	/* position: absolute;
@@ -426,12 +427,13 @@ a:active {
 	font-weight: 700;
 	font-size: 35px;
 	text-align: center;
+	padding-top:13px;
   }
 
   .step-lines-inactive{
 	position:relative;
 	width: 100%;
-	top: -50px;
+	top: -55px;
 	z-index: -1;
 	left:50px;
 	border: 3px solid #EDEBEE
@@ -440,14 +442,25 @@ a:active {
   .step-lines-active{
 	position:relative;
 	width: 100%;
-	top: -50px;
+	top: -55px;
 	z-index: -1;
 	left:50px;
 	border: 3px solid #8F346C;
   }
+
+  .steps{
+	margin-left:7.5%;
+  }
+  .checkbox-pos{
+	margin-top:22px;
+  }
   
 
-
+  @media(max-width: 991px){
+	.steps{
+		margin-left:0%;
+	  }
+  }
 
   @media (max-width: 767px){
 	.modal-content {padding: 40px 35px;}
@@ -458,6 +471,7 @@ a:active {
     .carousel-inner .carousel-item.active, 
     .carousel-inner .carousel-item-next, 
     .carousel-inner .carousel-item-prev{display: flex}
+	
     
     @media (min-width: 768px){
       .carousel-inner 
@@ -474,7 +488,7 @@ a:active {
       .carousel-item-start{transform: translateX(0)}
       
 
-
+	
 
 /* ===================================== */
 /* ===NAV=== */
