@@ -475,7 +475,22 @@ a:active {
   .date-margin{
 	margin-top:10px;
   }
+
+  .portfolio-headder-img{
+	width:155px;
+	height:120px;
+	border-radius: 10px;
+  }
   
+  .project1{
+	display: block;
+  }
+
+  .project2{
+	display: none;
+  }
+
+
 
   @media(max-width: 991px){
 	.steps{

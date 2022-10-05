@@ -396,11 +396,11 @@
                 Please provide a valid zip.
               </div>
             </div>
-            <button class="btn btn-primary" type="submit">Submit form</button> 
+            <button class="btn btn-primary" id="modal-step1" id="button" type="button">Submit form</button> 
             <div class="col-12">
               <div class="set-content-right">
                 <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-target="#postmodal" data-bs-dismiss="modal" >Back</button>
-                <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal" data-bs-target="#step2" data-bs-dismiss="modal" >Next Step</button>
+                <button type="button" id="submit1" class="btn btn-primary btn-lg btn-block apply-btn">Next Step</button>
               </div>
             </div>
           </form>
@@ -544,12 +544,12 @@
       </div>
             
           <div class="col-12">
-              <button class="btn btn-primary" type="submit">Submit form</button>
+            <button class="btn btn-primary" type="button">form validation</button>
           </div>
           <div class="col-12">
             <div class="set-content-right gap">
               <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#step1" data-bs-dismiss="modal">Back</button>
-              <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#step3" data-bs-dismiss="modal" >Next Step</button>
+              <button type="button" id="submit1" class="btn btn-primary btn-lg btn-block"  >Next Step</button>
             </div>
           </div>
           </form>
@@ -743,15 +743,16 @@
 
   // Fetch the forms we want to apply custom Bootstrap validation styles to
   const myForm = document.querySelector('.test-form');
-
+  const Form = document.querySelector('.submit1');
   // Loop over them and prevent submission
-  myForm.addEventListener('submit', function (event) {
+  myForm.addEventListener('button1', function (event) {
     if (!myForm.checkValidity()) {
       event.preventDefault()
       event.stopPropagation()
     }
 
-    myForm.classList.add('was-validated')
+    myForm.classList.add('was-validated');
+    Form.classList.add('data-bs-toggle= "modal" data-bs-target="#step2" data-bs-dismiss="modal"');
   }, false)
 
 </script>
