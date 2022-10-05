@@ -462,15 +462,19 @@
             </div>
             <textarea class="form-control" id="validationCustom03" rows="1" required></textarea>
           </div>
-
-          <div class="col-md-12">
+          <div class="gap"
+          <div class="row">
+          <div class="col-md-6">
             <label for="validationCustom04" class="form-label">Application Deadline*</label>
-            <input type="text" class="form-control" id="validationCustom07" required>
+            <p></p>
+            <input class="date-input" type="date" id="start" name="trip-start"
+              value="now"
+               required>
             <div class="invalid-feedback">
                 Please add a application deadline
               </div>
           </div>
-
+        </div>
           <div class="col-md-6">
             <label for="validationCustom04" class="form-label">Job location*</label>
             <input type="text" class="form-control" id="validationCustom07" required>
@@ -495,7 +499,9 @@
               Completion date
             </label>
           </div>  
-          <input type="text" class="form-control" id="validationCustom07" required>
+          <input class="date-input date-margin" type="date" id="start" name="trip-start"
+              value="now"
+               required>
         </div>
 
         <div class="col-md-6 col-sm-12 gap">
@@ -505,12 +511,14 @@
               Duration period 
             </label>
         </div>
-        <input type="text" class="form-control" id="validationCustom07" rows="3" required>
+        <input class="date-input date-margin" type="date" id="start" name="trip-start"
+        value="now"
+         required>
       </div>
 
       <div class="col-md-12">
         <label for="validationCustom04" class="form-label">Job brief*</label>
-        <textarea class="form-control" id="validationCustom03" rows="1" required></textarea>
+        <textarea class="form-control" id="validationCustom03" rows="3" required></textarea>
 
         <div class="invalid-feedback">
             Please tell us about the job
@@ -540,7 +548,7 @@
           </div>
           <div class="col-12">
             <div class="set-content-right gap">
-              <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#step2">Cancel</button>
+              <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#step1" data-bs-dismiss="modal">Back</button>
               <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#step3" data-bs-dismiss="modal" >Next Step</button>
             </div>
           </div>
@@ -613,7 +621,7 @@
           </div>
           <div class="col-12">
             <div class="set-content-right gap">
-              <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#applymodal">Cancel</button>
+              <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#step2" data-bs-dismiss="modal">Back</button>
               <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#submit" data-bs-dismiss="modal" >Submit job</button>
             </div>
           </div>
