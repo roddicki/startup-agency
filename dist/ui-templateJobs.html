@@ -435,7 +435,8 @@
             <div class="col-12">
               <div class="set-content-right">
                 <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-target="#postmodal" data-bs-dismiss="modal" >Back</button>
-                <button type="button" id="submit1" class="btn btn-primary btn-lg btn-block apply-btn"data-bs-toggle= "modal"   data-bs-target="#step2" data-bs-dismiss="modal">Next Step</button>
+                <!-- <button type="button" id="submit1" class="btn btn-primary btn-lg btn-block apply-btn"data-bs-toggle= "modal"   data-bs-target="#step2" data-bs-dismiss="modal">Next Step</button> -->
+                <button type="button" id="submit1" class="btn btn-primary btn-lg btn-block apply-btn">Next Step</button>
               </div>
             </div>
           </form>
@@ -778,16 +779,26 @@
 
   // Fetch the forms we want to apply custom Bootstrap validation styles to
   const myForm = document.querySelector('.test-form');
-  const Form = document.querySelector('.submit1');
-  // Loop over them and prevent submission
-  myForm.addEventListener('button1', function (event) {
-    if (!myForm.checkValidity()) {
-      event.preventDefault()
-      event.stopPropagation()
-    }
 
+  const modal1 = document.querySelector('#submit1');
+  const forenameInput = document.querySelector('#validationCustom01');
+  const modalStep1 = new bootstrap.Modal(document.querySelector('#step1'));
+  const modalStep2 = new bootstrap.Modal(document.querySelector('#step2'));
+
+  // Loop over them and prevent submission
+  modal1.addEventListener('click', function (event) {
+    console.log("modal 1 submit clicked");
+    if (!myForm.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("modal 1 was-NOT-validated");
+    }
+    else {
+      console.log("modal 1 was-validated");
+      modalStep1.hide();
+      modalStep2.show();
+    }
     myForm.classList.add('was-validated');
-    Form.classList.add('data-bs-toggle= "modal" data-bs-target="#step2" data-bs-dismiss="modal"');
   }, false)
 
 </script>
@@ -796,7 +807,7 @@
   // Example starter JavaScript for disabling form submissions if there are invalid fields
 
   // Fetch the forms we want to apply custom Bootstrap validation styles to
-  const myForm1 = document.querySelector('.test-form1');
+ /* const myForm1 = document.querySelector('.test-form1');
 
   // Loop over them and prevent submission
   myForm1.addEventListener('submit', function (event) {
@@ -806,7 +817,7 @@
     }
 
     myForm1.classList.add('was-validated')
-  }, false)
+  }, false)*/
 
 </script>
 
@@ -814,7 +825,7 @@
   // Example starter JavaScript for disabling form submissions if there are invalid fields
 
   // Fetch the forms we want to apply custom Bootstrap validation styles to
-  const myForm2 = document.querySelector('.test-form2');
+ /* const myForm2 = document.querySelector('.test-form2');
 
   // Loop over them and prevent submission
   myForm2.addEventListener('submit', function (event) {
@@ -824,7 +835,7 @@
     }
 
     myForm2.classList.add('was-validated')
-  }, false)
+  }, false)*/
 
 </script>
 
