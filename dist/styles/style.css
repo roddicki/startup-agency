@@ -202,6 +202,14 @@ a:active {
 	color: #EDEBEE;
   }
 
+  .size-text{
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 12px;
+	color: #C0BCC5;
+
+  }
+
   .project-showcase-text{
 	float:left;
 	font-style: normal;
@@ -214,6 +222,21 @@ a:active {
 	margin-top: 10px;
 	
   }
+
+  .download-text{
+	font-style: normal;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 17px;
+	color: #244F8E;
+	line-height: 0px;
+	margin-top:10px;
+  }
+
+  .download-img{
+	margin-top: -10px;
+  }
+
 
   .jobboardheader{
 	margin-top:20px ;
@@ -449,6 +472,21 @@ a:active {
 	
   }
  
+  .download-portfolio{
+	padding: 16px;
+	gap: 56px;
+
+	width: 245px;
+	height: 63px;
+
+	/* White-100 */
+
+	background: #FFFFFF;
+	/* Gray-100 */
+
+	border: 1px solid #EDEBEE;
+	border-radius: 10px;
+  }
 
   .step-text-active{
 	/* position: absolute;
@@ -546,6 +584,14 @@ a:active {
 
   .project5{
 	display: none;
+  }
+
+  .propose-job{
+	display: none;
+  }
+
+  .general-messgae{
+	display: block;
   }
 
    .form-check-input-profile{
