@@ -244,6 +244,7 @@ a:active {
   .profile-img{
     width: 100%;
     padding-top: 25px;
+	margin-bottom: 10px;
   }
 
   .paginationnav{
@@ -592,6 +593,20 @@ a:active {
 
   .general-messgae{
 	display: block;
+  }
+
+  .message-portfolio-button{
+	background: #572F88;
+	border-radius: 30px;
+	width:100%;
+  }
+
+  .propose-portfolio-button{
+	background: #FAFAFA;
+	color: #7E7984;
+	border-radius: 30px;
+	width:100%;
+	float: right;
   }
 
    .form-check-input-profile{

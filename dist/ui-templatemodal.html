@@ -117,7 +117,7 @@
         <div class= "row content-blocks">
           
           <div class="col-sm-8 col-md-8 col-lg-8 project-showcase-text">
-            <p>PROJECT SHOWCASE</p>
+            <p>PROJECT SHOWCASE (0)</p>
           </div>
           <div class="col-sm-4 col-md-4 col-lg-4 d-grid">
             <!-- <button class="btn btn-primary btn-lg btn-block">Manage projects</button> -->
@@ -435,17 +435,17 @@
             </form>
            <!--Put button for job bfeif thingy on figma here -->
            <div class="gap"></div>
-           <p class="project-showcase-text">MESSAGE DETAILS</p> 
-           <div class="row" >
-            <form class="row g-3 needs-validation test-form2" novalidate>
-            <div class="col-6">
-              <button class="btn btn-primary" id="general-button">Send general message</button>
-            </div>
-            <div class="col-6">
-              <button class="btn btn-primary" id="propose-button">Propose Job breif</button>
-            </div>
+           <div class="row">
+            <p class="project-showcase-text">MESSAGE DETAILS</p> 
+              <form class="row g-3 needs-validation test-form2" novalidate>
+              <div class="col-lg-6 col-md-12 col-sm-12">
+                <button class="btn btn-primary message-portfolio-button" id="general-button">Send general message</button>
+              </div>
+              <div class="col-lg-6 col-md-12 col-sm-12">
+                <button class="btn btn-primary message-portfolio-button" id="propose-button">Propose Job breif</button>
+              </div>
            </div>
-
+           <div class="gap"></div>
            <!--This is for the genral message-->
             <div class="col-md-12" id="general-message">
               <label for="validationCustom04" class="form-label">General message*</label>
@@ -559,7 +559,7 @@
         <!--end of propose job brief-->    
 
 
-            <button class="btn btn-primary" type="submit">form validation</button>
+          
             <row>
               <div class="col-12">
                 <div class="set-content-right gap">
@@ -666,12 +666,20 @@ items.forEach((el) => {
     document.getElementById("general-button").onclick = function() {
       document.getElementById("propose-job").style.display = "none";
       document.getElementById("general-message").style.display = "block";
+      document.getElementById("propose-button").style.background = "#FAFAFA";
+      document.getElementById("general-button").style.background = "#572F88";
+      document.getElementById("general-button").style.color= "#fff";
+      document.getElementById("propose-button").style.color= "#7E7984";
       console.log("Genral Clicked");
     }
 
     document.getElementById("propose-button").onclick = function() {
       document.getElementById("propose-job").style.display = "block";
       document.getElementById("general-message").style.display = "none";
+      document.getElementById("propose-button").style.background = "#572F88";
+      document.getElementById("general-button").style.background = "#FAFAFA";
+      document.getElementById("general-button").style.color= "#7E7984";
+      document.getElementById("propose-button").style.color= "#fff";
       console.log("propose Clicked");
     }
 </script>
