@@ -581,7 +581,7 @@ a:active {
 	
     
     @media (min-width: 768px){
-      .carousel-inner 
+      /* .carousel-inner 
       .carousel-item-end.active, 
       .carousel-inner 
       .carousel-item-next{transform: translateX(25%)}
@@ -592,7 +592,7 @@ a:active {
       .carousel-inner 
       .carousel-item-end, 
       .carousel-inner 
-      .carousel-item-start{transform: translateX(0)}
+      .carousel-item-start{transform: translateX(0)} */
       
 
 	
@@ -664,7 +664,7 @@ footer {
 /* medium and up screens */
 @media (min-width: 768px) {
     
-    .carousel-inner .carousel-item-end.active,
+    /* .carousel-inner .carousel-item-end.active,
     .carousel-inner .carousel-item-next {
       transform: translateX(25%);
     }
@@ -677,7 +677,7 @@ footer {
 
 .carousel-inner .carousel-item-end,
 .carousel-inner .carousel-item-start { 
-  transform: translateX(0);
+  transform: translateX(0); */
 } 
 
 .carousel-indicators {
