@@ -609,6 +609,18 @@ a:active {
 	float: right;
   }
 
+  .port-block{
+	border: 1px solid #EDEBEE;
+	border-radius: 10px;
+	height: 447px;
+	padding: 20px;
+  }
+
+  .port-edit-img{
+	width: 100%;
+	border-radius: 10px;
+  }
+
    .form-check-input-profile{
 	
 	height:2em;
@@ -696,6 +708,12 @@ header .container-fluid {
 	margin-bottom: 15px;
 	padding: 16px;
 	border-color: #EDEBEE ;
+}
+
+.float-right{
+	float:right;
+	margin-right:15px;
+	margin-bottom: 15px;
 }
 
 /* ===================================== */
