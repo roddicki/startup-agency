@@ -41,7 +41,8 @@
           </div>
 
           <div class="col-lg-2 col-md-4 col-sm-12 d-grid ">
-            <a href="post-job.html" class="btn btn-primary btn-lg btn-block postjobbutton">Post Job</a>
+            <!-- <a href="post-job.html" class="btn btn-primary btn-lg btn-block postjobbutton">Post Job</a> -->
+            <button class="btn btn-primary btn-lg btn-block postjobbutton" data-bs-toggle= "modal" data-bs-target="#postmodal">Post Job</button>
           </div>
         </div>
         <!-- end row -->
@@ -69,12 +70,13 @@
   </div> <!-- container -->
 </section>
 
-<!-- <div class="container">  
-  <h2>Current Jobs </h2>
-  <div class="all-job-data"></div>
-  <br style="clear: both">
-</div> -->
 
+
+
+
+<span id="postjobmodal">
+  <!--Import post job modal-->
+</span>
 
 <span id="signinmodal">
   <!--Import sign in modal-->
@@ -94,4 +96,7 @@
 <script src="scripts/app.bundle.js"></script>
 <!-- event listeners -->
 <script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous"></script>
+<!-- form validation -->
+<script src="scripts/form-validation.js"></script>
+
 </body>

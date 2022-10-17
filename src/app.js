@@ -5,10 +5,10 @@ loadCheck();
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import { initializeApp } from 'firebase/app';
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL, connectStorageEmulator } from "firebase/storage";
 
 import { getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc, doc, query, where, orderBy, getDoc, serverTimestamp, updateDoc, setDoc,  Timestamp, arrayUnion} from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, signInWithPhoneNumber } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAq7-QGjZ8O1RVe_seOfdYjVLCjLdwrHYE",
@@ -67,34 +67,58 @@ async function getCurrentUserDetails(uid) {
 
 
 // create doc for job 
-function createJobDoc(tags) {
-  const jobDetailsForm = document.querySelector('.jobDetails');
-  let jobDeadline = new Date(jobDetailsForm.deadline.value);
-  let applicationDeadline = new Date(jobDetailsForm.applicationdeadline.value);
+function createJobDoc() {
+  const jobDetailsForm0 = document.querySelector('.post-job-form0');
+  console.log(jobDetailsForm0.firstname.value, jobDetailsForm0.lastname.value, jobDetailsForm0.email.value, jobDetailsForm0.phone.value);
+  const jobDetailsForm1 = document.querySelector('.post-job-form1');
+    console.log(jobDetailsForm1.title.value, jobDetailsForm1.company.value, jobDetailsForm1.budgetRadio.checked, jobDetailsForm1.budget.value, jobDetailsForm1.hourlyRadio.checked, jobDetailsForm1.rate.value, jobDetailsForm1.applicationDeadline.value, jobDetailsForm1.location.value, jobDetailsForm1.remoteRadio.checked, jobDetailsForm1.completionRadio.value,  jobDetailsForm1.completionDate.value, jobDetailsForm1.durationRadio.checked, jobDetailsForm1.duration.value, jobDetailsForm1.jobBrief.value);
+
+  let completionDate = new Date(jobDetailsForm1.completionDate.value);
+  let applicationDeadline = new Date(jobDetailsForm1.applicationDeadline.value);
+  let location = jobDetailsForm1.location.value;
+  if(jobDetailsForm1.remoteRadio.checked) {
+    location = "remote";
+  }
+  let tags = []; // send to db
+  const allTags = document.querySelectorAll(".filtertag.active");
+  for (var i = 0; i < allTags.length; i++) {
+    // save tags
+    tags.push(allTags[i].innerHTML);
+  }
+
   addDoc(collection(db, "jobs"), {
-    forename: jobDetailsForm.forename.value,
-    surname: jobDetailsForm.surname.value,
-    company: jobDetailsForm.company.value,
-    email: jobDetailsForm.email.value,
-    phone: jobDetailsForm.phone.value,
-    title: jobDetailsForm.title.value,
-    shortdescription: jobDetailsForm.shortdescription.value.replace(/\n\r?/g, '<br>'),
-    longdescription: jobDetailsForm.longdescription.value.replace(/\n\r?/g, '<br>'),
-    budget: jobDetailsForm.budget.value,
-    deadline: Timestamp.fromDate(jobDeadline),
+    forename: jobDetailsForm0.firstname.value.toLowerCase(),
+    surname: jobDetailsForm0.lastname.value.toLowerCase(),
+    company: jobDetailsForm1.company.value.toLowerCase(),
+    email: jobDetailsForm0.email.value,
+    phone: jobDetailsForm0.phone.value,
+    title: jobDetailsForm1.title.value,
+    usebudget: jobDetailsForm1.budgetRadio.checked,
+    budget: jobDetailsForm1.budget.value,
+    usehourly: jobDetailsForm1.hourlyRadio.checked,
+    hourlyrate: jobDetailsForm1.rate.value,
+    longdescription: jobDetailsForm1.jobBrief.value.replace(/\n\r?/g, '<br>'),
+    deadline: Timestamp.fromDate(completionDate),
+    duration:jobDetailsForm1.duration.value,
     applicationdeadline: Timestamp.fromDate(applicationDeadline),
-    tc: jobDetailsForm.tc.checked,
+    location: location,
+    tc: true,
     tags: tags,
     createdAt: serverTimestamp(),
     approved: false
   })
   .then(function(){
-    alert("Placeholder alert box. This will probably be a modal or overlay...tbc... Thank you "+ jobDetailsForm.forename.value +". Your job "+ jobDetailsForm.title.value +" has been successfully submitted");
     console.log("successfully created new job");
-    // go to add profile on completion
-    //window.location.href = "index.html";
+    const thankYou = document.querySelector("#thankYouModal");
+    thankYou.innerHTML = "Thank you for your submission!";
+    const spinner = document.querySelector(".submitting-spinner");
+    console.log(spinner);
+    spinner.style.display = "none";
+    const thankYouTick = document.querySelector(".thank-you-tick");
+    thankYouTick.style.display = "inline";
   });
 }
+
 
 
 // upload image - argument is an object - {upload url : blob url}
@@ -296,6 +320,8 @@ function displayAllJobs (itemsPerPage, page, jobCollection) {
       }
 
       // last row
+      let jobFooter = document.createElement("div");
+      jobFooter.className = "job-footer";
       let row = document.createElement("div");
       row.className = "row";
       let col1 = document.createElement("div");
@@ -306,14 +332,16 @@ function displayAllJobs (itemsPerPage, page, jobCollection) {
       let link = document.createElement("a");
       link.href="job-details.html?id=" + jobCollection[i].id;
       link.innerHTML = "View more details"
+      
       col1.appendChild(link);
       row.appendChild(col1);
       row.appendChild(col2);
+      jobFooter.appendChild(row);
 
 	  	cardBody.appendChild(title);
 	  	cardBody.appendChild(subtitle);
       cardBody.appendChild(jobDetails);
-      cardBody.appendChild(row);
+      cardBody.appendChild(jobFooter);
 	  	card.appendChild(cardBody);
 
       jobContainer.appendChild(card);
@@ -546,7 +574,9 @@ function showSignedOutUser() {
   li = document.createElement('li');
   a = document.createElement('a');
   a.className = 'btn btn-primary post-job';
-  a.href = 'post-job.html';
+  a.href = '#';
+  a.dataset.bsToggle = 'modal';
+  a.dataset.bsTarget = '#postmodal';
   a.innerHTML = 'Post job';
   li.className = 'nav-item';
   li.appendChild(a);
@@ -1061,9 +1091,11 @@ function enableSubmitJob() {
 import header from './header.html'
 import footer from './footer.html'
 import signinmodal from './signinmodal.html'
+import postjobmodal from './postjobmodal.html'
 document.getElementById("header").innerHTML = header;
 document.getElementById("footer").innerHTML = footer;
 document.getElementById("signinmodal").innerHTML = signinmodal;
+document.getElementById("postjobmodal").innerHTML = postjobmodal;
 
 // tag categories
 const tags = ["Animation", "Visual-Effects", "Graphic-Design", "Games-Design-and-Production", "Video", "Audio-Production", "Journalism", "Photography", "Theatre-Dance"];
@@ -1076,6 +1108,16 @@ const signedInName = document.querySelector('.welcome-name');
 
 
 //===========EVENT LISTENERS===================
+
+//===========NON PAGE SPECIFIC EVENT LISTENERS AND PROCESSES===================
+// submit job to db
+const submitJob = document.querySelector('.submit-job-details');
+submitJob.addEventListener('click', function (e) {
+  e.preventDefault();
+  console.log("submitting job");
+  //createJobDoc(getTags());
+  createJobDoc();
+});
 
 
 // LOGIN PAGE
@@ -1184,7 +1226,7 @@ if (page == "single-profile") {
 
 
 // POST JOB PAGE
-if (page == "post-job") {
+/* if (page == "post-job") {
   console.log("post-job page");
 
   // creat tag system
@@ -1211,14 +1253,7 @@ if (page == "post-job") {
   // allow submission after tc checked
   const tc = document.querySelector("#tc");
   tc.addEventListener('change', enableSubmitJob);
-
-  // submit job to db
-  const submitJob = document.querySelector('.submit-job-details');
-  submitJob.addEventListener('click', function (e) {
-    e.preventDefault();
-    createJobDoc(getTags());
-  });
-}
+} */
 
 
 // JOB BOARD PAGE
