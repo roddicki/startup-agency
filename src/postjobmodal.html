@@ -137,8 +137,14 @@
                   Set budget
                 </label>
               </div>
-              <textarea class="form-control" name="budget" id="validationCustom03" rows="1"></textarea>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">£</span>
+                </div>
+
+              <input type="text" class="form-control" name="budget" id="validationCustom03">
             </div>
+
             <div class="col-md-6 col-sm-12 gap">
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="hourlyRadio" id="flexRadioDefault1">
@@ -146,9 +152,16 @@
                   Hourly Rate
                 </label>
               </div>
-              <textarea class="form-control" name="rate" id="validationCustom03" rows="1"></textarea>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">£</span>
+                </div>
+             
+              <input type="text" class="form-control" name="rate" id="validationCustom03">
             </div>
-            <div class="gap"
+            </div>
+
+            <div class="gap"></div>
             <div class="row">
             <div class="col-md-6">
               <label for="validationCustom04" class="form-label">Application Deadline*</label>
@@ -166,6 +179,7 @@
                   Please tell us if we need a location
                 </div>
             </div>
+            
   
             <div class="col-md-6 col-sm-12 gap remotejob">
               <div class="form-check checkbox-pos">
@@ -203,7 +217,7 @@
           <label for="validationCustom04" class="form-label">Job brief*</label>
           <textarea class="form-control" id="validationCustom03" name="jobBrief" rows="7" required></textarea>
   
-          <div class="invalid-feedback">
+            <div class="invalid-feedback">
               Please tell us about the job
             </div>
         </div>
