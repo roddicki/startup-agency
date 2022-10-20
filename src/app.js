@@ -1180,9 +1180,14 @@ submitJob.addEventListener('click', function (e) {
 
 // send help email about posting a job
 const modalHelpButton = document.querySelector('#submit3');
+const helpSendModal = new bootstrap.Modal(document.querySelector('#help'));
+const thankYouModal = new bootstrap.Modal(document.querySelector('#help-thank-you'));
 modalHelpButton.addEventListener('click', function (e) {
   if(validateHelpForm(e)) {
-    // get form values
+    // hide / show modals
+    helpSendModal.hide(); 
+    thankYouModal.show();
+    // get form values and close and open modal
     let formValues = getHelpFormValues();
     // send email if help modal validated
     createSentEmailDoc(formValues.to, formValues.from, formValues.message).then(function(){
