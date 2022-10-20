@@ -7,8 +7,8 @@ loadCheck();
 import { initializeApp } from 'firebase/app';
 import { getStorage, ref, uploadBytes, getDownloadURL, connectStorageEmulator } from "firebase/storage";
 
-import { getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc, doc, query, where, orderBy, getDoc, serverTimestamp, updateDoc, setDoc,  Timestamp, arrayUnion} from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, signInWithPhoneNumber } from 'firebase/auth';
+import { getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc, doc, query, where, orderBy, getDoc, serverTimestamp, updateDoc, setDoc,  Timestamp, arrayUnion, connectFirestoreEmulator} from 'firebase/firestore';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, signInWithPhoneNumber, ActionCodeURL } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAq7-QGjZ8O1RVe_seOfdYjVLCjLdwrHYE",
@@ -65,13 +65,47 @@ async function getCurrentUserDetails(uid) {
   }
 }
 
+// SEND EMAIL FUNCTIONS
+// create doc to send email // this uses a a google cloud function to auto send a a mail onCreate() // see functions > index.js
+async function createSentEmailDoc(to, from, msg){
+  const modalHelp = new bootstrap.Modal(document.querySelector('#help'));
+  const modalThankYou = new bootstrap.Modal(document.querySelector('#help-thank-you'));
+  // add doc to collection
+  addDoc(collection(db, "sentmails"), {
+    to: to,
+    from: from,
+    message: msg
+  })
+}
 
+// get form values to send help email 
+function getHelpFormValues() {
+  const helpForm = document.querySelector('.post-job-form2');
+  let formValues = {};
+  formValues.message = "<b>Name:</b> " + helpForm.helpForename.value + " " + helpForm.helpSurname.value + " <br><b>Message:</b> " + helpForm.helpDesc.value;
+  formValues.from = helpForm.helpEmail.value;
+  formValues.to = "stiwdiofreelanceragency@gmail.com";
+  return formValues;
+}
+
+// change spinner and message on help-thank-you / confirmation modal
+function emailSentConfirmation() {
+  console.log("sent email");
+  const message = document.querySelector("#help-thank-you .modal-title");
+  message.innerHTML = "Your message has been sent";
+  const spinner = document.querySelector("#help-thank-you .sending-spinner");
+  spinner.style.display = "none";
+  const thankYouTick = document.querySelector("#help-thank-you  .sent-thank-you-tick");
+  thankYouTick.style.display = "inline";
+}
+
+// POST A JOB FUNCTIONS
 // create doc for job 
 function createJobDoc() {
   const jobDetailsForm0 = document.querySelector('.post-job-form0');
-  console.log(jobDetailsForm0.firstname.value, jobDetailsForm0.lastname.value, jobDetailsForm0.email.value, jobDetailsForm0.phone.value);
+  //console.log(jobDetailsForm0.firstname.value, jobDetailsForm0.lastname.value, jobDetailsForm0.email.value, jobDetailsForm0.phone.value);
   const jobDetailsForm1 = document.querySelector('.post-job-form1');
-    console.log(jobDetailsForm1.title.value, jobDetailsForm1.company.value, jobDetailsForm1.budgetRadio.checked, jobDetailsForm1.budget.value, jobDetailsForm1.hourlyRadio.checked, jobDetailsForm1.rate.value, jobDetailsForm1.applicationDeadline.value, jobDetailsForm1.location.value, jobDetailsForm1.remoteRadio.checked, jobDetailsForm1.completionRadio.value,  jobDetailsForm1.completionDate.value, jobDetailsForm1.durationRadio.checked, jobDetailsForm1.duration.value, jobDetailsForm1.jobBrief.value);
+  //console.log(jobDetailsForm1.title.value, jobDetailsForm1.company.value, jobDetailsForm1.budgetRadio.checked, jobDetailsForm1.budget.value, jobDetailsForm1.hourlyRadio.checked, jobDetailsForm1.rate.value, jobDetailsForm1.applicationDeadline.value, jobDetailsForm1.location.value, jobDetailsForm1.remoteRadio.checked, jobDetailsForm1.completionRadio.value,  jobDetailsForm1.completionDate.value, jobDetailsForm1.durationRadio.checked, jobDetailsForm1.duration.value, jobDetailsForm1.jobBrief.value);
 
   let completionDate = new Date(jobDetailsForm1.completionDate.value);
   let applicationDeadline = new Date(jobDetailsForm1.applicationDeadline.value);
@@ -201,6 +235,8 @@ function addToProfile(e, tags) {
 
 
 
+
+
 //===========================================
 //===========================================
 //===========DOM FUNCTIONS===================
@@ -222,6 +258,28 @@ function getParam() {
 }
 
 // ======SHOW JOB FUNCTIONS======
+// validate job help
+function validateHelpForm(event) {
+  const helpForm = document.querySelector('.post-job-form2');
+  const modalHelp = new bootstrap.Modal(document.querySelector('#help'));
+  let wasValidated = false;
+  console.log("modal help submit clicked");
+    if (!helpForm.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("modal help was-NOT-validated");
+    }
+    else {
+      console.log("modal help was-validated");
+      modalHelp.hide();
+      wasValidated = true;
+      // modalStep3.show();
+      //createSentEmailDoc("rod@roddickinson.net", "me@myemail.com", "Here is a message");
+    }
+    helpForm.classList.add('was-validated');
+    return wasValidated;
+}
+
 // show all jobs - jobs page
 function displayAllJobs (itemsPerPage, page, jobCollection) {
   let jobContainer = document.querySelector(".all-job-data");
@@ -1120,6 +1178,21 @@ submitJob.addEventListener('click', function (e) {
 });
 
 
+// send help email about posting a job
+const modalHelpButton = document.querySelector('#submit3');
+modalHelpButton.addEventListener('click', function (e) {
+  if(validateHelpForm(e)) {
+    // get form values
+    let formValues = getHelpFormValues();
+    // send email if help modal validated
+    createSentEmailDoc(formValues.to, formValues.from, formValues.message).then(function(){
+      // when sent change message and graphic
+      emailSentConfirmation();
+    });
+  }
+});  
+
+
 // LOGIN PAGE
 if (page == "login") {
   console.log("login page");
@@ -1223,37 +1296,6 @@ if (page == "single-profile") {
       } 
   })
 }
-
-
-// POST JOB PAGE
-/* if (page == "post-job") {
-  console.log("post-job page");
-
-  // creat tag system
-  createTagCheckboxes();
-
-  // show hide post a job form
-  const showJobDetails = document.querySelector('.show-job-details');
-  showJobDetails.addEventListener('click', showHide);
-  
-  const showYourDetails = document.querySelector('.show-your-details');
-  showYourDetails.addEventListener('click', showHide);
-  
-  const showSummary = document.querySelector('.show-summary');
-  showSummary.addEventListener('click', showHide);
-  // preview job listing
-  showSummary.addEventListener('click', function (e) {
-    previewJob(e, getTags(), getJobForm());
-  });
-
-  // go back
-  const backJobDetails = document.querySelector('.back-job-details');
-  backJobDetails.addEventListener('click', showHide);
-
-  // allow submission after tc checked
-  const tc = document.querySelector("#tc");
-  tc.addEventListener('change', enableSubmitJob);
-} */
 
 
 // JOB BOARD PAGE

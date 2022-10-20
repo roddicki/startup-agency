@@ -1,5 +1,13 @@
 {
   "projects": {
     "default": "studio-freelancer-agency"
+  },
+  "targets": {},
+  "etags": {
+    "studio-freelancer-agency": {
+      "extensionInstances": {
+        "firestore-send-email": "deb77176daf34b27030381f14cd346082ec9c9f3043b1f22c091e6e3e6f426f3"
+      }
+    }
   }
 }

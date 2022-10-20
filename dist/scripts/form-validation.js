@@ -52,9 +52,11 @@
     myForm1.classList.add('was-validated');
   }, false)
 
-//Help form
+  // Help form - 
+ // NOTE:validation now in app.js to work with send email functions
+//Help form - validation now in app.js to work with send email functions
   // Fetch the forms we want to apply custom Bootstrap validation styles to
-  const helpForm = document.querySelector('.post-job-form2');
+  /* const helpForm = document.querySelector('.post-job-form2');
 
   const modalHelpButton = document.querySelector('#submit3');
   const modalHelp = new bootstrap.Modal(document.querySelector('#help'));
@@ -71,10 +73,10 @@
       console.log("modal help was-validated");
       modalHelp.hide();
       // modalStep3.show();
+      //createSentEmailDoc("rod@roddickinson.net", "me@myemail.com", "Here is a message");
     }
     helpForm.classList.add('was-validated');
-  }, false)
-
+  }, false) */
 
 
   // show job preview on preview modal
