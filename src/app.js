@@ -30,6 +30,7 @@ const storage = getStorage();
 
 
 let currentUserData = {};
+let currentJobData = {};
 
 
 // on login state change
@@ -88,7 +89,7 @@ function getHelpFormValues() {
   return formValues;
 }
 
-// change spinner and message on help-thank-you / confirmation modal
+// confirm email sent - change spinner and message on help-thank-you / confirmation modal
 function emailSentConfirmation() {
   console.log("sent email");
   const message = document.querySelector("#help-thank-you .modal-title");
@@ -482,7 +483,6 @@ function createPagination(pageParam, itemsPerPage, jobs) {
 
 // display single job
 function displaySingleJob(jobData) {  
-  console.log(jobData);
   let jobTitle = document.querySelector(".jobboardheader");
   jobTitle.innerHTML = jobData.title;
 
@@ -551,6 +551,61 @@ function activateApplyBtn(action){
     applyBtn.setAttribute('disabled', '');
     warningText.innerHTML = "<p>Sign in before applying for this job. Only active stwidio members are allowed to apply for the jobs posted on the platform</p>";
   }
+}
+
+function validateApplyForJob(event){
+  const applyForm = document.querySelector('.apply-form');
+  const textfield1 = applyForm.querySelector('#apply-for-job-text1');
+  const textfield2 = applyForm.querySelector('#apply-for-job-text2');
+  let wasValidated = false;
+  // if textfield1 or textfield2 is not valid
+  if (!textfield1.validity.valid || !textfield2.validity.valid) {
+    event.preventDefault();
+    event.stopPropagation();
+  } 
+  else {
+    wasValidated = true;
+  }
+
+  applyForm.classList.add('was-validated');
+  return wasValidated;
+}
+
+// apply for job display user data in modal
+function applyForJobAddUserdata(userData) {
+  const forename = document.querySelector('#applymodal .forename');
+  forename.innerHTML = userData.forename;
+  const surname = document.querySelector('#applymodal .surname');
+  surname.innerHTML = userData.surname;
+  const email = document.querySelector('#applymodal .email');
+  email.innerHTML = userData.email;
+  const portfolio = document.querySelector('#applymodal .portfolio');
+  portfolio.innerHTML = userData.website;
+}
+
+console.log(window.location.href);
+// apply for job get form values
+function getApplyForJobValues(userData, jobData) {
+  const how = document.querySelector('#applymodal #apply-for-job-text1');
+  const why = document.querySelector('#applymodal #apply-for-job-text2');
+  let formValues = {};
+  formValues.message = "<h2>Application for job</h2><b>Job</b> " +window.location.href+ "<br><b>Job Title:</b> " +jobData.title+ "<h2>Applicant details</h2><b>Applicant Name:</b> " +userData.forename+ " " +userData.surname+ " <br><b>Applicant Email:</b> " +userData.email+ " <br><b>Applicant Portfolio:</b> " +userData.website+ " <br><h2>Applicant answers</h2><b>How will you approach and deliver this job?:</b><br>" + how.value+ " <br><b>Why are you right for this job?:</b><br>" + why.value;
+  formValues.from = userData.email;
+  formValues.to = "stiwdiofreelanceragency@gmail.com";
+  return formValues;
+}
+
+// confirm application sent - change spinner and message on help-thank-you / confirmation modal
+function applicationSentConfirmation() {
+  console.log("sent application");
+  const messageTitle = document.querySelector("#help-thank-you .modal-title");
+  messageTitle.innerHTML = "Thank you for your submission!";
+  const message = document.querySelector("#help-thank-you .modal-message");
+  message.innerHTML = "<p>If your application and stiwdio portfolio are what the client is looking for, we will contact you to set up next steps and connect you to the client.</p><p>If you’re not successful with this one - don’t worry! There will soon be another opportunity to apply for! Keep browsing the job board and check your emails regurarly as we will send matching job briefs to your inbox.</p>";
+  const spinner = document.querySelector("#help-thank-you .sending-spinner");
+  spinner.style.display = "none";
+  const thankYouTick = document.querySelector("#help-thank-you  .sent-thank-you-tick");
+  thankYouTick.style.display = "inline";
 }
 
 
@@ -1064,31 +1119,6 @@ function addTagBadge(){
 }
 
 
-// show hide / next - prev sections of the 'post a job' form to create multiple steps
-function showHide(evt) {
-	evt.preventDefault();
-	const yourDetails = document.querySelector('.your-details');
-  	const jobDetails = document.querySelector('.job-details');
-  	const jobSummary = document.querySelector('.job-summary');
-	
-	if (this.className.includes('show-job-details')) {
-		yourDetails.style.display = "none";
-		jobDetails.style.display = "initial";
-	} 
-	else if (this.className.includes('show-your-details')) {
-		yourDetails.style.display = "initial";
-		jobDetails.style.display = "none";
-	} 
-	else if (this.className.includes('back-job-details')) {
-		jobDetails.style.display = "initial";
-		jobSummary.style.display = "none";
-	}
-	else if (this.className.includes('show-summary')) {
-		jobDetails.style.display = "none";
-		jobSummary.style.display = "initial";
-	} 
-}
-
 // return checked tags
 function getTags(){
   let tags = [];
@@ -1103,7 +1133,7 @@ function getTags(){
 }
 
 // return job form elements
-function getJobForm() {
+/* function getJobForm() {
   const jobDetailsForm = document.querySelector('.jobDetails');
   let formValues = "";
   for (let i = 0; i < jobDetailsForm.length; i++) {
@@ -1117,20 +1147,17 @@ function getJobForm() {
   }
   return formValues;
 }
-
+ */
 // create preview of job details
-function previewJob(e, tags, formValues) {
+/* function previewJob(e, tags, formValues) {
   e.preventDefault();
-  /*const jobDetailsForm = document.querySelector('.jobDetails');
-  let jobDeadline = new Date(jobDetailsForm.deadline.value);
-  console.log(jobDeadline);*/
   document.querySelector(".preview").innerHTML = formValues + "tag: " + tags;
-}
+} */
 
 
 
 // enable / disable post job submit btn
-function enableSubmitJob() {
+/* function enableSubmitJob() {
   const tc = document.querySelector("#tc");
   console.log(tc.checked);
   if (tc.checked) {
@@ -1140,7 +1167,7 @@ function enableSubmitJob() {
   } else {
     submit.disabled = true;
   }
-}
+} */
 
 
 //==========================================
@@ -1348,11 +1375,40 @@ if (page == "job-details") {
       location.href = "jobs.html";
     }
   });
-  // get and show all jobs
-  console.log(getParam());
+  // get and show job
   getSingleJob(getParam(), function(jobData){
+    currentJobData = jobData;
     displaySingleJob(jobData);
   });
+
+  // apply for job
+  // populate user details on clicking appl button
+  const applyForJob = document.querySelector('.apply-btn');
+  applyForJob.addEventListener('click', function (event) {
+    // add user data from global currentUserData
+    applyForJobAddUserdata(currentUserData);
+  }, false)
+
+  // validate application and send message
+  const jobApplicationModal = new bootstrap.Modal(document.querySelector('#applymodal'));
+  const submittedModal = new bootstrap.Modal(document.querySelector('#help-thank-you'));
+  const submitApplication = document.querySelector('.apply-job-btn');
+  submitApplication.addEventListener('click', function (event) {
+    if(validateApplyForJob(event)){
+      // close / open modal
+      jobApplicationModal.hide();
+      submittedModal.show();
+      // get form values inc user data from global currentUserData
+      let formValues = getApplyForJobValues(currentUserData, currentJobData);
+      // send email if help modal validated
+      createSentEmailDoc(formValues.to, formValues.from, formValues.message).then(function(){
+        // when sent change message and graphic
+        applicationSentConfirmation();
+      });
+      console.log("success success");
+    }
+
+  }, false)
 }
 
 
