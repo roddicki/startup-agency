@@ -342,13 +342,12 @@
               <p>
                 After the application deadline, we will forward to you all freelancers who applied for the job so you can select the successful applicant(s). Then we will arrange the contact between you to discuss any other details.
               </p>
-        </div>
-        </div>
+            </div>
+          </div>
           <div class="row">
             <div class="col-12">
               <div class="set-content-right">
                 <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#submit">Close</button>
-               
               </div>
             </div>
           </div>
@@ -357,7 +356,8 @@
       </div>
     </div>
   </div>
-  <!--Help Modal-->
+
+  <!--Help email Modal-->
   <div class="modal fade" id="help" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content modalcontentleft">
@@ -371,21 +371,21 @@
             <form class="row g-3 needs-validation post-job-form2" novalidate>
               <div class="col-md-6 col-sm-12">
                 <label for="validationCustom09" class="form-label">First name*</label>
-                <input type="text" class="form-control" id="validationCustom01" required>
+                <input type="text" class="form-control" name="helpForename" id="validationCustom01" required>
                 <div class="invalid-feedback">
                     Please add your forename.
                   </div>
               </div>
               <div class="col-md-6 col-sm-12">
                 <label for="validationCustom10" class="form-label">Last name*</label>
-                <input type="text" class="form-control" id="validationCustom02" required>
+                <input type="text" class="form-control" name="helpSurname" id="validationCustom02" required>
                 <div class="invalid-feedback">
                     Please add your surname.
                   </div>
               </div>
               <div class="col-md-6 col-sm-12">
                 <label for="validationCustom11" class="form-label">Email*</label>
-                <input type="text" class="form-control" id="validationCustom03" required>
+                <input type="text" class="form-control" name="helpEmail" id="validationCustom03" required>
                 <div class="invalid-feedback">
                   Please provide a valid Email.
                 </div>
@@ -393,7 +393,7 @@
               
               <div class="col-md-12">
                 <label for="validationCustom12" class="form-label">Job details*</label>
-                <textarea type="text" class="form-control" id="validationCustom07" rows="3" required></textarea>
+                <textarea type="text" class="form-control" name="helpDesc" id="validationCustom07" rows="3" required></textarea>
                 <div class="invalid-feedback">
                     Please tell us about the job
                   </div>
@@ -402,8 +402,8 @@
                 <div class="col-12">
                   <div class="set-content-right gap">
                     <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-target="#postmodal" data-bs-dismiss="modal" >Back</button>
-                    <!-- <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-dismiss="modal" >Submit</button> -->
-                    <button type="button" id="submit3" class="btn btn-primary btn-lg btn-block apply-btn">Submit</button>
+                    <!-- <button type="button" id="submit3" class="btn btn-primary btn-lg btn-block send-help-email" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#help-thank-you">Send</button> -->
+                    <button type="button" id="submit3" class="btn btn-primary btn-lg btn-block send-help-email" >Send</button>
                  </div>
                 </div>
               </row>
@@ -413,5 +413,33 @@
       </div>
     </div>
   </div>
+
+  <!-- help sent message thankyou -->
+  <div class="modal fade" id="help-thank-you" tabindex="-1" aria-labelledby="thankYouModal" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+          <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+          <i class="fa-solid fa-spinner fa-spin fa-9x sending-spinner"></i>
+          <img src="/dist/assets/img/Tickcircle.svg" height="150" class="sent-thank-you-tick" style="display:none">
+          <div class="row">
+            <div class="col-12">
+              <h2 class="modal-title signinheader modalheaddrmid">Sending..</h2>
+              <p class="modal-message"></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="set-content-right">
+                <button type="button" class="btn btn-secondary btn-lg btn-block" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- end post job modals -->
+
+ 
   

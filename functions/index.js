@@ -1,0 +1,49 @@
+const functions = require("firebase-functions");
+
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
+// exports.helloWorld = functions.https.onRequest((request, response) => {
+//   functions.logger.info("Hello logs!", {structuredData: true});
+//   response.send("Hello from Firebase!");
+// });
+
+const admin = require('firebase-admin');
+const nodemailer = require('nodemailer');
+//Initializing Firebase Admin SDK
+admin.initializeApp();
+
+//Creating Nodemailer transporter using your Mailtrap SMTP details
+let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+  port: 465,
+  auth: {
+    user: "stiwdiofreelanceragency@gmail.com",
+    pass: "ssyofozjgmflvubm"
+  }
+});
+
+exports.sendEmail = functions.firestore
+    .document('sentmails/{sentmailId}')
+    .onCreate((snap, context) => {
+        const mailOptions = {
+            from: 'stiwdiofreelanceragency@gmail.com',
+            to: snap.data().to,
+            subject: 'Startup Agency contact form message',
+            html: `<h1>Email from Startup Agency contact form</h1>
+                      <p>
+                          <b>Email: </b>${snap.data().from}
+                          <br>${snap.data().message}
+                      </p>`
+        };
+        //Returning result
+        return transporter.sendMail(mailOptions, (error, data) => {
+            if (error) {
+                console.log(error)
+                return
+            }
+            console.log("email sent!")
+        });
+    });
+
+
