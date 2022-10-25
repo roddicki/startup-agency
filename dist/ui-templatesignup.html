@@ -21,28 +21,33 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <button type="button" class="btn-primary" data-bs-toggle= "modal" data-bs-target="#signupmodal">Sign up</button>
+        <button type="button" class="btn-primary" data-bs-toggle= "modal" data-bs-target="#register-form1">Sign up</button>
       </div>
     </div>
   </div>
 </section>
 
 <!--Reg Welcome Modal-->
-<div class="modal fade" id="signupmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+<div class="modal fade" id="register-form1" tabindex="-1" aria-labelledby="RegModal1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title signinheader" id="exampleModalLabel">Welcome!</h2>
+        <h2 class="modal-title signinheader" id="RegModal1">Welcome!</h2>
         <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form class="needs-validation" novalidate">
-        <p>First, we need some details...</p>
+        <form class="reg-form1  needs-validation" novalidate">
+        <p class="post-black"><strong>First, we need some details...</strong></p>
         <p>First name*</p>
-        <input type="text" id="validationCustom01" class="form-control signincontent" name="firstname" aria-label="firstname" >
-        <p>Last Name</p>
-        <input type="text" id="validationCustom02" class="form-control signincontent" name="lastname" aria-label="lastname">
-
+        <input type="text" id="validationCustom01" class="form-control signincontent" name="firstname" aria-label="firstname" required>
+        <div class="invalid-feedback">
+          Please add your forename.
+        </div>
+        <p>Last name</p>
+        <input type="text" id="validationCustom02" class="form-control signincontent" name="lastname" aria-label="lastname" required>
+        <div class="invalid-feedback">
+          Please add your surname.
+        </div>
         <p>Course*</p>
         <select class="form-select select-spacing" id="validationCustom03" name="course" aria-label="Default select example" required>
           <option selected>Select</option>
@@ -51,8 +56,8 @@
           <option value="Fashion">Fashion/option>
         </select>
 
-        <p>Graduation Year</p>
-        <select class="form-select select-spacing"  id="validationCustom04" name="graduation" aria-label="Default select example">
+        <p>Graduation Year*</p>
+        <select class="form-select select-spacing"  id="validationCustom04" name="graduation" aria-label="Default select example" required>
           <option selected>Select</option>
           <option value="2022">2022</option>
           <option value="2021">2021</option>
@@ -66,9 +71,15 @@
           <option value="2013">2013</option>
           <option value="2012">2012</option>
         </select>
-        
 
-        <button class="btn btn-inactive " type="submit" data-bs-toggle= "modal" data-bs-target="#almosttheremodal" data-bs-dismiss="modal"> Next </button>
+        <p>Student ID*</p>
+        <input type="number" id="validationCustom05" class="form-control signincontent" name="student-id" aria-label="student-id" required>
+        <div class="invalid-feedback">
+          Please add your student id.
+        </div>
+        <div class="col-12">
+        <button type="button" class="btn  btn-primary w-100" id="submit-reg"> Next </button>
+      </div>
         <div class="gap"></div>
       </form>
         <p class="center-text">Already got an account? <a href="">Sign in</a></p>
@@ -80,22 +91,30 @@
 <!--Reg Welcome modal end-->
 
 <!--Reg second Modal-->
-<div class="modal fade" id="almosttheremodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+<div class="modal fade" id="register-form2" tabindex="-1" aria-labelledby="RegModal2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title signinheader" id="exampleModalLabel">Almost there...</h2>
+        <h2 class="modal-title signinheader" id="RegModal2">Almost there...</h2>
         <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <p>Please add your email and a password to create your account.</p>
-        <p>Email*</p>
-        <input type="text" class="form-control signincontent" aria-label="Username">
-        <p>Password</p>
-        <input type="text" class="form-control signincontent" aria-label="Password">
-        <p class="timetext modalheaddrapply">Your password must be at least 8 characters and include a mixture of both uppercase, lowercase letters and numbers</p>
-        <div class="gap"></div>
-        <button class="btn btn-inactive" type="button"> Create your account</button>
+      <form class="reg-form2  needs-validation" novalidate">
+        <div class="modal-body">
+          <p>Please add your email and a password to create your account.</p>
+          <p>Email*</p>
+          <input type="text" class="form-control signincontent" aria-label="Username" required>
+          <div class="invalid-feedback">
+            Please add your email
+          </div>
+          <p>Password*</p>
+          <input type="password" class="form-control signincontent" aria-label="Password" required>
+          <div class="invalid-feedback">
+            Please add a password
+          </div>
+          <p class="text-muted post-grey">Your password must be at least 8 characters and include a mixture of both uppercase, lowercase letters and numbers</p>
+          <div class="gap"></div>
+          <button class="btn btn-primary w-100" type="button" id="submit-reg2"> Create your account</button>
+        </form>
         <div class="gap"></div>
         <div class="row">
           <div class="col-5 line"></div>
@@ -137,8 +156,18 @@
   <!-- imports footer from src/footer.html -->
 </footer>
 
+
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!-- custom JS -->
+<script src="scripts/app.bundle.js"></script>
+<!-- event listeners -->
+
+
 <!--jamie Script-->
-<script>
+<!-- <script>
 (function () {
   'use strict'
 
@@ -158,14 +187,69 @@
       }, false)
     })
 })()
+</script> -->
+
+
+<script>
+
+  //step 1 validaiton
+
+  // Fetch the forms we want to apply custom Bootstrap validation styles to
+  const regForm1 = document.querySelector('.reg-form1');
+
+  const modalreg = document.querySelector('#submit-reg');
+
+
+  const regButton1 = new bootstrap.Modal(document.querySelector('#register-form1'));
+  const regButton2 = new bootstrap.Modal(document.querySelector('#register-form2'));
+
+  // Loop over them and prevent submission
+  modalreg.addEventListener('click', function (event) {
+    console.log("modal 1 submit clicked");
+    if (!regForm1.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("modal 1 was-NOT-validated");
+    }
+    else {
+      console.log("modal 1 was-validated");
+      regButton1.hide();
+      regButton2.show();
+    }
+    regForm1.classList.add('was-validated');
+  }, false)
+
+
+
+  //step 1 validaiton
+
+  // Fetch the forms we want to apply custom Bootstrap validation styles to
+  const regForm2 = document.querySelector('.reg-form2');
+
+  const modalreg2 = document.querySelector('#submit-reg2');
+  
+  // const regButton1 = new bootstrap.Modal(document.querySelector('#register-form1'));
+  // const regButton2 = new bootstrap.Modal(document.querySelector('#register-form2'));
+
+  // Loop over them and prevent submission
+  modalreg2.addEventListener('click', function (event) {
+    console.log("modal 2 submit clicked");
+    if (!regForm2.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("modal 12was-NOT-validated");
+    }
+    else {
+      console.log("modal 2 was-validated");
+      // regButton1.hide();
+      // regButton2.show();
+    }
+    regForm2.classList.add('was-validated');
+  }, false)
+
+
 </script>
   
 
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<!-- custom JS -->
-<script src="scripts/app.bundle.js"></script>
-<!-- event listeners -->
 
 </body>

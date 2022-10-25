@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="styles/style.css" rel="stylesheet">
-
   <title>Startup Agency</title>
 </head>
 
 <body data-page="" class="d-flex flex-column min-vh-100">
 
 <header id="header">
+  
   <!-- imports header + nav from src/header.html -->
 </header>
 
@@ -35,7 +35,8 @@
           <!--this is for edit function-->
           <div class="form-check form-switch">
             <input class="form-check-input form-check-input-profile" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label form-check-label-profile" for="flexSwitchCheckDefault">Available for work</label>
+            <label class="form-check-label form-check-label-profile" for="flexSwitchCheckDefault">Available for work</label> 
+           <i class="bi bi-pencil-square float-right " data-bs-toggle= "modal" data-bs-target="#edit-details"></i></button>
           </div> 
           <!-- <div class="available-tag">Available for work</div> -->
           <div class="text-center">
@@ -52,13 +53,14 @@
               <p class="underline">www.ReduxGameStudios.com</p>
             </div>
             <div class="col-12 gap"><img src="./assets/img/mapicon.svg"  width="16" height="16">  Cardiff, Wales</div>
-            <div class="d-grid gap">
+            <!-- <div class="d-grid gap">
               <button class="btn btn-primary btn-lg btn-block" data-bs-toggle= "modal" data-bs-target="#contact">Messgae / Propose job</button>
-            </div>
+            </div> -->
           </div>
             <div class="gap">
             <div class="line gap"></div>
             <div class="col-12 gap project-showcase-text">
+              <div class="gap"></div>
               <p>bio</p>
             </div>
           </div>
@@ -98,7 +100,7 @@
         </div>
         <div class="content-blocks">
           <div class="col-12 project-showcase-text">
-            <p>SOCIALS</p>
+            <p>SOCIALS  <i class="bi bi-pencil-square float-right " data-bs-toggle= "modal" data-bs-target="#social-modal"></i></button></p> 
           </div>
           
           <div class="row">
@@ -128,7 +130,8 @@
             <p>PROJECT SHOWCASE (0)</p>
           </div>
           <div class="col-sm-4 col-md-4 col-lg-4 d-grid">
-            <button class="btn btn-primary btn-lg btn-block" data-bs-toggle= "modal" data-bs-target="#addProject">Add projects</button>
+            <!-- <button class="btn btn-primary btn-lg btn-block" >Add projects</button> -->
+            <i class="bi bi-plus-square float-right" data-bs-toggle= "modal" data-bs-target="#addProject" width="24px" height="24px"></i>
           </div>
          
         <div class="container">
@@ -232,12 +235,12 @@
   </div>
 
       
-
+  <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#Initial-sign-up" data-bs-dismiss="modal">Cancel</button>
   </div>
-  </div>
+</div>
 </section>
 <!--MessageModal-->
-<div class="modal fade" id="contact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="contact" tabindex="-1" aria-labelledby="details" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modalcontentleft">
       
@@ -432,7 +435,7 @@
           
           <form class="row g-3 needs-validation test-form2" novalidate>
             <p class="project-showcase-text">PERSONAL DETAILS</p> 
-            <div class="col-md-6 col-sm-12">
+            <div class=" col-lg-6 col-md-12 col-sm-12">
               <label for="validationCustom01" class="form-label">First name*</label>
               <input type="text" class="form-control" id="validationCustom01" required>
               <div class="invalid-feedback">
@@ -451,10 +454,15 @@
             <div class="gap"></div>
             <p class="project-showcase-text">PHOTO GALLERY</p> 
             <div class="col-sm-12">
-              <div class="form-group port-block">
-                <label for="exampleFormControlFile1">Example file input</label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1">
-              </div>
+              <form class="add-profile">
+              
+                <div class="existing-images"></div>
+                <div class="input-field form-group">
+                    <label class="active">Add images of your work</label>
+                    <div class="input-images-1" id="image-uploader" style="padding-top: .5rem;"></div>
+                </div>
+                
+                </form>
             </div>
 
             <div class="gap"></div>
@@ -500,6 +508,199 @@
 </div>
 
 
+<!--Edit Details modal-->
+<div class="modal fade" id="edit-details" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content modalcontentleft">
+      
+        <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Personal Details</h2>
+        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+            <!--add image here-->
+          </div>
+
+          <!-- Need to add image for profile -->
+
+          <input type="file" id="image-input" accept="image/jpeg, image/png, image/jpg">
+          <div id="display-image"></div>
+          
+          <form class="row g-3 needs-validation changeDetails" novalidate>
+            <div class="col-lg-6 col-md-12">
+              <label for="validationCustom06" class="form-label">FirstName*</label>
+              <input type="text" class="form-control" id="validationCustom06" required>
+              <div class="invalid-feedback">
+                  Please add a your first name
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label for="validationCustom04" class="form-label">Last name*</label>
+              <input type="text" class="form-control" id="validationCustom07" required>
+              <div class="invalid-feedback">
+                  Please add your last name
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 gap">
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Example select</label>
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>she/her</option>
+                  <option>he/him</option>
+                  <option>they/them</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label for="validationCustom04" class="form-label">Business name</label>
+              <input type="text" class="form-control" id="validationCustom07" required>
+              <div class="invalid-feedback">
+                  Please add your last name
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label for="validationCustom04" class="form-label">Title</label>
+              <input type="text" class="form-control" id="validationCustom07" required>
+              <div class="invalid-feedback">
+                  Please add your last name
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label for="validationCustom04" class="form-label">Location</label>
+              <input type="text" class="form-control" id="validationCustom07" required>
+              <div class="invalid-feedback">
+                  Please add your last name
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label for="validationCustom04" class="form-label">Website</label>
+              <input type="text" class="form-control" id="validationCustom07" required>
+              <div class="invalid-feedback">
+                  Please add your last name
+                </div>
+            </div>
+
+                  
+            <div class="col-md-12">
+              <label for="validationCustom04" class="form-label">Bio</label>
+              <textarea class="form-control" id="validationCustom03" rows="3" required></textarea>
+              
+              <div class="invalid-feedback">
+                  Please tell us about the job
+                </div>
+              </div>
+              <small id="passwordHelpBlock" class="form-text text-muted">
+                Max 500 charachters
+              </small>
+      
+          <div class="gap"
+            
+          <div class="col-12">
+            <div class="set-content-right gap">
+              <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#step1" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" id="submit6" class="btn btn-primary btn-lg btn-block">Save changes</button>
+            </div>
+          </div>
+          </form>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!--Social modal-->
+<div class="modal fade" id="social-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content modalcontentleft">
+      
+        <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Socials</h2>
+        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 gap">
+            <p>Platform</p>
+          </div>
+          <div class="col-md-6 col-sm-12 gap">
+            <p>Username</p>
+          </div>
+          <form class="row g-3 needs-validation changeDetails" novalidate>
+            <div class="col-md-6 col-sm-12 gap">
+              <div class="form-group">
+                <select class="form-control" id="exampleFormControlSelect1">
+                    <option>Instagram</option>
+                  <option>Dribble</option>
+                  <option>Twitter</option>
+                  <option>Facebook</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <input type="text" class="form-control" id="validationCustom07" required>
+              <div class="invalid-feedback">
+                  Please add your last name
+                </div>
+            </div>
+
+          <div class="gap"></div>
+            
+          <div class="col-12">
+            <div class="set-content-right gap">
+              <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#step1" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" id="submit6" class="btn btn-primary btn-lg btn-block">Save changes</button>
+            </div>
+          </div>
+          </form>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal for first load-->
+<div class="modal fade" id="Initial-sign-up" tabindex="-1" aria-labelledby="Inital-Sign-Up" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+        <img src="/dist/assets/img/Tickcircle.svg" height="150">
+        <div class="row">
+          <div class="col-12">
+        <h2 class="modal-title signinheader modalheaddrmid" id="exampleModalLabel">Hooray! You’re in!</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <p>
+              Thank you for joining stwidio agency!
+            </p>
+            <p>
+              Please check your inbox to verify your email - it is essencial we have your right contact information, so we can pass any potential jobs to you! 
+            </p>
+            <p>
+              Your account is now created, but reminds hidden until we approve it. In the meantime you should set up your profile portfolio.
+            </p>
+      </div>
+      </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="set-content-right">
+              <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#Initial-sign-up">Close</button>
+              <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#edit-details" data-bs-dismiss="modal">Setup Profile</button>
+              <!-- <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#submitted" data-bs-dismiss="modal" >Return to job board</button> -->
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
 
 <span id="signinmodal">
   <!--Import sign in modal-->
@@ -518,6 +719,18 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <!-- add custom scripts -->
+<script type="text/javascript" src="image-uploader/image-uploader.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('.input-images-1').imageUploader({
+      extensions: ['.jpg', '.jpeg', '.png', '.gif'],
+      mimes: ['image/jpeg', 'image/png', 'image/gif'],
+      maxSize: undefined,
+      maxFiles: undefined,
+      label:' Drag & Drop files here or click to browse',
+    });
+  });
+</script>
 <script>
   // jamie add page specific JS here
   let items = document.querySelectorAll('.carousel .carousel-item')
@@ -537,6 +750,35 @@ items.forEach((el) => {
 })
 
 </script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<!-- 
+<script>
+  const myForm = document.querySelector('.changedetails');
+
+  const modal1 = document.querySelector('#submit6');
+  // const forenameInput = document.querySelector('#validationCustom01');
+  const modalStep1 = new bootstrap.Modal(document.querySelector('#step1'));
+  const modalStep2 = new bootstrap.Modal(document.querySelector('#step2'));
+
+  // Loop over them and prevent submission
+  modal1.addEventListener('click', function (event) {
+    console.log("modal 1 submit clicked");
+    if (!myForm.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("modal 1 was-NOT-validated");
+    }
+    else {
+      console.log("modal 1 was-validated");
+      modalStep1.hide();
+      modalStep2.show();
+    }
+    myForm.classList.add('was-validated');
+  }, false)
+
+</script> -->
+
 
 <script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous"></script>
 
@@ -646,6 +888,20 @@ items.forEach((el) => {
   //     document.getElementById("project-img5").style.border = "2px solid #244F8E";
   //  }
 </script>
+
+<script>
+  const image_input = document.querySelector("#image-input");
+  image_input.addEventListener("change", function() {
+  const reader = new FileReader();
+  reader.addEventListener("load", () => {
+    const uploaded_image = reader.result;
+    document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`;
+  });
+  reader.readAsDataURL(this.files[0]);
+});
+</script>
+
+
 
 <!-- custom JS -->
 <script src="scripts/app.bundle.js"></script>
