@@ -235,12 +235,12 @@
   </div>
 
       
-
+  <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#Initial-sign-up" data-bs-dismiss="modal">Cancel</button>
   </div>
-  </div>
+</div>
 </section>
 <!--MessageModal-->
-<div class="modal fade" id="contact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="contact" tabindex="-1" aria-labelledby="details" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modalcontentleft">
       
@@ -519,6 +519,11 @@
           <div class="col-md-12 col-sm-12">
             <!--add image here-->
           </div>
+
+          <!-- Need to add image for profile -->
+
+          <input type="file" id="image-input" accept="image/jpeg, image/png, image/jpg">
+          <div id="display-image"></div>
           
           <form class="row g-3 needs-validation changeDetails" novalidate>
             <div class="col-lg-6 col-md-12">
@@ -581,7 +586,7 @@
 
                   
             <div class="col-md-12">
-              <label for="validationCustom04" class="form-label">Bio*</label>
+              <label for="validationCustom04" class="form-label">Bio</label>
               <textarea class="form-control" id="validationCustom03" rows="3" required></textarea>
               
               <div class="invalid-feedback">
@@ -624,7 +629,7 @@
             <div class="col-md-6 col-sm-12 gap">
               <div class="form-group">
                 <select class="form-control" id="exampleFormControlSelect1">
-                  <option><i class="bi bi-instagram">Instagram</i></option>
+                    <option>Instagram</option>
                   <option>Dribble</option>
                   <option>Twitter</option>
                   <option>Facebook</option>
@@ -649,6 +654,45 @@
           </div>
           </form>
         </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal for first load-->
+<div class="modal fade" id="Initial-sign-up" tabindex="-1" aria-labelledby="Inital-Sign-Up" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+        <img src="/dist/assets/img/Tickcircle.svg" height="150">
+        <div class="row">
+          <div class="col-12">
+        <h2 class="modal-title signinheader modalheaddrmid" id="exampleModalLabel">Hooray! You’re in!</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <p>
+              Thank you for joining stwidio agency!
+            </p>
+            <p>
+              Please check your inbox to verify your email - it is essencial we have your right contact information, so we can pass any potential jobs to you! 
+            </p>
+            <p>
+              Your account is now created, but reminds hidden until we approve it. In the meantime you should set up your profile portfolio.
+            </p>
+      </div>
+      </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="set-content-right">
+              <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#Initial-sign-up">Close</button>
+              <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#edit-details" data-bs-dismiss="modal">Setup Profile</button>
+              <!-- <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#submitted" data-bs-dismiss="modal" >Return to job board</button> -->
+            </div>
+          </div>
+        </div>
+        
+      </div>
     </div>
   </div>
 </div>
@@ -844,6 +888,20 @@ items.forEach((el) => {
   //     document.getElementById("project-img5").style.border = "2px solid #244F8E";
   //  }
 </script>
+
+<script>
+  const image_input = document.querySelector("#image-input");
+  image_input.addEventListener("change", function() {
+  const reader = new FileReader();
+  reader.addEventListener("load", () => {
+    const uploaded_image = reader.result;
+    document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`;
+  });
+  reader.readAsDataURL(this.files[0]);
+});
+</script>
+
+
 
 <!-- custom JS -->
 <script src="scripts/app.bundle.js"></script>
