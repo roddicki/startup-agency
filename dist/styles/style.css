@@ -888,7 +888,7 @@ input[type=file]::file-selector-button {
 	text-align: center;
   }
 
-.nav-item{
+.nav-item-categroies{
 	color: #7E7984;
 	background: #FFFFFF;
 	/* Gray-100 */
@@ -903,7 +903,7 @@ input[type=file]::file-selector-button {
 	//border:  #EDEBEE 2px solid;
 }
 
-.nav-link{
+.nav-link-categroies{
 	color: #7E7984;
 	background: #FFFFFF;
 	/* Gray-100 */
@@ -915,7 +915,7 @@ input[type=file]::file-selector-button {
 	width: 200px;
 }
 
-.nav-link :active{
+.nav-link-categroies :active{
 	color: #000;
 }
 

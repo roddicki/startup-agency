@@ -108,10 +108,18 @@
           </div>
           <p>Password*</p>
           <input type="password" class="form-control signincontent" aria-label="Password" required>
+          <button id="toggle-password" type="button" class="d-none"
+          aria-label="Show password as plain text. Warning: this will display your password on the screen.">
           <div class="invalid-feedback">
             Please add a password
           </div>
           <p class="text-muted post-grey">Your password must be at least 8 characters and include a mixture of both uppercase, lowercase letters and numbers</p>
+          <div class="gap"></div>
+          <p>Confirm password*</p>
+          <input type="password" class="form-control signincontent" aria-label="Password" required>
+          <div class="invalid-feedback">
+            Please add a password
+          </div>
           <div class="gap"></div>
           <button class="btn btn-primary w-100" type="button" id="submit-reg2"> Create your account</button>
         </form>
