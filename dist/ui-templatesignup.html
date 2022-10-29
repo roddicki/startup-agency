@@ -102,23 +102,22 @@
         <div class="modal-body">
           <p>Please add your email and a password to create your account.</p>
           <p>Email*</p>
-          <input type="text" class="form-control signincontent" aria-label="Username" required>
+          <input type="text" id="email" class="form-control signincontent" aria-label="Username" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
           <div class="invalid-feedback">
             Please add your email
           </div>
           <p>Password*</p>
-          <input type="password" class="form-control signincontent" aria-label="Password" required>
-          <button id="toggle-password" type="button" class="d-none"
-          aria-label="Show password as plain text. Warning: this will display your password on the screen.">
+          <input type="password" id="password" class="form-control signincontent" aria-label="Password" required>
+        
           <div class="invalid-feedback">
             Please add a password
           </div>
           <p class="text-muted post-grey">Your password must be at least 8 characters and include a mixture of both uppercase, lowercase letters and numbers</p>
           <div class="gap"></div>
           <p>Confirm password*</p>
-          <input type="password" class="form-control signincontent" aria-label="Password" required>
+          <input type="password" id="password2" class="form-control signincontent" aria-label="Password" required>
           <div class="invalid-feedback">
-            Please add a password
+            Passwords do not match
           </div>
           <div class="gap"></div>
           <button class="btn btn-primary w-100" type="button" id="submit-reg2"> Create your account</button>
@@ -256,6 +255,43 @@
   }, false)
 
 
+</script>
+
+<script>
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    var forms = document.getElementsByClassName('needs-validation');
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+
+</script>
+
+<script>
+  $("#password").on("focusout", function () {
+  if ($(this).val() != $("#password2").val()) {
+    $("#password2").removeClass("was-validated").addClass("invalid");
+  } else {
+    $("#password2").removeClass("invalid").addClass("was-validated");
+  }
+});
+
+$("#password2").on("keyup", function () {
+  if ($("#password").val() != $(this).val()) {
+    $(this).removeClass("was-validated").addClass("invalid");
+  } else {
+    $(this).removeClass("invalid").addClass("was-validated");
+  }
+});
 </script>
   
 
