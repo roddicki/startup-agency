@@ -785,12 +785,13 @@ a:active {
   }
 
   #display-image{
-	width: 400px;
-	height: 225px;
+	width: 180px;
+	height: 180px;
 	border: 1px solid black;
 	background-position: center;
 	background-size: cover;
-	border-radius: 80px;
+	border-radius: 100%;
+	text-align: center;
   }
 
   
@@ -876,7 +877,47 @@ header .container-fluid {
 	margin-bottom: 15px;
 }
 
+input[type=file]::file-selector-button {
+	background: #572F88;
+	color: white;
+	border: 3px solid #333;
+	border-radius: 5px;
+	padding: 0.5em;
+	width: 10em;
+	cursor: pointer;
+	text-align: center;
+  }
 
+.nav-item{
+	color: #7E7984;
+	background: #FFFFFF;
+	/* Gray-100 */
+	
+	border: 1px solid #EDEBEE;
+	color: #7E7984;
+	border-radius: 5px 5px 0px 0px;
+
+}
+
+.bordertest{
+	//border:  #EDEBEE 2px solid;
+}
+
+.nav-link{
+	color: #7E7984;
+	background: #FFFFFF;
+	/* Gray-100 */
+	
+	border: 1px solid #EDEBEE;
+	color: #7E7984;
+	border-radius: 5px 5px 0px 0px;
+	height: 82px;
+	width: 200px;
+}
+
+.nav-link :active{
+	color: #000;
+}
 
 
 /* ===================================== */
