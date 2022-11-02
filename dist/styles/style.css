@@ -912,11 +912,15 @@ input[type=file]::file-selector-button {
 	color: #7E7984;
 	border-radius: 5px 5px 0px 0px;
 	height: 82px;
-	width: 200px;
+	width: 100%;
 }
 
 .nav-link-categroies :active{
 	color: #000;
+}
+
+.showhide{
+margin-top: 40px;
 }
 
 

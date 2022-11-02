@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="styles/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  
 
   <title>Startup Agency</title>
 </head>
@@ -102,11 +104,11 @@
         <div class="modal-body">
           <p>Please add your email and a password to create your account.</p>
           <p>Email*</p>
-          <input type="text" id="email" class="form-control signincontent" aria-label="Username" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+          <input type="email" id="email" class="form-control signincontent" aria-label="Username"  required>
           <div class="invalid-feedback">
             Please add your email
           </div>
-          <p>Password*</p>
+          <!-- <p>Password*</p>
           <input type="password" id="password" class="form-control signincontent" aria-label="Password" required>
         
           <div class="invalid-feedback">
@@ -118,7 +120,34 @@
           <input type="password" id="password2" class="form-control signincontent" aria-label="Password" required>
           <div class="invalid-feedback">
             Passwords do not match
+          </div> -->
+         <div class="row">
+          <div class="col-10">
+            <div class="accountFormToggle display-none" id="passwordForm">
+                <label for="password">Password*</label>
+                <input type='password' id="password" data-bv-identical placeholder="Password" name="password" class="form-control masked signincontent" value="" data-bv-notemty data-bv-excluded="false" required>  
+                <div class="col-2">
+                 
+                </div>
+              </div>
+                <div class="showhide">
+                
+                </div>
+                <!-- <button class="btn btn-default" id="save">Save password</button> -->
+            </div>
+             <div class="col-2">
+              <i class="fa fa-eye showhide" id="eye"></i>
+            </div>
           </div>
+            <div class="col-12">
+              <label for="exampleInputEmail1">Confirm password*</label>
+              <input type='password' id="password2" placeholder="Confirm password" name="password2" class="form-control signincontent" value="" data-bv-notemty data-bv-excluded="false" data-bv-identical required>
+              <!-- <button class="btn btn-default" id="save">Save password</button> -->
+            </div>
+         
+
+
+
           <div class="gap"></div>
           <button class="btn btn-primary w-100" type="button" id="submit-reg2"> Create your account</button>
         </form>
@@ -171,6 +200,7 @@
 <!-- custom JS -->
 <script src="scripts/app.bundle.js"></script>
 <!-- event listeners -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
 
 
 <!--jamie Script-->
@@ -258,42 +288,128 @@
 </script>
 
 <script>
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    var forms = document.getElementsByClassName('needs-validation');
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})();
+function validateField() {
+  let cont = $('#passwordForm');
+  if (cont.hasClass('display-none')) {
+    cont.removeClass('display-none');
+    $("#password").attr('data-bv-validatorname', true);
+    $("#password2").attr('data-bv-validatorname', true);
+  } else {
+    cont.addClass('display-none');
+    $("#password").attr('data-bv-validatorname', false);
+    $("#password2").attr('data-bv-validatorname', false);
+  }
+  console.log(`$("#password").attr('data-bv-validatorname') is ${$("#password2").attr('data-bv-validatorname')}`);
+  console.log(`$("#password2").attr('data-bv-validatorname') is ${$("#password2").attr('data-bv-validatorname')}`);
+}
 
+$('#passwordForm').bootstrapValidator({
+      message: 'This value is not valid',
+      live: 'enabled',
+      fields: {
+        password: {
+          message: 'The password is not valid',
+          validators: {
+            notEmpty: {
+              message: 'The password is required and cannot be empty'
+            },
+            identical: {
+              field: 'password',
+              message: 'The passwords must match. '
+            },
+            stringLength: {
+              min: 6,
+              max: 30,
+              message: 'The password must be more than 6 and less than 30 characters long'
+            },
+            regexp: {
+              regexp: /^[a-zA-Z0-9_]+$/,
+              message: 'The password can only consist of alphabetical, number and underscore'
+            }
+          }
+        },
+        password2: {
+          message: 'The password2 is not valid',
+          validators: {
+            notEmpty: {
+              message: 'The password2 is required and cannot be empty'
+            },
+            identical: {
+              field: 'password',
+              message: 'The passwords must match. '
+            },
+            stringLength: {
+              min: 6,
+              max: 30,
+              message: 'The password2 must be more than 6 and less than 30 characters long'
+            },
+            regexp: {
+              regexp: /^[a-zA-Z0-9_]+$/,
+              message: 'The password2 can only consist of alphabetical, number and underscore'
+            }
+          }
+        }
+      }
+      });
+
+
+    $('a.accountFormToggleBtn').on('click', function() {
+      validateField();
+    }); 
 </script>
 
 <script>
-  $("#password").on("focusout", function () {
-  if ($(this).val() != $("#password2").val()) {
-    $("#password2").removeClass("was-validated").addClass("invalid");
-  } else {
-    $("#password2").removeClass("invalid").addClass("was-validated");
-  }
-});
+const validateEmail = (email) => {
+  return email.match(
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  );
+};
 
-$("#password2").on("keyup", function () {
-  if ($("#password").val() != $(this).val()) {
-    $(this).removeClass("was-validated").addClass("invalid");
+const validate = () => {
+  const $result = $('#result');
+  const email = $('#email').val();
+  $result.text('');
+
+  if (validateEmail(email)) {
+    $result.text(email + ' is valid :)');
+    $result.css('color', 'green');
   } else {
-    $(this).removeClass("invalid").addClass("was-validated");
+    $result.text(email + ' is not valid :(');
+    $result.css('color', 'red');
   }
-});
+  return false;
+}
+
+$('#email').on('input', validate);
 </script>
-  
+
+<script>
+  function show() {
+    var p = document.getElementById('password');
+    p.setAttribute('type', 'text');
+}
+
+function hide() {
+    var p = document.getElementById('password');
+    p.setAttribute('type', 'password');
+}
+
+var pwShown = 0;
+
+document.getElementById("eye").addEventListener("click", function () {
+    if (pwShown == 0) {
+        pwShown = 1;	
+				document.getElementById("eye").classList.add("fa-eye-slash");
+				document.getElementById("eye").classList.remove("fa-eye");
+        show();
+    } else {
+        pwShown = 0;
+			  document.getElementById("eye").classList.add("fa-eye");
+				document.getElementById("eye").classList.remove("fa-eye-slash");
+        hide();
+    }
+}, false);
+</script>
 
 
 </body>
