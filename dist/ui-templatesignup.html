@@ -23,14 +23,14 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <button type="button" class="btn-primary" data-bs-toggle= "modal" data-bs-target="#register-form1">Sign up</button>
+        <button type="button" class="btn-primary" data-bs-toggle="modal" data-bs-target="#register-modal1">Sign up</button>
       </div>
     </div>
   </div>
 </section>
 
 <!--Reg Welcome Modal-->
-<div class="modal fade" id="register-form1" tabindex="-1" aria-labelledby="RegModal1" aria-hidden="true">
+<div class="modal fade" id="register-modal1" tabindex="-1" aria-labelledby="RegModal1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -38,7 +38,7 @@
         <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form class="reg-form1  needs-validation" novalidate">
+        <form class="reg-form1  needs-validation" novalidate>
         <p class="post-black"><strong>First, we need some details...</strong></p>
         <p>First name*</p>
         <input type="text" id="validationCustom01" class="form-control signincontent" name="firstname" aria-label="firstname" required>
@@ -51,12 +51,10 @@
           Please add your surname.
         </div>
         <p>Course*</p>
-        <select class="form-select select-spacing" id="validationCustom03" name="course" aria-label="Default select example" required>
-          <option value="" disabled selected>Select</option>
-          <option value="Digital Media">Digital Media</option>
-          <option value="Video & Film">Video & Film</option>
-          <option value="Fashion">Fashion/option>
-        </select>
+        <input type="text" id="validationCustom03" class="form-control signincontent" name="coursename" aria-label="coursename" required>
+        <div class="invalid-feedback">
+          Please add the name of your course.
+        </div>
 
         <p>Graduation Year*</p>
         <select class="form-select select-spacing"  id="validationCustom04" name="graduation" aria-label="Default select example" required>
@@ -80,7 +78,7 @@
           Please add your student id.
         </div>
         <div class="col-12">
-        <button type="button" class="btn  btn-primary w-100" id="submit-reg"> Next </button>
+        <button type="button" class="btn  btn-primary w-100" id="submit-reg1"> Next </button>
       </div>
         <div class="gap"></div>
       </form>
@@ -93,21 +91,30 @@
 <!--Reg Welcome modal end-->
 
 <!--Reg second Modal-->
-<div class="modal fade" id="register-form2" tabindex="-1" aria-labelledby="RegModal2" aria-hidden="true">
+<div class="modal fade" id="register-modal2" tabindex="-1" aria-labelledby="RegModal2" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title signinheader" id="RegModal2">Almost there...</h2>
         <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form class="reg-form2  needs-validation" novalidate">
+      <form class="reg-form2 needs-validation" novalidate>
+
+      <form class="reg-form2  needs-validation" novalidate>
         <div class="modal-body">
-          <p>Please add your email and a password to create your account.</p>
-          <p>Email*</p>
-          <input type="email" id="email" class="form-control signincontent" aria-label="Username"  required>
-          <div class="invalid-feedback">
-            Please add your email
+
+          <!-- email row -->
+          <div class="row">
+            <div class="col-12">
+              <p>Please add your email and a password to create your account.</p>
+              <p>Email*</p>
+              <input type="email" id="registrationEmail" class="form-control signincontent" aria-label="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+              <div class="invalid-feedback">
+                Please add a valid email address
+              </div>
+            </div>
           </div>
+          
           <!-- <p>Password*</p>
           <input type="password" id="password" class="form-control signincontent" aria-label="Password" required>
         
@@ -121,35 +128,46 @@
           <div class="invalid-feedback">
             Passwords do not match
           </div> -->
+
+         <!-- password row  -->
          <div class="row">
-          <div class="col-10">
-            <div class="accountFormToggle display-none" id="passwordForm">
-                <label for="password">Password*</label>
-                <input type='password' id="password" data-bv-identical placeholder="Password" name="password" class="form-control masked signincontent" value="" data-bv-notemty data-bv-excluded="false" required>  
-                <div class="col-2">
-                 
-                </div>
-              </div>
-                <div class="showhide">
-                
-                </div>
-                <!-- <button class="btn btn-default" id="save">Save password</button> -->
+            <div class="col-12">
+              <label for="password">Password*</label>
             </div>
-             <div class="col-2">
+        </div>
+         <div class="row">
+            <div class="col-10">
+              <div class="accountFormToggle display-none" id="passwordForm">
+                  <label for="password">Min 8 characters inc 1 number</label>
+                  <input type='password' id="password" data-bv-identical placeholder="Password" name="password" class="form-control masked signincontent" value="" data-bv-notemty data-bv-excluded="false" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required>  
+                  <div class="invalid-feedback">
+                    Your password must be minimum eight characters, including at least one letter and one number
+                  </div>
+              </div>
+            </div>
+            <div class="col-2">
               <i class="fa fa-eye showhide" id="eye"></i>
             </div>
           </div>
-            <div class="col-12">
-              <label for="exampleInputEmail1">Confirm password*</label>
-              <input type='password' id="password2" placeholder="Confirm password" name="password2" class="form-control signincontent" value="" data-bv-notemty data-bv-excluded="false" data-bv-identical required>
-              <!-- <button class="btn btn-default" id="save">Save password</button> -->
+
+          <!-- confirn password row  -->
+         <div class="row">
+            <div class="col-10">
+              <div class="accountFormToggle display-none" id="passwordForm">
+                <label for="passwordConfirmation">Confirm Password*</label>
+                <input type='password' id="passwordConfirmation" data-bv-identical placeholder="Confirm password" name="passwordConfirmation" autocomplete="off"  class="form-control masked signincontent" value="" data-bv-notemty data-bv-excluded="false" required>  
+                <div class="invalid-feedback">
+                  Password not a match.
+                </div>
+              </div>
             </div>
-         
-
-
+            <div class="col-2">
+              <i class="fa fa-eye showhide" id="eye-confirmation"></i>
+            </div>
+          </div>
 
           <div class="gap"></div>
-          <button class="btn btn-primary w-100" type="button" id="submit-reg2"> Create your account</button>
+          <button class="btn btn-primary w-100" type="button" id="submit-reg2">Create your account</button>
         </form>
         <div class="gap"></div>
         <div class="row">
@@ -184,6 +202,10 @@
 </div>
 <!--End of Reg second modal-->
 
+<span id="postjobmodal">
+  <!--Import post job modal-->
+</span>
+
 <span id="signinmodal">
   <!--Import sign in modal-->
 </span>
@@ -202,46 +224,17 @@
 <!-- event listeners -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
 
-
-<!--jamie Script-->
-<!-- <script>
-(function () {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
-</script> -->
-
-
 <script>
 
-  //step 1 validaiton
-
-  // Fetch the forms we want to apply custom Bootstrap validation styles to
+  //step 1 registration validaiton
   const regForm1 = document.querySelector('.reg-form1');
+  const regForm1Submit = document.querySelector('#submit-reg1');
 
-  const modalreg = document.querySelector('#submit-reg');
+  const regModal1 = new bootstrap.Modal(document.querySelector('#register-modal1'));
+  const regModal2 = new bootstrap.Modal(document.querySelector('#register-modal2'));
 
-
-  const regButton1 = new bootstrap.Modal(document.querySelector('#register-form1'));
-  const regButton2 = new bootstrap.Modal(document.querySelector('#register-form2'));
-
-  // Loop over them and prevent submission
-  modalreg.addEventListener('click', function (event) {
+  // Loop over inputs and prevent submission
+  regForm1Submit.addEventListener('click', function (event) {
     console.log("modal 1 submit clicked");
     if (!regForm1.checkValidity()) {
       event.preventDefault();
@@ -250,165 +243,76 @@
     }
     else {
       console.log("modal 1 was-validated");
-      regButton1.hide();
-      regButton2.show();
+      regModal1.hide();
+      regModal2.show();
     }
     regForm1.classList.add('was-validated');
   }, false)
 
 
 
-  //step 1 validaiton
-
-  // Fetch the forms we want to apply custom Bootstrap validation styles to
+  //step 2 registration validation registration details
   const regForm2 = document.querySelector('.reg-form2');
+  const regForm2Submit = document.querySelector('#submit-reg2');
 
-  const modalreg2 = document.querySelector('#submit-reg2');
-  
-  // const regButton1 = new bootstrap.Modal(document.querySelector('#register-form1'));
-  // const regButton2 = new bootstrap.Modal(document.querySelector('#register-form2'));
-
-  // Loop over them and prevent submission
-  modalreg2.addEventListener('click', function (event) {
+  // Loop over inputs and prevent submission
+  regForm2Submit.addEventListener('click', function (event) {
     console.log("modal 2 submit clicked");
-    if (!regForm2.checkValidity()) {
+    // check passwords match 
+    if (document.querySelector("#password").value == document.querySelector("#passwordConfirmation").value) {
+      document.querySelector("#passwordConfirmation").setCustomValidity("");
+    }
+    else {
+      document.querySelector("#passwordConfirmation").setCustomValidity("Duplicate passwords do not match");
+    }
+    // other validation
+    if (regForm2.checkValidity() == false ) {
       event.preventDefault();
       event.stopPropagation();
       console.log("modal 12was-NOT-validated");
     }
     else {
       console.log("modal 2 was-validated");
-      // regButton1.hide();
-      // regButton2.show();
     }
     regForm2.classList.add('was-validated');
   }, false)
 
-
-</script>
-
-<script>
-function validateField() {
-  let cont = $('#passwordForm');
-  if (cont.hasClass('display-none')) {
-    cont.removeClass('display-none');
-    $("#password").attr('data-bv-validatorname', true);
-    $("#password2").attr('data-bv-validatorname', true);
-  } else {
-    cont.addClass('display-none');
-    $("#password").attr('data-bv-validatorname', false);
-    $("#password2").attr('data-bv-validatorname', false);
-  }
-  console.log(`$("#password").attr('data-bv-validatorname') is ${$("#password2").attr('data-bv-validatorname')}`);
-  console.log(`$("#password2").attr('data-bv-validatorname') is ${$("#password2").attr('data-bv-validatorname')}`);
-}
-
-$('#passwordForm').bootstrapValidator({
-      message: 'This value is not valid',
-      live: 'enabled',
-      fields: {
-        password: {
-          message: 'The password is not valid',
-          validators: {
-            notEmpty: {
-              message: 'The password is required and cannot be empty'
-            },
-            identical: {
-              field: 'password',
-              message: 'The passwords must match. '
-            },
-            stringLength: {
-              min: 6,
-              max: 30,
-              message: 'The password must be more than 6 and less than 30 characters long'
-            },
-            regexp: {
-              regexp: /^[a-zA-Z0-9_]+$/,
-              message: 'The password can only consist of alphabetical, number and underscore'
-            }
-          }
-        },
-        password2: {
-          message: 'The password2 is not valid',
-          validators: {
-            notEmpty: {
-              message: 'The password2 is required and cannot be empty'
-            },
-            identical: {
-              field: 'password',
-              message: 'The passwords must match. '
-            },
-            stringLength: {
-              min: 6,
-              max: 30,
-              message: 'The password2 must be more than 6 and less than 30 characters long'
-            },
-            regexp: {
-              regexp: /^[a-zA-Z0-9_]+$/,
-              message: 'The password2 can only consist of alphabetical, number and underscore'
-            }
-          }
-        }
-      }
-      });
-
-
-    $('a.accountFormToggleBtn').on('click', function() {
-      validateField();
-    }); 
-</script>
-
-<script>
-const validateEmail = (email) => {
-  return email.match(
-    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  );
-};
-
-const validate = () => {
-  const $result = $('#result');
-  const email = $('#email').val();
-  $result.text('');
-
-  if (validateEmail(email)) {
-    $result.text(email + ' is valid :)');
-    $result.css('color', 'green');
-  } else {
-    $result.text(email + ' is not valid :(');
-    $result.css('color', 'red');
-  }
-  return false;
-}
-
-$('#email').on('input', validate);
-</script>
-
-<script>
-  function show() {
-    var p = document.getElementById('password');
+// show hide password functions
+function showPass(eye, id) {
+    eye.classList.add("fa-eye-slash");
+    eye.classList.remove("fa-eye");
+    const p = document.getElementById(id);
     p.setAttribute('type', 'text');
 }
 
-function hide() {
-    var p = document.getElementById('password');
+function hidePass(eye, id) {
+    eye.classList.add("fa-eye");
+    eye.classList.remove("fa-eye-slash");
+    const p = document.getElementById(id);
     p.setAttribute('type', 'password');
 }
 
-var pwShown = 0;
-
+// show hide passsword
 document.getElementById("eye").addEventListener("click", function () {
-    if (pwShown == 0) {
-        pwShown = 1;	
-				document.getElementById("eye").classList.add("fa-eye-slash");
-				document.getElementById("eye").classList.remove("fa-eye");
-        show();
+    const eye = document.getElementById("eye");
+    if (eye.classList.contains("fa-eye")) {
+      showPass(eye, "password");
     } else {
-        pwShown = 0;
-			  document.getElementById("eye").classList.add("fa-eye");
-				document.getElementById("eye").classList.remove("fa-eye-slash");
-        hide();
+      hidePass(eye, "password");
     }
 }, false);
+
+// show hide conform passsword
+document.getElementById("eye-confirmation").addEventListener("click", function () {
+    const eye = document.getElementById("eye-confirmation");
+    if (eye.classList.contains("fa-eye")) {
+      showPass(eye, "passwordConfirmation");
+    } else {
+      hidePass(eye, "passwordConfirmation");
+    }
+}, false);
+
+
 </script>
 
 
