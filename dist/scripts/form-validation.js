@@ -1,4 +1,90 @@
+//step 1 registration validaiton
+  const regForm1 = document.querySelector('.reg-form1');
+  const regForm1Submit = document.querySelector('#submit-reg1');
 
+  const regModal1 = new bootstrap.Modal(document.querySelector('#register-modal1'));
+  const regModal2 = new bootstrap.Modal(document.querySelector('#register-modal2'));
+
+  // Loop over inputs and prevent submission
+  regForm1Submit.addEventListener('click', function (event) {
+    console.log("modal 1 submit clicked");
+    if (!regForm1.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("modal 1 was-NOT-validated");
+    }
+    else {
+      console.log("modal 1 was-validated");
+      regModal1.hide();
+      regModal2.show();
+    }
+    regForm1.classList.add('was-validated');
+  }, false)
+
+
+
+  //step 2 registration validation registration details
+  const regForm2 = document.querySelector('.reg-form2');
+  const regForm2Submit = document.querySelector('#submit-reg2');
+
+  // Loop over inputs and prevent submission
+  regForm2Submit.addEventListener('click', function (event) {
+    console.log("modal 2 submit clicked");
+    // check passwords match 
+    if (document.querySelector("#password").value == document.querySelector("#passwordConfirmation").value) {
+      document.querySelector("#passwordConfirmation").setCustomValidity("");
+    }
+    else {
+      document.querySelector("#passwordConfirmation").setCustomValidity("Duplicate passwords do not match");
+    }
+    // other validation
+    if (regForm2.checkValidity() == false ) {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("modal 12was-NOT-validated");
+    }
+    else {
+      console.log("modal 2 was-validated");
+    }
+    regForm2.classList.add('was-validated');
+  }, false)
+
+// show hide password functions
+function showPass(eye, id) {
+    eye.classList.add("fa-eye-slash");
+    eye.classList.remove("fa-eye");
+    const p = document.getElementById(id);
+    p.setAttribute('type', 'text');
+}
+
+function hidePass(eye, id) {
+    eye.classList.add("fa-eye");
+    eye.classList.remove("fa-eye-slash");
+    const p = document.getElementById(id);
+    p.setAttribute('type', 'password');
+}
+
+// show hide passsword
+document.getElementById("eye").addEventListener("click", function () {
+    const eye = document.getElementById("eye");
+    if (eye.classList.contains("fa-eye")) {
+      showPass(eye, "password");
+    } else {
+      hidePass(eye, "password");
+    }
+}, false);
+
+// show hide conform passsword
+document.getElementById("eye-confirmation").addEventListener("click", function () {
+    const eye = document.getElementById("eye-confirmation");
+    if (eye.classList.contains("fa-eye")) {
+      showPass(eye, "passwordConfirmation");
+    } else {
+      hidePass(eye, "passwordConfirmation");
+    }
+}, false);
+
+//==POST JOB==
 //step 1 validation
 
   // Fetch the forms we want to apply custom Bootstrap validation styles to
