@@ -185,6 +185,12 @@ a:active {
 	margin-bottom: 10px;
 	
   }
+  .centre-block{
+	margin: 1.75rem auto;
+	border: 1px rgb(192, 192, 192) solid;
+	width: auto;
+	max-width: 350px;
+  }
 
   
 
