@@ -91,8 +91,8 @@ export function signOutUser(e) {
 
 
 // login
-export function signInUser(e) {
-  e.preventDefault();
+export function signInUser() {
+  //e.preventDefault();
   const loginForm = document.querySelector('.login');
   let email = loginForm.email.value;
   let password = loginForm.password.value;

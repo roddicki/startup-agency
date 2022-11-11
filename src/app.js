@@ -1204,6 +1204,21 @@ submitJob.addEventListener('click', function (e) {
   createJobDoc();
 });
 
+// login validation
+  const loginForm = document.querySelector('.login');
+  const loginFormSubmit = document.querySelector('#login-submit');
+
+  loginFormSubmit.addEventListener('click', function (e) {
+    e.preventDefault();
+    let validated = validateLoginForm(loginForm); // from form-validation js
+    console.log(validated);
+    // NEW not tested
+    if (validated) {
+      signInUser();
+    }
+    // NEW not tested
+  });
+
 
 // send help email about posting a job
 const modalHelpButton = document.querySelector('#submit3');

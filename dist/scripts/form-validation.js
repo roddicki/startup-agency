@@ -1,3 +1,30 @@
+// login validation
+  /*const loginModal = new bootstrap.Modal(document.querySelector('#signInModal'));
+  const loginForm = document.querySelector('.login');
+  const loginFormSubmit = document.querySelector('#login-submit');
+
+  loginFormSubmit.addEventListener('click', function (e) {
+    validateLoginForm(e);
+  }, false)*/
+
+  const loginModal = new bootstrap.Modal(document.querySelector('#signInModal'));
+
+  function validateLoginForm(loginForm) {
+    if (!loginForm.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("modal 1 was-NOT-validated");
+      return false;
+    }
+    else {
+      console.log("modal 1 was-validated");  
+      loginModal.hide();
+      return true;
+    }
+    loginForm.classList.add('was-validated');
+  }
+
+
 //step 1 registration validaiton
   const regForm1 = document.querySelector('.reg-form1');
   const regForm1Submit = document.querySelector('#submit-reg1');

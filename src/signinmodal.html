@@ -8,14 +8,42 @@
         <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Email</p>
-        <input type="text" class="form-control signincontent" aria-label="Username">
-        <p>Password</p>
-        <input type="text" class="form-control signincontent" aria-label="Username">
 
-        <a href=""><p>Forgotten your password?</p></a>
+        <form class="login needs-validation" novalidate>
+          <!-- email row -->
+          <div class="row">
+            <div class="col-12">
+              <p><label for="email">Email</label></p>
+              <input type="email" class="form-control signincontent" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+            </div>
+            <div class="invalid-feedback">
+              Please add your email.
+            </div>
+          </div>
 
-        <button class="btn btn-inactive disabled" type="button"> Login </button>
+          <!-- password row  -->
+          <div class="row">
+            <div class="col-12">
+              <p><label for="password">Password</label></p>
+            </div>
+            <div class="invalid-feedback">
+              Please add your password.
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-10">
+              <input type='password' id="password" placeholder="Password" name="password" class="form-control masked signincontent" data-bv-notemty data-bv-excluded="false" required>
+            </div>
+            <div class="col-2 justify-content-center align-self-center">
+              <i class="fa fa-eye showhide" id="eye"></i>
+            </div>
+          </div>
+
+          <a href=""><p>Forgotten your password?</p></a>
+
+          <button class="btn btn-primary" id="login-submit" type="button"> Login </button>
+        </form>
+
         <div class="gap"></div>
         <div class="row">
           <div class="col-5 line"></div>
@@ -24,21 +52,21 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-4">
+        <div class="col-12">
           <a href="">
             <img src="/dist/assets/img/GoogleSocial.svg"  style="width:56px;height:56px;">
           </a>
         </div>
-        <div class="col-4">
+        <!-- <div class="col-4">
           <a href="">
             <img src="/dist/assets/img/FaceBookIcon.svg"  style="width:56px;height:56px;">
           </a>
-        </div>
-        <div class="col-4">
+        </div> -->
+        <!-- <div class="col-4">
           <a href="">
             <img src="/dist/assets/img/AppleIcon.svg"  style="width:56px;height:56px;">
           </a>
-        </div>
+        </div> -->
       </div>
       <div class="modal-footer mx-auto">
         <p>New to <strong>stiwdio agency</strong>? <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#register-modal1">Register now</a></p>
@@ -117,7 +145,6 @@
         <h2 class="modal-title signinheader" id="RegModal2">Almost there...</h2>
         <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form class="reg-form2 needs-validation" novalidate>
 
       <form class="reg-form2  needs-validation" novalidate>
         <div class="modal-body">
