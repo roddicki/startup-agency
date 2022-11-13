@@ -1,80 +1,67 @@
 // login validation
-  /*const loginModal = new bootstrap.Modal(document.querySelector('#signInModal'));
-  const loginForm = document.querySelector('.login');
-  const loginFormSubmit = document.querySelector('#login-submit');
+//const loginModal = new bootstrap.Modal(document.querySelector('#signInModal'));
 
-  loginFormSubmit.addEventListener('click', function (e) {
-    validateLoginForm(e);
-  }, false)*/
-
-  const loginModal = new bootstrap.Modal(document.querySelector('#signInModal'));
-
-  function validateLoginForm(loginForm) {
-    if (!loginForm.checkValidity()) {
-      event.preventDefault();
-      event.stopPropagation();
-      console.log("modal 1 was-NOT-validated");
-      return false;
-    }
-    else {
-      console.log("modal 1 was-validated");  
-      loginModal.hide();
-      return true;
-    }
-    loginForm.classList.add('was-validated');
+function validateLoginForm(loginForm) {
+  if (!loginForm.checkValidity()) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log("modal 1 was-NOT-validated");
   }
+  else {
+    console.log("modal 1 was-validated");  
+    //loginModal.hide();
+    return true;
+  }
+  loginForm.classList.add('was-validated');
+}
 
 
 //step 1 registration validaiton
-  const regForm1 = document.querySelector('.reg-form1');
-  const regForm1Submit = document.querySelector('#submit-reg1');
+const regForm1 = document.querySelector('.reg-form1');
+const regForm1Submit = document.querySelector('#submit-reg1');
 
-  const regModal1 = new bootstrap.Modal(document.querySelector('#register-modal1'));
-  const regModal2 = new bootstrap.Modal(document.querySelector('#register-modal2'));
+const regModal1 = new bootstrap.Modal(document.querySelector('#register-modal1'));
+const regModal2 = new bootstrap.Modal(document.querySelector('#register-modal2'));
 
-  // Loop over inputs and prevent submission
-  regForm1Submit.addEventListener('click', function (event) {
-    console.log("modal 1 submit clicked");
-    if (!regForm1.checkValidity()) {
-      event.preventDefault();
-      event.stopPropagation();
-      console.log("modal 1 was-NOT-validated");
-    }
-    else {
-      console.log("modal 1 was-validated");
-      regModal1.hide();
-      regModal2.show();
-    }
-    regForm1.classList.add('was-validated');
-  }, false)
+// Loop over inputs and prevent submission
+regForm1Submit.addEventListener('click', function (event) {
+  console.log("modal 1 submit clicked");
+  if (!regForm1.checkValidity()) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log("modal 1 was-NOT-validated");
+  }
+  else {
+    console.log("modal 1 was-validated");
+    regModal1.hide();
+    regModal2.show();
+  }
+  regForm1.classList.add('was-validated');
+}, false)
 
 
 
-  //step 2 registration validation registration details
-  const regForm2 = document.querySelector('.reg-form2');
-  const regForm2Submit = document.querySelector('#submit-reg2');
+//step 2 registration validation registration details
 
-  // Loop over inputs and prevent submission
-  regForm2Submit.addEventListener('click', function (event) {
-    console.log("modal 2 submit clicked");
-    // check passwords match 
-    if (document.querySelector("#password").value == document.querySelector("#passwordConfirmation").value) {
-      document.querySelector("#passwordConfirmation").setCustomValidity("");
-    }
-    else {
-      document.querySelector("#passwordConfirmation").setCustomValidity("Duplicate passwords do not match");
-    }
-    // other validation
-    if (regForm2.checkValidity() == false ) {
-      event.preventDefault();
-      event.stopPropagation();
-      console.log("modal 12was-NOT-validated");
-    }
-    else {
-      console.log("modal 2 was-validated");
-    }
-    regForm2.classList.add('was-validated');
-  }, false)
+function validateRegForm2(regForm2) {
+  if (document.querySelector("#passwordRegister").value == document.querySelector("#passwordConfirmation").value) {
+    document.querySelector("#passwordConfirmation").setCustomValidity("");
+  }
+  else {
+    document.querySelector("#passwordConfirmation").setCustomValidity("Duplicate passwords do not match");
+  }
+  // other validation
+  if (regForm2.checkValidity() == false ) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log("modal reg 2was-NOT-validated");
+  }
+  else {
+    console.log("modal reg 2 was-validated");
+    return true;
+  }
+  regForm2.classList.add('was-validated');
+}
 
 // show hide password functions
 function showPass(eye, id) {
@@ -92,12 +79,22 @@ function hidePass(eye, id) {
 }
 
 // show hide passsword
-document.getElementById("eye").addEventListener("click", function () {
-    const eye = document.getElementById("eye");
+document.getElementById("eye-signin").addEventListener("click", function () {
+    const eye = document.getElementById("eye-signin");
     if (eye.classList.contains("fa-eye")) {
-      showPass(eye, "password");
+      showPass(eye, "passwordSignin");
     } else {
-      hidePass(eye, "password");
+      hidePass(eye, "passwordSignin");
+    }
+}, false);
+
+// show hide passsword
+document.getElementById("eye-register").addEventListener("click", function () {
+    const eye = document.getElementById("eye-register");
+    if (eye.classList.contains("fa-eye")) {
+      showPass(eye, "passwordRegister");
+    } else {
+      hidePass(eye, "passwordRegister");
     }
 }, false);
 
@@ -110,6 +107,9 @@ document.getElementById("eye-confirmation").addEventListener("click", function (
       hidePass(eye, "passwordConfirmation");
     }
 }, false);
+
+
+
 
 //==POST JOB==
 //step 1 validation

@@ -644,12 +644,11 @@ function showSignedInUser(user, id, forename, surname) {
 
   // get profile pic
 
-  // get profile pic
+  // add name
   const accountDropdown = document.querySelector('.dropdown-menu');
   // edit drop down contents
   const name = document.querySelector('.dropdown-toggle');
   name.innerHTML = forename + " " + surname;
-
 
   const dashboardLink = document.querySelector('.dropdown-menu .dashboard');
   dashboardLink.href = 'profile.html?id='+id;
@@ -1204,19 +1203,29 @@ submitJob.addEventListener('click', function (e) {
   createJobDoc();
 });
 
-// login validation
-  const loginForm = document.querySelector('.login');
-  const loginFormSubmit = document.querySelector('#login-submit');
+// login and validation
+const loginForm = document.querySelector('.login');
+const loginFormSubmit = document.querySelector('#login-submit');
+loginFormSubmit.addEventListener('click', function (e) {
+  e.preventDefault();
+  let validated = validateLoginForm(loginForm); // from form-validation.js
+  if (validated) {
+    signInUser(e);
+  }
+});
 
-  loginFormSubmit.addEventListener('click', function (e) {
+// register and validation
+const regForm2 = document.querySelector('.reg-form2');
+const regForm2Submit = document.querySelector('#submit-reg2');
+regForm2Submit.addEventListener('click', function (e) {
+    console.log("reg modal 1 submit clicked");
     e.preventDefault();
-    let validated = validateLoginForm(loginForm); // from form-validation js
+    let validated = validateRegForm2(regForm2); // from form-validation.js 
     console.log(validated);
-    // NEW not tested
+    // register
     if (validated) {
-      signInUser();
+      signUpUser(e);
     }
-    // NEW not tested
   });
 
 

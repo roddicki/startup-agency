@@ -39,7 +39,7 @@ export function loadCheck(){
 // sign up user
 export function signUpUser(e) {
   e.preventDefault();
-  const signupForm = document.querySelector('.signup');
+  const signupForm = document.querySelector('.reg-form2');
   let email = signupForm.email.value;
   let password = signupForm.password.value;
   createUserWithEmailAndPassword(auth, email, password)
@@ -50,6 +50,13 @@ export function signUpUser(e) {
       })
       .catch(function(err) {
         console.log(err.message);
+        if (err.message.includes("email-already-in-use")) {
+          document.querySelector("#register-modal2 .alert-danger").innerHTML += "Email already in use, please ty another or reset your password";
+        }
+        else {
+          document.querySelector("#register-modal2 .alert-danger").innerHTML += "Error registering";
+        }
+        document.querySelector("#register-modal2 .alert-danger").removeAttribute("hidden");
       });
 }
 
@@ -57,22 +64,22 @@ export function signUpUser(e) {
 // create doc for user
 export function createUserDoc(uid, userEmail) {
   console.log(uid, userEmail);
-  const signupForm = document.querySelector('.signup');
+  const signupForm = document.querySelector('.reg-form1');
+  //console.log(signupForm.forename.value, signupForm.surname.value, signupForm.studentid.value, signupForm.coursename.value, signupForm.graduation.value);
   setDoc(doc(db, "users", uid), {
     forename: signupForm.forename.value,
     surname: signupForm.surname.value,
     studentid: signupForm.studentid.value,
-    course: signupForm.course.value,
+    course: signupForm.coursename.value,
     graduation: signupForm.graduation.value,
     email: userEmail,
-    phone: signupForm.phone.value,
     createdAt: serverTimestamp(),
     approved: 'false'
   })
   .then(function(){
     console.log("successfully created");
     // go to add profile on completion
-    window.location.href = "add-profile.html";
+    window.location.href = "index.html";
   });
 }
 
@@ -91,8 +98,8 @@ export function signOutUser(e) {
 
 
 // login
-export function signInUser() {
-  //e.preventDefault();
+export function signInUser(e) {
+  e.preventDefault();
   const loginForm = document.querySelector('.login');
   let email = loginForm.email.value;
   let password = loginForm.password.value;
@@ -103,6 +110,11 @@ export function signInUser() {
       // go to profile page
       window.location.href = "profile.html?id="+cred.user.uid;
     })
+    .catch(function(err) {
+      console.log(err.message);
+      document.querySelector("#signInModal .alert-danger").removeAttribute("hidden");
+    });
+
 }
 
 // retrieve user data - single doc in the collection
