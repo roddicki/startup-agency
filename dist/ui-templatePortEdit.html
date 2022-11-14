@@ -108,13 +108,13 @@
           </div>
           
           <div class="row">
-            <div class="col-md-3 col-lg-3 col-xl-2">
+            <div class="col-4 col-md-4 col-lg-4 col-xl-4">
               <img src="./assets/img/InstagramSocial.svg">
             </div>
-            <div class="col-md-3 col-lg-3 col-xl-2">
+            <div class="col-4 col-md-4 col-lg-4 col-xl-4">
               <img src="./assets/img/WebSocialIcon.svg">
             </div>
-            <div class="col-md-3 col-lg-3 col-xl-2">
+            <div class="col-4 col-md-4 col-lg-4 col-xl-4">
               <img src="./assets/img/TwitterSocial.svg">
             </div>
           </div>
@@ -130,10 +130,10 @@
       <div class="col-sm-12 col-md-12 col-lg-8 ">
         <div class= "row content-blocks">
           
-          <div class="col-sm-8 col-md-8 col-lg-8 project-showcase-text">
+          <div class="col-8 col-sm-8 col-md-8 col-lg-8 project-showcase-text">
             <p>PROJECT SHOWCASE (0)</p>
           </div>
-          <div class="col-sm-4 col-md-4 col-lg-4 d-grid">
+          <div class="col-4 col-sm-4 col-md-4 col-lg-4 d-grid ">
             <!-- <button class="btn btn-primary btn-lg btn-block" >Add projects</button> -->
             <i class="bi bi-plus-square text-right" data-bs-toggle= "modal" data-bs-target="#addProject" width="24px" height="24px"></i>
           </div>
@@ -164,8 +164,31 @@
                   </div>
                   <div class="gap"></div>
                   <div class="col-12">
-                    <h2><strong>Sweet Dreams</strong><i class="bi bi-pencil-square float-right cursor-pointer" font-size="16px" data-bs-toggle= "modal" data-bs-target="#editProject"></i></button></h2>
-Fp                  </div>
+                    <!--data-bs-toggle= "modal" data-bs-target="#editProject"-->
+                    <h2><strong>Sweet Dreams</strong>
+                    
+                        <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          <i  class="bi bi-pencil-square cursor-pointer edit-size" height="16px"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" data-bs-toggle= "modal" data-bs-target="#editProject" href="#">Edit Project</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item text-danger" href="#">Delete Project</a></li>
+                          <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                        </ul>
+                    </h2>
+                    </div>
+
+
+
+
+                     <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> <i  class="bi bi-pencil-square float-right cursor-pointer"></i></button></h2>
+                 </div>
+                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul> -->
                   <div class="col-12">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna mauris, at urna ...</p>
                   </div>
@@ -194,7 +217,16 @@ Fp                  </div>
                   </div>
                   <div class="gap"></div>
                   <div class="col-12">
-                    <h2><strong>MGS VR</strong></h2>
+                    <h2><strong>MGS VR</strong>
+                      <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i  class="bi bi-pencil-square cursor-pointer edit-size" height="16px"></i>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" data-bs-toggle= "modal" data-bs-target="#editProject" href="#">Edit Project</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="#">Delete Project</a></li>
+                        <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                      </ul></h2>
                   </div>
                   <div class="col-12">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna mauris, at urna ...</p>
@@ -239,7 +271,7 @@ Fp                  </div>
   </div>
 
       
-  <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#Inital-Sign-Up" data-bs-dismiss="modal">Cancel</button>
+  <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#Inital-Sign-Up" data-bs-dismiss="modal">First time button (testing)</button>
   </div>
 </div>
 </section>
@@ -522,15 +554,15 @@ Fp                  </div>
           
           <div calss="col-12 text-center">
             <div class="row">
-              <div class="col-4"></div>
-              <div class="col-4">
+              <div class="col-md-4 col-sm-12"></div>
+              <div class=" col-md-4 col-sm-12">
                 <div class="gap"></div>
                 <div id="display-image"></div>
                 <div class="gap"></div>
                 <input type="file" id="image-input" accept="image/jpeg, image/png, image/jpg">
                 <!--Need a remove button-->
               </div>
-            <div class="col-4"></div>
+            <div class="col-md-4 col-sm-12"></div>
           
               
             
@@ -611,8 +643,8 @@ Fp                  </div>
 
               <p class="project-showcase-text">ADDITIONAL FILES</p> 
               <div class="col-sm-12">
-                <div class="form-group port-block">
-                  <label for="exampleFormControlFile1">Example file input</label>
+                <div class="form-group additional-files">
+                  <label for="exampleFormControlFile1"></label>
                   <input type="file" class="form-control-file" id="exampleFormControlFile1">
                 </div>
               </div>
@@ -641,38 +673,73 @@ Fp                  </div>
         <div class="row">
           <div class="col-md-6 col-sm-12 gap">
             <p>Platform</p>
-          </div>
-          <div class="col-md-6 col-sm-12 gap">
-            <p>Username</p>
-          </div>
-          <form class="row g-3 needs-validation changeDetails" novalidate>
-            <div class="col-md-6 col-sm-12 gap">
               <div class="form-group">
-                <select class="form-control" id="exampleFormControlSelect1">
-                    <option>Instagram</option>
+                <select class="form-control" id="SocialMediaSelect1">
+                  <option>Instagram</option>
+                  <option>Dribble</option>
+                  <option>Twitter</option>
+                  <option>Facebook</option>
+                </select>
+                <button id="SocialMediaSelectbutton1" class="Button-Social" onClick="showSocialDiv1()">+ Add another</button>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12 gap">
+              <p>Username</p>
+            
+              <input type="text" class="form-control" >
+              
+            </div>
+          <div id="SocialMediaSelect2" class="col-md-6 col-sm-12 gap">
+            <p>Platform</p>
+              <div class="form-group">
+                <select class="form-control" id="SocialMediaSelect1">
+                  <option>Instagram</option>
+                  <option>Dribble</option>
+                  <option>Twitter</option>
+                  <option>Facebook</option>
+                </select>
+                <button id="SocialMediaSelectbutton2" class="Button-Social" onClick="showSocialDiv2()">Add another</button>
+
+              </div>
+            </div>
+
+            <div id="SocialMediaSelect3" class="col-md-6 col-sm-12 gap">
+              <p>Username</p>
+              <input type="text" class="form-control" >
+              <button id="SocialMediaSelectbutton3" class="Button-Social-delete" onClick="hideSocialDiv1()">Delete</button>
+
+              <div class="col-md-12 col-sm-12 ">
+              </div>
+            </div>
+
+          
+            <div id="SocialMediaSelect4" class="col-md-6 col-sm-6 gap">
+              <p>Platform</p>
+              <div class="form-group">
+                <select class="form-control">
+                  <option>Instagram</option>
                   <option>Dribble</option>
                   <option>Twitter</option>
                   <option>Facebook</option>
                 </select>
               </div>
+              
             </div>
 
-            <div class="col-lg-6 col-md-12">
-              <input type="text" class="form-control" id="validationCustom07" required>
-              <div class="invalid-feedback">
-                  Please add your last name
-                </div>
-            </div>
+            <div id="SocialMediaSelect5" class="col-md-6 col-sm-6 gap">
+              <p>Username</p>
+              <input type="text" class="form-control" >
+              <button id="SocialMediaSelectbutton4" class="Button-Social-delete" onClick="hideSocialDiv2()">Delete</button>
 
-          <div class="gap"></div>
-            
+            </div>
+          </div>
           <div class="col-12">
             <div class="set-content-right gap">
               <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#step1" data-bs-dismiss="modal">Cancel</button>
               <button type="button" id="submit6" class="btn btn-primary btn-lg btn-block">Save changes</button>
             </div>
           </div>
-          </form>
+          
         </div>
     </div>
   </div>
@@ -692,109 +759,106 @@ Fp                  </div>
         <div class="row">
           <div class="col-12">
          <!--Make caegories here -->
-         <ul class="nav nav-tabs" id="catagoriesTab1" role="tablist">
-          <div class="col-4">
-          <li class="nav-item nav-item-categroies" role="presentation">
-            <button class="nav-link nav-link-categroies" id="home-tab" data-bs-toggle="tab" data-bs-target="#3D-design-tab" type="button" role="tab" aria-controls="home" aria-selected="false">3D DESIGN</button>
+         <ul class="nav nav-tabs " id="catagoriesTab1" role="tablist">
+         
+          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
+            <button class="nav-link nav-link-categroies" id="home-tab" data-bs-toggle="tab" data-bs-target="#D-designs-tab" type="button" role="tab" aria-controls="home" aria-selected="false">3D DESIGN</button>
           </li>
-        </div>
-        <div class="col-4">
-          <li class="nav-item nav-item-categroies" role="presentation">
+      
+        
+          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
             <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#computer-animation-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">COMPUTER ANIMATION</button>
           </li>
-        </div>
-          <div class="col-4">
-          <li class="nav-item nav-item-categroies" role="presentation">
+   
+         
+          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
             <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#fashion-tab" type="button" role="tab" aria-controls="contact" aria-selected="false">FASHION</button>
           </li>
-        </div>
-        </ul>
-      </div>
-        <div class="tab-content" id="catagoriesTab1">
-          <div class="tab-pane fade" id="3D-design-tab" role="tabpanel" aria-labelledby="home-tab">
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Interior design</button>
-             <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Model creation</button>
-             <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Set design</button>
-          </div>
-          <div class="tab-pane fade" id="computer-animation-tab" role="tabpanel" aria-labelledby="profile-tab">
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">2D animation</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D animation</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D modeling</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Compositing</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Infographics</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Motion Graphics</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Stop motion animation</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Infographics</button>
-          </div>
-          <div class="tab-pane fade" id="fashion-tab" role="tabpanel" aria-labelledby="contact-tab">
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Clothing production</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Fashion design</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">T-shirt design</button>
-          </div>
-        
-        <div class="gap"></div>
-        <ul class="nav nav-tabs nav-item-categroies" id="catagoriesTab1" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link nav-link-categroies" id="home-tab" data-bs-toggle="tab" data-bs-target="#graphics-tab" type="button" role="tab" aria-controls="home" aria-selected="false">GRAPHICS DESIGN</button>
+          <div class="tab-content" id="catagoriesTab1">
+            <div class="tab-pane fade" id="D-designs-tab" role="tabpanel" aria-labelledby="home-tab">
+               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Interior design</button>
+               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Model creation</button>
+               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Set design</button>
+               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D Printing</button>
+            </div>
+            <div class="tab-pane fade" id="computer-animation-tab" role="tabpanel" aria-labelledby="profile-tab">
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">2D animation</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D animation</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D modeling</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Compositing</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Infographics</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Motion Graphics</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Stop motion animation</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Infographics</button>
+            </div>
+            <div class="tab-pane fade" id="fashion-tab" role="tabpanel" aria-labelledby="contact-tab">
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Clothing production</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Fashion design</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">T-shirt design</button>
+            </div>
+            </div>
+
+          <li class="nav-item nav-skills" role="presentation">
+            <button class="nav-link nav-link-categroies " id="home-tab" data-bs-toggle="tab" data-bs-target="#graphics-tab" type="button" role="tab" aria-controls="home" aria-selected="false">GRAPHICS DESIGN</button>
           </li>
-          <li class="nav-item nav-item-categroies" role="presentation">
+          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
             <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#music-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">MUSIC AND SOUND</button>
           </li>
-          <li class="nav-item nav-item-categroies" role="presentation">
+          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
             <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#performance-tab" type="button" role="tab" aria-controls="contact" aria-selected="false">PERFORMANCE</button>
           </li>
-        </ul>
-        
-          <div class="tab-pane fade" id="graphics-tab" role="tabpanel" aria-labelledby="home-tab">
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Brand design</button>
-             <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Concept art</button>
-             <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Illustration</button>
-             <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Logo design</button>
-             <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Photoshop</button>
-             <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Storyboarding</button>
-          </div>
-          <div class="tab-pane fade" id="music-tab" role="tabpanel" aria-labelledby="profile-tab">
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Audio recording and editing</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Boom operator</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Composition</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">DJ</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Dubbing/ Subtitles</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Live performance</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Podcasting</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Radio</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Sound effects</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Sound engineer</button>
-          </div>
-          <div class="tab-pane fade" id="performance-tab" role="tabpanel" aria-labelledby="contact-tab">
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Acting</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Ballet</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Burlesque</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Circus</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Clowning</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Directing</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Drag</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Improv</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Interpretive Dance</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Modern Dance</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Performance art</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Stage management and production management </button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Stand up comedy</button>
-            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Workshops</button>
-          </div>
-        
 
-        <div class="gap"></div>
-        <ul class="nav nav-tabs" id="catagoriesTab1" role="tablist">
-          <li class="nav-item nav-item-categroies" role="presentation">
+          <div class="tab-content" id="catagoriesTab1">
+
+            <div class="tab-pane fade" id="graphics-tab" role="tabpanel" aria-labelledby="home-tab">
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Brand design</button>
+               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Concept art</button>
+               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Illustration</button>
+               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Logo design</button>
+               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Photoshop</button>
+               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Storyboarding</button>
+            </div>
+            <div class="tab-pane fade" id="music-tab" role="tabpanel" aria-labelledby="profile-tab">
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Audio recording and editing</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Boom operator</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Composition</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">DJ</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Dubbing/ Subtitles</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Live performance</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Podcasting</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Radio</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Sound effects</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Sound engineer</button>
+            </div>
+            <div class="tab-pane fade" id="performance-tab" role="tabpanel" aria-labelledby="contact-tab">
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Acting</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Ballet</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Burlesque</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Circus</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Clowning</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Directing</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Drag</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Improv</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Interpretive Dance</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Modern Dance</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Performance art</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Stage management and production management </button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Stand up comedy</button>
+              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Workshops</button>
+            </div>
+          </div>
+          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
             <button class="nav-link nav-link-categroies" id="home-tab" data-bs-toggle="tab" data-bs-target="#photography-tab" type="button" role="tab" aria-controls="home" aria-selected="false">JOURNALISM</button>
           </li>
-          <li class="nav-item nav-item-categroies" role="presentation">
+          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
             <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#video-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">PHOTOGRAPHY</button>
           </li>
-          <li class="nav-item nav-item-categroies" role="presentation">
+          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
             <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#video-games" type="button" role="tab" aria-controls="contact" aria-selected="false">THEATRE/DANCE</button>
           </li>
-        </ul>
+
+          
+          <div class="tab-content" id="catagoriesTab1">
         <div class="tab-pane fade" id="photography-tab" role="tabpanel" aria-labelledby="home-tab">
           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Event photography</button>
           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Documentary photography</button>
@@ -826,20 +890,24 @@ Fp                  </div>
           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Unreal 4/5</button>
           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Virtual reality</button>
         </div>
-     
+      </div>
 
-      <div class="gap"></div>
-        <ul class="nav nav-tabs" id="catagoriesTab1" role="tablist">
-          <li class="nav-item nav-item-categroies" role="presentation">
+          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
             <button class="nav-link nav-link-categroies" id="home-tab" data-bs-toggle="tab" data-bs-target="#visual-tab" type="button" role="tab" aria-controls="home" aria-selected="false">VISUAL EFFECTS</button>
           </li>
-          <li class="nav-item nav-item-categroies" role="presentation">
+          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
             <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#web-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">WEB DEVELOPMENT</button>
           </li>
-          <li class="nav-item nav-item-categroies" role="presentation">
+          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
             <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#writing-games" type="button" role="tab" aria-controls="contact" aria-selected="false">WRITING AND COPY</button>
           </li>
+        
         </ul>
+      </div>
+        
+        
+
+      <div class="tab-content" id="catagoriesTab1">
         <div class="tab-pane fade" id="visual-tab" role="tabpanel" aria-labelledby="home-tab">
           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Motion graphics</button>
           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Procedural modeling</button>
@@ -861,13 +929,13 @@ Fp                  </div>
           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Journalism</button>
           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Script Writing</button>
         </div>
-      </div>
+      
     </div>
     <div class="row">
       <div class="col-12">
         <div class="set-content-right">
           <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-dismiss="modal" data-bs-target="skills-catagories">Close</button>
-          <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#edit-details" data-bs-dismiss="modal">Setup Profile</button>
+          <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#edit-details" data-bs-dismiss="modal">Save</button>
           <!-- <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#submitted" data-bs-dismiss="modal" >Return to job board</button> -->
         </div>
       </div>
@@ -971,7 +1039,7 @@ Fp                  </div>
             </div>
             
             <div class="col-6"><p class="float-left delete-text">Delete project</p></div>
-             <div class="col-6">
+             <div class="col-md-6 col-sm-12 col-12">
               <div class="set-content-right gap">
                 
                 <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-target="#postmodal" data-bs-dismiss="modal" >Back</button>
@@ -1203,7 +1271,35 @@ items.forEach((el) => {
 });
 </script>
 
+<script>
+ function showSocialDiv1(){
+  document.getElementById("SocialMediaSelect2").style.visibility = "visible";
+  document.getElementById("SocialMediaSelect3").style.visibility = "visible";
+  document.getElementById("SocialMediaSelectbutton1").style.display = "none";
+}; 
 
+function showSocialDiv2(){
+  document.getElementById("SocialMediaSelect4").style.visibility = "visible";
+  document.getElementById("SocialMediaSelect5").style.visibility = "visible";
+  document.getElementById("SocialMediaSelectbutton2").style.display = "none"
+  document.getElementById("SocialMediaSelectbutton3").style.display = "none";
+
+}; 
+
+function hideSocialDiv1(){
+  document.getElementById("SocialMediaSelect2").style.visibility = "hidden";
+  document.getElementById("SocialMediaSelect3").style.visibility = "hidden";
+  document.getElementById("SocialMediaSelectbutton1").style.display = "block";
+
+}; 
+
+function hideSocialDiv2(){
+  document.getElementById("SocialMediaSelect4").style.visibility = "hidden";
+  document.getElementById("SocialMediaSelect5").style.visibility = "hidden";
+  document.getElementById("SocialMediaSelectbutton2").style.display = "block"
+  document.getElementById("SocialMediaSelectbutton3").style.display = "block";
+}; 
+</script>
 
 <!-- custom JS -->
 <script src="scripts/app.bundle.js"></script>

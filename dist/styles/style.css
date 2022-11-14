@@ -636,8 +636,9 @@ a:active {
   .port-block{
 	border: 1px solid #EDEBEE;
 	border-radius: 10px;
-	height: 447px;
+	height: 100%;
 	padding: 20px;
+	
   }
 
   .port-edit-img{
@@ -659,6 +660,13 @@ a:active {
 	text-decoration: underline;
 }
 
+.additional-files{
+	border: 1px solid #EDEBEE;
+    border-radius: 10px;
+    height: 200px;
+    padding: 20px;
+    text-align: center
+}
 .image-uploader {
     min-height: 10rem;
     border: 1px solid #d9d9d9;
@@ -811,11 +819,12 @@ a:active {
   #display-image{
 	width: 180px;
 	height: 180px;
-	border: 1px solid black;
+	border: 1px solid rgba(0,0,0,.3);
 	background-position: center;
 	background-size: cover;
 	border-radius: 100%;
 	text-align: center;
+	margin: 0 auto 0 auto;
   }
 
   
@@ -920,11 +929,48 @@ input[type=file]::file-selector-button {
 	
 	color: #7E7984;
 	border-radius: 5px 5px 0px 0px;
-
+	
 }
-
+ 
 .bordertest{
 	//border:  #EDEBEE 2px solid;
+}
+
+#SocialMediaSelect2{
+	visibility: hidden;
+	
+}
+
+#SocialMediaSelect3{
+	visibility: hidden;
+}
+
+#SocialMediaSelect4{
+	visibility: hidden;
+}
+
+#SocialMediaSelect5{
+	visibility: hidden;
+}
+
+
+#SocialMediaSelectbutton1{
+	display: block;
+	
+}
+
+.Button-Social{
+	background-color: #fff;
+	border: 0px;
+	color: #244F8E;
+	margin-top: 5px;
+}
+
+.Button-Social-delete{
+	background-color: #fff;
+	border: 0px;
+	color: #f70000;
+	margin-top: 5px;
 }
 
 .nav-link-categroies{
@@ -937,6 +983,16 @@ input[type=file]::file-selector-button {
 	border-radius: 5px 5px 0px 0px;
 	height: 82px;
 	width: 100%;
+	margin-bottom: 15px;
+}
+
+.nav-skills{
+	width: 33%;
+}
+
+.tab-pane{
+	margin-bottom: 10px;
+	margin-top: 10px;
 }
 
 .nav-link-categroies :active{
@@ -950,6 +1006,20 @@ margin-top: 20px;
 .showhide2{
 	margin-top: 40px;
 	}
+
+.dropdown-edit{
+	border:0px;
+	background-color: white;
+	
+}
+
+.edit-size{
+	font-size: 17px;
+	margin-bottom: 0px;
+	margin-top: 8px;
+	float: right;
+}
+
 
 
 /* ===================================== */
@@ -1004,6 +1074,7 @@ footer {
 	
 	border-radius: 10px;
 }
+
 
 .carousel-indicators button[data-bs-target] {
 	width: 200px;
