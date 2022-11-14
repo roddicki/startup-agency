@@ -944,8 +944,12 @@ input[type=file]::file-selector-button {
 }
 
 .showhide{
-margin-top: 40px;
+margin-top: 20px;
 }
+
+.showhide2{
+	margin-top: 40px;
+	}
 
 
 /* ===================================== */
