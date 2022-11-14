@@ -192,7 +192,15 @@ a:active {
 	max-width: 350px;
   }
 
+  .text-right{
+	text-align: right;
+	margin-top: 10px;
+	cursor: pointer;
+  }
   
+  .cursor-pointer{
+	cursor: pointer;
+  }
 
   .gap{
 	margin-top: 30px;
@@ -410,6 +418,16 @@ a:active {
 	float: right;
 	justify-content: right;
 	margin-top: 20px;
+  }
+
+  .delete-text{
+	font-style: normal;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 19px;
+	text-decoration-line: underline;
+	color: #E41B1F;
+	margin-top: 25px;
   }
 
   .warning-border{
