@@ -262,3 +262,28 @@ document.getElementById("eye-confirmation").addEventListener("click", function (
     }
     console.log(tags);
   }
+
+
+//forgot password validation
+const forgotPassForm = document.querySelector('#forgot-pass-form');
+//const forgotModal1 = new bootstrap.Modal(document.querySelector('#forgot-pass'));
+//const forgotModal2 = new bootstrap.Modal(document.querySelector('#forgot-pass-success'));
+
+// forgot password validation
+function validateEmail() {
+  if (!forgotPassForm.checkValidity()) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  else {
+    // validated
+    console.log("email validated");
+    return true;
+    //forgotModal1.hide();
+    //forgotModal2.show();
+  }
+  forgotPassForm.classList.add('was-validated');
+}
+
+
+
