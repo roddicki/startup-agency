@@ -275,189 +275,8 @@
   </div>
 </div>
 </section>
-<!--MessageModal-->
-<div class="modal fade" id="contact" tabindex="-1" aria-labelledby="details" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-centered">
-    <div class="modal-content modalcontentleft">
-      
-        <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Contact stiwdio member</h2>
-        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div class="row">
           
-          <form class="row g-3 needs-validation test-form2" novalidate>
-            <p class="project-showcase-text">PERSONAL DETAILS</p> 
-            <div class="col-md-6 col-sm-12">
-              <label for="validationCustom01" class="form-label">First name*</label>
-              <input type="text" class="form-control" id="validationCustom01" required>
-              <div class="invalid-feedback">
-                  Please add your forename.
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-12">
-              <label for="validationCustom02" class="form-label">Last name*</label>
-              <input type="text" class="form-control" id="validationCustom02" required>
-              <div class="invalid-feedback">
-                  Please add your surname.
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-12">
-              <label for="validationCustom03" class="form-label">Email*</label>
-              <input type="text" class="form-control" id="validationCustom03" required>
-              <div class="invalid-feedback">
-                Please provide a valid Email.
-              </div>
-            </div>
-            <div class="col-md-6 col-sm-12">
-              <label for="validationCustom03" class="form-label">Phone*</label>
-              <input type="text" class="form-control" id="validationCustom03" required>
-              <div class="invalid-feedback">
-                Please provide a valid phone number.
-              </div>
-            </div>
-            </form>
-           <!--Put button for job bfeif thingy on figma here -->
-           <div class="gap"></div>
-           <div class="row">
-            <p class="project-showcase-text">MESSAGE DETAILS</p> 
-              <form class="row g-3 needs-validation test-form2" novalidate>
-              <div class="col-lg-6 col-md-12 col-sm-12">
-                <button class="btn btn-primary message-portfolio-button" id="general-button">Send general message</button>
-              </div>
-              <div class="col-lg-6 col-md-12 col-sm-12">
-                <button class="btn btn-primary message-portfolio-button" id="propose-button">Propose Job breif</button>
-              </div>
-           </div>
-           <div class="gap"></div>
-           <!--This is for the genral message-->
-            <div class="col-md-12" id="general-message">
-              <label for="validationCustom04" class="form-label">General message*</label>
-              <textarea type="text" class="form-control" id="validationCustom07" rows="3" required></textarea>
-              <div class="invalid-feedback">
-                  Please tell us about the job
-                </div>
-            </div>
 
-              <!--This is the Propose job breif-->
-          <div class="propose-job" id="propose-job">
-            <div class="row">
-            <form class="g-3 needs-validation test-form1" novalidate>
-              <div class="col-md-12">
-                <label for="validationCustom06" class="form-label">Job title*</label>
-                <input type="text" class="form-control" id="validationCustom06" required>
-                <div class="invalid-feedback">
-                    Please add a job title
-                  </div>
-              </div>
-  
-              <div class="col-md-12">
-                <label for="validationCustom04" class="form-label">Company name*</label>
-                <input type="text" class="form-control" id="validationCustom07" required>
-                <div class="invalid-feedback">
-                    Please add your company name
-                  </div>
-              </div>
-  
-              <!--Completion radios -->
-              <div class="col-md-6 col-sm-12 gap">
-                <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                <label class="form-check-label" for="flexRadioDefault1">
-                  Set budget
-                </label>
-              </div>
-              <textarea class="form-control" id="validationCustom03" rows="1"></textarea>
-            </div>
-            <div class="col-md-6 col-sm-12 gap">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                <label class="form-check-label" for="flexRadioDefault1">
-                  Hourly Rate
-                </label>
-              </div>
-              <textarea class="form-control" id="validationCustom03" rows="1"></textarea>
-            </div>
-            <div class="gap"
-            <div class="row">
-            <div class="col-md-6">
-              <label for="validationCustom04" class="form-label">Application Deadline*</label>
-              <p></p>
-              <input class="date-input" type="date" id="start" name="trip-start" value="now" required>
-              <div class="invalid-feedback">
-                  Please add a application deadline
-                </div>
-            </div>
-          </div>
-            <div class="col-md-6">
-              <label for="validationCustom04" class="form-label">Job location*</label>
-              <input type="text" class="form-control" id="validationCustom07" required>
-              <div class="invalid-feedback">
-                  Please tell us if we need a location
-                </div>
-            </div>
-  
-            <div class="col-md-6 col-sm-12 gap remotejob">
-              <div class="form-check checkbox-pos">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                  Remote Job
-                </label>
-              </div>
-            </div>
-  
-            <div class="col-md-6 col-sm-12 gap">
-              <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault2">
-              <label class="form-check-label" for="flexRadioDefault2">
-                Completion date
-              </label>
-            </div>  
-            <input class="date-input date-margin" type="date" id="start" name="trip-start"
-                value="now"
-                 required>
-          </div>
-  
-          <div class="col-md-6 col-sm-12 gap">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault2">
-              <label class="form-check-label" for="flexRadioDefault2">
-                Duration period 
-              </label>
-          </div>
-          <input class="date-input date-margin" type="date" id="start" name="trip-start"
-          value="now"
-           required>
-        </div>
-  
-        <div class="col-md-12">
-          <label for="validationCustom04" class="form-label">Job brief*</label>
-          <textarea class="form-control" id="validationCustom03" rows="3" required></textarea>
-  
-          <div class="invalid-feedback">
-              Please tell us about the job
-            </div>
-        </div>
-      </div>
-    </div>
-        <!--end of propose job brief-->    
-
-
-          
-            <row>
-              <div class="col-12">
-                <div class="set-content-right gap">
-                  <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-target="#postmodal" data-bs-dismiss="modal" >Back</button>
-                  <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-dismiss="modal" >Submit</button>
-               </div>
-              </div>
-            </row>
-          </form>
-
-        
-
-        </div>
-    </div>
-  </div>
-</div>
 
 
 <!--MessageModal Add Project-->
@@ -469,11 +288,11 @@
         <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
         <div class="row">
           
-          <form class="row g-3 needs-validation test-form2" novalidate>
+          <form class="row g-3 needs-validation Add-Project" novalidate>
             <p class="project-showcase-text">PROJECT DETAILS</p> 
             <div class=" col-lg-6 col-md-12 col-sm-12">
-              <label for="validationCustom01" class="form-label">Project name*</label>
-              <input type="text" class="form-control" id="validationCustom01" required>
+              <label for="Add-Project" class="form-label">Project name*</label>
+              <input type="text" class="form-control" id="Add-project-Name" required>
               <div class="invalid-feedback">
                   Please add the project name 
                 </div>
@@ -481,8 +300,8 @@
 
             <!--This is for the genral message-->
             <div class="col-md-12" id="general-message">
-              <label for="validationCustom04" class="form-label">Description*</label>
-              <textarea type="text" class="form-control" id="validationCustom07" rows="4" required></textarea>
+              <label for="Add-project-Description" class="form-label">Description*</label>
+              <textarea type="text" class="form-control" id="Add-project-Description" rows="4" required></textarea>
               <div class="invalid-feedback">
                   Please tell us about the job
                 </div>
@@ -510,32 +329,19 @@
             
             <div class="col-12">
               <div class="set-content-right gap">
-                <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-target="#postmodal" data-bs-dismiss="modal" >Back</button>
-                <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-dismiss="modal" >Submit</button>
+                <button type="button" class="btn btn-secondary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"  data-bs-dismiss="modal" >Cancel</button>
+                <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"    id="Add-Project-Submit">Submit</button>
              </div>
             </div>
-
             
             </form>
-           
-           
-  
-  
-      </div>
+          </div>
+       </div>
     </div>
-        <!--end of propose job brief-->    
-
-
-          
-            
-          </form>
-
-        
-
-        </div>
-    </div>
-  </div>
 </div>
+           
+  
+
 
 
 <!--Edit Details modal-->
@@ -543,7 +349,7 @@
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modalcontentleft">
       
-        <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Personal Details</h2>
+        <h2 class="modal-title signinheader modalheaddrapply">Personal Details</h2>
         <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
         <div class="row">
           <div class="col-md-12 col-sm-12">
@@ -569,18 +375,18 @@
             </div>
           </div>
         
-          <form class="row g-3 needs-validation changeDetails" novalidate>
+          <form class="row g-3 needs-validation change-Details" novalidate>
             <div class="col-lg-6 col-md-12">
-              <label for="validationCustom06" class="form-label">FirstName*</label>
-              <input type="text" class="form-control" id="validationCustom06" required>
+              <label for="bio-edit-firstname" class="form-label">FirstName*</label>
+              <input type="text" class="form-control" id="bio-edit-firstname" required>
               <div class="invalid-feedback">
                   Please add a your first name
                 </div>
             </div>
 
             <div class="col-lg-6 col-md-12">
-              <label for="validationCustom04" class="form-label">Last name*</label>
-              <input type="text" class="form-control" id="validationCustom07" required>
+              <label for="bio-edit-lastname" class="form-label">Last name*</label>
+              <input type="text" class="form-control" id="bio-edit-lastname" required>
               <div class="invalid-feedback">
                   Please add your last name
                 </div>
@@ -597,32 +403,32 @@
             </div>
 
             <div class="col-lg-6 col-md-12">
-              <label for="validationCustom04" class="form-label">Business name</label>
-              <input type="text" class="form-control" id="validationCustom07" required>
+              <label for="Business-name" class="form-label">Business name</label>
+              <input type="text" class="form-control" >
               <div class="invalid-feedback">
                   Please add your last name
                 </div>
             </div>
 
             <div class="col-lg-6 col-md-12">
-              <label for="validationCustom04" class="form-label">Title</label>
-              <input type="text" class="form-control" id="validationCustom07" required>
+              <label for="Title" class="form-label">Title</label>
+              <input type="text" class="form-control">
               <div class="invalid-feedback">
                   Please add your last name
                 </div>
             </div>
 
             <div class="col-lg-6 col-md-12">
-              <label for="validationCustom04" class="form-label">Location</label>
-              <input type="text" class="form-control" id="validationCustom07" required>
+              <label for="Location" class="form-label">Location</label>
+              <input type="text" class="form-control">
               <div class="invalid-feedback">
                   Please add your last name
                 </div>
             </div>
 
             <div class="col-lg-6 col-md-12">
-              <label for="validationCustom04" class="form-label">Website</label>
-              <input type="text" class="form-control" id="validationCustom07" required>
+              <label for="Website" class="form-label">Website</label>
+              <input type="text" class="form-control">
               <div class="invalid-feedback">
                   Please add your last name
                 </div>
@@ -630,11 +436,11 @@
 
                   
             <div class="col-md-12">
-              <label for="validationCustom04" class="form-label">Bio</label>
+              <label for="Bio" class="form-label">Bio</label>
               <textarea class="form-control" maxlength="500"  rows="3" required></textarea>
               
               <div class="invalid-feedback">
-                  Please tell us about the job
+                  Please add a Bio
                 </div>
               </div>
               <small id="passwordHelpBlock" class="form-text text-muted">
@@ -653,8 +459,8 @@
             
           <div class="col-12">
             <div class="set-content-right gap">
-              <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#step1" data-bs-dismiss="modal">Cancel</button>
-              <button type="button" id="submit6" class="btn btn-primary btn-lg btn-block">Save changes</button>
+              <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal"  data-bs-dismiss="modal">Cancel</button>
+              <button type="button" id="change-Details-Submit" class="btn btn-primary btn-lg btn-block">Save changes</button>
             </div>
           </div>
           </form>
@@ -667,7 +473,7 @@
 <div class="modal fade" id="social-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modalcontentleft">
-      
+      <form class="row g-3 needs-validation SocialMedia" novalidate>
         <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Socials</h2>
         <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
         <div class="row">
@@ -675,30 +481,33 @@
             <p>Platform</p>
               <div class="form-group">
                 <select class="form-control" id="SocialMediaSelect1">
-                  <option>Instagram</option>
-                  <option>Dribble</option>
-                  <option>Twitter</option>
-                  <option>Facebook</option>
+                  <option value="0">Please select an option</option>
+                  <option value="1">Instagram</option>
+                  <option value="2">Dribble</option>
+                  <option value="3">Twitter</option>
+                  <option value="4">Facebook</option>
                 </select>
-                <button id="SocialMediaSelectbutton1" class="Button-Social" onClick="showSocialDiv1()">+ Add another</button>
+                <div id="SocialMediaSelectbutton1" class="Button-Social" onClick="showSocialDiv1()">+ Add Social</div>
               </div>
             </div>
             <div class="col-md-6 col-sm-12 gap">
               <p>Username</p>
             
-              <input type="text" class="form-control" >
+              <input  type="text" id="Social-Media-1"  id="disabledTextInput" class="form-control" required>
               
             </div>
+          
           <div id="SocialMediaSelect2" class="col-md-6 col-sm-12 gap">
             <p>Platform</p>
               <div class="form-group">
                 <select class="form-control" id="SocialMediaSelect1">
-                  <option>Instagram</option>
-                  <option>Dribble</option>
-                  <option>Twitter</option>
-                  <option>Facebook</option>
+                  <option value="0">Please select an option</option>
+                  <option value="1">Instagram</option>
+                  <option value="2">Dribble</option>
+                  <option value="3">Twitter</option>
+                  <option value="4">Facebook</option>
                 </select>
-                <button id="SocialMediaSelectbutton2" class="Button-Social" onClick="showSocialDiv2()">Add another</button>
+                <div id="SocialMediaSelectbutton2" class="Button-Social" onClick="showSocialDiv2()">+ Add Social</div>
 
               </div>
             </div>
@@ -706,7 +515,7 @@
             <div id="SocialMediaSelect3" class="col-md-6 col-sm-12 gap">
               <p>Username</p>
               <input type="text" class="form-control" >
-              <button id="SocialMediaSelectbutton3" class="Button-Social-delete" onClick="hideSocialDiv1()">Delete</button>
+              <div id="SocialMediaSelectbutton3" class="Button-Social-delete" onClick="hideSocialDiv1()">Delete</div>
 
               <div class="col-md-12 col-sm-12 ">
               </div>
@@ -717,6 +526,7 @@
               <p>Platform</p>
               <div class="form-group">
                 <select class="form-control">
+                  <option>Please select an option</option>
                   <option>Instagram</option>
                   <option>Dribble</option>
                   <option>Twitter</option>
@@ -729,14 +539,15 @@
             <div id="SocialMediaSelect5" class="col-md-6 col-sm-6 gap">
               <p>Username</p>
               <input type="text" class="form-control" >
-              <button id="SocialMediaSelectbutton4" class="Button-Social-delete" onClick="hideSocialDiv2()">Delete</button>
+              <div id="SocialMediaSelectbutton4" class="Button-Social-delete" onClick="hideSocialDiv2()">Delete</div>
 
             </div>
           </div>
+        </form>
           <div class="col-12">
             <div class="set-content-right gap">
-              <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#step1" data-bs-dismiss="modal">Cancel</button>
-              <button type="button" id="submit6" class="btn btn-primary btn-lg btn-block">Save changes</button>
+              <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" id="Social-Media-Submit" class="btn btn-primary btn-lg btn-block">Save changes</button>
             </div>
           </div>
           
@@ -811,7 +622,7 @@
           <div class="tab-content" id="catagoriesTab1">
 
             <div class="tab-pane fade" id="graphics-tab" role="tabpanel" aria-labelledby="home-tab">
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Brand design</button>
+               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Brand design</button>
                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Concept art</button>
                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Illustration</button>
                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Logo design</button>
@@ -934,8 +745,8 @@
     <div class="row">
       <div class="col-12">
         <div class="set-content-right">
-          <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-dismiss="modal" data-bs-target="skills-catagories">Close</button>
-          <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#edit-details" data-bs-dismiss="modal">Save</button>
+          <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal"  data-bs-dismiss="modal">Save</button>
           <!-- <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#submitted" data-bs-dismiss="modal" >Return to job board</button> -->
         </div>
       </div>
@@ -1046,7 +857,7 @@
              <div class="col-md-6 col-sm-12 col-12">
               <div class="set-content-right gap">
                 
-                <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-target="#postmodal" data-bs-dismiss="modal" >Back</button>
+                <button type="button" class="btn btn-secondary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-dismiss="modal" >Cancel</button>
                 <button type="button" id="submit-edit-project" class="btn btn-primary btn-lg btn-block apply-btn" >Submit</button>
               
               </div>
@@ -1074,6 +885,9 @@
 </div>
 
 
+<span id="postjobmodal">
+  <!--Import post job modal-->
+</span>
 
 
 <span id="signinmodal">
@@ -1193,6 +1007,79 @@ function hideSocialDiv2(){
      }
     EditProject1.classList.add('was-validated');
   }, false)
+</script>
+
+<script>
+  //step 1 registration validaiton
+const AddProject1 = document.querySelector('.Add-Project');
+const AddProjectSubmit = document.querySelector('#Add-Project-Submit');
+const AddProjectModal = new bootstrap.Modal(document.querySelector('#addProject'));
+
+
+// Loop over inputs and prevent submission
+AddProjectSubmit.addEventListener('click', function (event) {
+  console.log("modal 1 submit clicked");
+  if (!AddProject1.checkValidity()) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log("modal 1 was-NOT-validated");
+  }
+   else {
+     console.log("modal 1 was-validated");
+     AddProjectModal.hide();
+  //   regModal2.show();
+   }
+   AddProject1.classList.add('was-validated');
+}, false)
+</script>
+
+<script>
+  //step 1 registration validaiton
+const changeDetailsForm = document.querySelector('.change-Details');
+const changeDetailsSubmit = document.querySelector('#change-Details-Submit');
+const changeDetailsModal = new bootstrap.Modal(document.querySelector('#edit-details'));
+
+
+// Loop over inputs and prevent submission
+changeDetailsSubmit.addEventListener('click', function (event) {
+  console.log("modal 1 submit clicked");
+  if (!changeDetailsForm.checkValidity()) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log("modal 1 was-NOT-validated");
+  }
+   else {
+     console.log("modal 1 was-validated");
+     changeDetailsModal.hide();
+  //   regModal2.show();
+   }
+   changeDetailsForm.classList.add('was-validated');
+}, false)
+</script>
+
+<script>
+  //step 1 registration validaiton
+const SoicalMediaForm = document.querySelector('.SocialMedia');
+const SocialMediaSubmit = document.querySelector('#Social-Media-Submit');
+const SocialMediaOptionValue = document.querySelector('#SocialMediaSelect1');
+const SocialMediaModal = new bootstrap.Modal(document.querySelector('#social-modal'));
+
+
+// Loop over inputs and prevent submission
+SocialMediaSubmit.addEventListener('click', function (event) {
+  console.log("modal 1 submit clicked");
+  if (!SoicalMediaForm.checkValidity()){
+    event.preventDefault();
+    event.stopPropagation();
+    console.log("modal 1 was-NOT-validated");
+  }
+   else {
+     console.log("modal 1 was-validated");
+     SoicalMediaForm.hide();
+  //   regModal2.show();
+   }
+   SoicalMediaForm.classList.add('was-validated');
+}, false)
 </script>
 
 <!-- custom JS -->

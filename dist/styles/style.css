@@ -964,6 +964,7 @@ input[type=file]::file-selector-button {
 	border: 0px;
 	color: #244F8E;
 	margin-top: 5px;
+	cursor: pointer;
 }
 
 .Button-Social-delete{
@@ -971,6 +972,7 @@ input[type=file]::file-selector-button {
 	border: 0px;
 	color: #f70000;
 	margin-top: 5px;
+	cursor: pointer;
 }
 
 .nav-link-categroies{
