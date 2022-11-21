@@ -936,27 +936,10 @@ input[type=file]::file-selector-button {
 	//border:  #EDEBEE 2px solid;
 }
 
-#SocialMediaSelect2{
-	visibility: hidden;
-	
-}
-
-#SocialMediaSelect3{
-	visibility: hidden;
-}
-
-#SocialMediaSelect4{
-	visibility: hidden;
-}
-
-#SocialMediaSelect5{
-	visibility: hidden;
-}
-
-
-#SocialMediaSelectbutton1{
-	display: block;
-	
+.SocialMedia-1-container,
+.SocialMedia-2-container,
+.SocialMedia-3-container {
+  visibility: hidden;
 }
 
 .Button-Social{
