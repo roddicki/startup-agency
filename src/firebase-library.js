@@ -4,7 +4,7 @@ import { initializeApp } from 'firebase/app';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import { getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc, doc, query, where, orderBy, getDoc, serverTimestamp, updateDoc, setDoc,  Timestamp, arrayUnion} from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAq7-QGjZ8O1RVe_seOfdYjVLCjLdwrHYE",
@@ -164,6 +164,28 @@ export function getUserUid() {
         console.log(user.uid, "current use id");
       } 
   })
+}
+
+
+
+// returns password reset link
+export function resetPassword(email) {
+  const forgotModal1 = bootstrap.Modal.getInstance(document.querySelector('#forgot-pass'));
+  const forgotModal2 = new bootstrap.Modal(document.querySelector('#forgot-pass-success'));
+  sendPasswordResetEmail(auth, email)
+  .then(function() {
+    // Password reset email sent!
+    console.log("email sent");
+    forgotModal1.hide();
+    forgotModal2.show();
+  })
+  .catch(function(error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(error.message);
+    document.querySelector("#forgot-pass .alert-danger").innerHTML += "Email not found, Please try another email";
+    document.querySelector("#forgot-pass .alert-danger").removeAttribute("hidden");
+  });
 }
 
 //*****************************************

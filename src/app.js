@@ -1,5 +1,5 @@
 
-import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, isUserSignedIn, getUserUid, getAllJobData, getAllCurrentJobData, getSingleJob, getAllUserData} from './firebase-library.js';
+import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, isUserSignedIn, getUserUid, getAllJobData, getAllCurrentJobData, getSingleJob, getAllUserData, resetPassword} from './firebase-library.js';
 
 loadCheck();
 
@@ -8,7 +8,7 @@ import { initializeApp } from 'firebase/app';
 import { getStorage, ref, uploadBytes, getDownloadURL, connectStorageEmulator } from "firebase/storage";
 
 import { getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc, doc, query, where, orderBy, getDoc, serverTimestamp, updateDoc, setDoc,  Timestamp, arrayUnion, connectFirestoreEmulator} from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, signInWithPhoneNumber, ActionCodeURL } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, signInWithPhoneNumber, ActionCodeURL } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAq7-QGjZ8O1RVe_seOfdYjVLCjLdwrHYE",
@@ -1229,6 +1229,19 @@ regForm2Submit.addEventListener('click', function (e) {
   });
 
 
+// reset password
+//resetPassword("rod@roddickinson.net");
+const forgotPassSubmit = document.querySelector('#submit-forgot1');
+
+forgotPassSubmit.addEventListener('click', function (event) {
+  let validated = validateEmail(); // from form-validation.js
+  const forgotForm = document.querySelector('#forgot-pass-form');
+  if (validated) {
+    resetPassword(forgotForm.email.value); // from firebase-library.js
+  }
+});
+
+
 // send help email about posting a job
 const modalHelpButton = document.querySelector('#submit3');
 const helpSendModal = new bootstrap.Modal(document.querySelector('#help'));
@@ -1247,6 +1260,8 @@ modalHelpButton.addEventListener('click', function (e) {
     });
   }
 });  
+
+
 
 
 // LOGIN PAGE
