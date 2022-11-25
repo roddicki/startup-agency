@@ -6,25 +6,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="styles/style.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
-      rel="stylesheet"> 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <title>Startup Agency</title>
-  <style>
-   
-  </style>
+
+  <!-- image uploader -->
+  <link rel="stylesheet" href="image-uploader/image-uploader.min.css">
+  <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <title>Startup Agency - build profile</title>
 </head>
 
-<body data-page="" class="d-flex flex-column min-vh-100">
+<style>
+  /*.uploaded-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+  }
+
+  .uploaded-image {
+    display: inline-block;
+    width: calc(16.6666667% - 1rem);
+    padding-bottom: calc(16.6666667% - 1rem);
+    height: 0;
+    position: relative;
+    margin: 0.5rem;
+    background: #f3f3f3;
+    cursor: default;
+  }
+
+  .delete-image i {
+    color: #fff;
+    font-size: 1.4rem;
+  }
+
+  .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    color: white;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .uploaded-image .delete-image {
+    cursor: pointer;
+    position: absolute;
+    top: 0.2rem;
+    right: 0.2rem;
+    border-radius: 50%;
+    padding: 0.3rem;
+    width: 2rem;
+    height: 2rem;
+    background-color: rgba(0,0,0,.5);
+    -webkit-appearance: none;
+    border: none;
+  }
+
+  .uploaded-image .edit-image {
+    cursor: pointer;
+    position: absolute;
+    bottom: 0.2rem;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.3rem;
+    background-color: rgba(0,0,0,.5);
+    -webkit-appearance: none;
+    border: none;
+  }*/
+
+  .edit-section {
+    display: none;
+  }
+</style>
+<body data-page="edit-profile" class="d-flex flex-column min-vh-100">
 
 <header id="header">
-  <!-- imports header + nav from src/header.html -->
+    <!-- header + nav from src/header.html -->
 </header>
 
 
-
-<section>
-  
+<section class="edit-section">
   <div class="container">
     <div class="row">
       <div class="col-md-9 col-sm-12"></div>
@@ -39,25 +112,28 @@
         <div class="content-blocks">
           <!--this is for edit function-->
           <div class="form-check form-switch">
-            <input class="form-check-input form-check-input-profile" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label form-check-label-profile" for="flexSwitchCheckDefault">Available for work</label> 
+            <input class="form-check-input form-check-input-profile" type="checkbox" id="available-for-work">
+            <label class="form-check-label form-check-label-profile" for="available-for-work">Available for work</label> 
            <i class="bi bi-pencil-square float-right cursor-pointer" data-bs-toggle="modal" data-bs-target="#edit-details"></i></button>
           </div> 
           <!-- <div class="available-tag">Available for work</div> -->
           <div class="text-center">
             <div class="profile-img">
-              <img src="https://github.com/mdo.png" alt="mdo" width="128" height="128" class="rounded-circle">
+              <img src="./assets/img/generic-profile.jpg" alt="mdo" width="128" height="128" class="rounded-circle">
             </div> 
             <div>
-              <h2>Jamie Lamb</h2>
+              <h2 id="personal-details-name"><!-- name --></h2>
             </div>
             <div>
-              <h3>Game Designer</h2>
+              <h3 id="personal-details-title"><!-- title --></h2>
             </div>
             <div>
-              <p class="underline">www.ReduxGameStudios.com</p>
+              <p class="underline" id="personal-details-link"><!-- web site --></p>
             </div>
-            <div class="col-12 gap"><img src="./assets/img/mapicon.svg"  width="16" height="16">  Cardiff, Wales</div>
+            <div class="col-12 gap">
+              <img src="./assets/img/mapicon.svg"  width="16" height="16">
+              <span id="personal-details-location"><!-- location --></span>
+            </div>
             <!-- <div class="d-grid gap">
               <button class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#contact">Messgae / Propose job</button>
             </div> -->
@@ -71,8 +147,8 @@
             </div>
           </div>
           
-          <div class="">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae urna semper augue nec risus, pellentesque sit. Sit aenean dictum est vel habitasse. Sollicitudin ultrices montes, justo, quis pretium tellus suspendisse leo lectus.</p>
+          <div id="personal-details-bio">
+            <p>Add your bio</p>
           </div>
         </div>
         
@@ -81,26 +157,21 @@
             <div class="col-12 project-showcase-text">
               <p>SKILLS CATEGORIES <i class="bi bi-pencil-square float-right cursor-pointer" data-bs-toggle="modal" data-bs-target="#skills-catagories"></i></button></p>
             </div>
-            <div class="col-12">
-              <p><strong>Design</strong></p>
+            <div id="skills-catagories-list">
+              <div class="col-12">
+                <p><strong>Add your Skills</strong></p>
+              </div>
+              <!-- <div class="col-12 gap">
+                <p><strong>Games</strong></p>
+              </div>
+              <div class="col-12">
+                <div class="filter-tag-profile">Unreal 4</div>
+                <div class="filter-tag-profile">Unity</div>
+                <div class="filter-tag-profile">Blender</div>
+              </div> -->
             </div>
-            <div class="col-12">
-               <div class="filter-tag-profile">Photoshop</div>
-               <div class="filter-tag-profile">Premeire</div>
-               <div class="filter-tag-profile">Video</div>
-               <div class="filter-tag-profile">Photography</div>
-               <div class="filter-tag-profile">Adobe</div>
-             </div>
-            <div class="col-12 gap">
-
-              <p><strong>Games</strong></p>
-
-            </div>
-            <div class="col-12">
-              <div class="filter-tag-profile">Unreal 4</div>
-              <div class="filter-tag-profile">Unity</div>
-              <div class="filter-tag-profile">Blender</div>
-            </div>
+          
+            
           </div>
         
         </div>
@@ -110,7 +181,7 @@
           </div>
           
           <div class="row">
-            <div class="col-4 col-md-4 col-lg-4 col-xl-4">
+            <!-- <div class="col-4 col-md-4 col-lg-4 col-xl-4">
               <img src="./assets/img/InstagramSocial.svg">
             </div>
             <div class="col-4 col-md-4 col-lg-4 col-xl-4">
@@ -118,7 +189,7 @@
             </div>
             <div class="col-4 col-md-4 col-lg-4 col-xl-4">
               <img src="./assets/img/TwitterSocial.svg">
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -180,17 +251,6 @@
                         </ul>
                     </h2>
                     </div>
-
-
-
-
-                     <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> <i  class="bi bi-pencil-square float-right cursor-pointer"></i></button></h2>
-                 </div>
-                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul> -->
                   <div class="col-12">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna mauris, at urna ...</p>
                   </div>
@@ -368,8 +428,6 @@
                 <!--Need a remove button-->
               </div>
             <div class="col-md-4 col-sm-12"></div>
-          
-              
             
             </div>
           </div>
@@ -377,7 +435,7 @@
           <form class="row g-3 needs-validation change-Details" novalidate>
             <div class="col-lg-6 col-md-12">
               <label for="bio-edit-firstname" class="form-label">FirstName*</label>
-              <input type="text" class="form-control" id="bio-edit-firstname" required>
+              <input type="text" class="form-control" id="bio-edit-firstname" placeholder="Add your forename" required>
               <div class="invalid-feedback">
                   Please add a your first name
                 </div>
@@ -385,49 +443,49 @@
 
             <div class="col-lg-6 col-md-12">
               <label for="bio-edit-lastname" class="form-label">Last name*</label>
-              <input type="text" class="form-control" id="bio-edit-lastname" required>
+              <input type="text" class="form-control" id="bio-edit-lastname" placeholder="Add your surname" required>
               <div class="invalid-feedback">
                   Please add your last name
                 </div>
             </div>
             <div class="col-md-6 col-sm-12 gap">
               <div class="form-group">
-                <label for="exampleFormControlSelect1">Example select</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                  <option>she/her</option>  
-                  <option>he/him</option>
-                  <option>they/them</option>
+                <label for="pronoun-selection">Pronouns</label>
+                <select class="form-control" id="pronoun-selection">
+                  <option>Select an option</option>
+                  <option value="she/her">she/her</option>  
+                  <option value="he/him">he/him</option>
+                  <option value="they/them">they/them</option>
                 </select>
               </div>
             </div>
 
             <div class="col-lg-6 col-md-12">
               <label for="Business-name" class="form-label">Business name</label>
-              <input type="text" class="form-control" >
+              <input type="text" class="form-control" placeholder="Add your business name" id="business-name">
               <div class="invalid-feedback">
-                  Please add your last name
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+              <label for="job-title" class="form-label">Job Title*</label>
+              <input type="text" class="form-control" id="job-title" placeholder="Add your job title / optional" required>
+              <div class="invalid-feedback">
+                  Please add your job title
                 </div>
             </div>
 
             <div class="col-lg-6 col-md-12">
-              <label for="Title" class="form-label">Title</label>
-              <input type="text" class="form-control">
+              <label for="user-location" class="form-label">Location*</label>
+              <input type="text" class="form-control" placeholder="Add your location" id="user-location" required>
               <div class="invalid-feedback">
-                  Please add your last name
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-md-12">
-              <label for="Location" class="form-label">Location</label>
-              <input type="text" class="form-control">
-              <div class="invalid-feedback">
-                  Please add your last name
+                  Please add your location
                 </div>
             </div>
 
             <div class="col-lg-6 col-md-12">
               <label for="Website" class="form-label">Website</label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" placeholder="Add your website / optional" id="user-website">
               <div class="invalid-feedback">
                   Please add your last name
                 </div>
@@ -435,8 +493,8 @@
 
                   
             <div class="col-md-12">
-              <label for="Bio" class="form-label">Bio</label>
-              <textarea class="form-control" maxlength="500"  rows="3" required></textarea>
+              <label for="Bio" class="form-label">Bio*</label>
+              <textarea class="form-control" maxlength="500" placeholder="Add your bio"  rows="3" id="user-bio" required></textarea>
               
               <div class="invalid-feedback">
                   Please add a Bio
@@ -922,18 +980,17 @@
 </div>
 
 
+
 <span id="postjobmodal">
   <!--Import post job modal-->
 </span>
-
 
 <span id="signinmodal">
   <!--Import sign in modal-->
 </span>
 
-
 <footer id="footer" class="mt-auto">
-  <!-- imports footer from src/footer.html -->
+  <!-- footer from src/footer.html -->
 </footer>
 
 
@@ -942,6 +999,26 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<!-- image uploader -->
+<script type="text/javascript" src="image-uploader/image-uploader.min.js"></script>
+<!-- custom JS -->
+<script src="scripts/app.bundle.js"></script>
+<!-- form validation -->
+<script src="scripts/form-validation.js"></script>
+<script>
+  $(document).ready(function(){
+    $('.input-images-1').imageUploader({
+      extensions: ['.jpg', '.jpeg', '.png', '.gif'],
+      mimes: ['image/jpeg', 'image/png', 'image/gif'],
+      maxSize: undefined,
+      maxFiles: undefined,
+      label:'Drag & Drop files here or click to browse',
+    });
+  });
+</script>
 
 <!-- add custom scripts -->
 <script type="text/javascript" src="image-uploader/image-uploader.min.js"></script>
@@ -956,6 +1033,7 @@
     });
   });
 </script>
+
 <script>
   // jamie add page specific JS here
   let items = document.querySelectorAll('.carousel .carousel-item')
@@ -966,8 +1044,8 @@ items.forEach((el) => {
     for (var i=1; i<minPerSlide; i++) {
         if (!next) {
             // wrap carousel by using first child
-        	next = items[0]
-      	}
+          next = items[0]
+        }
         let cloneChild = next.cloneNode(true)
         el.appendChild(cloneChild.children[0])
         next = next.nextElementSibling
@@ -975,11 +1053,6 @@ items.forEach((el) => {
 })
 
 </script>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-<script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-
 <script>
   const image_input = document.querySelector("#image-input");
   image_input.addEventListener("change", function() {
@@ -1165,9 +1238,4 @@ SocialMediaSubmit.addEventListener('click', function (event) {
 
 
 </script>
-
-<!-- custom JS -->
-<script src="scripts/app.bundle.js"></script>
-<!-- event listeners -->
-
 </body>

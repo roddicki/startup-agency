@@ -700,6 +700,67 @@ function showSignedOutUser() {
 
 // ======CREATE AND EDIT PROFILE FUNCTIONS======
 
+// show registration data in the personal details modal
+function populatePersonalDetailsModal(vals){
+  let forename = document.querySelector("#edit-details #bio-edit-firstname");
+  forename.value = vals.forename;
+  let surname = document.querySelector("#edit-details #bio-edit-lastname");
+  surname.value = vals.surname;
+  // add profile image
+  if (vals.businessName) {
+    let businessName = document.querySelector("#edit-details #business-name");
+    businessName.value = vals.businessName;
+  }
+  if (vals.pronouns) {
+    let pronouns = document.querySelector("#edit-details #pronoun-selection");
+    pronouns.value = vals.pronouns;
+  }
+  if (vals.jobTitle) {
+    let jobTitle = document.querySelector("#edit-details #job-title");
+    jobTitle.value = vals.jobTitle;
+  }
+  if (vals.location) {
+    let location = document.querySelector("#edit-details #user-location");
+    location.value = vals.location;
+  }
+  if (vals.website) {
+    let website = document.querySelector("#edit-details #user-website");
+    website.value = vals.website;
+  }
+  if (vals.bio) {
+    let bio = document.querySelector("#edit-details #user-bio");
+    bio.value = vals.bio;
+  }
+}
+
+// show personal details in the bio column of edit-profile
+function populateBio(vals) {
+  // available for work
+  let available = document.querySelector(".edit-section #available-for-work");
+  if (vals.available) {
+    console.log(available);
+    available.checked = true;
+  }
+  else {
+    available.checked = false;
+  }
+  // name
+  let name = document.querySelector(".edit-section #personal-details-name");
+  name.innerHTML = vals.forename + " " + vals.surname;
+  // title
+  let jobTitle = document.querySelector(".edit-section #personal-details-title");
+  jobTitle.innerHTML = vals.jobTitle;
+  // website
+  let website = document.querySelector(".edit-section #personal-details-link");
+  website.innerHTML = vals.website;
+  // location
+  let location = document.querySelector(".edit-section #personal-details-location");
+  location.innerHTML = vals.location;
+  // bio
+  let bio = document.querySelector(".edit-section #personal-details-bio");
+  bio.innerHTML = vals.bio;
+}
+
 // watch for new uploaded images add edit caption icon
 function uploadImageWatcher(){
   const captionImg = document.querySelector('#caption-image');
@@ -1288,13 +1349,35 @@ window.addEventListener('DOMContentLoaded', function(){
   //getTag();
   if(allUserData) {
     getAllUserData(getParam(), function(userData){
-      displayAllUserData(userData);
+      displayAllUserData("user data:", userData);
     });
   }
 });
 
 
-// ADD / EDIT PROFILE PAGE
+// ADD / EDIT PROFILE PAGE edit-profile.html
+if (page == "edit-profile") {
+  console.log("edit-profile page");
+  let section = document.querySelector("section");
+  // show name on page load on add-profile page
+  onAuthStateChanged(auth, function(user) {
+    if (user) {
+      // User logged in already or has just logged in.
+      console.log("user "+user.uid+" logged in");
+      getCurrentUserDetails(user.uid).then(function(vals){
+        // show page when logged in
+        section.style.display = "block";
+        // populate personal details modal
+        populatePersonalDetailsModal(vals);
+        // pipoulate bio section and available for work
+        populateBio(vals);
+      });
+    } 
+  }) 
+}
+
+
+// ADD / EDIT PROFILE PAGE add-profile.html
 if (page == "add-profile") {
   console.log("add-profile page");
   // show name on page load on add-profile page
@@ -1308,6 +1391,7 @@ if (page == "add-profile") {
           }
         });
       } 
+
   })
 
   // create tag system

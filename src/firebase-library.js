@@ -43,21 +43,21 @@ export function signUpUser(e) {
   let email = signupForm.email.value;
   let password = signupForm.password.value;
   createUserWithEmailAndPassword(auth, email, password)
-      .then(function(cred){
-        console.log('user created:', cred.user);
-        // create doc for user
-        createUserDoc(cred.user.uid, email);
-      })
-      .catch(function(err) {
-        console.log(err.message);
-        if (err.message.includes("email-already-in-use")) {
-          document.querySelector("#register-modal2 .alert-danger").innerHTML += "Email already in use, please ty another or reset your password";
-        }
-        else {
-          document.querySelector("#register-modal2 .alert-danger").innerHTML += "Error registering";
-        }
-        document.querySelector("#register-modal2 .alert-danger").removeAttribute("hidden");
-      });
+    .then(function(cred){
+      console.log('user created:', cred.user);
+      // create doc for user
+      createUserDoc(cred.user.uid, email);
+    })
+    .catch(function(err) {
+      console.log(err.message);
+      if (err.message.includes("email-already-in-use")) {
+        document.querySelector("#register-modal2 .alert-danger").innerHTML += "Email already in use, please ty another or reset your password";
+      }
+      else {
+        document.querySelector("#register-modal2 .alert-danger").innerHTML += "Error registering";
+      }
+      document.querySelector("#register-modal2 .alert-danger").removeAttribute("hidden");
+    });
 }
 
 
