@@ -49,14 +49,19 @@
               <img src="https://github.com/mdo.png" alt="mdo" width="128" height="128" class="rounded-circle">
             </div> 
             <div>
-              <h2>Jamie Lamb</h2>
+              <h3>Jamie Lamb</h2>
             </div>
             <div>
-              <h3>Game Designer</h2>
+              <!--Changes start-->
+              <h5>Game Designer</h2>
             </div>
             <div>
-              <p class="underline">www.ReduxGameStudios.com</p>
+              <h4>Redux Studios</a></h2>
             </div>
+            <div>
+              <p class="underline"><a href="https://reduxgamestudios.com/">ReduxGameStudios.com</a></p>
+            </div>
+            <!--Changes end-->
             <div class="col-12 gap"><img src="./assets/img/mapicon.svg"  width="16" height="16">  Cardiff, Wales</div>
             <!-- <div class="d-grid gap">
               <button class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#contact">Messgae / Propose job</button>
@@ -151,7 +156,7 @@
                 <div class="port-block">
                   <div class="row">
                     <div class="col-12">
-                      <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams1.png">
+                      <img class="port-edit-img-main" src="./assets/img/jamie-profile-img/sweetdreams1.png">
                     </div>
                     <div class="gap"></div>
                     <div class="col-4">
@@ -204,7 +209,7 @@
                 <div class="port-block">
                   <div class="row">
                     <div class="col-12">
-                      <img class="port-edit-img" src="./assets/img/jamie-profile-img/stealthvr.jpg">
+                      <img class="port-edit-img-main" src="./assets/img/jamie-profile-img/stealthvr.jpg">
                     </div>
                     <div class="gap"></div>
                     <div class="col-4">
@@ -942,19 +947,20 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+<!--made changes here -->
 <!-- add custom scripts -->
 <script type="text/javascript" src="image-uploader/image-uploader.min.js"></script>
+
 <script>
-  $(document).ready(function(){
+
     $('.input-images-1').imageUploader({
       extensions: ['.jpg', '.jpeg', '.png', '.gif'],
       mimes: ['image/jpeg', 'image/png', 'image/gif'],
-      maxSize: undefined,
-      maxFiles: undefined,
-      label:' Drag & Drop files here or click to browse',
+      maxSize: 5 * 1024 * 1024,
+      maxFiles: 4,
+      label:' Drag & Drop files here or click to browse'
     });
-  });
+//finished here
 </script>
 <script>
   // jamie add page specific JS here

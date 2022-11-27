@@ -56,6 +56,24 @@ a:hover {
 a:active {
 	text-decoration: none;
 }
+
+h4{
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 22px;
+
+	/* Indigo */
+	color: #572F88;
+
+}
+
+h5{
+	font-weight: 400;
+	font-size: 22px;
+	line-height: 26px;
+	color: #4E4A53;
+}
+
   
   .btn {
     white-space: nowrap;
@@ -138,6 +156,7 @@ a:active {
 	flex-grow: 0;
 	z-index: 3;
 }
+
 
 .signinheader{
 	
@@ -641,9 +660,19 @@ a:active {
 	
   }
 
+  .port-edit-img-main{
+	width: 100%;
+	border-radius: 10px;
+	object-fit: cover;
+	max-height: 150px;
+	min-height: 150px;
+  }
   .port-edit-img{
 	width: 100%;
 	border-radius: 10px;
+	max-height: 50px;
+	min-height: 50px;
+	object-fit: cover;
   }
 
    .form-check-input-profile{
@@ -658,6 +687,7 @@ a:active {
 	}
 .underline{
 	text-decoration: underline;
+	color:#7E7984;
 }
 
 .additional-files{
