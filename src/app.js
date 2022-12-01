@@ -1,5 +1,5 @@
 
-import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, isUserSignedIn, getUserUid, getAllJobData, getAllCurrentJobData, getSingleJob, getAllUserData, resetPassword} from './firebase-library.js';
+import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, updateUserDoc, isUserSignedIn, getUserUid, getAllJobData, getAllCurrentJobData, getSingleJob, getAllUserData, resetPassword} from './firebase-library.js';
 
 loadCheck();
 
@@ -700,7 +700,51 @@ function showSignedOutUser() {
 
 // ======CREATE AND EDIT PROFILE FUNCTIONS======
 
-// show registration data in the personal details modal
+// update bio info 
+async function updatePersonalDetails(uid){
+  //console.log("update personal details");
+  const updateDetailsForm = document.querySelector('.change-Details');
+  updateDoc(doc(db, "users", uid), {
+    forename: updateDetailsForm.forename.value,
+    surname: updateDetailsForm.surname.value,
+    pronouns: updateDetailsForm.pronouns .value,
+    businessName: updateDetailsForm.businessName.value,
+    jobTitle: updateDetailsForm.jobTitle.value,
+    location: updateDetailsForm.userLocation.value,
+    website: updateDetailsForm.webLink.value,
+    bio: updateDetailsForm.bio.value,
+  })
+  .then(function(){
+    console.log("successfully updated user doc");
+  })
+  .catch(function(error){
+    console.log("Error: Getting document:", error); 
+  });
+}
+
+// update tags  
+async function updateSkillsTags(uid){
+  //console.log("update tags");
+  // get active buttons / tag from skill-categories modal
+  let tagEls = document.querySelectorAll("#skills-categories .tab-pane button.active");
+  let tagList = [];
+  for (var i = 0; i < tagEls.length; i++) {
+    console.log(tagEls[i].dataset.skills);
+    tagList.push(tagEls[i].dataset.skills);
+  }
+  
+  updateDoc(doc(db, "users", uid), {
+    tags: tagList
+  })
+  .then(function(){
+    console.log("successfully updated user doc wirg new tags");
+  })
+  .catch(function(error){
+    console.log("Error: Getting document:", error); 
+  });
+}
+
+// show bio info / personal info in personal details modal
 function populatePersonalDetailsModal(vals){
   let forename = document.querySelector("#edit-details #bio-edit-firstname");
   forename.value = vals.forename;
@@ -738,7 +782,6 @@ function populateBio(vals) {
   // available for work
   let available = document.querySelector(".edit-section #available-for-work");
   if (vals.available) {
-    console.log(available);
     available.checked = true;
   }
   else {
@@ -760,6 +803,78 @@ function populateBio(vals) {
   let bio = document.querySelector(".edit-section #personal-details-bio");
   bio.innerHTML = vals.bio;
 }
+
+// populate skills tags modal
+function populateSkillsModal(vals){
+  for (var i = 0; i < vals.tags.length; i++) {
+    let el = document.querySelector('[data-skills="'+vals.tags[i]+'"]');
+    el.classList.add("active");
+  }
+}
+
+// populate skills in bio section of edit
+function populateSkills(vals){
+  // remove existing skills tags to avoid duplication
+  let allTagContainers = document.querySelectorAll('#skills-categories-list .skills-tags');
+  for (var i = 0; i < allTagContainers.length; i++) {
+    allTagContainers[i].innerHTML = "";
+  } 
+  // if there are some skills tags - hide placeholder
+  let placeholder = document.querySelector('.placeholder-category');
+  if (vals.tags.length > 0) {
+    placeholder.classList.add("d-none");
+  } else {
+    placeholder.classList.remove("d-none");
+  }
+  // find tags and categories
+  for (var i = 0; i < vals.tags.length; i++) {
+    // find category
+    let category = vals.tags[i].split('-');
+    // unhide category
+    let el = document.querySelector('[data-category="'+category[0]+'"]');
+    el.classList.remove('d-none');    
+    // add tag
+    let tagTitle = vals.tags[i].replace(category[0], "").replace("-", "");
+    tagTitle = tagTitle.split('-').join(' ');
+    //let tagEl = "<div class=\"filter-tag-profile\">"+tagTitle+"</div>";
+    let tagEl = document.createElement('div');
+    tagEl.className = "filter-tag-profile text-capitalize";
+    tagEl.innerHTML = tagTitle;
+    let tagContainer = document.querySelector('[data-category="'+category[0]+'"] .skills-tags');
+    tagContainer.appendChild(tagEl);
+  }
+  // hide categories title if no div skill-tags
+  for (var i = 0; i < allTagContainers.length; i++) {
+    if (allTagContainers[i].innerHTML == "") {
+      //console.log("empty", allTagContainers[i])
+      allTagContainers[i].parentElement.classList.add("d-none");
+    }
+  } 
+}
+
+function populateSocialsModal(vals) {
+  console.log(vals.socials);
+  for (const [index, [key, value]] of Object.entries(Object.entries(vals.socials))) {
+    //console.log(`${index}: ${key} = ${value}`);
+    console.log(index, key, value);
+    if (index == 0) {
+      showSocialDiv0();
+      document.querySelector("#SocialMedia-1-Select-input").value = key;
+      document.querySelector("#Social-Media-1-user-input").value = value;
+    } else if (index == 1) {
+      showSocialDiv1();
+      document.querySelector("#SocialMedia-2-Select-input").value = key;
+      document.querySelector("#Social-Media-2-user-input").value = value;
+    }
+    else if (index == 2) {
+      showSocialDiv2();
+      document.querySelector("#SocialMedia-3-Select-input").value = key;
+      document.querySelector("#Social-Media-3-user-input").value = value;
+    }
+  }
+}
+
+
 
 // watch for new uploaded images add edit caption icon
 function uploadImageWatcher(){
@@ -849,6 +964,7 @@ function saveHero(e) {
   }
 }
 
+// OLD
 // show profile preview
 function showPreview(selectedTags){
   const profileForm = document.querySelector('.add-profile');
@@ -934,6 +1050,7 @@ async function getImageUrls(e){
   return images; 
 }
 
+// OLD
 // show all existing profile data in form fields
 function showProfileData(userData) {
   console.log("show user data", userData.tags);
@@ -1152,6 +1269,7 @@ function createTagCheckboxes() {
   }
 }
 
+
 // add tag badge on change
 function addTagBadge(){
   const tagList = document.querySelector('#tag-list');
@@ -1355,7 +1473,7 @@ window.addEventListener('DOMContentLoaded', function(){
 });
 
 
-// ADD / EDIT PROFILE PAGE edit-profile.html
+// EDIT PROFILE PAGE edit-profile.html
 if (page == "edit-profile") {
   console.log("edit-profile page");
   let section = document.querySelector("section");
@@ -1371,13 +1489,65 @@ if (page == "edit-profile") {
         populatePersonalDetailsModal(vals);
         // pipoulate bio section and available for work
         populateBio(vals);
+        // populate skills tags modal
+        populateSkillsModal(vals);
+        // populate skills 
+        populateSkills(vals);
+        // populate socials modal
+        populateSocialsModal(vals);
       });
     } 
   }) 
+
+  let pageEdited = false;
+  // listen for change to available for work switch
+  const availability = document.querySelector(".edit-section #available-for-work");
+  availability.addEventListener('change',function(){
+    // update user doc with key val
+    updateUserDoc(currentUserData.uid, "available", availability.checked);
+  })
+
+  // submit personal details modal, update edit page, send update email to admin
+  const submitPersonalDetails = document.querySelector("#edit-details #change-Details-Submit");
+  submitPersonalDetails.addEventListener('click', function(){
+    updatePersonalDetails(currentUserData.uid).then(function(){
+      getCurrentUserDetails(currentUserData.uid).then(function(vals){
+        // populate bio section and available for work
+        populateBio(vals);
+        pageEdited = true;
+        //let msg = "User " + currentUserData.forename + " " + currentUserData.surname + ", user ID: " + currentUserData.uid + " has updated their profile<br><br>Please view it here: https://studio-freelancer-agency.web.app/profile.html?id=" + currentUserData.uid;
+        //createSentEmailDoc("stiwdiofreelanceragency@gmail.com", "stiwdiofreelanceragency@gmail.com", msg);
+      });
+    });
+  });
+
+  // submit / update skills tags, update edit page, send update email to admin
+  const submitSkillsTags = document.querySelector("#skills-categories #save-skills");
+  submitSkillsTags.addEventListener('click', function(){
+    updateSkillsTags(currentUserData.uid).then(function(){
+      getCurrentUserDetails(currentUserData.uid).then(function(vals){
+        // populate skills tags
+        populateSkills(vals);
+        pageEdited = true;
+        //let msg = "User " + currentUserData.forename + " " + currentUserData.surname + ", user ID: " + currentUserData.uid + " has updated their profile<br><br>Please view it here: https://studio-freelancer-agency.web.app/profile.html?id=" + currentUserData.uid;
+        //createSentEmailDoc("stiwdiofreelanceragency@gmail.com", "stiwdiofreelanceragency@gmail.com", msg);
+      });
+    });
+  });
+
+  // listen for a visibility change and use this to send an email
+  document.addEventListener("visibilitychange", function(){
+    if (document.visibilityState == "hidden" && pageEdited) {
+      console.log("edit page: ",document.visibilityState);
+      let msg = "User " + currentUserData.forename + " " + currentUserData.surname + ", user ID: " + currentUserData.uid + " has updated their profile<br><br>Please view it here: https://studio-freelancer-agency.web.app/profile.html?id=" + currentUserData.uid;
+      createSentEmailDoc("stiwdiofreelanceragency@gmail.com", "stiwdiofreelanceragency@gmail.com", msg);
+    }
+  });
+
 }
 
 
-// ADD / EDIT PROFILE PAGE add-profile.html
+// ADD PROFILE PAGE add-profile.html
 if (page == "add-profile") {
   console.log("add-profile page");
   // show name on page load on add-profile page
