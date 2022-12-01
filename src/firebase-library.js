@@ -83,6 +83,18 @@ export function createUserDoc(uid, userEmail) {
   });
 }
 
+// update doc for user
+export function updateUserDoc(uid, key, val) {
+  //console.log(uid, key, val);
+  // create key val update
+  let updateKeyVal = {};
+  updateKeyVal[key] = val;
+  updateDoc(doc(db, "users", uid), updateKeyVal)
+  .then(function(){
+    console.log("successfully updated user doc");
+  });
+}
+
 
 // Sign-out
 export function signOutUser(e) {

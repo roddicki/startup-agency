@@ -155,25 +155,62 @@
         <div class="content-blocks">
           <div class="row">
             <div class="col-12 project-showcase-text">
-              <p>SKILLS CATEGORIES <i class="bi bi-pencil-square float-right cursor-pointer" data-bs-toggle="modal" data-bs-target="#skills-catagories"></i></button></p>
+              <p>SKILLS CATEGORIES <i class="bi bi-pencil-square float-right cursor-pointer" data-bs-toggle="modal" data-bs-target="#skills-categories"></i></button></p>
             </div>
-            <div id="skills-catagories-list">
-              <div class="col-12">
+            <div id="skills-categories-list">
+              <div class="col-12 placeholder-category">
                 <p><strong>Add your Skills</strong></p>
               </div>
-              <!-- <div class="col-12 gap">
-                <p><strong>Games</strong></p>
+              <div class="col-12 d-none pb-4" data-category="3d">
+                <p><strong>3d Design</strong></p>
+                <div class="skills-tags"></div>
               </div>
-              <div class="col-12">
-                <div class="filter-tag-profile">Unreal 4</div>
-                <div class="filter-tag-profile">Unity</div>
-                <div class="filter-tag-profile">Blender</div>
-              </div> -->
-            </div>
-          
-            
+              <div class="col-12 d-none pb-4" data-category="animation">
+                <p><strong>Computer Animation</strong></p>
+                <div class="skills-tags"></div>
+              </div>
+              <div class="col-12 d-none" data-category="fashion">
+                <p><strong>Fashion</strong></p>
+                <div class="skills-tags"></div>
+              </div>
+              <div class="col-12 d-none pb-4" data-category="graphics">
+                <p><strong>Graphic Design</strong></p>
+                <div class="skills-tags"></div>
+              </div>
+              <div class="col-12 d-none pb-4" data-category="music">
+                <p><strong>Music and Sound</strong></p>
+                <div class="skills-tags"></div>
+              </div>
+              <div class="col-12 d-none pb-4" data-category="performance">
+                <p><strong>Performance</strong></p>
+                <div class="skills-tags"></div>
+              </div>
+              <div class="col-12 d-none pb-4" data-category="photography">
+                <p><strong>Photography</strong></p>
+                <div class="skills-tags"></div>
+              </div>
+              <div class="col-12 d-none pb-4" data-category="video">
+                <p><strong>Video</strong></p>
+                <div class="skills-tags"></div>
+              </div>
+              <div class="col-12 d-none pb-4" data-category="games">
+                <p><strong>Video Games</strong></p>
+                <div class="skills-tags"></div>
+              </div>
+              <div class="col-12 d-none pb-4" data-category="vfx">
+                <p><strong>Visual Effects</strong></p>
+                <div class="skills-tags"></div>
+              </div>
+              <div class="col-12 d-none pb-4" data-category="web">
+                <p><strong>Web Development</strong></p>
+                <div class="skills-tags"></div>
+              </div>
+              <div class="col-12 d-none pb-4" data-category="writing">
+                <p><strong>Writing and Copy</strong></p>
+                <div class="skills-tags"></div>
+              </div>
+            </div> 
           </div>
-        
         </div>
         <div class="content-blocks">
           <div class="col-12 project-showcase-text">
@@ -435,7 +472,7 @@
           <form class="row g-3 needs-validation change-Details" novalidate>
             <div class="col-lg-6 col-md-12">
               <label for="bio-edit-firstname" class="form-label">FirstName*</label>
-              <input type="text" class="form-control" id="bio-edit-firstname" placeholder="Add your forename" required>
+              <input type="text" class="form-control" id="bio-edit-firstname" name="forename" placeholder="Add your forename" required>
               <div class="invalid-feedback">
                   Please add a your first name
                 </div>
@@ -443,7 +480,7 @@
 
             <div class="col-lg-6 col-md-12">
               <label for="bio-edit-lastname" class="form-label">Last name*</label>
-              <input type="text" class="form-control" id="bio-edit-lastname" placeholder="Add your surname" required>
+              <input type="text" class="form-control" id="bio-edit-lastname" name="surname" placeholder="Add your surname" required>
               <div class="invalid-feedback">
                   Please add your last name
                 </div>
@@ -451,7 +488,7 @@
             <div class="col-md-6 col-sm-12 gap">
               <div class="form-group">
                 <label for="pronoun-selection">Pronouns</label>
-                <select class="form-control" id="pronoun-selection">
+                <select class="form-control" name="pronouns" id="pronoun-selection">
                   <option>Select an option</option>
                   <option value="she/her">she/her</option>  
                   <option value="he/him">he/him</option>
@@ -462,14 +499,14 @@
 
             <div class="col-lg-6 col-md-12">
               <label for="Business-name" class="form-label">Business name</label>
-              <input type="text" class="form-control" placeholder="Add your business name" id="business-name">
+              <input type="text" class="form-control" placeholder="Add your business name" name="businessName" id="business-name">
               <div class="invalid-feedback">
               </div>
             </div>
 
             <div class="col-lg-6 col-md-12">
               <label for="job-title" class="form-label">Job Title*</label>
-              <input type="text" class="form-control" id="job-title" placeholder="Add your job title / optional" required>
+              <input type="text" class="form-control" id="job-title" name="jobTitle" placeholder="Add your job title / optional" required>
               <div class="invalid-feedback">
                   Please add your job title
                 </div>
@@ -477,7 +514,7 @@
 
             <div class="col-lg-6 col-md-12">
               <label for="user-location" class="form-label">Location*</label>
-              <input type="text" class="form-control" placeholder="Add your location" id="user-location" required>
+              <input type="text" class="form-control" placeholder="Add your location" name="userLocation" id="user-location" required>
               <div class="invalid-feedback">
                   Please add your location
                 </div>
@@ -485,7 +522,7 @@
 
             <div class="col-lg-6 col-md-12">
               <label for="Website" class="form-label">Website</label>
-              <input type="text" class="form-control" placeholder="Add your website / optional" id="user-website">
+              <input type="text" class="form-control" placeholder="Add your website / optional" name="webLink" id="user-website">
               <div class="invalid-feedback">
                   Please add your last name
                 </div>
@@ -494,7 +531,7 @@
                   
             <div class="col-md-12">
               <label for="Bio" class="form-label">Bio*</label>
-              <textarea class="form-control" maxlength="500" placeholder="Add your bio"  rows="3" id="user-bio" required></textarea>
+              <textarea class="form-control" maxlength="500" placeholder="Add your bio"  rows="3" name="bio" id="user-bio" required></textarea>
               
               <div class="invalid-feedback">
                   Please add a Bio
@@ -547,7 +584,7 @@
             <p>Platform</p>
             <div class="form-group">
               <select class="form-control" id="SocialMedia-1-Select-input">
-                <option value="" disabled selected>Please select an option</option>
+                <option value="default" disabled selected>Please select an option</option>
                 <option value="instagram">Instagram</option>
                 <option value="dribble">Dribble</option>
                 <option value="twitter">Twitter</option>
@@ -580,7 +617,7 @@
             <p>Platform</p>
             <div class="form-group">
               <select class="form-control" id="SocialMedia-2-Select-input">
-                <option value="" disabled selected>Please select an option</option>
+                <option value="default" disabled selected>Please select an option</option>
                 <option value="instagram">Instagram</option>
                 <option value="dribble">Dribble</option>
                 <option value="twitter">Twitter</option>
@@ -613,7 +650,7 @@
             <p>Platform</p>
             <div class="form-group">
               <select class="form-control" id="SocialMedia-3-Select-input">
-                <option value="" disabled selected>Please select an option</option>
+                <option value="default" disabled selected>Please select an option</option>
                 <option value="instagram">Instagram</option>
                 <option value="dribble">Dribble</option>
                 <option value="twitter">Twitter</option>
@@ -651,7 +688,7 @@
 </div>
 
 <!--Modal for Skills catagorries not looking forward to making this-->
-<div class="modal fade" id="skills-catagories" tabindex="-1" aria-labelledby="Skills" aria-hidden="true">
+<div class="modal fade" id="skills-categories" tabindex="-1" aria-labelledby="Skills" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
         <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -664,7 +701,7 @@
         <div class="row">
           <div class="col-12">
          <!--Make caegories here -->
-         <ul class="nav nav-tabs " id="catagoriesTab1" role="tablist">
+         <ul class="nav nav-tabs " id="categoriesTab1" role="tablist">
          
           <li class="nav-item nav-item-categroies nav-skills" role="presentation">
             <button class="nav-link nav-link-categroies" id="home-tab" data-bs-toggle="tab" data-bs-target="#D-designs-tab" type="button" role="tab" aria-controls="home" aria-selected="false">3D DESIGN</button>
@@ -679,32 +716,31 @@
           <li class="nav-item nav-item-categroies nav-skills" role="presentation">
             <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#fashion-tab" type="button" role="tab" aria-controls="contact" aria-selected="false">FASHION</button>
           </li>
-          <div class="tab-content" id="catagoriesTab1">
+          <div class="tab-content">
             <div class="tab-pane fade" id="D-designs-tab" role="tabpanel" aria-labelledby="home-tab">
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Interior design</button>
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Model creation</button>
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Set design</button>
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D Printing</button>
+               <button type="button" data-skills="3d-interior-design" class="btn btn-primary filtertag" data-bs-toggle="button" prressed="true" autocomplete="off">Interior design</button>
+               <button type="button" data-skills="3d-model-creation" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Model creation</button>
+               <button type="button" data-skills="3d-set-design" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Set design</button>
+               <button type="button" data-skills="3d-3d-printing" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D Printing</button>
             </div>
             <div class="tab-pane fade" id="computer-animation-tab" role="tabpanel" aria-labelledby="profile-tab">
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">2D animation</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D animation</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D modeling</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Compositing</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Infographics</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Motion Graphics</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Stop motion animation</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Infographics</button>
+              <button type="button" data-skills="animation-2d-animation" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">2D animation</button>
+              <button type="button" data-skills="animation-3d-animation" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D animation</button>
+              <button type="button" data-skills="animation-3d-modelling" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D modeling</button>
+              <button type="button" data-skills="animation-compositing" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Compositing</button>
+              <button type="button" data-skills="animation-infographics" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Infographics</button>
+              <button type="button" data-skills="animation-motion-graphics" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Motion Graphics</button>
+              <button type="button" data-skills="animation-stop-motion-animation" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Stop motion animation</button>
             </div>
             <div class="tab-pane fade" id="fashion-tab" role="tabpanel" aria-labelledby="contact-tab">
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Clothing production</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Fashion design</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">T-shirt design</button>
+              <button type="button" data-skills="fashion-clothing-production" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Clothing production</button>
+              <button type="button" data-skills="fashion-fashion-design" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Fashion design</button>
+              <button type="button" data-skills="fashion-t-shirt-design" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">T-shirt design</button>
             </div>
           </div>
 
           <li class="nav-item nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies " id="home-tab" data-bs-toggle="tab" data-bs-target="#graphics-tab" type="button" role="tab" aria-controls="home" aria-selected="false">GRAPHICS DESIGN</button>
+            <button class="nav-link nav-link-categroies " id="home-tab" data-bs-toggle="tab" data-bs-target="#graphics-tab" type="button" role="tab" aria-controls="home" aria-selected="false">GRAPHIC DESIGN</button>
           </li>
           <li class="nav-item nav-item-categroies nav-skills" role="presentation">
             <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#music-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">MUSIC AND SOUND</button>
@@ -713,87 +749,86 @@
             <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#performance-tab" type="button" role="tab" aria-controls="contact" aria-selected="false">PERFORMANCE</button>
           </li>
 
-          <div class="tab-content" id="catagoriesTab1">
-
+          <div class="tab-content">
             <div class="tab-pane fade" id="graphics-tab" role="tabpanel" aria-labelledby="home-tab">
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Brand design</button>
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Concept art</button>
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Illustration</button>
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Logo design</button>
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Photoshop</button>
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Storyboarding</button>
+               <button type="button" data-skills="graphics-brand-design" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Brand design</button>
+               <button type="button" data-skills="graphics-concept-art" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Concept art</button>
+               <button type="button" data-skills="graphics-illustration" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Illustration</button>
+               <button type="button" data-skills="graphics-logo-design" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Logo design</button>
+               <button type="button" data-skills="graphics-photoshop" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Photoshop</button>
+               <button type="button" data-skills="graphics-storyboarding" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Storyboarding</button>
             </div>
             <div class="tab-pane fade" id="music-tab" role="tabpanel" aria-labelledby="profile-tab">
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Audio recording and editing</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Boom operator</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Composition</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">DJ</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Dubbing/ Subtitles</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Live performance</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Podcasting</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Radio</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Sound effects</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Sound engineer</button>
+              <button type="button" data-skills="music-audio-recording-and-editing" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Audio recording and editing</button>
+              <button type="button" data-skills="music-boom-operator" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Boom operator</button>
+              <button type="button" data-skills="music-composition" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Composition</button>
+              <button type="button" data-skills="music-dj" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">DJ</button>
+              <button type="button" data-skills="music-dubbing-and-subtitles" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Dubbing / Subtitles</button>
+              <button type="button" data-skills="music-live-perforamnce" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Live performance</button>
+              <button type="button" data-skills="music-podcasting" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Podcasting</button>
+              <button type="button" data-skills="music-radio" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Radio</button>
+              <button type="button" data-skills="music-sound-effects" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Sound effects</button>
+              <button type="button" data-skills="music-sound-engineer" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Sound engineer</button>
             </div>
             <div class="tab-pane fade" id="performance-tab" role="tabpanel" aria-labelledby="contact-tab">
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Acting</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Ballet</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Burlesque</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Circus</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Clowning</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Directing</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Drag</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Improv</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Interpretive Dance</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Modern Dance</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Performance art</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Stage management and production management </button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Stand up comedy</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Workshops</button>
+              <button type="button" data-skills="performance-acting" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Acting</button>
+              <button type="button" data-skills="performance-ballet" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Ballet</button>
+              <button type="button" data-skills="performance-burlesque" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Burlesque</button>
+              <button type="button" data-skills="performance-circus" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Circus</button>
+              <button type="button" data-skills="performance-clowning" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Clowning</button>
+              <button type="button" data-skills="performance-directing" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Directing</button>
+              <button type="button" data-skills="performance-drag" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Drag</button>
+              <button type="button" data-skills="performance-improv" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Improv</button>
+              <button type="button" data-skills="performance-interpretive-dance" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Interpretive Dance</button>
+              <button type="button" data-skills="performance-modern-dance" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Modern Dance</button>
+              <button type="button" data-skills="performance-performance-art" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Performance art</button>
+              <button type="button" data-skills="performance-stage-and-production-management" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Stage and production management </button>
+              <button type="button" data-skills="performance-stand-up-comedy" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Stand up comedy</button>
+              <button type="button" data-skills="performance-workshops" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Workshops</button>
             </div>
           </div>
           <li class="nav-item nav-item-categroies nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies" id="home-tab" data-bs-toggle="tab" data-bs-target="#photography-tab" type="button" role="tab" aria-controls="home" aria-selected="false">JOURNALISM</button>
+            <button class="nav-link nav-link-categroies" id="home-tab" data-bs-toggle="tab" data-bs-target="#photography-tab" type="button" role="tab" aria-controls="home" aria-selected="false">PHOTOGRAPHY</button>
           </li>
           <li class="nav-item nav-item-categroies nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#video-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">PHOTOGRAPHY</button>
+            <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#video-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">VIDEO</button>
           </li>
           <li class="nav-item nav-item-categroies nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#video-games" type="button" role="tab" aria-controls="contact" aria-selected="false">THEATRE/DANCE</button>
+            <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#video-games" type="button" role="tab" aria-controls="contact" aria-selected="false">VIDEO GAMES</button>
           </li>
 
           
-          <div class="tab-content" id="catagoriesTab1">
+          <div class="tab-content">
             <div class="tab-pane fade" id="photography-tab" role="tabpanel" aria-labelledby="home-tab">
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Event photography</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Documentary photography</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Pet photography </button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Photo editing </button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Portrait photography </button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Wildlife photography
+              <button type="button" data-skills="photography-event-photography" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Event photography</button>
+              <button type="button" data-skills="photography-documentary-photography" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Documentary photography</button>
+              <button type="button" data-skills="photography-pet-photography" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Pet photography </button>
+              <button type="button" data-skills="photography-photo-editing" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Photo editing </button>
+              <button type="button" data-skills="photography-portrait-photography" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Portrait photography </button>
+              <button type="button" data-skills="photography-wildlife-photography" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Wildlife photography
               </button>
                
             </div>
             <div class="tab-pane fade" id="video-tab" role="tabpanel" aria-labelledby="profile-tab">
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Aerial drone</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Directing </button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Lighting Artist</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Producer</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Runner</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Scripting</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Video editing </button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Videography</button>
+              <button type="button" data-skills="video-aerial-drone" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Aerial drone</button>
+              <button type="button" data-skills="video-directing" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Directing </button>
+              <button type="button" data-skills="video-lighting-artist" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Lighting Artist</button>
+              <button type="button" data-skills="video-producer" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Producer</button>
+              <button type="button" data-skills="video-runner" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Runner</button>
+              <button type="button" data-skills="video-scripting" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Scripting</button>
+              <button type="button" data-skills="video-editing" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Video editing </button>
+              <button type="button" data-skills="video-videography" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Videography</button>
             </div>
             <div class="tab-pane fade" id="video-games" role="tabpanel" aria-labelledby="contact-tab">
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Blueprint design </button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">C++</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">C#</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Games design</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Level design</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">QA testing </button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Unity </button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Unreal 4/5</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Virtual reality</button>
+              <button type="button" data-skills="games-blueprint-design" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Blueprint design </button>
+              <button type="button" data-skills="games-c++" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">C++</button>
+              <button type="button" data-skills="games-c#" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">C#</button>
+              <button type="button" data-skills="games-games-design" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Games design</button>
+              <button type="button" data-skills="games-level-design" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Level design</button>
+              <button type="button" data-skills="games-qa-testing" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">QA testing </button>
+              <button type="button" data-skills="games-unity" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Unity </button>
+              <button type="button" data-skills="games-unreal" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Unreal 4/5</button>
+              <button type="button" data-skills="games-virtual-reality" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Virtual reality</button>
             </div>
           </div>
 
@@ -812,27 +847,27 @@
         
         
 
-      <div class="tab-content" id="catagoriesTab1">
+      <div class="tab-content">
         <div class="tab-pane fade" id="visual-tab" role="tabpanel" aria-labelledby="home-tab">
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Motion graphics</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Procedural modeling</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Rotoscoping</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Simulation</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Texturing</button>
+          <button type="button" data-skills="vfx-motion-graphics" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Motion graphics</button>
+          <button type="button" data-skills="vfx-procedural-modeling" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Procedural modeling</button>
+          <button type="button" data-skills="vfx-rotoscoping" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Rotoscoping</button>
+          <button type="button" data-skills="vfx-simulation" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Simulation</button>
+          <button type="button" data-skills="vfx-texturing" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Texturing</button>
            
         </div>
         <div class="tab-pane fade" id="web-tab" role="tabpanel" aria-labelledby="profile-tab">
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">UI/UX Design</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Search engine optimisation</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Website design</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Website production</button>
+          <button type="button" data-skills="web-ui-ux-design" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">UI/UX Design</button>
+          <button type="button" data-skills="web-search-engine-optimisation" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Search engine optimisation</button>
+          <button type="button" data-skills="web-webiste-design" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Website design</button>
+          <button type="button" data-skills="web-website-production" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Website production</button>
         </div>
         <div class="tab-pane fade" id="writing-games" role="tabpanel" aria-labelledby="contact-tab">
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Blogs</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Copywriting and proofing</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Creative Writing</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Journalism</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Script Writing</button>
+          <button type="button" data-skills="writing-blogs" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Blogs</button>
+          <button type="button" data-skills="writing-copywriting-and-proofing" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Copywriting and proofing</button>
+          <button type="button" data-skills="writing-creative-writing" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Creative Writing</button>
+          <button type="button" data-skills="writing-journalism" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Journalism</button>
+          <button type="button" data-skills="writing-script-writing" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Script Writing</button>
         </div>
       
     </div>
@@ -840,7 +875,7 @@
       <div class="col-12">
         <div class="set-content-right">
           <button type="button" class="btn btn-secondary btn-lg btn-block" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-dismiss="modal">Save</button>
+          <button type="button" class="btn btn-primary btn-lg btn-block" id="save-skills"  data-bs-dismiss="modal">Save</button>
           <!-- <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle="modal" data-bs-target="#submitted" data-bs-dismiss="modal" >Return to job board</button> -->
         </div>
       </div>
@@ -1105,7 +1140,9 @@ function hideSocialDiv0(){
   document.querySelector(".SocialMedia-1-container").style.visibility = "hidden";
   // remove required to SocialMedia-1-Select-input, Social-Media-1-user-input
   document.querySelector("#SocialMedia-1-Select-input").removeAttribute("required", "");
+  document.querySelector("#SocialMedia-1-Select-input").value = "default";
   document.querySelector("#Social-Media-1-user-input").removeAttribute("required", "");
+  document.querySelector("#Social-Media-1-user-input").value = "";
   document.getElementById("SocialMediaSelectbuttonInit").style.visibility = "visible";
   document.querySelector("#SocialMedia-1-add").style.visibility = "hidden";
   document.querySelector("#SocialMedia-1-delete").style.visibility = "hidden";
@@ -1118,7 +1155,9 @@ function hideSocialDiv1(){
   document.querySelector(".SocialMedia-2-container").style.visibility = "hidden";
   // remove required to SocialMedia-2-Select-input, Social-Media-2-user-input
   document.querySelector("#SocialMedia-2-Select-input").removeAttribute("required", "");
+  document.querySelector("#SocialMedia-2-Select-input").value = "default";
   document.querySelector("#Social-Media-2-user-input").removeAttribute("required", "");
+  document.querySelector("#Social-Media-2-user-input").value = "";
   document.querySelector("#SocialMedia-1-add").style.visibility = "visible";
   document.querySelector("#SocialMedia-1-delete").style.visibility = "visible";
   document.querySelector("#SocialMedia-2-add").style.visibility = "hidden";
@@ -1129,7 +1168,9 @@ function hideSocialDiv2(){
   document.querySelector(".SocialMedia-3-container").style.visibility = "hidden";
   // remove required to SocialMedia-3-Select-input, Social-Media-3-user-input
   document.querySelector("#SocialMedia-3-Select-input").removeAttribute("required", "");
+  document.querySelector("#SocialMedia-3-Select-input").value = "default";
   document.querySelector("#Social-Media-3-user-input").removeAttribute("required", "");
+  document.querySelector("#Social-Media-3-user-input").value = "";
   document.querySelector("#SocialMedia-2-add").style.visibility = "visible";
   document.querySelector("#SocialMedia-2-delete").style.visibility = "visible";
 }; 
@@ -1192,14 +1233,11 @@ const changeDetailsModal = new bootstrap.Modal(document.querySelector('#edit-det
 
 // Loop over inputs and prevent submission
 changeDetailsSubmit.addEventListener('click', function (event) {
-  console.log("modal 1 submit clicked");
   if (!changeDetailsForm.checkValidity()) {
     event.preventDefault();
     event.stopPropagation();
-    console.log("modal 1 was-NOT-validated");
   }
    else {
-     console.log("modal 1 was-validated");
      changeDetailsModal.hide();
    }
    changeDetailsForm.classList.add('was-validated');
