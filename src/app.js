@@ -700,7 +700,7 @@ function showSignedOutUser() {
 
 // ======CREATE AND EDIT PROFILE FUNCTIONS======
 
-// update bio info 
+// update bio info using modal
 async function updatePersonalDetails(uid){
   //console.log("update personal details");
   const updateDetailsForm = document.querySelector('.change-Details');
@@ -722,7 +722,7 @@ async function updatePersonalDetails(uid){
   });
 }
 
-// update tags  
+// update tags using modal
 async function updateSkillsTags(uid){
   //console.log("update tags");
   // get active buttons / tag from skill-categories modal
@@ -737,7 +737,40 @@ async function updateSkillsTags(uid){
     tags: tagList
   })
   .then(function(){
-    console.log("successfully updated user doc wirg new tags");
+    console.log("successfully updated user doc with new tags");
+  })
+  .catch(function(error){
+    console.log("Error: Getting document:", error); 
+  });
+}
+
+// update social media links using modal
+async function updateSocialsLinks(uid){
+  console.log("update social links");  
+  let socialsForm = document.querySelector("#social-modal .SocialMedia");
+  let socialsList = [];
+  if (socialsForm.socialSelect1.value != "default") {
+    let social1 = {};
+    social1[socialsForm.socialSelect1.value] = socialsForm.socialInput1.value;
+    socialsList.push(social1);
+  }
+  if (socialsForm.socialSelect2.value != "default") {
+    let social2 = {};
+    social2[socialsForm.socialSelect2.value] = socialsForm.socialInput2.value;
+    socialsList.push(social2);
+  }
+  if (socialsForm.socialSelect3.value != "default") {
+    let social3 = {};
+    social3[socialsForm.socialSelect3.value] = socialsForm.socialInput3.value;
+    socialsList.push(social3);
+  }
+
+  //console.log(socialsList);
+  updateDoc(doc(db, "users", uid), {
+    socials: socialsList
+  })
+  .then(function(){
+    console.log("successfully updated user doc with new social links");
   })
   .catch(function(error){
     console.log("Error: Getting document:", error); 
@@ -852,25 +885,53 @@ function populateSkills(vals){
   } 
 }
 
+// populate socials modal
 function populateSocialsModal(vals) {
-  console.log(vals.socials);
-  for (const [index, [key, value]] of Object.entries(Object.entries(vals.socials))) {
-    //console.log(`${index}: ${key} = ${value}`);
-    console.log(index, key, value);
-    if (index == 0) {
+  //console.log(vals.socials);
+  for (var i = 0; i < vals.socials.length; i++) {
+    //console.log(vals.socials[i]);
+    let entries = Object.entries(vals.socials[i]);
+    let key = entries[0][0];
+    let value = entries[0][1];
+    //console.log(entries[0][0], entries[0][1]); 
+    if (i == 0) {
       showSocialDiv0();
       document.querySelector("#SocialMedia-1-Select-input").value = key;
       document.querySelector("#Social-Media-1-user-input").value = value;
-    } else if (index == 1) {
+    } else if (i == 1) {
       showSocialDiv1();
       document.querySelector("#SocialMedia-2-Select-input").value = key;
       document.querySelector("#Social-Media-2-user-input").value = value;
     }
-    else if (index == 2) {
+    else if (i == 2) {
       showSocialDiv2();
       document.querySelector("#SocialMedia-3-Select-input").value = key;
       document.querySelector("#Social-Media-3-user-input").value = value;
     }
+  }
+}
+
+// populate socials in edit page
+function populateSocials(vals) {
+  console.log("add social links");
+  const icons = {"instagram" : "./assets/img/InstagramSocial.svg", "twitter": "./assets/img/TwitterSocial.svg", "facebook": "./assets/img/WebSocialIcon.svg", "dribble": "./assets/img/WebSocialIcon.svg"};
+  const socialContainer = document.querySelector(".edit-section .socials-details");
+  // empty the div to prevent duplication
+  socialContainer.innerHTML = "";
+  // create and ad social links with icons
+  for (var i = 0; i < vals.socials.length; i++) {
+    let socialObject = vals.socials[i];
+    let keys = Object.keys(socialObject);  
+    //console.log(keys[0], socialObject[keys[0]]);
+    let container = document.createElement('div');
+    container.className = "col col-md col-lg col-xl";
+    let link = document.createElement('a');
+    link.href = socialObject[keys[0]];
+    let img = document.createElement("img");
+    img.src = icons[keys[0]];
+    link.appendChild(img);
+    container.appendChild(link);
+    socialContainer.appendChild(container);
   }
 }
 
@@ -1495,6 +1556,8 @@ if (page == "edit-profile") {
         populateSkills(vals);
         // populate socials modal
         populateSocialsModal(vals);
+        // populate socials section
+        populateSocials(vals);
       });
     } 
   }) 
@@ -1507,7 +1570,7 @@ if (page == "edit-profile") {
     updateUserDoc(currentUserData.uid, "available", availability.checked);
   })
 
-  // submit personal details modal, update edit page, send update email to admin
+  // submit personal details modal, update edit page
   const submitPersonalDetails = document.querySelector("#edit-details #change-Details-Submit");
   submitPersonalDetails.addEventListener('click', function(){
     updatePersonalDetails(currentUserData.uid).then(function(){
@@ -1515,13 +1578,11 @@ if (page == "edit-profile") {
         // populate bio section and available for work
         populateBio(vals);
         pageEdited = true;
-        //let msg = "User " + currentUserData.forename + " " + currentUserData.surname + ", user ID: " + currentUserData.uid + " has updated their profile<br><br>Please view it here: https://studio-freelancer-agency.web.app/profile.html?id=" + currentUserData.uid;
-        //createSentEmailDoc("stiwdiofreelanceragency@gmail.com", "stiwdiofreelanceragency@gmail.com", msg);
       });
     });
   });
 
-  // submit / update skills tags, update edit page, send update email to admin
+  // submit / update skills tags, update edit page
   const submitSkillsTags = document.querySelector("#skills-categories #save-skills");
   submitSkillsTags.addEventListener('click', function(){
     updateSkillsTags(currentUserData.uid).then(function(){
@@ -1529,8 +1590,20 @@ if (page == "edit-profile") {
         // populate skills tags
         populateSkills(vals);
         pageEdited = true;
-        //let msg = "User " + currentUserData.forename + " " + currentUserData.surname + ", user ID: " + currentUserData.uid + " has updated their profile<br><br>Please view it here: https://studio-freelancer-agency.web.app/profile.html?id=" + currentUserData.uid;
-        //createSentEmailDoc("stiwdiofreelanceragency@gmail.com", "stiwdiofreelanceragency@gmail.com", msg);
+      });
+    });
+  });
+
+  // submit / update socials links, update edit page
+  const submitSocials = document.querySelector("#social-modal #Social-Media-Submit");
+  submitSocials.addEventListener('click', function(){
+    updateSocialsLinks(currentUserData.uid).then(function(){
+      getCurrentUserDetails(currentUserData.uid).then(function(vals){
+        // populate socials modal
+        populateSocialsModal(vals);
+        // populate socials section
+        populateSocials(vals);
+        pageEdited = true;
       });
     });
   });
