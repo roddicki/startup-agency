@@ -5,7 +5,7 @@ loadCheck();
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import { initializeApp } from 'firebase/app';
-import { getStorage, ref, uploadBytes, getDownloadURL, connectStorageEmulator } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL, uploadString, connectStorageEmulator } from "firebase/storage";
 
 import { getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc, doc, query, where, orderBy, getDoc, serverTimestamp, updateDoc, setDoc,  Timestamp, arrayUnion, connectFirestoreEmulator} from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, signInWithPhoneNumber, ActionCodeURL } from 'firebase/auth';
@@ -154,6 +154,51 @@ function createJobDoc() {
   });
 }
 
+
+// upload image - argument is a base64 string
+// inserts a reference to the uploaded image/s into the logged in users profile
+async function uploadBase64Image(base64string) {
+  //console.log(base64string);
+  // get filetype from string
+  let fileSuffix = "";
+  const fileTypes = ["png", "jpg", "jpeg", "svg"];
+  // split string to get binary and test for what file ending
+  const splitStr = base64string.split(",");
+  const base64Type = splitStr[0];
+  console.log(splitStr);
+  for (var i = 0; i < fileTypes.length; i++) {
+    if (base64string.includes(fileTypes[i])) {
+      fileSuffix = fileTypes[i];
+      console.log(fileTypes[i]);
+      break;
+    }
+    else {
+      console.log("file Type not found");
+    }
+  }
+  // create upload url
+  const randStr = Math.random().toString(36).substr(2, 5);
+  const uploadUrl = "images/"+ currentUserData.uid + "/img-profile-"+randStr+"." + fileSuffix;
+  console.log(uploadUrl);
+  const storageRef = ref(storage, uploadUrl);
+  // upload
+  uploadString(storageRef, base64string, 'data_url').then(function(snapshot) {
+    console.log('Uploaded a base64url string!');
+    // update user profile with image url
+    let docRef = doc(db, 'users', currentUserData.uid);
+    updateDoc(docRef, {
+      profilePic: uploadUrl
+    })
+    .then(function () {
+      console.log("added new profile image reference to user profile");
+    })
+    // get download image ref - don't need this 
+    /*getDownloadURL(storageRef)
+      .then(function(url) {
+        console.log(url);
+      })*/
+  });
+}
 
 
 // upload image - argument is an object - {upload url : blob url}
@@ -924,7 +969,7 @@ function populateSocials(vals) {
     let keys = Object.keys(socialObject);  
     //console.log(keys[0], socialObject[keys[0]]);
     let container = document.createElement('div');
-    container.className = "col col-md col-lg col-xl";
+    container.className = "col-4 col-md-4 col-lg-4 col-xl-4";
     let link = document.createElement('a');
     link.href = socialObject[keys[0]];
     let img = document.createElement("img");
@@ -1065,6 +1110,16 @@ function showPreview(selectedTags){
   }
   userData.innerHTML = data;
 }
+
+
+// get upload image portrait url - return an object with all the new upload image urls
+async function getProfileImageUrl(){
+  const imageDiv = document.querySelector('#edit-details #display-image');
+  const url = imageDiv.style.backgroundImage.slice(5, -2);
+  //console.log(images);
+  return url; 
+}
+
 
 
 // get upload image urls - return an object with all the new upload image urls
@@ -1573,6 +1628,14 @@ if (page == "edit-profile") {
   // submit personal details modal, update edit page
   const submitPersonalDetails = document.querySelector("#edit-details #change-Details-Submit");
   submitPersonalDetails.addEventListener('click', function(){
+    // get urls of images to upload - resolve promise > upload
+    getProfileImageUrl().then(function(result) { 
+       //console.log(result);
+       uploadBase64Image(result).then(function(){
+        console.log('complete');
+       });
+    });
+
     updatePersonalDetails(currentUserData.uid).then(function(){
       getCurrentUserDetails(currentUserData.uid).then(function(vals){
         // populate bio section and available for work
@@ -1608,7 +1671,8 @@ if (page == "edit-profile") {
     });
   });
 
-  // listen for a visibility change and use this to send an email
+
+  // listen for a page focus change change and use this to send an email to admin
   document.addEventListener("visibilitychange", function(){
     if (document.visibilityState == "hidden" && pageEdited) {
       console.log("edit page: ",document.visibilityState);
