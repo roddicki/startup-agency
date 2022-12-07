@@ -182,23 +182,27 @@ async function uploadBase64Image(base64string) {
   console.log(uploadUrl);
   const storageRef = ref(storage, uploadUrl);
   // upload
-  uploadString(storageRef, base64string, 'data_url').then(function(snapshot) {
-    console.log('Uploaded a base64url string!');
-    // update user profile with image url
-    let docRef = doc(db, 'users', currentUserData.uid);
-    updateDoc(docRef, {
-      profilePic: uploadUrl
-    })
-    .then(function () {
-      console.log("added new profile image reference to user profile");
-    })
-    // get download image ref - don't need this 
-    /*getDownloadURL(storageRef)
-      .then(function(url) {
-        console.log(url);
-      })*/
+  const uploaded = await uploadString(storageRef, base64string, 'data_url')
+  .then(function() {
+    console.log('Uploaded a base64url string!', uploadUrl);
+    
   });
+
+  return uploadUrl;
 }
+
+//
+async function updateUserDocProfilePic(imageUrl) {
+  // update user profile with image url
+  let docRef = doc(db, 'users', currentUserData.uid);
+  const update = await updateDoc(docRef, {
+    profilePic: imageUrl
+  })
+  .then(function () {
+    console.log("added new profile image reference to user profile");
+
+  });
+} 
 
 
 // upload image - argument is an object - {upload url : blob url}
@@ -890,6 +894,30 @@ function populateSkillsModal(vals){
   }
 }
 
+function populateProfilePicModal(vals) {
+  const profilePicContainer = document.querySelector('#edit-details #display-image');
+  const storageRef = ref(storage, vals.profilePic);
+  // get download image ref - don't need this 
+  getDownloadURL(storageRef)
+    .then(function(url) {
+      //console.log(url);
+      // add to modal as background image
+      profilePicContainer.style.backgroundImage = "url("+url+")";
+    })
+}
+
+function populateProfilePic(vals) {
+  const profilePicContainer = document.querySelector('.edit-section .profile-img div');
+  const storageRef = ref(storage, vals.profilePic);
+  // get download image ref - don't need this 
+  getDownloadURL(storageRef)
+    .then(function(url) {
+      //console.log(url);
+      // add to modal as background image
+      profilePicContainer.style.backgroundImage = "url("+url+")";
+    })
+}
+
 // populate skills in bio section of edit
 function populateSkills(vals){
   // remove existing skills tags to avoid duplication
@@ -1113,7 +1141,7 @@ function showPreview(selectedTags){
 
 
 // get upload image portrait url - return an object with all the new upload image urls
-async function getProfileImageUrl(){
+function getProfileImageUrl(){
   const imageDiv = document.querySelector('#edit-details #display-image');
   const url = imageDiv.style.backgroundImage.slice(5, -2);
   //console.log(images);
@@ -1613,6 +1641,11 @@ if (page == "edit-profile") {
         populateSocialsModal(vals);
         // populate socials section
         populateSocials(vals);
+        // populate profile pic in modal
+        populateProfilePic(vals);
+        // populate profile pic in modal
+        populateProfilePicModal(vals);
+
       });
     } 
   }) 
@@ -1628,12 +1661,20 @@ if (page == "edit-profile") {
   // submit personal details modal, update edit page
   const submitPersonalDetails = document.querySelector("#edit-details #change-Details-Submit");
   submitPersonalDetails.addEventListener('click', function(){
-    // get urls of images to upload - resolve promise > upload
-    getProfileImageUrl().then(function(result) { 
-       //console.log(result);
-       uploadBase64Image(result).then(function(){
-        console.log('complete');
-       });
+    // get urls of image to upload 
+    const base64img = getProfileImageUrl(); 
+    // upload base64 image
+    uploadBase64Image(base64img).then(function(url){
+      console.log('complete', url);
+      // add a reference in the user doc
+      updateUserDocProfilePic(url).then(function(){
+        getCurrentUserDetails(currentUserData.uid).then(function(vals){
+          // populate bio section with new pic
+          populateProfilePic(vals);
+          pageEdited = true;
+        });
+      });
+      
     });
 
     updatePersonalDetails(currentUserData.uid).then(function(){
