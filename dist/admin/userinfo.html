@@ -17,7 +17,6 @@
 	<title>Graduate Approval Dashboard</title>
 
 	<link href="css/app.css" rel="stylesheet">
-	<link href="css/other.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
@@ -56,21 +55,19 @@
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
-          <i class="hamburger align-self-center"></i>
-        </a>
+		          <i class="hamburger align-self-center"></i>
+		        </a>
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
-						
-						
 						<li class="nav-item dropdown">
 							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-                <i class="align-middle" data-feather="settings"></i>
-              </a>
+			                	<i class="align-middle" data-feather="settings"></i>
+			            	</a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                 <span class="text-dark">Jamie Lamb</span>
-              </a>
+                 				<span class="text-dark user-email">Account</span>
+              				</a>
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="#">Log out</a>
 							</div>
@@ -82,7 +79,7 @@
 			<main class="content">
 				<div class="container-fluid p-0">
 
-					<h1 class="h3 mb-3"><strong>Graduate</strong> Dashboard</h1>
+					<h1 class="h3 mb-3"><strong>Graduate</strong> Details</h1>
 
 					<div class="row">
 						<div class="col-12 col-lg-12 col-xxl-12 d-flex">
@@ -94,12 +91,7 @@
 											<th>Forname</th>
 											<th>Surname</th>
 											<th>Email</th>
-											<th>Phone Number</th>
-											<th>Student ID</th>
-											<th>Course</th>
-											<th>Graduation Date</th>
-											<th>Website Link</th>
-											<th>User Approved</th>
+											<th>Phone No</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -108,16 +100,12 @@
 											<td>Lamb</td>
 											<td>Jamie-24@live.co.uk</td>
 											<td>07988752610</td>
-											<td>30012660</td>
-											<td>Games Enterprise</td>
-											<td>01/09/2020</td>
-											<td>www.ReduxGameStudio.com</td>
-											<td><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"></div></td>
 										</tr>
 										
 									</tbody>
 									
 								</table>
+								
 								<div class="col-sm-12">
 									<div class="card">
 										<div class="card-body">
@@ -126,12 +114,45 @@
 													<h2 class="card-title">Bio</h2>
 												</div>
 											</div>
-											<h3 class="mt-1 mb-3"> I am a Sed sed risus eleifend, ornare urna vitae, facilisis massa. Nunc sed dolor laoreet, scelerisque tellus ut, finibus justo. Duis arcu lectus, egestas at dui eget, gravida tristique ex. Cras nec dolor leo. Sed nec tempus nulla. Cras massa massa, ultrices quis iaculis eu, porttitor a nunc. Vivamus quam tellus, consectetur nec ullamcorper convallis, lacinia sodales arcu. Cras at laoreet ante. Nullam ut odio rhoncus magna aliquam fringilla eget sed justo. <br><br>Phasellus a malesuada ipsum. Sed ac massa ex. Suspendisse maximus, sapien sed tempus elementum, magna velit placerat nisl, vel sollicitudin nunc nibh in magna. <br><br>Fusce consequat mollis risus, sed aliquet turpis placerat vel. Phasellus nisi mi, posuere id enim a, congue convallis nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam consectetur leo dui, et suscipit justo accumsan a. Aenean purus sapien, tristique vel turpis et, congue porttitor urna. Fusce eleifend urna nec tellus dignissim, quis finibus eros fermentum. Nullam luctus porttitor fringilla. Mauris sollicitudin ex sit amet felis semper iaculis. </h3>
+											<div class="row">
+												<div class="col mt-0">
+													<h5 class="mt-1 mb-3"> I am a Sed sed risus eleifend, ornare urna vitae, facilisis massa. Nunc sed dolor laoreet, scelerisque tellus ut, finibus justo. Duis arcu lectus, egestas at dui eget, gravida tristique ex. Cras nec dolor leo. Sed nec tempus nulla. Cras massa massa, ultrices quis iaculis eu, porttitor a nunc. Vivamus quam tellus, consectetur nec ullamcorper convallis, lacinia sodales arcu. Cras at laoreet ante. Nullam ut odio rhoncus magna aliquam fringilla eget sed justo. <br><br>Phasellus a malesuada ipsum. Sed ac massa ex. Suspendisse maximus, sapien sed tempus elementum, magna velit placerat nisl, vel sollicitudin nunc nibh in magna. <br><br>Fusce consequat mollis risus, sed aliquet turpis placerat vel. Phasellus nisi mi, posuere id enim a, congue convallis nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam consectetur leo dui, et suscipit justo accumsan a. Aenean purus sapien, tristique vel turpis et, congue porttitor urna. Fusce eleifend urna nec tellus dignissim, quis finibus eros fermentum. Nullam luctus porttitor fringilla. Mauris sollicitudin ex sit amet felis semper iaculis. </h5>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col mt-0">
+													<h2 class="card-title">Website Link</h2>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col mt-0">
+													<h5 class="mt-1 mb-3"> <a href="#">www.ReduxGameStudio.com</a> </h5>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
+								<table class="table table-hover my-0">
+									<thead>
+										<tr>
+											<th>Student ID</th>
+											<th>Course</th>
+											<th>Graduation</th>
+											<th>Approved</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>30012660</td>
+											<td>Games Enterprise</td>
+											<td>01/09/2020</td>
+											<td><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"></div></td>
+										</tr>
+										
+									</tbody>
+									
+								</table>
 							
-						
 					
 
 				</div>

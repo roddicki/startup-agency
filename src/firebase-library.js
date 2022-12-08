@@ -74,7 +74,7 @@ export function createUserDoc(uid, userEmail) {
     graduation: signupForm.graduation.value,
     email: userEmail,
     createdAt: serverTimestamp(),
-    approved: 'false'
+    approved: false
   })
   .then(function(){
     console.log("successfully created");

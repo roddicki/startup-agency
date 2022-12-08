@@ -1676,7 +1676,7 @@ if (page == "edit-profile") {
       });
       
     });
-
+    // update personal details bio
     updatePersonalDetails(currentUserData.uid).then(function(){
       getCurrentUserDetails(currentUserData.uid).then(function(vals){
         // populate bio section and available for work
@@ -1716,7 +1716,7 @@ if (page == "edit-profile") {
   // listen for a page focus change change and use this to send an email to admin
   document.addEventListener("visibilitychange", function(){
     if (document.visibilityState == "hidden" && pageEdited) {
-      console.log("edit page: ",document.visibilityState);
+      //console.log("edit page: ",document.visibilityState);
       let msg = "User " + currentUserData.forename + " " + currentUserData.surname + ", user ID: " + currentUserData.uid + " has updated their profile<br><br>Please view it here: https://studio-freelancer-agency.web.app/profile.html?id=" + currentUserData.uid;
       createSentEmailDoc("stiwdiofreelanceragency@gmail.com", "stiwdiofreelanceragency@gmail.com", msg);
     }

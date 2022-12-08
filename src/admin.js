@@ -1,5 +1,5 @@
 
-import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, isUserSignedIn, getUserUid, getAllJobData, getSingleJob, getAllUserData} from './firebase-library.js';
+import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, updateUserDoc,isUserSignedIn, getUserUid, getAllJobData, getSingleJob, getAllUserData} from './firebase-library.js';
 
 loadCheck();
 
@@ -104,6 +104,86 @@ function redirectSignedOutUser() {
 }
 
 
+// get first query string tag
+function getParam() {
+  const urlParams = new URLSearchParams(location.search);
+  for (const [key, value] of urlParams) {
+      //console.log(`${key}:${value}`);
+      return value; // only works with one param at the mo
+  }
+}
+
+
+// show list of users
+function createUserList(userData) {
+  console.log("create list of users");
+  let userListContainer = document.querySelector(".user-list tbody");
+  for (var i = 0; i < userData.length; i++) {
+    //userData[i]
+    let tr = document.createElement("tr");
+    let name = document.createElement("td");
+    name.innerHTML = userData[i].forename + " " + userData[i].surname;
+
+    let approvedUser = "";
+    if (userData[i].approved == "true") {
+      approvedUser = "checked";
+    }
+    let idUser = "approve-"+i;
+    let userApproved = document.createElement("td");
+    userApproved.innerHTML = '<div class="form-check user-approved form-switch"><input id="'+idUser+'" class="form-check-input" type="checkbox" data-id="'+userData[i].id+'" '+approvedUser+'></div>';
+
+
+    let userInfo = document.createElement("td");
+    userInfo.className = "d-none d-md-table-cell";
+    userInfo.innerHTML = '<a class="btn btn-primary" href="userinfo.html?id='+userData[i].id+'">User Information</a>';
+
+    let approvedProfile = "";
+    if (userData[i].profileApproved) {
+      approvedProfile = "checked";
+    } 
+    let idProfile = "approve-profile-"+i;
+    let profileApproved = document.createElement("td");
+    profileApproved.innerHTML = '<div class="form-check profile-approved form-switch"><input class="form-check-input" type="checkbox" id="'+idProfile+'" data-id="'+userData[i].id+'" '+approvedProfile+'></div>';
+
+    let profileLink = document.createElement("td");
+    profileLink.className = "d-none d-md-table-cell";
+    profileLink.innerHTML = '<a href="../profile.html?id='+userData[i].id+'" class="btn btn-primary">Profile</a>';
+
+    tr.appendChild(name);
+    tr.appendChild(userApproved);
+    tr.appendChild(userInfo);
+    tr.appendChild(profileApproved);
+    tr.appendChild(profileLink);
+    userListContainer.appendChild(tr);
+
+    // add event listeners for the switch
+    const approveSwitch = document.querySelector("#"+idUser);
+    approveSwitch.addEventListener('change', function(){ 
+      // update doc
+      console.log(approveSwitch.dataset.id); 
+      // update user doc with key val
+      //updateUserDoc(approveSwitch.dataset.id, "approved", approveSwitch.checked); // problem
+      updateApproval(approveSwitch.dataset.id, approveSwitch.checked);
+    });
+    // add event listeners for the switch
+    const profileApproveSwitch = document.querySelector("#"+idProfile);
+    profileApproveSwitch.addEventListener('change', function(){ 
+      // update doc
+      console.log(profileApproveSwitch.dataset.id); 
+      // update user doc with key val
+      updateUserDoc(profileApproveSwitch.dataset.id, "profileApproved", profileApproveSwitch.checked); // problem
+    });
+  }
+}
+
+
+
+function updateApproval(uid, val) {
+  // update user doc with key val
+  updateUserDoc(uid, "approved", val); // problem
+}
+
+
 
 //===========PAGE EVENT LISTENERS===================
 const page = document.body.getAttribute('data-page');
@@ -134,4 +214,34 @@ if (page == "login") {
     }
   }
 };
+
+// GRADUATE / USER PAGE
+if (page == "graduates") {
+  console.log("graduate page");
+  getAllUserData(getParam(), function(userData){
+    //console.log("user data:", userData);
+    createUserList(userData);
+  });
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
