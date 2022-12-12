@@ -1,6 +1,8 @@
 
 import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, updateUserDoc, isUserSignedIn, getUserUid, getAllJobData, getAllCurrentJobData, getSingleJob, getAllUserData, resetPassword} from './firebase-library.js';
 
+import {getSkillsTags, getCategories} from './tags-categories.js';
+
 loadCheck();
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -106,19 +108,17 @@ function createJobDoc() {
   const jobDetailsForm0 = document.querySelector('.post-job-form0');
   //console.log(jobDetailsForm0.firstname.value, jobDetailsForm0.lastname.value, jobDetailsForm0.email.value, jobDetailsForm0.phone.value);
   const jobDetailsForm1 = document.querySelector('.post-job-form1');
-  //console.log(jobDetailsForm1.title.value, jobDetailsForm1.company.value, jobDetailsForm1.budgetRadio.checked, jobDetailsForm1.budget.value, jobDetailsForm1.hourlyRadio.checked, jobDetailsForm1.rate.value, jobDetailsForm1.applicationDeadline.value, jobDetailsForm1.location.value, jobDetailsForm1.remoteRadio.checked, jobDetailsForm1.completionRadio.value,  jobDetailsForm1.completionDate.value, jobDetailsForm1.durationRadio.checked, jobDetailsForm1.duration.value, jobDetailsForm1.jobBrief.value);
-
   let completionDate = new Date(jobDetailsForm1.completionDate.value);
   let applicationDeadline = new Date(jobDetailsForm1.applicationDeadline.value);
   let location = jobDetailsForm1.location.value;
   if(jobDetailsForm1.remoteRadio.checked) {
     location = "remote";
   }
-  let tags = []; // send to db
-  const allTags = document.querySelectorAll(".filtertag.active");
-  for (var i = 0; i < allTags.length; i++) {
+  let categories = []; // send to db
+  const allCategoryTags = document.querySelectorAll("#post-job-modal2 .filtertag.active");
+  for (var i = 0; i < allCategoryTags.length; i++) {
     // save tags
-    tags.push(allTags[i].innerHTML);
+    categories.push(allCategoryTags[i].name);
   }
 
   addDoc(collection(db, "jobs"), {
@@ -138,7 +138,7 @@ function createJobDoc() {
     applicationdeadline: Timestamp.fromDate(applicationDeadline),
     location: location,
     tc: true,
-    tags: tags,
+    categories: categories,
     createdAt: serverTimestamp(),
     approved: false
   })
@@ -328,6 +328,24 @@ function validateHelpForm(event) {
     }
     helpForm.classList.add('was-validated');
     return wasValidated;
+}
+
+// add category buttons in the post job modal
+function createCategoryButtons(){
+  const categoryContainer = document.querySelector('#post-job-modal2 .category-tags');
+  const categories = getCategories(); // imported obj
+  for (var i = 0; i < categories.length; i++) {
+    let categoryBtn = document.createElement('button');
+    categoryBtn.type = "button";
+    categoryBtn.className = "btn btn-primary filtertag";
+    categoryBtn.autocomplete = "off";
+    categoryBtn.dataset.bsToggle = 'button';
+    categoryBtn.name = categories[i].category;
+    categoryBtn.innerHTML = categories[i].description;
+    // add to container
+    categoryContainer.appendChild(categoryBtn);
+  }
+  
 }
 
 // show all jobs - jobs page
@@ -573,17 +591,23 @@ function displaySingleJob(jobData) {
   jobDetails.appendChild(completion);
 
   let jobDescription = document.querySelector(".job-description");
-  jobDescription.innerHTML = jobData.longdescription;;
+  jobDescription.innerHTML = jobData.longdescription;
 
   let tagContainer = document.querySelector(".tag-container");
-  for (var i = 0; i < jobData.tags.length; i++) {
-    let tag = jobData.tags[i];
-    let tagStr = tag.replace(/-/g, " ");
+  const categories = getCategories(); // from import
+  for (var i = 0; i < jobData.categories.length; i++) {
+    let category = jobData.categories[i];
+    // match category in imported array
+    let categoryObj = categories.find(function(x){
+      return x.category === category;
+    });
+    console.log(categoryObj);
     let tagBtn = document.createElement("a");
     tagBtn.setAttribute("style", "text-transform: capitalize;");
     tagBtn.className = "btn btn-primary filtertag";
+    tagBtn.name = category;
     tagBtn.href = "#";
-    tagBtn.innerHTML = tagStr;
+    tagBtn.innerHTML = categoryObj.description;
 
     tagContainer.appendChild(tagBtn);
   }
@@ -737,7 +761,7 @@ function showSignedOutUser() {
   a.className = 'btn btn-primary post-job';
   a.href = '#';
   a.dataset.bsToggle = 'modal';
-  a.dataset.bsTarget = '#postmodal';
+  a.dataset.bsTarget = '#post-job-modal0';
   a.innerHTML = 'Post job';
   li.className = 'nav-item';
   li.appendChild(a);
@@ -1608,6 +1632,9 @@ if (signupForm) {
 //===========PAGE SPECIFIC EVENT LISTENERS AND PROCESSES===================
 // add listeners if dom element present
 window.addEventListener('DOMContentLoaded', function(){
+  // load category buttons into the post job modal
+  createCategoryButtons();
+
   //getTag();
   if(allUserData) {
     getAllUserData(getParam(), function(userData){

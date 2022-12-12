@@ -119,8 +119,8 @@ document.getElementById("eye-confirmation").addEventListener("click", function (
 
   const modal1 = document.querySelector('#submit1');
   // const forenameInput = document.querySelector('#validationCustom01');
-  const modalStep1 = new bootstrap.Modal(document.querySelector('#step1'));
-  const modalStep2 = new bootstrap.Modal(document.querySelector('#step2'));
+  const modalStep1 = new bootstrap.Modal(document.querySelector('#post-job-modal1'));
+  const modalStep2 = new bootstrap.Modal(document.querySelector('#post-job-modal2'));
 
   // Loop over them and prevent submission
   modal1.addEventListener('click', function (event) {
@@ -128,10 +128,10 @@ document.getElementById("eye-confirmation").addEventListener("click", function (
     if (!myForm.checkValidity()) {
       event.preventDefault();
       event.stopPropagation();
-      console.log("modal 1 was-NOT-validated");
+      console.log("post job modal 1 was-NOT-validated");
     }
     else {
-      console.log("modal 1 was-validated");
+      console.log("post job modal 1 was-validated");
       modalStep1.hide();
       modalStep2.show();
     }
@@ -145,7 +145,7 @@ document.getElementById("eye-confirmation").addEventListener("click", function (
   const myForm1 = document.querySelector('.post-job-form1');
 
   const modal2 = document.querySelector('#submit2'); // preview
-  const modalStep3 = new bootstrap.Modal(document.querySelector('#step3'));
+  const modalPostJobStep3 = new bootstrap.Modal(document.querySelector('#post-job-modal3'));
 
   // Loop over them and prevent submission
   modal2.addEventListener('click', function (event) {
@@ -153,12 +153,12 @@ document.getElementById("eye-confirmation").addEventListener("click", function (
     if (!myForm1.checkValidity()) {
       event.preventDefault();
       event.stopPropagation();
-      console.log("modal 2 was-NOT-validated");
+      console.log("post job modal 2 was-NOT-validated");
     }
     else {
-      console.log("modal 2 was-validated");
+      console.log("post job modal 2 was-validated");
       modalStep2.hide();
-      modalStep3.show();
+      modalPostJobStep3.show();
       // populate preview modal
       createJobPreview();
     }
@@ -247,20 +247,16 @@ document.getElementById("eye-confirmation").addEventListener("click", function (
     const applicationDeadline = document.querySelector(".application-deadline-preview");
     applicationDeadline.innerHTML = "Apply by - " + applicationDate.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"});
 
-    // tags
-    let tags = []; // send to db
-    const allTags = document.querySelectorAll(".filtertag.active");
+    // category tags
+    const allCategoryTags = document.querySelectorAll(".filtertag.active");
     const tagsPreview = document.querySelector(".related-categories-preview");
     tagsPreview.innerHTML = ""; // remove previous tags
-    for (var i = 0; i < allTags.length; i++) {
-      // save tags
-      tags.push(allTags[i].innerHTML);
+    for (var i = 0; i < allCategoryTags.length; i++) {
       // show preview tags
-      let previewTag = "<span class=\"btn btn-primary filtertag\">"+allTags[i].innerHTML+"</span>"
-      //tagsPreview.appendChild(allTags[i]);
+      let previewTag = "<span class=\"btn btn-primary filtertag\">"+allCategoryTags[i].innerHTML+"</span>"
       tagsPreview.innerHTML += previewTag;
     }
-    console.log(tags);
+    console.log(allCategoryTags);
   }
 
 

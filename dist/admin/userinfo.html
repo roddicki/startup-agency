@@ -18,38 +18,44 @@
 
 	<link href="css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<style>
+		.badge {
+			width: 20px;
+			height: 20px;
+		}
+
+	</style>
 </head>
 
-<body>
+<body data-page="single-graduate-record">
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="">
-          <span class="align-middle">Startup Agency DashBoard</span>
-        </a>
+				<a class="sidebar-brand" href="graduates.html">
+          			<span class="align-middle">Startup Agency DashBoard</span>
+        		</a>
 
 				<ul class="sidebar-nav">
 					<li class="sidebar-header">
 						Pages
 					</li>
-					<li class="sidebar-item active">
+					<li class="sidebar-item">
 						<a class="sidebar-link" href="graduates.html">
-              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Graduate Approval</span>
-            </a>
+              				<i class="align-middle" data-feather="user"></i> <span class="align-middle">Graduate Approval</span>
+           		 		</a>
 					</li>
-
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="jobboard.html">
 							<i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Job Board</span>
-            </a>
+            			</a>
 					</li>
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="login.html">
-              <i class="align-middle" data-feather="book"></i> <span class="align-middle">Sign Out</span>
-            </a>
+						<a class="sidebar-link" id="sidebar-sign-out" href="#">
+			              <i class="align-middle" data-feather="book"></i> <span class="align-middle">Sign Out</span>
+			            </a>
 					</li>
-
-					
+				</ul>
+			</div>
 		</nav>
 
 		<div class="main">
@@ -76,7 +82,7 @@
 				</div>
 			</nav>
 
-			<main class="content">
+			<main class="content user-record">
 				<div class="container-fluid p-0">
 
 					<h1 class="h3 mb-3"><strong>Graduate</strong> Details</h1>
@@ -88,18 +94,20 @@
 								<table class="table table-hover my-0">
 									<thead>
 										<tr>
+											<th>Availability</th>
 											<th>Forname</th>
 											<th>Surname</th>
+											<th>Pronouns</th>
 											<th>Email</th>
-											<th>Phone No</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<td>Jamie</td>
-											<td>Lamb</td>
-											<td>Jamie-24@live.co.uk</td>
-											<td>07988752610</td>
+											<td class="ps-4"><span class="badge availability rounded-pill">&nbsp;</span></td>
+											<td class="forename"></td>
+											<td class="surname"></td>
+											<td class="pronouns"></td>
+											<td class="email"></td>
 										</tr>
 										
 									</tbody>
@@ -116,7 +124,7 @@
 											</div>
 											<div class="row">
 												<div class="col mt-0">
-													<h5 class="mt-1 mb-3"> I am a Sed sed risus eleifend, ornare urna vitae, facilisis massa. Nunc sed dolor laoreet, scelerisque tellus ut, finibus justo. Duis arcu lectus, egestas at dui eget, gravida tristique ex. Cras nec dolor leo. Sed nec tempus nulla. Cras massa massa, ultrices quis iaculis eu, porttitor a nunc. Vivamus quam tellus, consectetur nec ullamcorper convallis, lacinia sodales arcu. Cras at laoreet ante. Nullam ut odio rhoncus magna aliquam fringilla eget sed justo. <br><br>Phasellus a malesuada ipsum. Sed ac massa ex. Suspendisse maximus, sapien sed tempus elementum, magna velit placerat nisl, vel sollicitudin nunc nibh in magna. <br><br>Fusce consequat mollis risus, sed aliquet turpis placerat vel. Phasellus nisi mi, posuere id enim a, congue convallis nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam consectetur leo dui, et suscipit justo accumsan a. Aenean purus sapien, tristique vel turpis et, congue porttitor urna. Fusce eleifend urna nec tellus dignissim, quis finibus eros fermentum. Nullam luctus porttitor fringilla. Mauris sollicitudin ex sit amet felis semper iaculis. </h5>
+													<h5 class="mt-1 mb-3 bio"></h5>
 												</div>
 											</div>
 											<div class="row">
@@ -126,7 +134,7 @@
 											</div>
 											<div class="row">
 												<div class="col mt-0">
-													<h5 class="mt-1 mb-3"> <a href="#">www.ReduxGameStudio.com</a> </h5>
+													<h5 class="mt-1 mb-3 website"> </h5>
 												</div>
 											</div>
 										</div>
@@ -143,10 +151,10 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td>30012660</td>
-											<td>Games Enterprise</td>
-											<td>01/09/2020</td>
-											<td><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"></div></td>
+											<td class="student-id"></td>
+											<td class="course"></td>
+											<td class="graduation"></td>
+											<td><div class="form-check form-switch"><input class="form-check-input approved-switch" type="checkbox"></div></td>
 										</tr>
 										
 									</tbody>

@@ -17,17 +17,16 @@
 	<title>Graduate Approval Dashboard</title>
 
 	<link href="css/app.css" rel="stylesheet">
-	<link href="css/other.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body data-page="edit-job">
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="graduates.html">
-          <span class="align-middle">Startup Agency DashBoard</span>
-        </a>
+          			<span class="align-middle">Startup Agency DashBoard</span>
+        		</a>
 
 				<ul class="sidebar-nav">
 					<li class="sidebar-header">
@@ -35,42 +34,39 @@
 					</li>
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="graduates.html">
-              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Graduate Approval</span>
-            </a>
+              				<i class="align-middle" data-feather="user"></i> <span class="align-middle">Graduate Approval</span>
+           		 		</a>
 					</li>
-
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="jobboard.html">
 							<i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Job Board</span>
-            </a>
+            			</a>
 					</li>
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="login.html">
-              <i class="align-middle" data-feather="book"></i> <span class="align-middle">Sign Out</span>
-            </a>
+						<a class="sidebar-link" id="sidebar-sign-out" href="#">
+			              <i class="align-middle" data-feather="book"></i> <span class="align-middle">Sign Out</span>
+			            </a>
 					</li>
-
-					
+				</ul>
+			</div>
 		</nav>
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
-          <i class="hamburger align-self-center"></i>
-        </a>
+		          <i class="hamburger align-self-center"></i>
+		        </a>
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
-						
-						
 						<li class="nav-item dropdown">
 							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-                <i class="align-middle" data-feather="settings"></i>
-              </a>
+			                	<i class="align-middle" data-feather="settings"></i>
+			            	</a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                 <span class="text-dark">Jamie Lamb</span>
-              </a>
+                 				<span class="text-dark user-email">Account</span>
+              				</a>
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="#">Log out</a>
 							</div>
@@ -79,108 +75,110 @@
 				</div>
 			</nav>
 
-			<main class="content">
+			<main class="content" id="edit-job-content" hidden>
 				<div class="container-fluid p-0">
 
-					<h1 class="h3 mb-3"><strong>Job</strong> Edit</h1>
+					<h1 class="h3 mb-3"><strong>Edit</strong> Job</h1>
 					<div class="your-details">
 						<form class="jobDetails">
-						  <div class="form-group">
-							<label for="forename">First name</label>
-							<input type="text" class="form-control" name="forename" id="forename"  placeholder="Enter first name">
-						  </div>
-					
-						  <div class="form-group">
-							<label for="surname">Surname</label>
-							<input type="text" class="form-control" name="surname" id="surname" placeholder="Enter surname">
-						  </div>
-					
-						  <div class="form-group">
-							<label for="company">Company</label>
-							<input type="text" class="form-control" name="company" id="company" placeholder="Company name">
-						  </div>
-					
-						  <div class="form-group">
-							<label for="email">Email address</label>
-							<input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-							<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-						  </div>
-					
-						  <div class="form-group">
-							<label for="phone">Phone no</label>
-							<input type="tel" class="form-control" name="phone" id="phone" placeholder="Enter phone number">
-						  </div>
-						</div>
-					
-						<!-- Job Details -->
-						<div class="job-details">
-						  <div class="form-group">
-							<label for="title">Job Brief Title</label>
-							<input type="text" class="form-control" name="title" id="title" placeholder="eg: Animator wanted for advert">
-						  </div>
-					
-						  <div class="form-group">
-							<label for="shortdescription">Short description</label>
-							<textarea class="form-control" name="shortdescription" id="shortdescription"  placeholder="Add the who, what, where, when" rows="5"></textarea>
-							<small id="shortdescription-help" class="form-text text-muted">The who, what, where in a sentence.</small>
-						  </div>
-					
-						  <div class="form-group">
-							<label for="longdescription">Long description</label>
-							<textarea class="form-control" name="longdescription" id="longdescription"  placeholder="Add more details" rows="15"></textarea>
-							<small id="longdescription-help" class="form-text text-muted">Long description intructions.</small>
-						  </div>
-						  
-						  <!-- tags -->
-						  <div class="form-group">
-							<label for="tags">Tag and add the skills that the job requires</label>
-							<div>
-							   <small id="tags-help" class="form-text text-muted">We use your tags to source the best suited freelancers. We only send job briefs out to freelancers that have the required skills and knowledge; this way you know that every proposal you recieve will be applicable and tailored. i.e. Animation, rigging .</small>
+							<div class="form-group pt-2">
+								<label for="title">Job Brief Title</label>
+								<input type="text" class="form-control" name="title" id="title" placeholder="eg: Animator wanted for advert">
 							</div>
-						   
-							<div class="tags" id="tag-list"></div>
-							<div>
-							  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#add-tags" aria-expanded="false" aria-controls="add-tags">
-								Add skills tags
-							  </button>
+							<div class="form-group pt-2">
+								<label for="forename">First name</label>
+								<input type="text" class="form-control" name="forename" id="forename"  placeholder="Enter first name">
 							</div>
-							<div class="collapse" id="add-tags">
-							  <div class="card card-body" id="tag-checkboxes">
-							  </div> 
-							</div>
-						  </div>
-						  <p></p>
-						  <div class="form-group">
-							<label for="budget">Budget for this job / freelancer</label>
-							<div class="input-group mb-3">
-							  <span class="input-group-text">£</span>
-							  <input type="number" name="budget" id="budget" class="form-control" aria-label="Amount (in pounds)">
-							</div>
-						  </div>
 					
-						  <div class="form-group">
-							<label for="deadline">Deadline for job</label>
-							<div>
-							   <small class="form-text text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</small>
+							<div class="form-group pt-2">
+								<label for="surname">Surname</label>
+								<input type="text" class="form-control" name="surname" id="surname" placeholder="Enter surname">
 							</div>
-							<input id="deadline" name="deadline" class="form-control" type="date" />
-						  </div>
 					
-						  <div class="form-group">
-							<label for="applicationdeadline">Application deadline</label>
-							<div>
-							   <small class="form-text text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</small>
-							</div>
-							<input id="applicationdeadline" name="applicationdeadline" class="form-control" type="date" />
-						  </div>
-						  <p></p>
-						  <button class="btn btn-primary show-your-details">Back</button> <button class="btn btn-primary show-summary">Save</button>
-						</div>
+						  	<div class="form-group pt-2">
+								<label for="company">Company</label>
+								<input type="text" class="form-control" name="company" id="company" placeholder="Company name">
+						  	</div>
 					
-							
+						  	<div class="form-group pt-2">
+								<label for="email">Email address</label>
+								<input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+						  	</div>
+					
+						  	<div class="form-group pt-2">
+								<label for="phone">Phone no</label>
+								<input type="tel" class="form-control" name="phone" id="phone" placeholder="Enter phone number">
+						  	</div>
+					
+							<!-- Job Details -->
+							<div class="job-details pt-2">
 						
-					
+								<div class="form-group pt-2">
+									<label for="longdescription">Description</label>
+									<textarea class="form-control" name="longdescription" id="longdescription"  placeholder="Add more details" rows="15"></textarea>
+								</div>
+							  
+							  	<!-- tags -->
+							  	<div class="form-group pt-4">
+									<div>
+									  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#add-tags" aria-expanded="false" aria-controls="add-tags">
+										Edit skills categories
+									  </button>
+									</div>
+									<div class="collapse" id="add-tags">
+									  	<div class="pb-5" id="tag-checkboxes">
+									  		<!-- inject tags -->
+										</div>
+							  		</div>
+							  	</div>
 
+							  	<div class="form-group pt-2">
+									<label for="budget">Hourly rate for this job</label>
+									<div class="input-group mb-3">
+								  		<span class="input-group-text">£</span>
+								  		<input type="number" name="hourlyrate" id="hourlyrate" class="form-control" aria-label="Amount (in pounds)">
+									</div>
+							  	</div>
+
+							  	<div class="form-group pt-2">
+									<label for="budget">Duration for this job</label>
+									<div class="input-group mb-3">
+								  		<span class="input-group-text">Days</span>
+								  		<input type="number" name="duration" id="duration" class="form-control" aria-label="Length (in days)">
+									</div>
+							  	</div>
+
+								<div class="form-group pt-2">
+									<label for="budget">Budget for this job</label>
+									<div class="input-group mb-3">
+									  	<span class="input-group-text">£</span>
+									  	<input type="number" name="budget" id="budget" class="form-control" aria-label="Amount (in pounds)">
+									</div>
+								</div>
+
+							  	
+						
+								<div class="form-group">
+									<label for="deadline">Deadline for job</label>
+									<input id="deadline" name="deadline" class="form-control" type="date" />
+								</div>
+							
+							  	<div class="form-group">
+									<label for="applicationdeadline">Application deadline</label>
+									<input id="applicationdeadline" name="applicationdeadline" class="form-control" type="date" />
+							  	</div>
+							  <p></p>
+							  <a href="jobboard.html" class="btn btn-primary show-your-details">Back</a> 
+							  <button class="btn btn-primary show-summary" id="save-edit">Save</button>
+							  <button class="btn btn-primary show-summary" id="save-edit-preview">Save & View (in new window)</button>
+							  <p class="response-msg pt-3"></p>
+							  <hr>
+							  <p></p>
+							  <h3>Danger Zone: Deletion cannot be undone</h3>
+							   <a href="#" id="delete-job" class="btn btn-danger" onclick="confirm('Deleting a Job cannot be undone. Confirm deletion')">Delete Job</a>
+							</div>
+						</form>
+					</div>
 				</div>
 			</main>
 
@@ -190,6 +188,7 @@
 		</div>
 	</div>
 
+	
 	<script src="js/app.js"></script>
 	<!-- custom JS -->
 	<script src="../scripts/admin.bundle.js"></script>

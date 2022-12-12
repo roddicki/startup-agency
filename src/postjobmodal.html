@@ -1,6 +1,8 @@
 <!--Modals-->
-<!--Step 1-->
-<div class="modal fade" id="postmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+<!--Step 0-->
+<div class="modal fade" id="post-job-modal0" tabindex="-1" aria-labelledby="exampleModalLabel" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content modalcontentleft">
         
@@ -20,7 +22,7 @@
                 <h3>I know what I'm looking for!</h3>
                 <p>I have enough experience to clearly specify who I’m looking for for this job brief and I’m fine to carry on by myself.</p>
                 <p>I’m happy to fill the job brief myself.</p>
-                <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#step1" data-bs-dismiss="modal" >Add brief now</button>
+                <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#post-job-modal1" data-bs-dismiss="modal" >Add brief now</button>
               </div>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12">
@@ -36,8 +38,9 @@
       </div>
     </div>
   </div>
-  
-  <div class="modal fade" id="step1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <!-- Step 1 -->
+  <div class="modal fade" id="post-job-modal1" tabindex="-1" aria-labelledby="exampleModalLabel" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content modalcontentleft">
         
@@ -55,21 +58,21 @@
             <form class="row g-3 needs-validation post-job-form0" novalidate>
               <div class="col-md-6 col-sm-12">
                 <label for="validationCustom01" class="form-label">First name*</label>
-                <input type="text" class="form-control" name="firstname" id="validationCustom01" required>
+                <input type="text" class="form-control" name="firstname" id="validationCustom01" placeholder="Your first name" required>
                 <div class="invalid-feedback">
                     Please add your forename.
                   </div>
               </div>
               <div class="col-md-6 col-sm-12">
                 <label for="validationCustom02" class="form-label">Last name*</label>
-                <input type="text" class="form-control" name="lastname" id="validationCustom02" required>
+                <input type="text" class="form-control" name="lastname" id="validationCustom02" placeholder="Your surname" required>
                 <div class="invalid-feedback">
                     Please add your surname.
                   </div>
               </div>
               <div class="col-md-6 col-sm-12">
                 <label for="validationCustom03" class="form-label">Email*</label>
-                <input type="text" class="form-control" name="email" id="validationCustom03" required>
+                <input type="text" class="form-control" name="email" id="validationCustom03" placeholder="Your email" required>
                 <div class="invalid-feedback">
                   Please provide a valid Email.
                 </div>
@@ -77,15 +80,14 @@
               
               <div class="col-md-6 col-sm-12">
                 <label for="validationCustom05" class="form-label">Phone Number*</label>
-                <input type="text" class="form-control" name="phone" id="validationCustom05" required>
+                <input type="text" class="form-control" name="phone" id="validationCustom05" placeholder="Your phone no" required>
                 <div class="invalid-feedback">
                   Please provide a valid phone number.
                 </div>
               </div>
               <div class="col-12">
                 <div class="set-content-right">
-                  <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-target="#postmodal" data-bs-dismiss="modal" >Back</button>
-                  <!-- <button type="button" id="submit1" class="btn btn-primary btn-lg btn-block apply-btn"data-bs-toggle= "modal"   data-bs-target="#step2" data-bs-dismiss="modal">Next Step</button> -->
+                  <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-target="#post-job-modal0" data-bs-dismiss="modal" >Back</button>
                   <button type="button" id="submit1" class="btn btn-primary btn-lg btn-block apply-btn">Next Step</button>
                 </div>
               </div>
@@ -95,166 +97,178 @@
       </div>
     </div>
   </div>
-  <!--Step 2-->
-  <div class="modal fade" id="step2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-      <div class="modal-content modalcontentleft">
-        
-          <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Add job brief</h2>
-          <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
-          <div class="row">
-            <div class="row steps">
-              <div class="col-4"><div class="step-active"><p class="step-text-active">1</p></div><hr class="step-lines-active"></div> 
-              <div class="col-4"><div class="step-active"><p class="step-text-active">2</p></div><hr class="step-lines-inactive"></div> 
-              <div class="col-4"><div class="step-inactive"><p class="step-text-inactive">3</p></div></div> 
-            </div>
-            <div class="col-md-12 col-sm-12">
-              <p>Now we actually need more details on the job itself. The job title should be a short summary of the job itself. In brief please describe all essential details of the job including job background, who are you looking for, when and where but also any required skills or software expertise if applicable. </p>
-            </div>
-            
-            <form class="row g-3 needs-validation post-job-form1" novalidate>
-              <div class="col-md-12">
-                <label for="validationCustom06" class="form-label">Job title*</label>
-                <input type="text" class="form-control" name="title" id="validationCustom06" required>
-                <div class="invalid-feedback">
-                    Please add a job title
-                  </div>
-              </div>
-  
-              <div class="col-md-12">
-                <label for="validationCustom04" class="form-label">Company name*</label>
-                <input type="text" class="form-control" name="company" id="validationCustom07" required>
-                <div class="invalid-feedback">
-                    Please add your company name
-                  </div>
-              </div>
-  
-              <!--Completion radios -->
-              <div class="col-md-6 col-sm-12 gap">
-                <div class="form-check">
-                <input class="form-check-input" type="radio" name="budgetRadio" id="flexRadioDefault1">
-                <label class="form-check-label" for="budgetRadio">
-                  Set budget
-                </label>
-              </div>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">£</span>
-                </div>
 
-              <input type="text" class="form-control" name="budget" id="validationCustom03">
-            </div>
+<!-- step 2 -->
+<div class="modal fade" id="post-job-modal2" tabindex="-1" aria-labelledby="exampleModalLabel" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content modalcontentleft">
+      <h2 class="modal-title signinheader modalheaddrapply">Add job brief</h2>
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+      <!-- row -->
+      <div class="row">
+        <div class="row steps">
+          <div class="col-4"><div class="step-active"><p class="step-text-active">1</p></div><hr class="step-lines-active"></div> 
+          <div class="col-4"><div class="step-active"><p class="step-text-active">2</p></div><hr class="step-lines-inactive"></div> 
+          <div class="col-4"><div class="step-inactive"><p class="step-text-inactive">3</p></div></div> 
+        </div>
+        <div class="col-md-12 col-sm-12">
+          <p>Now we actually need more details on the job itself. The job title should be a short summary of the job itself. In brief please describe all essential details of the job including job background, who are you looking for, when and where but also any required skills or software expertise if applicable. </p>
+        </div>
 
-            <div class="col-md-6 col-sm-12 gap">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="hourlyRadio" id="flexRadioDefault1">
-                <label class="form-check-label" for="hourlyRadio">
-                  Hourly Rate
-                </label>
-              </div>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">£</span>
-                </div>
-             
-              <input type="text" class="form-control" name="rate" id="validationCustom03">
-            </div>
-            </div>
-
-            <div class="gap"></div>
-            <div class="row">
-            <div class="col-md-6">
-              <label for="validationCustom04" class="form-label">Application Deadline*</label>
-              <p></p>
-              <input class="date-input" type="date" name="applicationDeadline" value="now" required>
-              <div class="invalid-feedback">
-                  Please add a application deadline
-                </div>
-            </div>
+      </div> 
+      <!-- end row -->
+      <form class="needs-validation post-job-form1" novalidate>
+      <div class="row g-3">
+        <div class="col-md-12">
+          <label for="validationCustom06" class="form-label">Job title*</label>
+          <input type="text" class="form-control" name="title" id="validationCustom06" placeholder="Descriptive job title" required>
+          <div class="invalid-feedback">
+              Please add a job title
           </div>
-            <div class="col-md-6">
-              <label for="validationCustom04" class="form-label">Job location*</label>
-              <input type="text" class="form-control" name="location" id="validationCustom07" required>
-              <div class="invalid-feedback">
-                  Please tell us if we need a location
-                </div>
-            </div>
-            
-  
-            <div class="col-md-6 col-sm-12 gap remotejob">
-              <div class="form-check checkbox-pos">
-                <input class="form-check-input" type="checkbox" name="remoteRadio" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="remoteRadio">
-                  Remote Job
-                </label>
-              </div>
-            </div>
-  
-            <div class="col-md-6 col-sm-12 gap">
-              <div class="form-check">
-              <input class="form-check-input" type="radio" name="completionRadio" id="flexRadioDefault2">
-              <label class="form-check-label" for="completionRadio">
-                Completion date
-              </label>
-            </div>  
-            <input class="date-input date-margin" type="date" name="completionDate"
-                value="now"
-                 required>
+        </div>
+      </div>
+
+      <div class="row pt-3">
+        <div class="col-md-6 col-sm-12">
+          <label for="validationCustom04" class="form-label">Company name*</label>
+          <input type="text" class="form-control" name="company" id="validationCustom07" placeholder="Your company" required>
+          <div class="invalid-feedback">
+              Please add your company name
           </div>
-  
-          <div class="col-md-6 col-sm-12 gap">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="durationRadio" id="flexRadioDefault2">
-              <label class="form-check-label" for="durationRadio">
-                Duration length (days) 
-              </label>
+        </div>
+      </div>
+      <!-- end row -->
+
+      <div class="row pt-3">
+        <div class="col-md-12">
+          Please either set a Budget or add an Hourly Rate*
+        </div>
+      </div>
+
+      <div class="row">
+        <!--Completion radios -->
+        <div class="col-md-6 col-sm-12">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="budgetRadio" id="flexRadioDefault1">
+            <label class="form-check-label" for="budgetRadio">
+              Set budget
+            </label>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">£</span>
+            </div>
+            <input type="text" class="form-control" name="budget" id="validationCustom03">
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="hourlyRadio" id="flexRadioDefault1">
+            <label class="form-check-label" for="hourlyRadio">
+              Hourly Rate
+            </label>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">£</span>
+            </div>
+            <input type="text" class="form-control" name="rate" id="validationCustom03">
+          </div>
+        </div>
+      </div>
+      <!-- end row -->
+
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <label for="validationCustom04" class="form-label pb-2">Deadline to apply for this job*</label>
+          <input class="date-input" type="date" name="applicationDeadline" value="now" required>
+          <div class="invalid-feedback">
+              Please add a application deadline
+          </div>
+        </div>
+      </div>
+      <!-- end row -->
+
+      <div class="row pt-3">
+        <div class="col-md-6 col-sm-12">
+          <label for="validationCustom04" class="form-label">Job location (or remote work)*</label>
+          <input type="text" class="form-control" name="location" id="validationCustom07" placeholder="Where is the job based" required>
+          <div class="invalid-feedback">
+              Please tell the location of the job
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12 pt-3 remotejob">
+          <div class="form-check checkbox-pos">
+            <label class="form-check-label" for="remoteRadio">Remote Job</label>
+            <input class="form-check-input" type="checkbox" name="remoteRadio" value="" id="flexCheckDefault">
+          </div>
+        </div>
+      </div>
+      <!-- end row -->
+
+      <div class="row pt-3">
+        <div class="col-md-12">
+          Please either set a Completion date for the job or how many days work you expect it to be*
+        </div>
+      </div>
+
+      <div class="row pt-3">
+        <div class="col-md-6 col-sm-12">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="completionRadio" id="flexRadioDefault2">
+            <label class="form-check-label" for="completionRadio">Completion date</label>
+          </div>  
+          <input class="date-input date-margin" type="date" name="completionDate" value="now" required>
+        </div>
+        <div class="col-md-6 col-sm-12 pt-1">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="durationRadio" id="flexRadioDefault2">
+            <label class="form-check-label" for="durationRadio">Duration (days of work)</label>
           </div>
           <input class="form-control" type="number" min="1" name="duration" required>
-          <!-- <input class="date-input date-margin" type="date" name="duration" required> -->
         </div>
-  
+      </div>
+      <!-- end row -->
+
+      <div class="row pt-3">
         <div class="col-md-12">
           <label for="validationCustom04" class="form-label">Job brief*</label>
-          <textarea class="form-control" id="validationCustom03" name="jobBrief" rows="7" required></textarea>
-  
-            <div class="invalid-feedback">
-              Please tell us about the job
-            </div>
-        </div>
-            
-        <div class="col-12">
-          <label>Related categories* </label>
-        </div>
-        <div class="col-12 category-tags">
-           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D Design</button>
-           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Computer Animation</button>
-           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Fashion</button>
-           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Graphic design</button>
-           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Music & Sound</button>
-           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Performance</button>
-           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Photography</button>
-           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Film & Video Production</button>
-           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Video Games</button>
-           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Visual Effects</button>
-           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Web Development</button>
-           <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Writing & Copy</button>
-        </div>
-              
-            <div class="col-12">
-              <div class="set-content-right gap">
-                <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#step1" data-bs-dismiss="modal">Back</button>
-                <button type="button" id="submit2" class="btn btn-primary btn-lg btn-block">Preview Job</button>
-              </div>
-            </div>
-            </form>
+          <textarea class="form-control" id="validationCustom03" name="jobBrief" rows="7" placeholder="Decription of the job" required></textarea>
+          <div class="invalid-feedback">
+            Please tell us about the job
           </div>
+        </div>
       </div>
+
+      <div class="row pt-3">
+        <div class="col-12">
+          <label>Please select related categories for your job (this will help us match freelancers)* </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 category-tags">
+          <!-- inject caterory buttons from app.js and external file -->
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="set-content-right gap">
+            <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#post-job-modal1" data-bs-dismiss="modal">Back</button>
+            <button type="button" id="submit2" class="btn btn-primary btn-lg btn-block">Preview Job</button>
+          </div>
+        </div>
+      </div>
+      </form>
     </div>
   </div>
+</div>
   
-  
+
+
   <!--Step 3-->
-  <div class="modal fade" id="step3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="post-job-modal3" tabindex="-1" aria-labelledby="exampleModalLabel" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content modalcontentleft">
         
@@ -313,7 +327,7 @@
             </div>
             <div class="col-12">
               <div class="set-content-right gap">
-                <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#step2" data-bs-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#post-job-modal2" data-bs-dismiss="modal">Back</button>
                 <button type="button" class="btn btn-primary btn-lg btn-block submit-job-details"  data-bs-toggle= "modal" data-bs-target="#submit" data-bs-dismiss="modal" >Submit job</button>
               </div>
             </div>
@@ -323,7 +337,7 @@
   </div>
   
 
-  <div class="modal fade" id="submit" tabindex="-1" aria-labelledby="thankYouModal" aria-hidden="true">
+  <div class="modal fade" id="submit" tabindex="-1" aria-labelledby="thankYouModal" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content">
           <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -352,13 +366,13 @@
             </div>
           </div>
           
-        </div>
       </div>
     </div>
   </div>
+ 
 
   <!--Help email Modal-->
-  <div class="modal fade" id="help" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="help" tabindex="-1" aria-labelledby="exampleModalLabel" data-bs-backdrop="static" data-bs-keyboard="false"  aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content modalcontentleft">
         
@@ -415,7 +429,7 @@
   </div>
 
   <!-- help sent message thankyou -->
-  <div class="modal fade" id="help-thank-you" tabindex="-1" aria-labelledby="thankYouModal" aria-hidden="true">
+  <div class="modal fade" id="help-thank-you" tabindex="-1" aria-labelledby="thankYouModal" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content">
           <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>

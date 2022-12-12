@@ -20,13 +20,13 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body data-page="job-listings">
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="graduates.html">
-          <span class="align-middle">Startup Agency DashBoard</span>
-        </a>
+          			<span class="align-middle">Startup Agency DashBoard</span>
+        		</a>
 
 				<ul class="sidebar-nav">
 					<li class="sidebar-header">
@@ -34,22 +34,21 @@
 					</li>
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="graduates.html">
-              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Graduate Approval</span>
-            </a>
-					</li>
-
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="jobboard.html">
-							<i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Job Board</span>
-            </a>
+              				<i class="align-middle" data-feather="user"></i> <span class="align-middle">Graduate Approval</span>
+           		 		</a>
 					</li>
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="#">
-              <i class="align-middle" data-feather="book"></i> <span class="align-middle logout-btn">Sign Out</span>
-            </a>
+						<a class="sidebar-link" href="jobboard.html">
+							<i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Job Board</span>
+            			</a>
 					</li>
-
-					
+					<li class="sidebar-item">
+						<a class="sidebar-link" id="sidebar-sign-out" href="#">
+			              <i class="align-middle" data-feather="book"></i> <span class="align-middle">Sign Out</span>
+			            </a>
+					</li>
+				</ul>
+			</div>
 		</nav>
 
 		<div class="main">
@@ -79,52 +78,24 @@
 			<main class="content">
 				<div class="container-fluid p-0">
 
-					<h1 class="h3 mb-3"><strong>Job Board</strong> Dashboard</h1>
+					<h1 class="h3 mb-3"><strong>Job Board</strong> Dashboard <span class="no-of-jobs"></span></h1>
 
 					<div class="row">
 						<div class="col-12 col-lg-12 col-xxl-12 d-flex">
 							<div class="card flex-fill">
 								
-								<table class="table table-hover my-0">
+								<table class="table table-hover my-0 job-list">
 									<thead>
 										<tr>
-											<th>Name</th>
+											<th>Job</th>
 											<th>Application Deadline</th>
-											<th>Status</th>
+											<th>Approved</th>
 											<th class="d-none d-md-table-cell">Link To Job</th>
 											<th class="d-none d-md-table-cell">Edit Job</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>Graphics designer needed</td>
-											<td>05/08/2022</td>
-											<td><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"></div></td>
-											<td class="d-none d-md-table-cell"><a href="jobinfo.html"><button class="btn btn-primary">Preview</button></a></td>
-											<td class="d-none d-md-table-cell"><a href="jobedit.html"><button class="btn btn-primary">Edit</button></a></td>
-											
-										</tr>
-										<tr>
-											<td>Untiy Programmer</td>
-											<td>30/07/2022</td>
-											<td><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"></div></td>
-											<td class="d-none d-md-table-cell"><button class="btn btn-primary">Preview</button></td>
-											<td class="d-none d-md-table-cell"><button class="btn btn-primary">Edit</button></td>
-										</tr>
-										<tr>
-											<td>Brand designer</td>
-											<td>01/08/2022</td>
-											<td><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"></div></td>
-											<td class="d-none d-md-table-cell"><button class="btn btn-primary">Preview</button></td>
-											<td class="d-none d-md-table-cell"><button class="btn btn-primary">Edit</button></td>
-										</tr>
-										<tr>
-											<td>Job Needed</td>
-											<td>05/04/2024</td>
-											<td><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"></div></td>
-											<td class="d-none d-md-table-cell"><button class="btn btn-primary">Preview</button></td>
-											<td class="d-none d-md-table-cell"><button class="btn btn-primary">Edit</button></td>
-										</tr>
+										<!-- inject jobs here -->
 									</tbody>
 								</table>
 							</div>

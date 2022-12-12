@@ -287,6 +287,18 @@ export function getSingleJob (id, fn) {
     });
 }
 
+// update doc for user
+export function updateJobDoc(uid, key, val) {
+  //console.log(uid, key, val);
+  // create key val update
+  let updateKeyVal = {};
+  updateKeyVal[key] = val;
+  updateDoc(doc(db, "jobs", uid), updateKeyVal)
+  .then(function(){
+    console.log("successfully updated user doc");
+  });
+}
+
 
 // get all users data
 export function getAllUserData(tag, fn) {
