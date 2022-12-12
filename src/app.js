@@ -85,7 +85,7 @@ async function createSentEmailDoc(to, from, msg){
 function getHelpFormValues() {
   const helpForm = document.querySelector('.post-job-form2');
   let formValues = {};
-  formValues.message = "<b>Enquiry about help posting a Job:<b>Message from:</b> " + helpForm.helpForename.value + " " + helpForm.helpSurname.value + " <br><b>Message:</b> " + helpForm.helpDesc.value;
+  formValues.message = "<b>Enquiry about help posting a Job:</b><br><br><b>Message from:</b> " + helpForm.helpForename.value + " " + helpForm.helpSurname.value + " <br><br><b>Message:</b><br>" + helpForm.helpDesc.value;
   formValues.from = helpForm.helpEmail.value;
   formValues.to = "stiwdiofreelanceragency@gmail.com";
   return formValues;
