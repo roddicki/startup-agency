@@ -29,10 +29,10 @@ exports.sendEmail = functions.firestore
         const mailOptions = {
             from: 'stiwdiofreelanceragency@gmail.com',
             to: snap.data().to,
-            subject: 'Startup Agency contact form message',
-            html: `<h1>Email from Startup Agency contact form</h1>
+            subject: 'Stiwdio Agency message',
+            html: `<h3>Email from Stiwdio Agency</h3>
                       <p>
-                          <b>Email: </b>${snap.data().from}
+                          <b>Email from: </b>${snap.data().from}
                           <br>${snap.data().message}
                       </p>`
         };
