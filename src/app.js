@@ -159,6 +159,11 @@ function createJobDoc() {
 // inserts a reference to the uploaded image/s into the logged in users profile
 async function uploadBase64Image(base64string) {
   //console.log(base64string);
+  // url is From Storage - not a new image - exit with a return
+  if (base64string.includes("firebasestorage")) {
+    return base64string;
+  }
+  console.log(isFromStorage);
   // get filetype from string
   let fileSuffix = "";
   const fileTypes = ["png", "jpg", "jpeg", "svg"];
@@ -180,12 +185,16 @@ async function uploadBase64Image(base64string) {
   const randStr = Math.random().toString(36).substr(2, 5);
   const uploadUrl = "images/"+ currentUserData.uid + "/img-profile-"+randStr+"." + fileSuffix;
   console.log(uploadUrl);
+  // if not from storage else return base64string
   const storageRef = ref(storage, uploadUrl);
   // upload
   const uploaded = await uploadString(storageRef, base64string, 'data_url')
   .then(function() {
     console.log('Uploaded a base64url string!', uploadUrl);
     
+  })
+  .catch(function(error){
+    console.log("Error: uploading pic:", error); 
   });
 
   return uploadUrl;
@@ -785,7 +794,7 @@ async function updatePersonalDetails(uid){
     jobTitle: updateDetailsForm.jobTitle.value,
     location: updateDetailsForm.userLocation.value,
     website: updateDetailsForm.webLink.value,
-    bio: updateDetailsForm.bio.value,
+    bio: updateDetailsForm.bio.value.replace(/\n\r?/g, '<br>'),
   })
   .then(function(){
     console.log("successfully updated user doc");
@@ -801,13 +810,28 @@ async function updateSkillsTags(uid){
   // get active buttons / tag from skill-categories modal
   let tagEls = document.querySelectorAll("#skills-categories .tab-pane button.active");
   let tagList = [];
+  let categoryList = [];
+  const categories = getCategories(); // fom import
   for (var i = 0; i < tagEls.length; i++) {
-    console.log(tagEls[i].dataset.skills);
+    // create tags array
+    let tag = tagEls[i].dataset.skills;
     tagList.push(tagEls[i].dataset.skills);
+    // create category array
+    let category = tag.split("-");
+    console.log(category[0]);
+    // match category in imported array
+    let categoryObj = categories.find(function(x){
+      return x.category === category[0];
+    });
+    // add to category list if not already present
+    if (! categoryList.includes(categoryObj.category)) {
+      categoryList.push(categoryObj.category);
+    }
   }
   
   updateDoc(doc(db, "users", uid), {
-    tags: tagList
+    tags: tagList,
+    categories: categoryList
   })
   .then(function(){
     console.log("successfully updated user doc with new tags");
@@ -879,7 +903,7 @@ function populatePersonalDetailsModal(vals){
   }
   if (vals.bio) {
     let bio = document.querySelector("#edit-details #user-bio");
-    bio.value = vals.bio;
+    bio.value = vals.bio.replace(/<br\s*[\/]?>/gi, "\n");
   }
 }
 
@@ -1701,8 +1725,8 @@ if (page == "edit-profile") {
           pageEdited = true;
         });
       });
-      
     });
+
     // update personal details bio
     updatePersonalDetails(currentUserData.uid).then(function(){
       getCurrentUserDetails(currentUserData.uid).then(function(vals){
