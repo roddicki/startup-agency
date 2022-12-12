@@ -50,7 +50,7 @@ http://[::]:8000/dist/
 
 ## To deploy to firebase hosting / build the environment  
 ```console  
-$ firebase deploy --only hosting  
+$ firebase deploy  
 
 ```  
 
