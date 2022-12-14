@@ -1028,6 +1028,10 @@ margin-top: 20px;
 	
 }
 
+.dropdown-toggle::after {
+    margin-left: 70px;
+}
+
 .edit-size{
 	font-size: 17px;
 	margin-bottom: 0px;

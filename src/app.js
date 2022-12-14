@@ -44,6 +44,8 @@ onAuthStateChanged(auth, function(user) {
       currentUserData.email = user.email;
       getCurrentUserDetails(user.uid).then(function(vals){
         showSignedInUser(user.email, user.uid, vals.forename, vals.surname);
+        // add profile pic
+        populateProfilePicNav(vals);
       });
     } else {
       // User not logged in or has just logged out.
@@ -158,12 +160,11 @@ function createJobDoc() {
 // upload image - argument is a base64 string
 // inserts a reference to the uploaded image/s into the logged in users profile
 async function uploadBase64Image(base64string) {
-  //console.log(base64string);
-  // url is From Storage - not a new image - exit with a return
-  if (base64string.includes("firebasestorage")) {
+  console.log("base64= " + base64string);
+  // url is From Storage - not a new image - or doesn't exist - exit with a return
+  if (base64string.includes("firebasestorage") || base64string == false) {
     return base64string;
   }
-  console.log(isFromStorage);
   // get filetype from string
   let fileSuffix = "";
   const fileTypes = ["png", "jpg", "jpeg", "svg"];
@@ -722,12 +723,83 @@ function displayAllUserData(usersCollection) {
 
 // show signed in user
 function showSignedInUser(user, id, forename, surname) {
+  const profilePic = document.querySelector('.navbar .profile-pic');
+  const liDropdown = document.querySelector('.navbar .dropdown');
+  const navbar = document.querySelector('.navbar .navbar-nav');
+  // create profile pic
+  // reset profile pic
+  profilePic.innerHTML = ""
+  let img = document.createElement('img');
+  img.width = "32";
+  img.height = "32";
+  img.src = "./assets/img/generic-profile.jpg";
+  img.alt = forename + " " + surname;
+  img.className = "rounded-circle mx-1";
+  profilePic.appendChild(img);
+  // create dropdown
+  let dropdownAnchor = document.createElement('a');
+  dropdownAnchor.className = "nav-link dropdown-toggle";
+  dropdownAnchor.href = "#";
+  dropdownAnchor.id = "navbarDropdown";
+  dropdownAnchor.role = "button";
+  dropdownAnchor.dataset.bsToggle = 'dropdown';
+  dropdownAnchor.setAttribute("aria-expanded", "false");
+  dropdownAnchor.innerHTML = forename + " " + surname;
+  liDropdown.appendChild(dropdownAnchor);
+
+  let ul = document.createElement("ul");
+  ul.className = "dropdown-menu";
+  ul.setAttribute("aria-labelledby", "navbarDropdown");
+  // Dashboard dropdown link
+  let li = document.createElement("li");
+  let a = document.createElement("a");
+  a.className = "dropdown-item dashboard";
+  a.href = 'profile.html?id='+id;
+  a.innerHTML = "Dashboard";
+  li.appendChild(a);
+  ul.appendChild(li);
+  // line break
+  let hr = document.createElement("hr");
+  ul.appendChild(hr);
+  // Folio dropdown link
+  li = document.createElement("li");
+  a = document.createElement("a");
+  a.className = "dropdown-item portfolio";
+  a.href = 'profile.html?id='+id;
+  a.innerHTML = "Portfolio profile";
+  li.appendChild(a);
+  ul.appendChild(li);
+  // line break
+  hr = document.createElement("hr");
+  ul.appendChild(hr);
+  // account dropdown link
+  li = document.createElement("li");
+  a = document.createElement("a");
+  a.className = "dropdown-item account";
+  a.href = 'profile.html?id='+id;
+  a.innerHTML = "Account settings";
+  li.appendChild(a);
+  ul.appendChild(li);
+  // line break
+  hr = document.createElement("hr");
+  ul.appendChild(hr);
+  // sign out dropdown link
+  li = document.createElement("li");
+  a = document.createElement("a");
+  a.className = "dropdown-item sign-out";
+  a.href = 'profile.html?id='+id;
+  a.innerHTML = "Sign Out";
+  li.appendChild(a);
+  ul.appendChild(li);
+  a.addEventListener('click', signOutUser);
+
+  liDropdown.appendChild(ul);
   // get name
 
   // get profile pic
 
   // add name
-  const accountDropdown = document.querySelector('.dropdown-menu');
+  /*const accountDropdown = document.querySelector('.dropdown-menu');
   // edit drop down contents
   const name = document.querySelector('.dropdown-toggle');
   name.innerHTML = forename + " " + surname;
@@ -742,39 +814,40 @@ function showSignedInUser(user, id, forename, surname) {
   accountLink.href = 'profile.html?id='+id;
 
   const signoutLink = document.querySelector('.dropdown-menu .sign-out');
-  signoutLink.addEventListener('click', signOutUser);
+  signoutLink.addEventListener('click', signOutUser);*/
 }
 
 
 // show signed out user
 function showSignedOutUser() {
   const profilePic = document.querySelector('.navbar .profile-pic');
-  const accountDropdown = document.querySelector('.navbar .dropdown');
+  const liDropdown = document.querySelector('.navbar .dropdown');
   const navbar = document.querySelector('.navbar .navbar-nav');
   // delete drop down contents & profile pic
   profilePic.innerHTML = ""
-  accountDropdown.innerHTML = "";
-  // create sign in and post job buttons
-  let li = document.createElement('li');
+  liDropdown.innerHTML = "";
+  // create sign in button
+  //let li = document.createElement('li');
   let a = document.createElement('a');
-  a.className = 'btn btn-outline-primary sign-in';
+  a.className = 'btn btn-outline-primary mx-1 sign-in';
   //a.href = 'login.html';
   a.dataset.bsToggle = 'modal';
   a.dataset.bsTarget = '#signInModal';
   a.innerHTML = 'Sign in';
-  li.className = 'nav-item pe-3';
-  li.appendChild(a);
-  navbar.appendChild(li);
-  li = document.createElement('li');
+  //li.className = 'nav-item pe-3';
+  liDropdown.appendChild(a);
+  //navbar.appendChild(li);
+  // create post job button
+  //li = document.createElement('li');
   a = document.createElement('a');
-  a.className = 'btn btn-primary post-job';
+  a.className = 'btn btn-primary mx-2 post-job';
   a.href = '#';
   a.dataset.bsToggle = 'modal';
   a.dataset.bsTarget = '#post-job-modal0';
   a.innerHTML = 'Post job';
-  li.className = 'nav-item';
-  li.appendChild(a);
-  navbar.appendChild(li);
+  //li.className = 'nav-item';
+  liDropdown.appendChild(a);
+  //navbar.appendChild(li);
 }
 
 
@@ -942,7 +1015,12 @@ function populateSkillsModal(vals){
   }
 }
 
+// populate personal details modal with a saved profile pic
 function populateProfilePicModal(vals) {
+  // exit if not profile pic
+  if (! vals.profilePic) {
+    return;
+  }
   const profilePicContainer = document.querySelector('#edit-details #display-image');
   const storageRef = ref(storage, vals.profilePic);
   // get download image ref - don't need this 
@@ -954,7 +1032,12 @@ function populateProfilePicModal(vals) {
     })
 }
 
+// populate personal details edit page with a saved profile pic
 function populateProfilePic(vals) {
+  // exit if not profile pic
+  if (! vals.profilePic) {
+    return;
+  }
   const profilePicContainer = document.querySelector('.edit-section .profile-img div');
   const storageRef = ref(storage, vals.profilePic);
   // get download image ref - don't need this 
@@ -963,6 +1046,23 @@ function populateProfilePic(vals) {
       //console.log(url);
       // add to modal as background image
       profilePicContainer.style.backgroundImage = "url("+url+")";
+    })
+}
+
+function populateProfilePicNav(vals) {
+  const profilePicContainer = document.querySelector('.navbar .profile-pic img');
+  // if not profile pic return
+  if (! vals.profilePic) {
+    return;
+  }
+  console.log(vals.profilePic);
+  const storageRef = ref(storage, vals.profilePic);
+  // get download image ref - don't need this 
+  getDownloadURL(storageRef)
+    .then(function(url) {
+      //console.log(url);
+      // add to modal as background image
+      profilePicContainer.src = url;
     })
 }
 
@@ -1009,6 +1109,10 @@ function populateSkills(vals){
 // populate socials modal
 function populateSocialsModal(vals) {
   //console.log(vals.socials);
+  // exit if no socials
+  if (! vals.socials) {
+    return;
+  }
   for (var i = 0; i < vals.socials.length; i++) {
     //console.log(vals.socials[i]);
     let entries = Object.entries(vals.socials[i]);
@@ -1035,6 +1139,10 @@ function populateSocialsModal(vals) {
 // populate socials in edit page
 function populateSocials(vals) {
   console.log("add social links");
+  // exit if no socials
+  if (! vals.socials) {
+    return;
+  }
   const icons = {"instagram" : "./assets/img/InstagramSocial.svg", "twitter": "./assets/img/TwitterSocial.svg", "facebook": "./assets/img/WebSocialIcon.svg", "dribble": "./assets/img/WebSocialIcon.svg"};
   const socialContainer = document.querySelector(".edit-section .socials-details");
   // empty the div to prevent duplication
