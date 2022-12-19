@@ -313,6 +313,7 @@ h5{
 	white-space: nowrap;
 	
   }
+  
 
   .jobblock{
 	box-sizing: border-box;
@@ -384,6 +385,22 @@ h5{
 		
   }
 
+  .filter-input{
+	background: #FFFFFF;
+	border: 1px solid #EDEBEE;
+	border-radius: 6px;
+	height: 52px;
+	width: 100%;
+	padding: 10px;
+  }
+
+  .can-work{
+	color: #244F8E;
+  }
+
+  .cant-work{
+	color: #4E4A53;
+  }
   .timetext{
 	font-weight: 400;
 	font-size: 10px;
@@ -559,6 +576,36 @@ h5{
 	padding-top:13px;
   }
 
+  .filter-checkbox{
+	background: #FFFFFF;
+	border: 1px solid #EDEBEE;
+	border-radius: 3px;
+	height: 24px;
+	width: 24px;
+	margin-right: 8px ;
+	margin-top: -2px;
+  }
+
+  .filter-close-button{
+	margin-left: 10px;
+	margin-right: 15px;
+	float: right;
+  }
+  
+  .accordion-item{
+	border-top: 2px #EDEBEE solid;
+	border-bottom: 2px #EDEBEE solid;
+	border-left: none;
+	border-right: none;
+  }
+
+  .filter-indent{
+	margin-left: 20px;
+  }
+  .filter-indent-switch{
+	margin-left: 10px;
+  }
+
   .step-lines-inactive{
 	position:relative;
 	width: 100%;
@@ -681,6 +728,18 @@ h5{
 	width:4em !important;
 }
 
+
+.grad-preview{
+	line-height: 5px;
+}
+
+.grad-preview-images{
+	width: 100%;
+	border-radius: 10px;
+	height: 120px;
+	object-fit: cover;
+}
+
 	.form-check-label-profile{
 		margin-top: 7px;
     	margin-left: 10px;
@@ -688,6 +747,14 @@ h5{
 .underline{
 	text-decoration: underline;
 	color:#7E7984;
+}
+
+.underline-filters{
+	text-decoration: underline;
+	color:#572F88;
+	float: right;
+	margin-top: 10px;
+	cursor: pointer;
 }
 
 .additional-files{
@@ -857,7 +924,23 @@ h5{
 	margin: 0 auto 0 auto;
   }
 
-  
+  .filter-center{
+	margin-left: auto;
+  	margin-right: auto;
+	width: 85%;
+	padding-top: 10px;
+	margin-bottom: 10px;
+
+  }
+  .filter-mobile-nav{
+	z-index: 2005;
+	position:absolute;
+	float:right;
+	right: 0px;
+	width: 18em;
+	display: none;
+	top: 0px;
+  }
 
 
   @media(max-width: 991px){
@@ -1049,7 +1132,21 @@ footer {
 	border-top: 1px solid #dee2e6;
 } 
 
-
+@media (max-width: 996px){
+	.filter-box{
+		display: none;
+	}
+	.filter-mobile-nav{
+		//display: block;
+	}
+}
+@media (min-width: 997px) {
+    .filter-box{
+		display: block;
+	}
+	.filter-mobile-nav{
+	 display: none !important;
+	}
 @media (max-width: 767px) {
     .carousel-inner .carousel-item > div {
         display: none;
@@ -1057,6 +1154,7 @@ footer {
     .carousel-inner .carousel-item > div:first-child {
         display: block;
     }
+	
 }
 
 .carousel-inner .carousel-item.active,
@@ -1066,8 +1164,7 @@ footer {
 }
 
 /* medium and up screens */
-@media (min-width: 768px) {
-    
+
     /* .carousel-inner .carousel-item-end.active,
     .carousel-inner .carousel-item-next {
       transform: translateX(25%);
@@ -1077,12 +1174,16 @@ footer {
     .carousel-inner .carousel-item-prev {
       transform: translateX(-25%);
     }
+	
 }
 
 .carousel-inner .carousel-item-end,
 .carousel-inner .carousel-item-start { 
   transform: translateX(0); */
+  
 } 
+
+
 
 .carousel-indicators {
 	margin-bottom: 70px;
