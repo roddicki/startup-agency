@@ -7,7 +7,7 @@ loadCheck();
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import { initializeApp } from 'firebase/app';
-import { getStorage, ref, uploadBytes, getDownloadURL, uploadString, connectStorageEmulator } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL, getMetadata, uploadString, connectStorageEmulator } from "firebase/storage";
 
 import { getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc, doc, query, where, orderBy, getDoc, serverTimestamp, updateDoc, setDoc,  Timestamp, arrayUnion, connectFirestoreEmulator} from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, signInWithPhoneNumber, ActionCodeURL } from 'firebase/auth';
@@ -213,6 +213,54 @@ async function updateUserDocProfilePic(imageUrl) {
 
   });
 } 
+
+
+// get pdf file from edit-profile modal
+function getFilePath(){
+  const fileInput = document.querySelector('#edit-details #pdf-folio-file');
+  let fileList = fileInput.files;
+  if (fileList != 0) {
+    // get the first file (should be only one)
+    return fileList[0];
+  }
+  else {
+    return;
+  }
+}
+
+
+// upload file
+async function uploadFile(filePath) {
+  // if filePath is null (no uploaded file)
+  if (! filePath) {
+    console.log("filepath is ", filePath);
+    return;
+  }
+  // update user data with doc url
+  const docRef = doc(db, 'users', currentUserData.uid);
+
+  // create upload url
+  const uploadUrl = "files/"+ currentUserData.uid + "/folio.pdf";
+  console.log(uploadUrl);
+  // upload
+  const storageRef = ref(storage, uploadUrl);
+  // upload file - File API
+  const uploaded = await uploadBytes(storageRef, filePath)
+  .then(function(snapshot) {
+    console.log('Uploaded file!');
+    
+    // update user profile with image urls
+    updateDoc(docRef, {
+      folioPdf: uploadUrl
+    })
+    .then(function () {
+      console.log("added new file / pdf reference to user profile");
+    })
+  })
+  .catch(function(error){
+    console.log("Error: uploading file:", error); 
+  });;
+}
 
 
 // upload image - argument is an object - {upload url : blob url}
@@ -855,6 +903,14 @@ function showSignedOutUser() {
 
 // ======CREATE AND EDIT PROFILE FUNCTIONS======
 
+// launch intro modal
+function introModal(show) {
+  const modalIntro = new bootstrap.Modal(document.querySelector('#inital-sign-up'));
+  if (show) {
+    modalIntro.show();
+  }
+}
+
 // update bio info using modal
 async function updatePersonalDetails(uid){
   //console.log("update personal details");
@@ -1007,11 +1063,52 @@ function populateBio(vals) {
   bio.innerHTML = vals.bio;
 }
 
+// populate downloadable file
+function populateDownloadFile(vals){
+  const downloadPanel = document.querySelector('.download-portfolio');
+  const downloadLink = document.querySelector('.download-portfolio .download-link');
+  const downloadSize = document.querySelector('.download-portfolio .size-text');
+  
+  if(vals.folioPdf) {
+    // get download link
+    const storageRef = ref(storage, vals.folioPdf);
+    // get download image ref - don't need this 
+    getDownloadURL(storageRef)
+      .then(function(url) {
+        // add to edit profile panel
+        downloadLink.href = url;
+      })
+      .catch(function(err){
+        console.log("download link error", err);
+      })
+    // get matadata add link, text, size
+    getMetadata(storageRef)
+      .then(function(metadata) {
+        console.log(metadata);
+        downloadSize.innerHTML = Math.round(metadata.size/1000) + " KB";
+      })
+      .catch(function(err) {
+        console.log("metadata error", err);
+      });
+    // un hide panel
+    downloadPanel.classList.remove("d-none");
+  }
+  else {
+    // hide panel
+    console.log("no download pdf");
+    downloadPanel.classList.add("d-none");
+    downloadSize.innerHTML = "";
+    downloadLink.href = "#";
+  }
+}
+
 // populate skills tags modal
 function populateSkillsModal(vals){
-  for (var i = 0; i < vals.tags.length; i++) {
-    let el = document.querySelector('[data-skills="'+vals.tags[i]+'"]');
-    el.classList.add("active");
+  if (vals.tags) {
+    for (var i = 0; i < vals.tags.length; i++) {
+      let el = document.querySelector('[data-skills="'+vals.tags[i]+'"]');
+      el.classList.add("active");
+    }
   }
 }
 
@@ -1075,7 +1172,7 @@ function populateSkills(vals){
   } 
   // if there are some skills tags - hide placeholder
   let placeholder = document.querySelector('.placeholder-category');
-  if (vals.tags.length > 0) {
+  if (vals.tags && vals.tags.length > 0) {
     placeholder.classList.add("d-none");
   } else {
     placeholder.classList.remove("d-none");
@@ -1779,6 +1876,9 @@ window.addEventListener('DOMContentLoaded', function(){
 // EDIT PROFILE PAGE edit-profile.html
 if (page == "edit-profile") {
   console.log("edit-profile page");
+  // first time edit show welcome modal
+  let firstTime = getParamKey("intro"); //inital-sign-up
+  introModal(firstTime);
   let section = document.querySelector("section");
   // show name on page load on add-profile page
   onAuthStateChanged(auth, function(user) {
@@ -1792,6 +1892,8 @@ if (page == "edit-profile") {
         populatePersonalDetailsModal(vals);
         // pipoulate bio section and available for work
         populateBio(vals);
+        // populate downloadable file
+        populateDownloadFile(vals);
         // populate skills tags modal
         populateSkillsModal(vals);
         // populate skills 
@@ -1843,6 +1945,17 @@ if (page == "edit-profile") {
         pageEdited = true;
       });
     });
+
+    const PDFpath = getFilePath();
+    uploadFile(PDFpath).then(function(){
+      console.log('file upload complete');
+      getCurrentUserDetails(currentUserData.uid).then(function(vals){
+          // populate bio section with new pic
+          populateDownloadFile(vals);
+          pageEdited = true;
+        });
+    })
+
   });
 
   // submit / update skills tags, update edit page
