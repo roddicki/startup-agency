@@ -156,17 +156,25 @@
                 <div class="port-block">
                   <div class="row">
                     <div class="col-12">
-                      <img class="port-edit-img-main" src="./assets/img/jamie-profile-img/sweetdreams1.png">
+                    <button type="button" class="button-showcase" data-bs-toggle="modal" data-bs-target="#showcaseImageModal1">
+                      <img class="port-edit-img-main" src="./assets/img/jamie-profile-img/sweetdreams1.png">                 
+                    </button>
                     </div>
                     <div class="gap"></div>
                     <div class="col-4">
+                     <button type="button" class="button-showcase" data-bs-toggle="modal" data-bs-target="#showcaseImageModal2">
                       <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams1.png">
+                     </button> 
                     </div>
                     <div class="col-4">
+                      <button type="button" class="button-showcase" data-bs-toggle="modal" data-bs-target="#showcaseImageModal3">
                       <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams2.png">
+                      </button>
                     </div>
                     <div class="col-4">
+                      <button type="button" class="button-showcase" data-bs-toggle="modal" data-bs-target="#showcaseImageModal4">
                       <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams3.png">
+                      </button>
                     </div>
                   </div>
                   <div class="gap"></div>
@@ -303,6 +311,11 @@
                   Please add the project name 
                 </div>
             </div>
+            <div class=" col-lg-6 col-md-6 col-sm-6">
+            <label for="Add-Project" class="form-label">Project Link</label>
+            <input type="text" class="form-control" id="Add-project-Name" >
+          
+          </div>
 
             <!--This is for the genral message-->
             <div class="col-md-12" id="general-message">
@@ -700,13 +713,13 @@
             </div>
           </div>
           <li class="nav-item nav-item-categroies nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies" id="home-tab" data-bs-toggle="tab" data-bs-target="#photography-tab" type="button" role="tab" aria-controls="home" aria-selected="false">JOURNALISM</button>
+            <button class="nav-link nav-link-categroies" id="home-tab" data-bs-toggle="tab" data-bs-target="#photography-tab" type="button" role="tab" aria-controls="home" aria-selected="false">PHOTOGRAPHY</button>
           </li>
           <li class="nav-item nav-item-categroies nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#video-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">PHOTOGRAPHY</button>
+            <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#video-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">VIDEO AND FILM</button>
           </li>
           <li class="nav-item nav-item-categroies nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#video-games" type="button" role="tab" aria-controls="contact" aria-selected="false">THEATRE/DANCE</button>
+            <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#video-games" type="button" role="tab" aria-controls="contact" aria-selected="false">VIDEO GAMES</button>
           </li>
 
           
@@ -844,7 +857,7 @@
 
 
 <!--MessageModal edit Project-->
-<div class="modal fade" id="editProject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editProject" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modalcontentleft">
       
@@ -861,7 +874,11 @@
                   Please add the project name 
                 </div>
             </div>
-
+            <div class=" col-lg-6 col-md-6 col-sm-6">
+              <label for="Add-Project" class="form-label">Project Link</label>
+              <input type="text" class="form-control" id="Add-project-Name" >
+            
+            </div>
             <!--This is for the genral message-->
             <div class="col-md-12" id="Description-Edit">
               <label for="Description-Edit" class="form-label">Description</label>
@@ -925,6 +942,52 @@
     </div>
   </div>
 </div>
+<!--Popup image modals-->
+<div id="showcaseImageModal1" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="col-12">
+            <img class="modal-showcase-img" src="./assets/img/jamie-profile-img/sweetdreams1.png" class="img-responsive">        
+        </div>
+   </div>
+  </div>
+</div>
+
+<div id="showcaseImageModal2" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="col-12">
+            <img class="modal-showcase-img" src="./assets/img/jamie-profile-img/sweetdreams1.png" class="img-responsive">
+           </div>
+   </div>
+  </div>
+</div>
+
+<div id="showcaseImageModal3" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="col-12">
+            <img class="modal-showcase-img" src="./assets/img/jamie-profile-img/sweetdreams2.png" class="img-responsive">       
+          </div>
+    </div>
+  </div>
+</div>
+
+<div id="showcaseImageModal4" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="col-12">
+            <img class="modal-showcase-img" src="./assets/img/jamie-profile-img/sweetdreams3.png" class="img-responsive">       
+          </div>
+    </div>
+  </div>
+</div>
+
+
 
 
 <span id="postjobmodal">
@@ -950,7 +1013,8 @@
 <!--made changes here -->
 <!-- add custom scripts -->
 <script type="text/javascript" src="image-uploader/image-uploader.min.js"></script>
-
+<script type="text/javascript" src="./image-uploader/image-uploader.min.css"></script>
+<script type="text/javascript" src="./image-uploader/image-uploader.min.js"></script>
 <script>
 
     $('.input-images-1').imageUploader({
