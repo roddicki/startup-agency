@@ -79,7 +79,7 @@ export function createUserDoc(uid, userEmail) {
   .then(function(){
     console.log("successfully created");
     // go to add profile on completion
-    window.location.href = "index.html";
+    window.location.href = "edit-profile.html?id="+uid+"&intro=true";
   });
 }
 

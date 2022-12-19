@@ -80,7 +80,7 @@
             <p>Add your bio</p>
           </div>
 
-          <div class="download-portfolio gap">
+          <div class="download-portfolio d-none gap">
             <div class="row">
               <div class="col-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor" class="bi bi-file-earmark-text download-img" viewBox="0 0 16 16">
@@ -89,17 +89,20 @@
                 </svg>
               </div>
               <div class="col-6">
-                <p class="download-text">Jamie-folio.pdf</p>
-                <p class="size-text">2MB</p>
+                <p class="download-text">folio.pdf</p>
+                <p class="size-text"><!-- 2MB --></p>
               </div>
               <div class="col-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                </svg>
+                <a class="download-link" href="" target="_blank">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                  </svg>
+                </a>
               </div>
             </div>
           </div>
+
         </div>
         
         <div class="content-blocks">
@@ -216,24 +219,21 @@
                   </div>
                   <div class="gap"></div>
                   <div class="col-12">
-                    <!--data-bs-toggle="modal" data-bs-target="#editProject"-->
-                    <h2><strong>Sweet Dreams</strong>
-                    
-                        <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <h2>
+                      <strong>Sweet Dreams</strong>
+                      <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                           <i  class="bi bi-pencil-square cursor-pointer edit-size" height="16px"></i>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                          <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editProject" href="#">Edit Project</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item text-danger" href="#">Delete Project</a></li>
-                          <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-                        </ul>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editProject" href="#">Edit Project</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="#">Delete Project</a></li>
+                      </ul>
                     </h2>
-                    </div>
+                  </div>
                   <div class="col-12">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna mauris, at urna ...</p>
                   </div>
-                  
                 </div>
               </div>
           
@@ -288,8 +288,6 @@
 
   </div>
 
-      
-  <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle="modal" data-bs-target="#Inital-Sign-Up" data-bs-dismiss="modal">First time button (testing)</button>
   </div>
 </div>
 </section>
@@ -408,7 +406,7 @@
               <div class="form-group">
                 <label for="pronoun-selection">Pronouns</label>
                 <select class="form-control" name="pronouns" id="pronoun-selection">
-                  <option>Select an option</option>
+                  <option>Select an option / optional</option>
                   <option value="she/her">she/her</option>  
                   <option value="he/him">he/him</option>
                   <option value="they/them">they/them</option>
@@ -416,16 +414,16 @@
               </div>
             </div>
 
-            <div class="col-lg-6 col-md-12">
+            <div class="col-lg-6 col-md-12 pt-1">
               <label for="Business-name" class="form-label">Business name</label>
-              <input type="text" class="form-control" placeholder="Add your business name" name="businessName" id="business-name">
+              <input type="text" class="form-control" placeholder="Add your business name / optional" name="businessName" id="business-name">
               <div class="invalid-feedback">
               </div>
             </div>
 
             <div class="col-lg-6 col-md-12">
               <label for="job-title" class="form-label">Job Title*</label>
-              <input type="text" class="form-control" id="job-title" name="jobTitle" placeholder="Add your job title / optional" required>
+              <input type="text" class="form-control" id="job-title" name="jobTitle" placeholder="Add your job title" required>
               <div class="invalid-feedback">
                   Please add your job title
                 </div>
@@ -443,8 +441,8 @@
               <label for="Website" class="form-label">Website</label>
               <input type="text" class="form-control" placeholder="Add your website / optional" name="webLink" id="user-website">
               <div class="invalid-feedback">
-                  Please add your last name
-                </div>
+                Please add your last name
+              </div>
             </div>
 
                   
@@ -454,19 +452,36 @@
               
               <div class="invalid-feedback">
                   Please add a Bio
-                </div>
               </div>
-              <small id="passwordHelpBlock" class="form-text text-muted">
-                Max 500 charachters
-              </small>
+            </div>
+            <small id="passwordHelpBlock" class="form-text text-muted">
+              Max 500 characters
+            </small>
 
-              <p class="project-showcase-text">ADDITIONAL FILES</p> 
-              <div class="col-sm-12">
-                <div class="form-group additional-files">
-                  <label for="exampleFormControlFile1"></label>
-                  <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                </div>
+            <p class="project-showcase-text pt-4">UPLOAD ADDITIONAL BIO / PORTFOLIO FILE</p> 
+              
+            <div class="col-lg-6 col-md-12 file-upload-container">
+              <label for="pdf-folio-file" class="form-label">Upload single PDF file only</label>
+              <input class="form-control" id="pdf-folio-file" type="file" accept="application/pdf">
+              <div class="invalid-feedback">
+                Please add a single PDF file only
               </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12 pt-3">
+              <div class="form-check">
+                <label class="form-check-label" for="remove-file-radio">Remove File</label>
+                <input class="form-check-input" type="checkbox" name="remove-file-radio" value="" id="remove-file-radio">
+              </div>
+            </div>
+
+              <!-- <div class="col-sm-12">
+                <div class="form-group additional-files input-field">
+                  <label for="active"></label>
+                  <div class="input-folio-pdf" style="padding-top: .5rem;"></div>
+                  <input type="file" class="form-control-file" id="pdf-folio-file">
+                </div>
+              </div> -->
       
           <!-- <div class="gap" -->
             
@@ -606,7 +621,7 @@
   </div>
 </div>
 
-<!--Modal for Skills catagorries not looking forward to making this-->
+<!--Modal for Skills categories-->
 <div class="modal fade" id="skills-categories" tabindex="-1" aria-labelledby="Skills" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
@@ -810,7 +825,7 @@
 
 
 <!--Modal for first load-->
-<div class="modal fade" id="Inital-Sign-Up" tabindex="-1" aria-labelledby="Inital-Sign-Up" aria-hidden="true">
+<div class="modal fade" id="inital-sign-up" tabindex="-1" aria-labelledby="inital-sign-up" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content">
       <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -962,33 +977,38 @@
 <script src="scripts/app.bundle.js"></script>
 <!-- form validation -->
 <script src="scripts/form-validation.js"></script>
-<script>
-  $(document).ready(function(){
-    $('.input-images-1').imageUploader({
-      extensions: ['.jpg', '.jpeg', '.png', '.gif'],
-      mimes: ['image/jpeg', 'image/png', 'image/gif'],
-      maxSize: undefined,
-      maxFiles: undefined,
-      label:'Drag & Drop files here or click to browse',
-    });
-  });
-</script>
 
 <!-- add custom scripts -->
 <script type="text/javascript" src="image-uploader/image-uploader.min.js"></script>
 <script>
   $(document).ready(function(){
-    $('.input-images-1').imageUploader({
-      extensions: ['.jpg', '.jpeg', '.png', '.gif'],
-      mimes: ['image/jpeg', 'image/png', 'image/gif'],
+    $('.input-folio-pdf').imageUploader({
+      extensions: ['.pdf'],
+      mimes: ['application/pdf'],
       maxSize: undefined,
-      maxFiles: undefined,
+      maxFiles: 1,
       label:' Drag & Drop files here or click to browse',
     });
   });
 </script>
 
 <script>
+  // validate pdf file upload
+  const fileInputBtn = document.querySelector('#edit-details #pdf-folio-file');
+  fileInputBtn.addEventListener('change', function(e){
+    let invalidFeedback = document.querySelector('.file-upload-container .invalid-feedback');
+    invalidFeedback.classList = "invalid-feedback";
+    let targetFiles = e.target.files;
+    if (targetFiles.length > 1 ||  ! targetFiles[0].name.includes(".pdf")) {
+      invalidFeedback.classList = "invalid-feedback d-block";
+    } else {
+      console.log("all ok");
+    }
+  });
+  
+
+
+
   // jamie add page specific JS here
   let items = document.querySelectorAll('.carousel .carousel-item')
 
