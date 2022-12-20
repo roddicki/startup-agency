@@ -295,7 +295,7 @@
 
 
 <!--MessageModal Add Project-->
-<div class="modal fade" id="addProject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addProject" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modalcontentleft">
       
@@ -358,7 +358,7 @@
   
 
 <!--Edit Details modal-->
-<div class="modal fade" id="edit-details" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="edit-details" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modalcontentleft">
       
@@ -460,7 +460,7 @@
 
             <p class="project-showcase-text pt-4">UPLOAD ADDITIONAL BIO / PORTFOLIO FILE</p> 
               
-            <div class="col-lg-6 col-md-12 file-upload-container">
+            <div class="col-md-12 file-upload-container">
               <label for="pdf-folio-file" class="form-label">Upload single PDF file only</label>
               <input class="form-control" id="pdf-folio-file" type="file" accept="application/pdf">
               <div class="invalid-feedback">
@@ -468,10 +468,10 @@
               </div>
             </div>
 
-            <div class="col-lg-6 col-md-12 pt-3">
-              <div class="form-check">
-                <label class="form-check-label" for="remove-file-radio">Remove File</label>
-                <input class="form-check-input" type="checkbox" name="remove-file-radio" value="" id="remove-file-radio">
+            <div class="col-md-12">
+              <a href="#" class="remove-pdf-file">Remove all uploaded files</a>
+              <div class="remove-pdf-file-feedback d-none text-success">
+                Success: All files removed
               </div>
             </div>
 
@@ -499,7 +499,7 @@
 
 
 <!--Social modal-->
-<div class="modal fade" id="social-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="social-modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modalcontentleft">
       <form class="row g-3 needs-validation SocialMedia" novalidate>
@@ -622,7 +622,7 @@
 </div>
 
 <!--Modal for Skills categories-->
-<div class="modal fade" id="skills-categories" tabindex="-1" aria-labelledby="Skills" aria-hidden="true">
+<div class="modal fade" id="skills-categories" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="Skills" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
         <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -825,7 +825,7 @@
 
 
 <!--Modal for first load-->
-<div class="modal fade" id="inital-sign-up" tabindex="-1" aria-labelledby="inital-sign-up" aria-hidden="true">
+<div class="modal fade" id="inital-sign-up" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="inital-sign-up" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content">
       <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
