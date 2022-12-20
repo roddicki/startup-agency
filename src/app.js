@@ -9,7 +9,7 @@ loadCheck();
 import { initializeApp } from 'firebase/app';
 import { getStorage, ref, uploadBytes, getDownloadURL, getMetadata, uploadString, connectStorageEmulator } from "firebase/storage";
 
-import { getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc, doc, query, where, orderBy, getDoc, serverTimestamp, updateDoc, setDoc,  Timestamp, arrayUnion, connectFirestoreEmulator} from 'firebase/firestore';
+import { getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc, deleteField, doc, query, where, orderBy, getDoc, serverTimestamp, updateDoc, setDoc,  Timestamp, arrayUnion, connectFirestoreEmulator} from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, signInWithPhoneNumber, ActionCodeURL } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -259,7 +259,24 @@ async function uploadFile(filePath) {
   })
   .catch(function(error){
     console.log("Error: uploading file:", error); 
-  });;
+  });
+}
+
+// delete field file
+async function deleteDocField(field){
+  const docRef = doc(db, 'users', currentUserData.uid);
+  // Remove the field from the document
+  const removed = await updateDoc(docRef, {
+      folioPdf: deleteField()
+  })
+  .catch(function(error){
+    console.log("Error: removing file:", error); 
+  });
+}
+
+function confirmDeletion(){
+  const removedFolioPDF = document.querySelector("#edit-details .remove-pdf-file-feedback");
+  removedFolioPDF.classList.remove("d-none");
 }
 
 
@@ -1956,6 +1973,16 @@ if (page == "edit-profile") {
         });
     })
 
+  });
+
+  // remove uploaded files
+  const removeFolioPDF = document.querySelector("#edit-details .remove-pdf-file");
+  removeFolioPDF.addEventListener('click', function(){
+    console.log("removeFolioPDF");
+    deleteDocField("folioPdf").then(function(){
+      console.log("folio removed");
+      confirmDeletion();
+    });
   });
 
   // submit / update skills tags, update edit page
