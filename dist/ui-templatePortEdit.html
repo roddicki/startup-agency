@@ -966,7 +966,8 @@
   </div>
 </div>
 </div>
-<!--MessageModal edit Project-->
+
+<!--Modal add or edit folio project-->
 <div class="modal fade" id="editProject" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modalcontentleft">
@@ -974,28 +975,29 @@
       </h2>
       <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
       </button>
-      <div class="row">
-        <form class="row g-3 needs-validation edit-project-form" novalidate>
-          <p class="project-showcase-text">PROJECT DETAILS
-          </p>
-          <div class=" col-lg-6 col-md-12 col-sm-12">
-            <label for="editProject" class="form-label">Project name*
+      <p class="project-showcase-text">PROJECT DETAILS
+      </p>
+      <form class="needs-validation edit-project-form" novalidate>
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <label for="folio-project-title" class="form-label">Project name*
             </label>
-            <input type="text" maxlength="40" class="form-control" id="editProject" required>
+            <input type="text" maxlength="40" class="form-control" id="folio-project-title" required>
             <div class="invalid-feedback">
               Please add the project name
             </div>
           </div>
-          <div class=" col-lg-6 col-md-6 col-sm-6">
-            <label for="Add-Project" class="form-label">Project Link
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <label for="folio-project-link" class="form-label">Project Link
             </label>
-            <input type="text" class="form-control" id="Add-project-Name">
+            <input type="text" class="form-control" id="folio-project-link">
           </div>
-          <!--This is for the genral message-->
-          <div class="col-md-12" id="Description-Edit">
-            <label for="Description-Edit" class="form-label">Description
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label for="folio-project-description" class="form-label">Description
             </label>
-            <textarea type="text" maxlength="500" class="form-control" rows="4" required>
+            <textarea type="text" maxlength="500" class="form-control" id="folio-project-description" rows="4">
             </textarea>
             <div class="invalid-feedback">
               Please tell us about the work
@@ -1004,32 +1006,30 @@
               Max 500 charachters
             </small>
           </div>
-          <div class="gap">
-          </div>
-          <p class="project-showcase-text">PHOTO GALLERY
+          <p class="project-showcase-text mt-5">PHOTO GALLERY
           </p>
+        </div>
+        <div class="row">
           <div class="col-sm-12">
-            <form class="add-profile">
-              <div class="existing-images">
+            <div class="existing-images">
+            </div>
+            <div class="input-field form-group">
+              <label class="active">Add images of your work
+              </label>
+              <div class="input-images-1" id="image-uploader" style="padding-top: .5rem;">
               </div>
-              <div class="input-field form-group">
-                <label class="active">Add images of your work
-                </label>
-                <div class="input-images-1" id="image-uploader" style="padding-top: .5rem;">
-                </div>
-              </div>
-            </form>
+            </div>
           </div>
-          <div class="gap">
-          </div>
-          <div class="gap">
-          </div>
-          <div class="col-12 warning-border">
+        </div>
+        <div class="row">
+          <div class="col-12 warning-border mt-5">
             <p>
               <i class="fa-solid fa-triangle-exclamation">
               </i> Before publishing the project, make sure you hold required copyright and publication rights. 
             </p>
           </div>
+        </div>
+        <div class="row">
           <div class="col-6">
             <p class="float-left delete-text">Delete project
             </p>
@@ -1042,15 +1042,13 @@
               </button>
             </div>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
-    <!--end of propose job brief-->
-    </form>
+  </div>
 </div>
-</div>
-</div>
-</div>
+
+
 <!--Popup image modals-->
 <div id="showcaseImageModal1" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -1232,6 +1230,7 @@
   const EditProject1 = document.querySelector('.edit-project-form');
   const EditProjectSubmit = document.querySelector('#submit-edit-project');
   const EditProjectModal = new bootstrap.Modal(document.querySelector('#editProject'));
+  EditProjectModal.show();
   // Loop over inputs and prevent submission
   EditProjectSubmit.addEventListener('click', function (event) {
     console.log("modal 1 submit clicked");
