@@ -1,493 +1,544 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="styles/style.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
-      rel="stylesheet"> 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <title>Startup Agency</title>
-  <style>
-   
-  </style>
-</head>
-
-<body data-page="" class="d-flex flex-column min-vh-100">
-
-<header id="header">
-  <!-- imports header + nav from src/header.html -->
-</header>
-
-
-
-<section>
-  
-  <div class="container">
-    <div class="row">
-      <div class="col-md-9 col-sm-12"></div>
-      <div class="col-md-3 col-sm-12">
-        <button class="btn btn-primary btn-lg btn-block float-right" data-bs-toggle="modal" data-bs-target="#client-preview">Client preview</button>
-      </div>
-    </div>
-
-    <div class="row">
-      <!--Left side of the page-->
-      <div class="col-sm-12 col-md-12 col-lg-4">
-        <div class="content-blocks">
-          <!--this is for edit function-->
-          <div class="form-check form-switch">
-            <input class="form-check-input form-check-input-profile" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label form-check-label-profile" for="flexSwitchCheckDefault">Available for work</label> 
-           <i class="bi bi-pencil-square float-right cursor-pointer" data-bs-toggle="modal" data-bs-target="#edit-details"></i></button>
-          </div> 
-          <!-- <div class="available-tag">Available for work</div> -->
-          <div class="text-center">
-            <div class="profile-img">
-              <img src="https://github.com/mdo.png" alt="mdo" width="128" height="128" class="rounded-circle">
-            </div> 
-            <div>
-              <h3>Jamie Lamb</h2>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Startup Agency
+    </title>
+    <style>
+    </style>
+  </head>
+  <body data-page="" class="d-flex flex-column min-vh-100">
+    <header id="header">
+      <!-- imports header + nav from src/header.html -->
+    </header>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 col-sm-12">
+          </div>
+          <div class="col-md-3 col-sm-12">
+            <button class="btn btn-primary btn-lg btn-block float-right" data-bs-toggle="modal" data-bs-target="#client-preview">Client preview
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <!--Left side of the page-->
+          <div class="col-sm-12 col-md-12 col-lg-4">
+            <div class="content-blocks">
+              <!--this is for edit function-->
+              <div class="form-check form-switch">
+                <input class="form-check-input form-check-input-profile" type="checkbox" id="flexSwitchCheckDefault">
+                <label class="form-check-label form-check-label-profile" for="flexSwitchCheckDefault">Available for work
+                </label>
+                <i class="bi bi-pencil-square float-right cursor-pointer" data-bs-toggle="modal" data-bs-target="#edit-details">
+                </i>
+                </button>
+            </div>
+            <!-- <div class="available-tag">Available for work</div> -->
+            <div class="text-center">
+              <div class="profile-img">
+                <img src="https://github.com/mdo.png" alt="mdo" width="128" height="128" class="rounded-circle">
+              </div>
+              <div>
+                <h3>Jamie Lamb
+                  </h2>
+              </div>
+              <div>
+                <!--Changes start-->
+                <h5>Game Designer
+                  </h2>
+              </div>
+              <div>
+                <h4>Redux Studios
+                  </a>
+                </h2>
             </div>
             <div>
-              <!--Changes start-->
-              <h5>Game Designer</h2>
-            </div>
-            <div>
-              <h4>Redux Studios</a></h2>
-            </div>
-            <div>
-              <p class="underline"><a href="https://reduxgamestudios.com/">ReduxGameStudios.com</a></p>
+              <p class="underline">
+                <a href="https://reduxgamestudios.com/">ReduxGameStudios.com
+                </a>
+              </p>
             </div>
             <!--Changes end-->
-            <div class="col-12 gap"><img src="./assets/img/mapicon.svg"  width="16" height="16">  Cardiff, Wales</div>
-            <!-- <div class="d-grid gap">
-              <button class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#contact">Messgae / Propose job</button>
-            </div> -->
-          </div>
-            <div class="gap">
-            <div class="line gap"></div>
-            <div class="col-12 gap project-showcase-text">
-              <div class="gap"></div>
-              <p>bio <i class="bi bi-pencil-square float-right cursor-pointer" data-bs-toggle="modal" data-bs-target="#edit-details"></i></button></p>
-              
-            </div>
-          </div>
-          
-          <div class="">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae urna semper augue nec risus, pellentesque sit. Sit aenean dictum est vel habitasse. Sollicitudin ultrices montes, justo, quis pretium tellus suspendisse leo lectus.</p>
-          </div>
-        </div>
-        
-        <div class="content-blocks">
-          <div class="row">
-            <div class="col-12 project-showcase-text">
-              <p>SKILLS CATEGORIES <i class="bi bi-pencil-square float-right cursor-pointer" data-bs-toggle="modal" data-bs-target="#skills-catagories"></i></button></p>
-            </div>
-            <div class="col-12">
-              <p><strong>Design</strong></p>
-            </div>
-            <div class="col-12">
-               <div class="filter-tag-profile">Photoshop</div>
-               <div class="filter-tag-profile">Premeire</div>
-               <div class="filter-tag-profile">Video</div>
-               <div class="filter-tag-profile">Photography</div>
-               <div class="filter-tag-profile">Adobe</div>
-             </div>
             <div class="col-12 gap">
-
-              <p><strong>Games</strong></p>
-
+              <img src="./assets/img/mapicon.svg" width="16" height="16"> Cardiff, Wales
             </div>
-            <div class="col-12">
-              <div class="filter-tag-profile">Unreal 4</div>
-              <div class="filter-tag-profile">Unity</div>
-              <div class="filter-tag-profile">Blender</div>
-            </div>
+            <!-- <div class="d-grid gap">
+<button class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#contact">Messgae / Propose job</button>
+</div> -->
           </div>
-        
+          <div class="gap">
+            <div class="line gap">
+            </div>
+            <div class="col-12 gap project-showcase-text">
+              <div class="gap">
+              </div>
+              <p>bio 
+                <i class="bi bi-pencil-square float-right cursor-pointer" data-bs-toggle="modal" data-bs-target="#edit-details">
+                </i>
+              </button>
+            </p>
         </div>
-        <div class="content-blocks">
-          <div class="col-12 project-showcase-text">
-            <p>SOCIALS  <i class="bi bi-pencil-square float-right cursor-pointer" data-bs-toggle="modal" data-bs-target="#social-modal"></i></button></p> 
-          </div>
-          
+      </div>
+      <div class="">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae urna semper augue nec risus, pellentesque sit. Sit aenean dictum est vel habitasse. Sollicitudin ultrices montes, justo, quis pretium tellus suspendisse leo lectus.
+        </p>
+      </div>
+      </div>
+    <div class="content-blocks">
+      <div class="row">
+        <div class="col-12 project-showcase-text">
+          <p>SKILLS CATEGORIES 
+            <i class="bi bi-pencil-square float-right cursor-pointer" data-bs-toggle="modal" data-bs-target="#skills-catagories">
+            </i>
+          </button>
+        </p>
+    </div>
+    <div class="col-12">
+      <p>
+        <strong>Design
+        </strong>
+      </p>
+    </div>
+    <div class="col-12">
+      <div class="filter-tag-profile">Photoshop
+      </div>
+      <div class="filter-tag-profile">Premeire
+      </div>
+      <div class="filter-tag-profile">Video
+      </div>
+      <div class="filter-tag-profile">Photography
+      </div>
+      <div class="filter-tag-profile">Adobe
+      </div>
+    </div>
+    <div class="col-12 gap">
+      <p>
+        <strong>Games
+        </strong>
+      </p>
+    </div>
+    <div class="col-12">
+      <div class="filter-tag-profile">Unreal 4
+      </div>
+      <div class="filter-tag-profile">Unity
+      </div>
+      <div class="filter-tag-profile">Blender
+      </div>
+    </div>
+    </div>
+  </div>
+<div class="content-blocks">
+  <div class="col-12 project-showcase-text">
+    <p>SOCIALS 
+      <i class="bi bi-pencil-square float-right cursor-pointer" data-bs-toggle="modal" data-bs-target="#social-modal">
+      </i>
+    </button>
+  </p>
+</div>
+<div class="row">
+  <div class="col-4 col-md-4 col-lg-4 col-xl-4">
+    <img src="./assets/img/InstagramSocial.svg">
+  </div>
+  <div class="col-4 col-md-4 col-lg-4 col-xl-4">
+    <img src="./assets/img/WebSocialIcon.svg">
+  </div>
+  <div class="col-4 col-md-4 col-lg-4 col-xl-4">
+    <img src="./assets/img/TwitterSocial.svg">
+  </div>
+</div>
+</div>
+</div>
+<!--Right side of the page-->
+<div class="col-sm-12 col-md-12 col-lg-8 ">
+  <div class="row content-blocks">
+    <div class="col-8 col-sm-8 col-md-8 col-lg-8 project-showcase-text">
+      <p>PROJECT SHOWCASE (0)
+      </p>
+    </div>
+    <div class="col-4 col-sm-4 col-md-4 col-lg-4 d-grid ">
+      <!-- <button class="btn btn-primary btn-lg btn-block" >Add projects</button> -->
+      <i class="bi bi-plus-square text-right" data-bs-toggle="modal" data-bs-target="#addProject" width="24px" height="24px">
+      </i>
+    </div>
+    <div class="container">
+      <hr>
+      </hr>
+    <div class="gap">
+    </div>
+    <div class="row">
+      <!--start of projects edit-->
+      <div class="col-lg-6 col-md-12">
+        <div class="port-block">
           <div class="row">
-            <div class="col-4 col-md-4 col-lg-4 col-xl-4">
-              <img src="./assets/img/InstagramSocial.svg">
+            <div class="col-12">
+              <button type="button" class="button-showcase" data-bs-toggle="modal" data-bs-target="#showcaseImageModal1">
+                <img class="port-edit-img-main" src="./assets/img/jamie-profile-img/sweetdreams1.png">                 
+              </button>
             </div>
-            <div class="col-4 col-md-4 col-lg-4 col-xl-4">
-              <img src="./assets/img/WebSocialIcon.svg">
+            <div class="gap">
             </div>
-            <div class="col-4 col-md-4 col-lg-4 col-xl-4">
-              <img src="./assets/img/TwitterSocial.svg">
+            <div class="col-4">
+              <button type="button" class="button-showcase" data-bs-toggle="modal" data-bs-target="#showcaseImageModal2">
+                <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams1.png">
+              </button>
             </div>
+            <div class="col-4">
+              <button type="button" class="button-showcase" data-bs-toggle="modal" data-bs-target="#showcaseImageModal3">
+                <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams2.png">
+              </button>
+            </div>
+            <div class="col-4">
+              <button type="button" class="button-showcase" data-bs-toggle="modal" data-bs-target="#showcaseImageModal4">
+                <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams3.png">
+              </button>
+            </div>
+          </div>
+          <div class="gap">
+          </div>
+          <div class="col-12">
+            <!--data-bs-toggle="modal" data-bs-target="#editProject"-->
+            <h2>
+              <strong>Sweet Dreams
+              </strong>
+              <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i  class="bi bi-pencil-square cursor-pointer edit-size" height="16px">
+                </i>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                  <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editProject" href="#">Edit Project
+                  </a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li>
+                  <a class="dropdown-item text-danger" href="#">Delete Project
+                  </a>
+                </li>
+                <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+              </ul>
+            </h2>
+          </div>
+          <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> <i  class="bi bi-pencil-square float-right cursor-pointer"></i></button></h2>
+</div>
+<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+<li><a class="dropdown-item" href="#">Action</a></li>
+<li><a class="dropdown-item" href="#">Another action</a></li>
+<li><a class="dropdown-item" href="#">Something else here</a></li>
+</ul> -->
+          <div class="col-12">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna mauris, at urna ...
+            </p>
           </div>
         </div>
       </div>
-
-
-
-
-
-
-      <!--Right side of the page-->
-      <div class="col-sm-12 col-md-12 col-lg-8 ">
-        <div class= "row content-blocks">
-          
-          <div class="col-8 col-sm-8 col-md-8 col-lg-8 project-showcase-text">
-            <p>PROJECT SHOWCASE (0)</p>
-          </div>
-          <div class="col-4 col-sm-4 col-md-4 col-lg-4 d-grid ">
-            <!-- <button class="btn btn-primary btn-lg btn-block" >Add projects</button> -->
-            <i class="bi bi-plus-square text-right" data-bs-toggle="modal" data-bs-target="#addProject" width="24px" height="24px"></i>
-          </div>
-         
-        <div class="container">
-    
-          <hr></hr>
-
-          <div class="gap"></div>
+      <!--end of project showcase-->
+      <!--start of projects edit-->
+      <div class="col-lg-6 col-md-12">
+        <div class="port-block">
           <div class="row">
-          <!--start of projects edit-->
-              <div class="col-lg-6 col-md-12">
-                <div class="port-block">
-                  <div class="row">
-                    <div class="col-12">
-                    <button type="button" class="button-showcase" data-bs-toggle="modal" data-bs-target="#showcaseImageModal1">
-                      <img class="port-edit-img-main" src="./assets/img/jamie-profile-img/sweetdreams1.png">                 
-                    </button>
-                    </div>
-                    <div class="gap"></div>
-                    <div class="col-4">
-                     <button type="button" class="button-showcase" data-bs-toggle="modal" data-bs-target="#showcaseImageModal2">
-                      <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams1.png">
-                     </button> 
-                    </div>
-                    <div class="col-4">
-                      <button type="button" class="button-showcase" data-bs-toggle="modal" data-bs-target="#showcaseImageModal3">
-                      <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams2.png">
-                      </button>
-                    </div>
-                    <div class="col-4">
-                      <button type="button" class="button-showcase" data-bs-toggle="modal" data-bs-target="#showcaseImageModal4">
-                      <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams3.png">
-                      </button>
-                    </div>
-                  </div>
-                  <div class="gap"></div>
-                  <div class="col-12">
-                    <!--data-bs-toggle="modal" data-bs-target="#editProject"-->
-                    <h2><strong>Sweet Dreams</strong>
-                    
-                        <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i  class="bi bi-pencil-square cursor-pointer edit-size" height="16px"></i>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                          <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editProject" href="#">Edit Project</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item text-danger" href="#">Delete Project</a></li>
-                          <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-                        </ul>
-                    </h2>
-                    </div>
-
-
-
-
-                     <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> <i  class="bi bi-pencil-square float-right cursor-pointer"></i></button></h2>
-                 </div>
-                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul> -->
-                  <div class="col-12">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna mauris, at urna ...</p>
-                  </div>
-                  
-                </div>
-              </div>
-          
-          <!--end of project showcase-->
-              <!--start of projects edit-->
-              <div class="col-lg-6 col-md-12">
-                <div class="port-block">
-                  <div class="row">
-                    <div class="col-12">
-                      <img class="port-edit-img-main" src="./assets/img/jamie-profile-img/stealthvr.jpg">
-                    </div>
-                    <div class="gap"></div>
-                    <div class="col-4">
-                      <img class="port-edit-img" src="./assets/img/jamie-profile-img/stealthvr.jpg">
-                    </div>
-                    <div class="col-4">
-                      <img class="port-edit-img" src="./assets/img/jamie-profile-img/speedrunning.jpg">
-                    </div>
-                    <div class="col-4">
-                      <img class="port-edit-img" src="./assets/img/jamie-profile-img/stealthvr1.jpg">
-                    </div>
-                  </div>
-                  <div class="gap"></div>
-                  <div class="col-12">
-                    <h2><strong>MGS VR</strong>
-                      <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i  class="bi bi-pencil-square cursor-pointer edit-size" height="16px"></i>
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editProject" href="#">Edit Project</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger" href="#">Delete Project</a></li>
-                        <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-                      </ul></h2>
-                  </div>
-                  <div class="col-12">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna mauris, at urna ...</p>
-                  </div>
-                  
-                </div>
-              </div>
-          
-          <!--end of project showcase-->
+            <div class="col-12">
+              <img class="port-edit-img-main" src="./assets/img/jamie-profile-img/stealthvr.jpg">
+            </div>
+            <div class="gap">
+            </div>
+            <div class="col-4">
+              <img class="port-edit-img" src="./assets/img/jamie-profile-img/stealthvr.jpg">
+            </div>
+            <div class="col-4">
+              <img class="port-edit-img" src="./assets/img/jamie-profile-img/speedrunning.jpg">
+            </div>
+            <div class="col-4">
+              <img class="port-edit-img" src="./assets/img/jamie-profile-img/stealthvr1.jpg">
+            </div>
+          </div>
+          <div class="gap">
+          </div>
+          <div class="col-12">
+            <h2>
+              <strong>MGS VR
+              </strong>
+              <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i  class="bi bi-pencil-square cursor-pointer edit-size" height="16px">
+                </i>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                  <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editProject" href="#">Edit Project
+                  </a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li>
+                  <a class="dropdown-item text-danger" href="#">Delete Project
+                  </a>
+                </li>
+                <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+              </ul>
+            </h2>
+          </div>
+          <div class="col-12">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna mauris, at urna ...
+            </p>
           </div>
         </div>
+      </div>
+      <!--end of project showcase-->
     </div>
-    
-    
-
-    </div>
-
-  </div>
-
-      
-  <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle="modal" data-bs-target="#Inital-Sign-Up" data-bs-dismiss="modal">First time button (testing)</button>
   </div>
 </div>
+</div>
+</div>
+<button type="button" class="btn btn-secondary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#Inital-Sign-Up" data-bs-dismiss="modal">First time button (testing)
+</button>
+</div>
+</div>
 </section>
-          
-
-
 <!--MessageModal Add Project-->
 <div class="modal fade" id="addProject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modalcontentleft">
-      
-        <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Project title</h2>
-        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div class="row">
-          
-          <form class="row g-3 needs-validation Add-Project" novalidate>
-            <p class="project-showcase-text">PROJECT DETAILS</p> 
-            <div class=" col-lg-6 col-md-12 col-sm-12">
-              <label for="Add-Project" class="form-label">Project name*</label>
-              <input type="text" class="form-control" id="Add-project-Name" required>
-              <div class="invalid-feedback">
-                  Please add the project name 
-                </div>
+      <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Project title
+      </h2>
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
+      </button>
+      <div class="row">
+        <form class="row g-3 needs-validation Add-Project" novalidate>
+          <p class="project-showcase-text">PROJECT DETAILS
+          </p>
+          <div class=" col-lg-6 col-md-12 col-sm-12">
+            <label for="Add-Project" class="form-label">Project name*
+            </label>
+            <input type="text" class="form-control" id="Add-project-Name" required>
+            <div class="invalid-feedback">
+              Please add the project name
             </div>
-            <div class=" col-lg-6 col-md-6 col-sm-6">
-            <label for="Add-Project" class="form-label">Project Link</label>
-            <input type="text" class="form-control" id="Add-project-Name" >
-          
           </div>
-
-            <!--This is for the genral message-->
-            <div class="col-md-12" id="general-message">
-              <label for="Add-project-Description" class="form-label">Description*</label>
-              <textarea type="text" class="form-control" id="Add-project-Description" rows="4" required></textarea>
-              <div class="invalid-feedback">
-                  Please tell us about the job
+          <div class=" col-lg-6 col-md-6 col-sm-6">
+            <label for="Add-Project" class="form-label">Project Link
+            </label>
+            <input type="text" class="form-control" id="Add-project-Name">
+          </div>
+          <!--This is for the genral message-->
+          <div class="col-md-12" id="general-message">
+            <label for="Add-project-Description" class="form-label">Description*
+            </label>
+            <textarea type="text" class="form-control" id="Add-project-Description" rows="4" required>
+            </textarea>
+            <div class="invalid-feedback">
+              Please tell us about the job
+            </div>
+          </div>
+          <div class="gap">
+          </div>
+          <p class="project-showcase-text">PHOTO GALLERY
+          </p>
+          <div class="col-sm-12">
+            <form class="add-profile">
+              <div class="existing-images">
+              </div>
+              <div class="input-field form-group">
+                <label class="active">Add images of your work
+                </label>
+                <div class="input-images-1" id="image-uploader" style="padding-top: .5rem;">
                 </div>
-            </div>
-            <div class="gap"></div>
-            <p class="project-showcase-text">PHOTO GALLERY</p> 
-            <div class="col-sm-12">
-              <form class="add-profile">
-              
-                <div class="existing-images"></div>
-                <div class="input-field form-group">
-                    <label class="active">Add images of your work</label>
-                    <div class="input-images-1" id="image-uploader" style="padding-top: .5rem;"></div>
-                </div>
-                
-                </form>
-            </div>
-
-            <div class="gap"></div>
-          
-            <div class="gap"></div>
-            <div class="col-12 warning-border">
-              <p><i class="fa-solid fa-triangle-exclamation"></i>  Before publishing the project, make sure you hold required copyright and publication rights. </p>
-            </div>
-            
-            <div class="col-12">
-              <div class="set-content-right gap">
-                <button type="button" class="btn btn-secondary btn-lg btn-block apply-btn"  data-bs-dismiss="modal" >Cancel</button>
-                <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"    id="Add-Project-Submit">Submit</button>
-             </div>
-            </div>
-            
+              </div>
             </form>
           </div>
-       </div>
+          <div class="gap">
+          </div>
+          <div class="gap">
+          </div>
+          <div class="col-12 warning-border">
+            <p>
+              <i class="fa-solid fa-triangle-exclamation">
+              </i> Before publishing the project, make sure you hold required copyright and publication rights. 
+            </p>
+          </div>
+          <div class="col-12">
+            <div class="set-content-right gap">
+              <button type="button" class="btn btn-secondary btn-lg btn-block apply-btn" data-bs-dismiss="modal">Cancel
+              </button>
+              <button type="button" class="btn btn-primary btn-lg btn-block apply-btn" id="Add-Project-Submit">Submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
-           
-  
-
 <!--Edit Details modal-->
 <div class="modal fade" id="edit-details" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modalcontentleft">
-      
-        <h2 class="modal-title signinheader modalheaddrapply">Personal Details</h2>
-        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div class="row">
-          <div class="col-md-12 col-sm-12">
-            <!--add image here-->
+      <h2 class="modal-title signinheader modalheaddrapply">Personal Details
+      </h2>
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
+      </button>
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <!--add image here-->
+        </div>
+        <!-- Need to add image for profile -->
+        <div calss="col-12 text-center">
+          <div class="row">
+            <div class="col-md-4 col-sm-12">
+            </div>
+            <div class=" col-md-4 col-sm-12">
+              <div class="gap">
+              </div>
+              <div id="display-image">
+              </div>
+              <div class="gap">
+              </div>
+              <input type="file" id="image-input" accept="image/jpeg, image/png, image/jpg">
+              <!--Need a remove button-->
+            </div>
+            <div class="col-md-4 col-sm-12">
+            </div>
           </div>
-
-          <!-- Need to add image for profile -->
-          
-          <div calss="col-12 text-center">
-            <div class="row">
-              <div class="col-md-4 col-sm-12"></div>
-              <div class=" col-md-4 col-sm-12">
-                <div class="gap"></div>
-                <div id="display-image"></div>
-                <div class="gap"></div>
-                <input type="file" id="image-input" accept="image/jpeg, image/png, image/jpg">
-                <!--Need a remove button-->
-              </div>
-            <div class="col-md-4 col-sm-12"></div>
-          
-              
-            
+        </div>
+        <form class="row g-3 needs-validation change-Details" novalidate>
+          <div class="col-lg-6 col-md-12">
+            <label for="bio-edit-firstname" class="form-label">FirstName*
+            </label>
+            <input type="text" class="form-control" id="bio-edit-firstname" required>
+            <div class="invalid-feedback">
+              Please add a your first name
             </div>
           </div>
-        
-          <form class="row g-3 needs-validation change-Details" novalidate>
-            <div class="col-lg-6 col-md-12">
-              <label for="bio-edit-firstname" class="form-label">FirstName*</label>
-              <input type="text" class="form-control" id="bio-edit-firstname" required>
-              <div class="invalid-feedback">
-                  Please add a your first name
-                </div>
+          <div class="col-lg-6 col-md-12">
+            <label for="bio-edit-lastname" class="form-label">Last name*
+            </label>
+            <input type="text" class="form-control" id="bio-edit-lastname" required>
+            <div class="invalid-feedback">
+              Please add your last name
             </div>
-
-            <div class="col-lg-6 col-md-12">
-              <label for="bio-edit-lastname" class="form-label">Last name*</label>
-              <input type="text" class="form-control" id="bio-edit-lastname" required>
-              <div class="invalid-feedback">
-                  Please add your last name
-                </div>
+          </div>
+          <div class="col-md-6 col-sm-12 gap">
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Example select
+              </label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option>she/her
+                </option>  
+                <option>he/him
+                </option>
+                <option>they/them
+                </option>
+              </select>
             </div>
-            <div class="col-md-6 col-sm-12 gap">
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Example select</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                  <option>she/her</option>  
-                  <option>he/him</option>
-                  <option>they/them</option>
-                </select>
-              </div>
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <label for="Business-name" class="form-label">Business name
+            </label>
+            <input type="text" class="form-control">
+            <div class="invalid-feedback">
+              Please add your last name
             </div>
-
-            <div class="col-lg-6 col-md-12">
-              <label for="Business-name" class="form-label">Business name</label>
-              <input type="text" class="form-control" >
-              <div class="invalid-feedback">
-                  Please add your last name
-                </div>
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <label for="Title" class="form-label">Title
+            </label>
+            <input type="text" class="form-control">
+            <div class="invalid-feedback">
+              Please add your last name
             </div>
-
-            <div class="col-lg-6 col-md-12">
-              <label for="Title" class="form-label">Title</label>
-              <input type="text" class="form-control">
-              <div class="invalid-feedback">
-                  Please add your last name
-                </div>
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <label for="Location" class="form-label">Location
+            </label>
+            <input type="text" class="form-control">
+            <div class="invalid-feedback">
+              Please add your last name
             </div>
-
-            <div class="col-lg-6 col-md-12">
-              <label for="Location" class="form-label">Location</label>
-              <input type="text" class="form-control">
-              <div class="invalid-feedback">
-                  Please add your last name
-                </div>
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <label for="Website" class="form-label">Website
+            </label>
+            <input type="text" class="form-control">
+            <div class="invalid-feedback">
+              Please add your last name
             </div>
-
-            <div class="col-lg-6 col-md-12">
-              <label for="Website" class="form-label">Website</label>
-              <input type="text" class="form-control">
-              <div class="invalid-feedback">
-                  Please add your last name
-                </div>
+          </div>
+          <div class="col-md-12">
+            <label for="Bio" class="form-label">Bio
+            </label>
+            <textarea class="form-control" maxlength="500" rows="3" required>
+            </textarea>
+            <div class="invalid-feedback">
+              Please add a Bio
             </div>
-
-                  
-            <div class="col-md-12">
-              <label for="Bio" class="form-label">Bio</label>
-              <textarea class="form-control" maxlength="500"  rows="3" required></textarea>
-              
-              <div class="invalid-feedback">
-                  Please add a Bio
-                </div>
-              </div>
-              <small id="passwordHelpBlock" class="form-text text-muted">
-                Max 500 charachters
-              </small>
-
-              <p class="project-showcase-text">ADDITIONAL FILES</p> 
-              <div class="col-sm-12">
-                <div class="form-group additional-files">
-                  <label for="exampleFormControlFile1"></label>
-                  <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                </div>
-              </div>
-      
+          </div>
+          <small id="passwordHelpBlock" class="form-text text-muted">
+            Max 500 charachters
+          </small>
+          <p class="project-showcase-text">ADDITIONAL FILES
+          </p>
+          <div class="col-sm-12">
+            <div class="form-group additional-files">
+              <label for="exampleFormControlFile1">
+              </label>
+              <input type="file" class="form-control-file" id="exampleFormControlFile1">
+            </div>
+          </div>
           <!-- <div class="gap" -->
-            
           <div class="col-12">
             <div class="set-content-right gap">
-              <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-dismiss="modal">Cancel</button>
-              <button type="button" id="change-Details-Submit" class="btn btn-primary btn-lg btn-block">Save changes</button>
+              <button type="button" class="btn btn-secondary btn-lg btn-block" data-bs-dismiss="modal">Cancel
+              </button>
+              <button type="button" id="change-Details-Submit" class="btn btn-primary btn-lg btn-block">Save changes
+              </button>
             </div>
           </div>
-          </form>
-        </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
-
-
 <!--Social modal-->
 <div class="modal fade" id="social-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modalcontentleft">
       <form class="row g-3 needs-validation SocialMedia" novalidate>
-        <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Socials</h2>
-        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Socials
+        </h2>
+        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
+        </button>
         <!-- initial add -->
         <div class="row">
           <div class="col-md-12 col-sm-12 gap">
-            <div id="SocialMediaSelectbuttonInit" class="Button-Social" onClick="showSocialDiv0()">+ Add Social</div>
+            <div id="SocialMediaSelectbuttonInit" class="Button-Social" onClick="showSocialDiv0()">+ Add Social
+            </div>
           </div>
         </div>
-        
         <!-- first social -->
         <div class="row SocialMedia-1-container">
           <div id="SocialMedia-1-Select" class="col-md-6 col-sm-12 gap">
-            <p>Platform</p>
+            <p>Platform
+            </p>
             <div class="form-group">
               <select class="form-control" id="SocialMedia-1-Select-input">
-                <option value="" disabled selected>Please select an option</option>
-                <option value="instagram">Instagram</option>
-                <option value="dribble">Dribble</option>
-                <option value="twitter">Twitter</option>
-                <option value="facebook">Facebook</option>
+                <option value="" disabled selected>Please select an option
+                </option>
+                <option value="instagram">Instagram
+                </option>
+                <option value="dribble">Dribble
+                </option>
+                <option value="twitter">Twitter
+                </option>
+                <option value="facebook">Facebook
+                </option>
               </select>
               <div class="invalid-feedback">
                 Please select a platform.
@@ -498,9 +549,9 @@
             </div>
           </div>
           <div id="SocialMedia-1-username" class="col-md-6 col-sm-12 gap">
-            <p>Username</p>
-          
-            <input  type="text" id="Social-Media-1-user-input" class="form-control">
+            <p>Username
+            </p>
+            <input type="text" id="Social-Media-1-user-input" class="form-control">
             <div class="invalid-feedback">
               Please add your socials handle.
             </div>
@@ -509,18 +560,23 @@
             </div>
           </div>
         </div>
-
         <!-- second social -->
         <div class="row SocialMedia-2-container">
           <div id="SocialMedia-2-Select" class="col-md-6 col-sm-12 gap">
-            <p>Platform</p>
+            <p>Platform
+            </p>
             <div class="form-group">
               <select class="form-control" id="SocialMedia-2-Select-input">
-                <option value="" disabled selected>Please select an option</option>
-                <option value="instagram">Instagram</option>
-                <option value="dribble">Dribble</option>
-                <option value="twitter">Twitter</option>
-                <option value="facebook">Facebook</option>
+                <option value="" disabled selected>Please select an option
+                </option>
+                <option value="instagram">Instagram
+                </option>
+                <option value="dribble">Dribble
+                </option>
+                <option value="twitter">Twitter
+                </option>
+                <option value="facebook">Facebook
+                </option>
               </select>
               <div class="invalid-feedback">
                 Please select a platform.
@@ -531,9 +587,9 @@
             </div>
           </div>
           <div id="SocialMedia-2-username" class="col-md-6 col-sm-12 gap">
-            <p>Username</p>
-          
-            <input  type="text" id="Social-Media-2-user-input" class="form-control">
+            <p>Username
+            </p>
+            <input type="text" id="Social-Media-2-user-input" class="form-control">
             <div class="invalid-feedback">
               Please add your socials handle.
             </div>
@@ -542,18 +598,23 @@
             </div>
           </div>
         </div>
-
         <!-- third social -->
         <div class="row SocialMedia-3-container">
           <div id="SocialMedia-3-Select" class="col-md-6 col-sm-12 gap">
-            <p>Platform</p>
+            <p>Platform
+            </p>
             <div class="form-group">
               <select class="form-control" id="SocialMedia-3-Select-input">
-                <option value="" disabled selected>Please select an option</option>
-                <option value="instagram">Instagram</option>
-                <option value="dribble">Dribble</option>
-                <option value="twitter">Twitter</option>
-                <option value="facebook">Facebook</option>
+                <option value="" disabled selected>Please select an option
+                </option>
+                <option value="instagram">Instagram
+                </option>
+                <option value="dribble">Dribble
+                </option>
+                <option value="twitter">Twitter
+                </option>
+                <option value="facebook">Facebook
+                </option>
               </select>
               <div class="invalid-feedback">
                 Please select a platform.
@@ -561,9 +622,9 @@
             </div>
           </div>
           <div id="SocialMedia-3-username" class="col-md-6 col-sm-12 gap">
-            <p>Username</p>
-          
-            <input  type="text" id="Social-Media-3-user-input" class="form-control">
+            <p>Username
+            </p>
+            <input type="text" id="Social-Media-3-user-input" class="form-control">
             <div class="invalid-feedback">
               Please add your socials handle.
             </div>
@@ -572,549 +633,605 @@
             </div>
           </div>
         </div>
-
       </form>
-          <div class="col-12">
-            <div class="set-content-right gap">
-              <button type="button" class="btn btn-secondary btn-lg btn-block" data-bs-dismiss="modal">Cancel</button>
-              <button type="button" disabled id="Social-Media-Submit" class="btn btn-primary btn-lg btn-block">Save changes</button>
-            </div>
-          </div>
-          
+      <div class="col-12">
+        <div class="set-content-right gap">
+          <button type="button" class="btn btn-secondary btn-lg btn-block" data-bs-dismiss="modal">Cancel
+          </button>
+          <button type="button" disabled id="Social-Media-Submit" class="btn btn-primary btn-lg btn-block">Save changes
+          </button>
         </div>
+      </div>
     </div>
   </div>
 </div>
-
+</div>
 <!--Modal for Skills catagorries not looking forward to making this-->
 <div class="modal fade" id="skills-catagories" tabindex="-1" aria-labelledby="Skills" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
-        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
-        
-        <div class="row">
-          <div class="col-12">
-            <h2 class="modal-title signinheader modalheaddrapply float-left" id="Skills-label">Skills categories</h2>
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
+      </button>
+      <div class="row">
+        <div class="col-12">
+          <h2 class="modal-title signinheader modalheaddrapply float-left" id="Skills-label">Skills categories
+          </h2>
         </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-         <!--Make caegories here -->
-         <ul class="nav nav-tabs " id="catagoriesTab1" role="tablist">
-         
-          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies" id="home-tab" data-bs-toggle="tab" data-bs-target="#D-designs-tab" type="button" role="tab" aria-controls="home" aria-selected="false">3D DESIGN</button>
-          </li>
-      
-        
-          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#computer-animation-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">COMPUTER ANIMATION</button>
-          </li>
-   
-         
-          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#fashion-tab" type="button" role="tab" aria-controls="contact" aria-selected="false">FASHION</button>
-          </li>
-          <div class="tab-content" id="catagoriesTab1">
-            <div class="tab-pane fade" id="D-designs-tab" role="tabpanel" aria-labelledby="home-tab">
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Interior design</button>
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Model creation</button>
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Set design</button>
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D Printing</button>
-            </div>
-            <div class="tab-pane fade" id="computer-animation-tab" role="tabpanel" aria-labelledby="profile-tab">
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">2D animation</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D animation</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D modeling</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Compositing</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Infographics</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Motion Graphics</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Stop motion animation</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Infographics</button>
-            </div>
-            <div class="tab-pane fade" id="fashion-tab" role="tabpanel" aria-labelledby="contact-tab">
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Clothing production</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Fashion design</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">T-shirt design</button>
-            </div>
-          </div>
-
-          <li class="nav-item nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies " id="home-tab" data-bs-toggle="tab" data-bs-target="#graphics-tab" type="button" role="tab" aria-controls="home" aria-selected="false">GRAPHICS DESIGN</button>
-          </li>
-          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#music-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">MUSIC AND SOUND</button>
-          </li>
-          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#performance-tab" type="button" role="tab" aria-controls="contact" aria-selected="false">PERFORMANCE</button>
-          </li>
-
-          <div class="tab-content" id="catagoriesTab1">
-
-            <div class="tab-pane fade" id="graphics-tab" role="tabpanel" aria-labelledby="home-tab">
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Brand design</button>
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Concept art</button>
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Illustration</button>
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Logo design</button>
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Photoshop</button>
-               <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Storyboarding</button>
-            </div>
-            <div class="tab-pane fade" id="music-tab" role="tabpanel" aria-labelledby="profile-tab">
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Audio recording and editing</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Boom operator</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Composition</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">DJ</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Dubbing/ Subtitles</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Live performance</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Podcasting</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Radio</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Sound effects</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Sound engineer</button>
-            </div>
-            <div class="tab-pane fade" id="performance-tab" role="tabpanel" aria-labelledby="contact-tab">
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Acting</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Ballet</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Burlesque</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Circus</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Clowning</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Directing</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Drag</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Improv</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Interpretive Dance</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Modern Dance</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Performance art</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Stage management and production management </button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Stand up comedy</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Workshops</button>
-            </div>
-          </div>
-          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies" id="home-tab" data-bs-toggle="tab" data-bs-target="#photography-tab" type="button" role="tab" aria-controls="home" aria-selected="false">PHOTOGRAPHY</button>
-          </li>
-          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#video-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">VIDEO AND FILM</button>
-          </li>
-          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#video-games" type="button" role="tab" aria-controls="contact" aria-selected="false">VIDEO GAMES</button>
-          </li>
-
-          
-          <div class="tab-content" id="catagoriesTab1">
-            <div class="tab-pane fade" id="photography-tab" role="tabpanel" aria-labelledby="home-tab">
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Event photography</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Documentary photography</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Pet photography </button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Photo editing </button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Portrait photography </button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Wildlife photography
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <!--Make caegories here -->
+          <ul class="nav nav-tabs " id="catagoriesTab1" role="tablist">
+            <li class="nav-item nav-item-categroies nav-skills" role="presentation">
+              <button class="nav-link nav-link-categroies" id="home-tab" data-bs-toggle="tab" data-bs-target="#D-designs-tab" type="button" role="tab" aria-controls="home" aria-selected="false">3D DESIGN
               </button>
-               
+            </li>
+            <li class="nav-item nav-item-categroies nav-skills" role="presentation">
+              <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#computer-animation-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">COMPUTER ANIMATION
+              </button>
+            </li>
+            <li class="nav-item nav-item-categroies nav-skills" role="presentation">
+              <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#fashion-tab" type="button" role="tab" aria-controls="contact" aria-selected="false">FASHION
+              </button>
+            </li>
+            <div class="tab-content" id="catagoriesTab1">
+              <div class="tab-pane fade" id="D-designs-tab" role="tabpanel" aria-labelledby="home-tab">
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Interior design
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Model creation
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Set design
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D Printing
+                </button>
+              </div>
+              <div class="tab-pane fade" id="computer-animation-tab" role="tabpanel" aria-labelledby="profile-tab">
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">2D animation
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D animation
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">3D modeling
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Compositing
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Infographics
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Motion Graphics
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Stop motion animation
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Infographics
+                </button>
+              </div>
+              <div class="tab-pane fade" id="fashion-tab" role="tabpanel" aria-labelledby="contact-tab">
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Clothing production
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Fashion design
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">T-shirt design
+                </button>
+              </div>
             </div>
-            <div class="tab-pane fade" id="video-tab" role="tabpanel" aria-labelledby="profile-tab">
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Aerial drone</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Directing </button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Lighting Artist</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Producer</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Runner</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Scripting</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Video editing </button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Videography</button>
+            <li class="nav-item nav-skills" role="presentation">
+              <button class="nav-link nav-link-categroies " id="home-tab" data-bs-toggle="tab" data-bs-target="#graphics-tab" type="button" role="tab" aria-controls="home" aria-selected="false">GRAPHICS DESIGN
+              </button>
+            </li>
+            <li class="nav-item nav-item-categroies nav-skills" role="presentation">
+              <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#music-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">MUSIC AND SOUND
+              </button>
+            </li>
+            <li class="nav-item nav-item-categroies nav-skills" role="presentation">
+              <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#performance-tab" type="button" role="tab" aria-controls="contact" aria-selected="false">PERFORMANCE
+              </button>
+            </li>
+            <div class="tab-content" id="catagoriesTab1">
+              <div class="tab-pane fade" id="graphics-tab" role="tabpanel" aria-labelledby="home-tab">
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Brand design
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Concept art
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Illustration
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Logo design
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Photoshop
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Storyboarding
+                </button>
+              </div>
+              <div class="tab-pane fade" id="music-tab" role="tabpanel" aria-labelledby="profile-tab">
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Audio recording and editing
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Boom operator
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Composition
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">DJ
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Dubbing/ Subtitles
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Live performance
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Podcasting
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Radio
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Sound effects
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Sound engineer
+                </button>
+              </div>
+              <div class="tab-pane fade" id="performance-tab" role="tabpanel" aria-labelledby="contact-tab">
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Acting
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Ballet
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Burlesque
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Circus
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Clowning
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Directing
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Drag
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Improv
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Interpretive Dance
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Modern Dance
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Performance art
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Stage management and production management 
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Stand up comedy
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Workshops
+                </button>
+              </div>
             </div>
-            <div class="tab-pane fade" id="video-games" role="tabpanel" aria-labelledby="contact-tab">
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Blueprint design </button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">C++</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">C#</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Games design</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Level design</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">QA testing </button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Unity </button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Unreal 4/5</button>
-              <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Virtual reality</button>
+            <li class="nav-item nav-item-categroies nav-skills" role="presentation">
+              <button class="nav-link nav-link-categroies" id="home-tab" data-bs-toggle="tab" data-bs-target="#photography-tab" type="button" role="tab" aria-controls="home" aria-selected="false">PHOTOGRAPHY
+              </button>
+            </li>
+            <li class="nav-item nav-item-categroies nav-skills" role="presentation">
+              <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#video-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">VIDEO AND FILM
+              </button>
+            </li>
+            <li class="nav-item nav-item-categroies nav-skills" role="presentation">
+              <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#video-games" type="button" role="tab" aria-controls="contact" aria-selected="false">VIDEO GAMES
+              </button>
+            </li>
+            <div class="tab-content" id="catagoriesTab1">
+              <div class="tab-pane fade" id="photography-tab" role="tabpanel" aria-labelledby="home-tab">
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Event photography
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Documentary photography
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Pet photography 
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Photo editing 
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Portrait photography 
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Wildlife photography
+                </button>
+              </div>
+              <div class="tab-pane fade" id="video-tab" role="tabpanel" aria-labelledby="profile-tab">
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Aerial drone
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Directing 
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Lighting Artist
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Producer
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Runner
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Scripting
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Video editing 
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Videography
+                </button>
+              </div>
+              <div class="tab-pane fade" id="video-games" role="tabpanel" aria-labelledby="contact-tab">
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Blueprint design 
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">C++
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">C#
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Games design
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Level design
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">QA testing 
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Unity 
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Unreal 4/5
+                </button>
+                <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Virtual reality
+                </button>
+              </div>
+            </div>
+            <li class="nav-item nav-item-categroies nav-skills" role="presentation">
+              <button class="nav-link nav-link-categroies" id="home-tab" data-bs-toggle="tab" data-bs-target="#visual-tab" type="button" role="tab" aria-controls="home" aria-selected="false">VISUAL EFFECTS
+              </button>
+            </li>
+            <li class="nav-item nav-item-categroies nav-skills" role="presentation">
+              <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#web-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">WEB DEVELOPMENT
+              </button>
+            </li>
+            <li class="nav-item nav-item-categroies nav-skills" role="presentation">
+              <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#writing-games" type="button" role="tab" aria-controls="contact" aria-selected="false">WRITING AND COPY
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-content" id="catagoriesTab1">
+          <div class="tab-pane fade" id="visual-tab" role="tabpanel" aria-labelledby="home-tab">
+            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Motion graphics
+            </button>
+            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Procedural modeling
+            </button>
+            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Rotoscoping
+            </button>
+            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Simulation
+            </button>
+            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Texturing
+            </button>
+          </div>
+          <div class="tab-pane fade" id="web-tab" role="tabpanel" aria-labelledby="profile-tab">
+            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">UI/UX Design
+            </button>
+            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Search engine optimisation
+            </button>
+            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Website design
+            </button>
+            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Website production
+            </button>
+          </div>
+          <div class="tab-pane fade" id="writing-games" role="tabpanel" aria-labelledby="contact-tab">
+            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Blogs
+            </button>
+            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Copywriting and proofing
+            </button>
+            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Creative Writing
+            </button>
+            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Journalism
+            </button>
+            <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Script Writing
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="set-content-right">
+              <button type="button" class="btn btn-secondary btn-lg btn-block" data-bs-dismiss="modal">Cancel
+              </button>
+              <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-dismiss="modal">Save
+              </button>
+              <!-- <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle="modal" data-bs-target="#submitted" data-bs-dismiss="modal" >Return to job board</button> -->
             </div>
           </div>
-
-          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies" id="home-tab" data-bs-toggle="tab" data-bs-target="#visual-tab" type="button" role="tab" aria-controls="home" aria-selected="false">VISUAL EFFECTS</button>
-          </li>
-          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#web-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">WEB DEVELOPMENT</button>
-          </li>
-          <li class="nav-item nav-item-categroies nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#writing-games" type="button" role="tab" aria-controls="contact" aria-selected="false">WRITING AND COPY</button>
-          </li>
-        
-        </ul>
-      </div>
-        
-        
-
-      <div class="tab-content" id="catagoriesTab1">
-        <div class="tab-pane fade" id="visual-tab" role="tabpanel" aria-labelledby="home-tab">
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Motion graphics</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Procedural modeling</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Rotoscoping</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Simulation</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Texturing</button>
-           
         </div>
-        <div class="tab-pane fade" id="web-tab" role="tabpanel" aria-labelledby="profile-tab">
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">UI/UX Design</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Search engine optimisation</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Website design</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Website production</button>
-        </div>
-        <div class="tab-pane fade" id="writing-games" role="tabpanel" aria-labelledby="contact-tab">
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Blogs</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Copywriting and proofing</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Creative Writing</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Journalism</button>
-          <button type="button" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Script Writing</button>
-        </div>
-      
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <div class="set-content-right">
-          <button type="button" class="btn btn-secondary btn-lg btn-block" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-dismiss="modal">Save</button>
-          <!-- <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle="modal" data-bs-target="#submitted" data-bs-dismiss="modal" >Return to job board</button> -->
-        </div>
-      </div>
-    </div>
-      </div>
-      </div>
-     
-        
       </div>
     </div>
   </div>
 </div>
-
-
+</div>
+</div>
 <!--Modal for first load-->
 <div class="modal fade" id="Inital-Sign-Up" tabindex="-1" aria-labelledby="Inital-Sign-Up" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content">
-      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
+      </button>
       <img src="/dist/assets/img/Tickcircle.svg" height="150">
-      
       <div class="row">
         <div class="col-12">
-          <h2 class="modal-title signinheader modalheaddrmid" id="exampleModalLabel">Hooray! You’re in!</h2>
+          <h2 class="modal-title signinheader modalheaddrmid" id="exampleModalLabel">Hooray! You’re in!
+          </h2>
         </div>
       </div>
       <div class="row">
         <div class="col-12">
           <p>
-              Thank you for joining stwidio agency!
+            Thank you for joining stwidio agency!
           </p>
           <p>
-              Please check your inbox to verify your email - it is essencial we have your right contact information, so we can pass any potential jobs to you! 
+            Please check your inbox to verify your email - it is essencial we have your right contact information, so we can pass any potential jobs to you!
           </p>
           <p>
-              Your account is now created, but reminds hidden until we approve it. In the meantime you should set up your profile portfolio.
+            Your account is now created, but reminds hidden until we approve it. In the meantime you should set up your profile portfolio.
           </p>
         </div>
       </div>
       <div class="row">
         <div class="col-12">
           <div class="set-content-right">
-            <button type="button" class="btn btn-secondary btn-lg btn-block" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle="modal" data-bs-target="#edit-details" data-bs-dismiss="modal">Setup Profile</button>
+            <button type="button" class="btn btn-secondary btn-lg btn-block" data-bs-dismiss="modal">Close
+            </button>
+            <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#edit-details" data-bs-dismiss="modal">Setup Profile
+            </button>
             <!-- <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle="modal" data-bs-target="#submitted" data-bs-dismiss="modal" >Return to job board</button> -->
           </div>
         </div>
       </div>
-        
-      </div>
     </div>
   </div>
 </div>
-
-
+</div>
 <!--MessageModal edit Project-->
 <div class="modal fade" id="editProject" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modalcontentleft">
-      
-        <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Edit Project</h2>
-        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div class="row">
-          
-          <form class="row g-3 needs-validation edit-project-form" novalidate>
-            <p class="project-showcase-text">PROJECT DETAILS</p> 
-            <div class=" col-lg-6 col-md-12 col-sm-12">
-              <label for="editProject" class="form-label">Project name*</label>
-              <input type="text" maxlength="40" class="form-control" id="editProject" required>
-              <div class="invalid-feedback">
-                  Please add the project name 
-                </div>
+      <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Edit Project
+      </h2>
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
+      </button>
+      <div class="row">
+        <form class="row g-3 needs-validation edit-project-form" novalidate>
+          <p class="project-showcase-text">PROJECT DETAILS
+          </p>
+          <div class=" col-lg-6 col-md-12 col-sm-12">
+            <label for="editProject" class="form-label">Project name*
+            </label>
+            <input type="text" maxlength="40" class="form-control" id="editProject" required>
+            <div class="invalid-feedback">
+              Please add the project name
             </div>
-            <div class=" col-lg-6 col-md-6 col-sm-6">
-              <label for="Add-Project" class="form-label">Project Link</label>
-              <input type="text" class="form-control" id="Add-project-Name" >
-            
+          </div>
+          <div class=" col-lg-6 col-md-6 col-sm-6">
+            <label for="Add-Project" class="form-label">Project Link
+            </label>
+            <input type="text" class="form-control" id="Add-project-Name">
+          </div>
+          <!--This is for the genral message-->
+          <div class="col-md-12" id="Description-Edit">
+            <label for="Description-Edit" class="form-label">Description
+            </label>
+            <textarea type="text" maxlength="500" class="form-control" rows="4" required>
+            </textarea>
+            <div class="invalid-feedback">
+              Please tell us about the work
             </div>
-            <!--This is for the genral message-->
-            <div class="col-md-12" id="Description-Edit">
-              <label for="Description-Edit" class="form-label">Description</label>
-              <textarea type="text" maxlength="500" class="form-control" rows="4" required></textarea>
-              <div class="invalid-feedback">
-                
-                  Please tell us about the work
-                </div>
-                <small id="passwordHelpBlock" class="form-text text-muted">
-                  Max 500 charachters
-                </small>
-            </div>
-            <div class="gap"></div>
-            <p class="project-showcase-text">PHOTO GALLERY</p> 
-            <div class="col-sm-12">
-              <form class="add-profile">
-              
-                <div class="existing-images"></div>
-                <div class="input-field form-group">
-                    <label class="active">Add images of your work</label>
-                    <div class="input-images-1" id="image-uploader" style="padding-top: .5rem;"></div>
-                </div>
-                
-                </form>
-            </div>
-
-            <div class="gap"></div>
-          
-            <div class="gap"></div>
-            <div class="col-12 warning-border">
-              <p><i class="fa-solid fa-triangle-exclamation"></i>  Before publishing the project, make sure you hold required copyright and publication rights. </p>
-            </div>
-            
-            <div class="col-6"><p class="float-left delete-text">Delete project</p></div>
-             <div class="col-md-6 col-sm-12 col-12">
-              <div class="set-content-right gap">
-                
-                <button type="button" class="btn btn-secondary btn-lg btn-block apply-btn" data-bs-dismiss="modal" >Cancel</button>
-                <button type="button" id="submit-edit-project" class="btn btn-primary btn-lg btn-block apply-btn" >Submit</button>
-              
+            <small id="passwordHelpBlock" class="form-text text-muted">
+              Max 500 charachters
+            </small>
+          </div>
+          <div class="gap">
+          </div>
+          <p class="project-showcase-text">PHOTO GALLERY
+          </p>
+          <div class="col-sm-12">
+            <form class="add-profile">
+              <div class="existing-images">
               </div>
-            </div>
-
-            
+              <div class="input-field form-group">
+                <label class="active">Add images of your work
+                </label>
+                <div class="input-images-1" id="image-uploader" style="padding-top: .5rem;">
+                </div>
+              </div>
             </form>
-           
-           
-  
-  
+          </div>
+          <div class="gap">
+          </div>
+          <div class="gap">
+          </div>
+          <div class="col-12 warning-border">
+            <p>
+              <i class="fa-solid fa-triangle-exclamation">
+              </i> Before publishing the project, make sure you hold required copyright and publication rights. 
+            </p>
+          </div>
+          <div class="col-6">
+            <p class="float-left delete-text">Delete project
+            </p>
+          </div>
+          <div class="col-md-6 col-sm-12 col-12">
+            <div class="set-content-right gap">
+              <button type="button" class="btn btn-secondary btn-lg btn-block apply-btn" data-bs-dismiss="modal">Cancel
+              </button>
+              <button type="button" id="submit-edit-project" class="btn btn-primary btn-lg btn-block apply-btn">Submit
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-        <!--end of propose job brief-->    
-
-          
-            
-          </form>
-
-        
-
-        </div>
-    </div>
-  </div>
+    <!--end of propose job brief-->
+    </form>
+</div>
+</div>
+</div>
 </div>
 <!--Popup image modals-->
 <div id="showcaseImageModal1" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content">
-      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div class="col-12">
-            <img class="modal-showcase-img" src="./assets/img/jamie-profile-img/sweetdreams1.png" class="img-responsive">        
-        </div>
-   </div>
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
+      </button>
+      <div class="col-12">
+        <img class="modal-showcase-img" src="./assets/img/jamie-profile-img/sweetdreams1.png" class="img-responsive">
+      </div>
+    </div>
   </div>
 </div>
-
 <div id="showcaseImageModal2" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content">
-      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
-          <div class="col-12">
-            <img class="modal-showcase-img" src="./assets/img/jamie-profile-img/sweetdreams1.png" class="img-responsive">
-           </div>
-   </div>
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
+      </button>
+      <div class="col-12">
+        <img class="modal-showcase-img" src="./assets/img/jamie-profile-img/sweetdreams1.png" class="img-responsive">
+      </div>
+    </div>
   </div>
 </div>
-
 <div id="showcaseImageModal3" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content">
-      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
-          <div class="col-12">
-            <img class="modal-showcase-img" src="./assets/img/jamie-profile-img/sweetdreams2.png" class="img-responsive">       
-          </div>
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
+      </button>
+      <div class="col-12">
+        <img class="modal-showcase-img" src="./assets/img/jamie-profile-img/sweetdreams2.png" class="img-responsive">
+      </div>
     </div>
   </div>
 </div>
-
 <div id="showcaseImageModal4" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content">
-      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
-          <div class="col-12">
-            <img class="modal-showcase-img" src="./assets/img/jamie-profile-img/sweetdreams3.png" class="img-responsive">       
-          </div>
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
+      </button>
+      <div class="col-12">
+        <img class="modal-showcase-img" src="./assets/img/jamie-profile-img/sweetdreams3.png" class="img-responsive">
+      </div>
     </div>
   </div>
 </div>
-
-
-
-
 <span id="postjobmodal">
   <!--Import post job modal-->
 </span>
-
-
 <span id="signinmodal">
   <!--Import sign in modal-->
 </span>
-
-
 <footer id="footer" class="mt-auto">
   <!-- imports footer from src/footer.html -->
 </footer>
-
-
-  
-
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+</script>
 <!--made changes here -->
 <!-- add custom scripts -->
-<script type="text/javascript" src="image-uploader/image-uploader.min.js"></script>
-<script type="text/javascript" src="./image-uploader/image-uploader.min.css"></script>
-<script type="text/javascript" src="./image-uploader/image-uploader.min.js"></script>
+<script type="text/javascript" src="image-uploader/image-uploader.min.js">
+</script>
+<script type="text/javascript" src="./image-uploader/image-uploader.min.css">
+</script>
+<script type="text/javascript" src="./image-uploader/image-uploader.min.js">
+</script>
 <script>
-
-    $('.input-images-1').imageUploader({
-      extensions: ['.jpg', '.jpeg', '.png', '.gif'],
-      mimes: ['image/jpeg', 'image/png', 'image/gif'],
-      maxSize: 5 * 1024 * 1024,
-      maxFiles: 4,
-      label:' Drag & Drop files here or click to browse'
-    });
-//finished here
+  $('.input-images-1').imageUploader({
+    extensions: ['.jpg', '.jpeg', '.png', '.gif'],
+    mimes: ['image/jpeg', 'image/png', 'image/gif'],
+    maxSize: 5 * 1024 * 1024,
+    maxFiles: 4,
+    label:' Drag & Drop files here or click to browse'
+  }
+                                    );
+  //finished here
 </script>
 <script>
   // jamie add page specific JS here
   let items = document.querySelectorAll('.carousel .carousel-item')
-
-items.forEach((el) => {
+  items.forEach((el) => {
     const minPerSlide = 4
     let next = el.nextElementSibling
     for (var i=1; i<minPerSlide; i++) {
-        if (!next) {
-            // wrap carousel by using first child
-        	next = items[0]
-      	}
-        let cloneChild = next.cloneNode(true)
-        el.appendChild(cloneChild.children[0])
-        next = next.nextElementSibling
+      if (!next) {
+        // wrap carousel by using first child
+        next = items[0]
+      }
+      let cloneChild = next.cloneNode(true)
+      el.appendChild(cloneChild.children[0])
+      next = next.nextElementSibling
     }
-})
-
+  }
+               )
 </script>
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-<script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous">
+</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-
 <script>
   const image_input = document.querySelector("#image-input");
   image_input.addEventListener("change", function() {
-  const reader = new FileReader();
-  reader.addEventListener("load", () => {
-    const uploaded_image = reader.result;
-    document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`;
-  });
-  reader.readAsDataURL(this.files[0]);
-});
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+      const uploaded_image = reader.result;
+      document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image}
+)`;
+    }
+                           );
+    reader.readAsDataURL(this.files[0]);
+  }
+                              );
 </script>
-
 <script>
-
-// show
-function showSocialDiv0(){
-  document.querySelector(".SocialMedia-1-container").style.visibility = "visible";
-  // add required to SocialMedia-1-Select-input, Social-Media-1-user-input
-  document.querySelector("#SocialMedia-1-Select-input").setAttribute("required", "");
-  document.querySelector("#Social-Media-1-user-input").setAttribute("required", "");
-  document.querySelector("#SocialMedia-1-add").style.visibility = "visible";
-  document.querySelector("#SocialMedia-1-delete").style.visibility = "visible";
-  document.getElementById("SocialMediaSelectbuttonInit").style.visibility = "hidden";
-  // remove disabled on submit
-  document.querySelector("#Social-Media-Submit").removeAttribute("disabled", "");
-}; 
-
-function showSocialDiv1(){
-  document.querySelector(".SocialMedia-2-container").style.visibility = "visible";
-  // add required to SocialMedia-2-Select-input, Social-Media-2-user-input
-  document.querySelector("#SocialMedia-2-Select-input").setAttribute("required", "");
-  document.querySelector("#Social-Media-2-user-input").setAttribute("required", "");
-  document.querySelector("#SocialMedia-2-add").style.visibility = "visible";
-  document.querySelector("#SocialMedia-2-delete").style.visibility = "visible";
-  document.querySelector("#SocialMedia-1-add").style.visibility = "hidden";
-  document.querySelector("#SocialMedia-1-delete").style.visibility = "hidden";
-}; 
-
-function showSocialDiv2(){
-  document.querySelector(".SocialMedia-3-container").style.visibility = "visible";
-  // add required to SocialMedia-3-Select-input, Social-Media-3-user-input
-  document.querySelector("#SocialMedia-3-Select-input").setAttribute("required", "");
-  document.querySelector("#Social-Media-3-user-input").setAttribute("required", "");
-  document.querySelector("#SocialMedia-2-add").style.visibility = "hidden";
-  document.querySelector("#SocialMedia-2-delete").style.visibility = "hidden";
-}; 
-
-// hide
-function hideSocialDiv0(){
-  document.querySelector(".SocialMedia-1-container").style.visibility = "hidden";
-  // remove required to SocialMedia-1-Select-input, Social-Media-1-user-input
-  document.querySelector("#SocialMedia-1-Select-input").removeAttribute("required", "");
-  document.querySelector("#Social-Media-1-user-input").removeAttribute("required", "");
-  document.getElementById("SocialMediaSelectbuttonInit").style.visibility = "visible";
-  document.querySelector("#SocialMedia-1-add").style.visibility = "hidden";
-  document.querySelector("#SocialMedia-1-delete").style.visibility = "hidden";
-  // add disabled on submit
-  document.querySelector("#Social-Media-Submit").setAttribute("disabled", "");
-
-}; 
-
-function hideSocialDiv1(){
-  document.querySelector(".SocialMedia-2-container").style.visibility = "hidden";
-  // remove required to SocialMedia-2-Select-input, Social-Media-2-user-input
-  document.querySelector("#SocialMedia-2-Select-input").removeAttribute("required", "");
-  document.querySelector("#Social-Media-2-user-input").removeAttribute("required", "");
-  document.querySelector("#SocialMedia-1-add").style.visibility = "visible";
-  document.querySelector("#SocialMedia-1-delete").style.visibility = "visible";
-  document.querySelector("#SocialMedia-2-add").style.visibility = "hidden";
-  document.querySelector("#SocialMedia-2-delete").style.visibility = "hidden";
-}; 
-
-function hideSocialDiv2(){
-  document.querySelector(".SocialMedia-3-container").style.visibility = "hidden";
-  // remove required to SocialMedia-3-Select-input, Social-Media-3-user-input
-  document.querySelector("#SocialMedia-3-Select-input").removeAttribute("required", "");
-  document.querySelector("#Social-Media-3-user-input").removeAttribute("required", "");
-  document.querySelector("#SocialMedia-2-add").style.visibility = "visible";
-  document.querySelector("#SocialMedia-2-delete").style.visibility = "visible";
-}; 
+  // show
+  function showSocialDiv0(){
+    document.querySelector(".SocialMedia-1-container").style.visibility = "visible";
+    // add required to SocialMedia-1-Select-input, Social-Media-1-user-input
+    document.querySelector("#SocialMedia-1-Select-input").setAttribute("required", "");
+    document.querySelector("#Social-Media-1-user-input").setAttribute("required", "");
+    document.querySelector("#SocialMedia-1-add").style.visibility = "visible";
+    document.querySelector("#SocialMedia-1-delete").style.visibility = "visible";
+    document.getElementById("SocialMediaSelectbuttonInit").style.visibility = "hidden";
+    // remove disabled on submit
+    document.querySelector("#Social-Media-Submit").removeAttribute("disabled", "");
+  };
+  function showSocialDiv1(){
+    document.querySelector(".SocialMedia-2-container").style.visibility = "visible";
+    // add required to SocialMedia-2-Select-input, Social-Media-2-user-input
+    document.querySelector("#SocialMedia-2-Select-input").setAttribute("required", "");
+    document.querySelector("#Social-Media-2-user-input").setAttribute("required", "");
+    document.querySelector("#SocialMedia-2-add").style.visibility = "visible";
+    document.querySelector("#SocialMedia-2-delete").style.visibility = "visible";
+    document.querySelector("#SocialMedia-1-add").style.visibility = "hidden";
+    document.querySelector("#SocialMedia-1-delete").style.visibility = "hidden";
+  };
+  function showSocialDiv2(){
+    document.querySelector(".SocialMedia-3-container").style.visibility = "visible";
+    // add required to SocialMedia-3-Select-input, Social-Media-3-user-input
+    document.querySelector("#SocialMedia-3-Select-input").setAttribute("required", "");
+    document.querySelector("#Social-Media-3-user-input").setAttribute("required", "");
+    document.querySelector("#SocialMedia-2-add").style.visibility = "hidden";
+    document.querySelector("#SocialMedia-2-delete").style.visibility = "hidden";
+  };
+  // hide
+  function hideSocialDiv0(){
+    document.querySelector(".SocialMedia-1-container").style.visibility = "hidden";
+    // remove required to SocialMedia-1-Select-input, Social-Media-1-user-input
+    document.querySelector("#SocialMedia-1-Select-input").removeAttribute("required", "");
+    document.querySelector("#Social-Media-1-user-input").removeAttribute("required", "");
+    document.getElementById("SocialMediaSelectbuttonInit").style.visibility = "visible";
+    document.querySelector("#SocialMedia-1-add").style.visibility = "hidden";
+    document.querySelector("#SocialMedia-1-delete").style.visibility = "hidden";
+    // add disabled on submit
+    document.querySelector("#Social-Media-Submit").setAttribute("disabled", "");
+  };
+  function hideSocialDiv1(){
+    document.querySelector(".SocialMedia-2-container").style.visibility = "hidden";
+    // remove required to SocialMedia-2-Select-input, Social-Media-2-user-input
+    document.querySelector("#SocialMedia-2-Select-input").removeAttribute("required", "");
+    document.querySelector("#Social-Media-2-user-input").removeAttribute("required", "");
+    document.querySelector("#SocialMedia-1-add").style.visibility = "visible";
+    document.querySelector("#SocialMedia-1-delete").style.visibility = "visible";
+    document.querySelector("#SocialMedia-2-add").style.visibility = "hidden";
+    document.querySelector("#SocialMedia-2-delete").style.visibility = "hidden";
+  };
+  function hideSocialDiv2(){
+    document.querySelector(".SocialMedia-3-container").style.visibility = "hidden";
+    // remove required to SocialMedia-3-Select-input, Social-Media-3-user-input
+    document.querySelector("#SocialMedia-3-Select-input").removeAttribute("required", "");
+    document.querySelector("#Social-Media-3-user-input").removeAttribute("required", "");
+    document.querySelector("#SocialMedia-2-add").style.visibility = "visible";
+    document.querySelector("#SocialMedia-2-delete").style.visibility = "visible";
+  };
 </script>
-
 <script>
-    //step 1 registration validaiton
+  //step 1 registration validaiton
   const EditProject1 = document.querySelector('.edit-project-form');
   const EditProjectSubmit = document.querySelector('#submit-edit-project');
   const EditProjectModal = new bootstrap.Modal(document.querySelector('#editProject'));
- 
-
   // Loop over inputs and prevent submission
   EditProjectSubmit.addEventListener('click', function (event) {
     console.log("modal 1 submit clicked");
@@ -1123,97 +1240,86 @@ function hideSocialDiv2(){
       event.stopPropagation();
       console.log("modal 1 was-NOT-validated");
     }
-     else {
-       console.log("modal 1 was-validated");
-       EditProjectModal.hide();
-    //   regModal2.show();
-     }
+    else {
+      console.log("modal 1 was-validated");
+      EditProjectModal.hide();
+      //   regModal2.show();
+    }
     EditProject1.classList.add('was-validated');
-  }, false)
+  }
+                                     , false)
 </script>
-
 <script>
   //step 1 registration validaiton
-const AddProject1 = document.querySelector('.Add-Project');
-const AddProjectSubmit = document.querySelector('#Add-Project-Submit');
-const AddProjectModal = new bootstrap.Modal(document.querySelector('#addProject'));
-
-
-// Loop over inputs and prevent submission
-AddProjectSubmit.addEventListener('click', function (event) {
-  console.log("modal 1 submit clicked");
-  if (!AddProject1.checkValidity()) {
-    event.preventDefault();
-    event.stopPropagation();
-    console.log("modal 1 was-NOT-validated");
+  const AddProject1 = document.querySelector('.Add-Project');
+  const AddProjectSubmit = document.querySelector('#Add-Project-Submit');
+  const AddProjectModal = new bootstrap.Modal(document.querySelector('#addProject'));
+  // Loop over inputs and prevent submission
+  AddProjectSubmit.addEventListener('click', function (event) {
+    console.log("modal 1 submit clicked");
+    if (!AddProject1.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("modal 1 was-NOT-validated");
+    }
+    else {
+      console.log("modal 1 was-validated");
+      AddProjectModal.hide();
+      //   regModal2.show();
+    }
+    AddProject1.classList.add('was-validated');
   }
-   else {
-     console.log("modal 1 was-validated");
-     AddProjectModal.hide();
-  //   regModal2.show();
-   }
-   AddProject1.classList.add('was-validated');
-}, false)
+                                    , false)
 </script>
-
 <script>
   //step 1 registration validaiton
-const changeDetailsForm = document.querySelector('.change-Details');
-const changeDetailsSubmit = document.querySelector('#change-Details-Submit');
-const changeDetailsModal = new bootstrap.Modal(document.querySelector('#edit-details'));
-
-
-// Loop over inputs and prevent submission
-changeDetailsSubmit.addEventListener('click', function (event) {
-  console.log("modal 1 submit clicked");
-  if (!changeDetailsForm.checkValidity()) {
-    event.preventDefault();
-    event.stopPropagation();
-    console.log("modal 1 was-NOT-validated");
+  const changeDetailsForm = document.querySelector('.change-Details');
+  const changeDetailsSubmit = document.querySelector('#change-Details-Submit');
+  const changeDetailsModal = new bootstrap.Modal(document.querySelector('#edit-details'));
+  // Loop over inputs and prevent submission
+  changeDetailsSubmit.addEventListener('click', function (event) {
+    console.log("modal 1 submit clicked");
+    if (!changeDetailsForm.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("modal 1 was-NOT-validated");
+    }
+    else {
+      console.log("modal 1 was-validated");
+      changeDetailsModal.hide();
+    }
+    changeDetailsForm.classList.add('was-validated');
   }
-   else {
-     console.log("modal 1 was-validated");
-     changeDetailsModal.hide();
-   }
-   changeDetailsForm.classList.add('was-validated');
-}, false)
+                                       , false)
 </script>
-
 <script>
-
-//Social media validation
-function validateSocials() {
-  if (!SocialMediaForm.checkValidity()){
-    event.preventDefault();
-    event.stopPropagation();
-    console.log("social modal was-NOT-validated");
+  //Social media validation
+  function validateSocials() {
+    if (!SocialMediaForm.checkValidity()){
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("social modal was-NOT-validated");
+    }
+    else {
+      console.log("social modal was-validated");
+      SocialMediaModal.hide();
+    }
+    SocialMediaForm.classList.add('was-validated');
   }
-   else {
-     console.log("social modal was-validated");
-     SocialMediaModal.hide();
-   }
-   SocialMediaForm.classList.add('was-validated');
-}
-
-//Social media validation
-const SocialMediaForm = document.querySelector('.SocialMedia');
-const SocialMediaSubmit = document.querySelector('#Social-Media-Submit');
-const SocialMediaOptionValue = document.querySelector('#SocialMediaSelect1');
-const SocialMediaModal = new bootstrap.Modal(document.querySelector('#social-modal'));
-
-
-// Loop over inputs and prevent submission
-SocialMediaSubmit.addEventListener('click', function (event) {
-  console.log("social modal submit clicked");
-  validateSocials();
-}, false)
-
-
-
+  //Social media validation
+  const SocialMediaForm = document.querySelector('.SocialMedia');
+  const SocialMediaSubmit = document.querySelector('#Social-Media-Submit');
+  const SocialMediaOptionValue = document.querySelector('#SocialMediaSelect1');
+  const SocialMediaModal = new bootstrap.Modal(document.querySelector('#social-modal'));
+  // Loop over inputs and prevent submission
+  SocialMediaSubmit.addEventListener('click', function (event) {
+    console.log("social modal submit clicked");
+    validateSocials();
+  }
+                                     , false)
 </script>
-
 <!-- custom JS -->
-<script src="scripts/app.bundle.js"></script>
+<script src="scripts/app.bundle.js">
+</script>
 <!-- event listeners -->
-
 </body>
