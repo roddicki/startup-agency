@@ -351,12 +351,15 @@
               <div class="input-field form-group">
                 <label class="active">Add images of your work
                 </label>
-                <form method="POST" name="form-example-1" id="form-example-1" enctype="multipart/form-data">
+                
                   <div class="input-field">
+                    <form method="POST" name="form-example-1" id="form-example-1" enctype="multipart/form-data">
                     <div class="input-images" id="image-uploader" style="padding-top: .5rem;">
                     </div>
+                    <button>Submit and display data</button>
+                  </form>
                   </div>
-               </form>
+               
               </div>
             </form>
           </div>
@@ -1074,23 +1077,30 @@
 </script>
 <!--made changes here -->
 <!-- add custom scripts -->
-<script type="text/javascript" src="image-uploader/image-uploader.min.js">
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/image-uploader/image-uploader.min.js">
 </script>
-<script type="text/javascript" src="./image-uploader/image-uploader.min.css">
+<script type="text/javascript" src="/dist/image-uploader/image-uploader.min.css">
 </script>
-<script type="text/javascript" src="./image-uploader/image-uploader.min.js">
-</script>
+
+
 <script>
-  $('.input-images').imageUploader({
-    extensions: ['.jpg', '.jpeg', '.png', '.gif'],
-    mimes: ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'],
-    maxSize: 5 * 1024 * 1024,
-    maxFiles: 4,
-    label:' Drag & Drop files here or click to browse'
-  }
-                                    );
+   $(function () {
+      $('.input-images').imageUploader({
+        label:' Drag & Drop images here or click to browse',
+        extensions: ['.jpg', '.jpeg', '.png', '.gif'],
+        imagesInputName: 'photos',
+        mimes: ['image/jpeg', 'image/png', 'image/gif'],
+        maxSize: 5 * 1024 * 1024,
+        maxFiles: 4,
+      });
+});
+
   //finished here
 </script>
+
 <script>
   // jamie add page specific JS here
   let items = document.querySelectorAll('.carousel .carousel-item')
@@ -1109,6 +1119,7 @@
   }
                )
 </script>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 <script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous">
 </script>
