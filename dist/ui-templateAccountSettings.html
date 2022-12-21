@@ -21,7 +21,7 @@
   <div class="container">
     <!-- basic grid -->
     <div class="row">
-      <div class="col-4">
+      <div class="col-lg-4 col-md-12">
         <div class="content-blocks">
           <div class="available-tag">Graduate</div>
           <div class="text-center">
@@ -38,21 +38,9 @@
               <p class="underline">www.ReduxGameStudios.com</p>
             </div>
           </div>
-            <div class="gap">
-            <div class="line gap"></div>
-            <div class="col-12">
-              <div class="gap"></div>
-              <h2>Account details</h2>
-            </div>
-          </div>
-          
-          <div class="">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae urna semper augue nec risus, pellentesque sit. Sit aenean dictum est vel habitasse. Sollicitudin ultrices montes, justo, quis pretium tellus suspendisse leo lectus.</p>
-          </div>
-        
         </div>
       </div>
-      <div class="col-8">
+      <div class="col-lg-8 col-md-12">
         <div class="row">
           <div class="content-blocks">
             <div class="col-12">
@@ -63,51 +51,64 @@
               General
             </div>
             <div class="col-12">
-              <p>This account is connected to b.cooper@icloud.com email. To change the email address please contact the website administrator.</p>
+              <p>This account is connected to b.cooper@icloud.com email. </p>
             </div>
-            <div class="col-6">
-              <p>Phone number</p>
-              <input type="number" id="validationCustom05" class="form-control signincontent" name="student-id" aria-label="student-id" required>
-              <div id="phoneHelp" class="form-text">
-                Your phone number will not be publicly visible on your profile
+            <div class="row">
+              <div class="col-6">
+                <p>Phone number</p>
+                <input type="number" id="validationCustom05" class="form-control signincontent">
+                <div id="phoneHelp" class="form-text">
+                  Your phone number will not be publicly visible on your profile
+                </div>
               </div>
-            </div>
+              <div class="col-6">
+                <p>Email</p>
+                <input type="text" id="validationCustom05" class="form-control signincontent">
+                <div id="emailChange" class="form-text">
+                  Your phone number will not be publicly visible on your profile
+                </div>
+              </div>
+          </div>
             <div class="gap"></div>
             <div class="col-12 project-showcase-text">
-              Password
+              Forgot Password?
               </div>
-              <div class="col-5">
-                <div class="accountFormToggle display-none" id="passwordForm">
-                    <label for="password">Min 8 characters inc 1 number</label>
-                    <input type='password' id="password" data-bv-identical placeholder="Password" name="password" class="form-control masked signincontent" value="" data-bv-notemty data-bv-excluded="false" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required>  
-                    <i class="fa fa-eye showhide" id="eye"></i>
-                    <div class="invalid-feedback">
-                      Your password must be minimum eight characters, including at least one letter and one number
-                    </div>
-                </div>
+              <button class="btn-primary btn-lg">Click here to reset password</button>
+              <div class="gap"></div>
+            <div class="col-12 project-showcase-text">
+              Delete Account
               </div>
-             
-               
-        
-        
-            <div class="col-5">
-              
-                <div class="accountFormToggle display-none" id="passwordForm">
-                  <label for="passwordConfirmation">Confirm Password*</label>
-                  <input type='password' id="passwordConfirmation" data-bv-identical placeholder="Confirm password" name="passwordConfirmation" autocomplete="off"  class="form-control masked signincontent" value="" data-bv-notemty data-bv-excluded="false" required>  
-                  <div class="invalid-feedback">
-                    Password not a match.
-                  </div>
-                </div>
-              </div>
-              <div class="col-2">
-                <i class="fa fa-eye showhide" id="eye-confirmation"></i>
-              </div>
-            </div>
-      </div>
+              <button  class="btn-primary btn-lg btn-delete-account" data-bs-toggle="modal" data-bs-target="#deleteAccount">Click here to delete your account</button>
+          </div>
+          </div>
+          
     </div>
   </div>
+  </div>
 </section>
+
+<div class="modal fade" id="deleteAccount"  tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modalcontentleft">
+      <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Are you sure you want to delete your account
+      </h2>
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
+      </button>
+        <div class="row">
+          <div class="col-sm-12">
+            <p>You are about to permanently delete your account from the freelance agency platform.</p>
+            <p>You can sign back up at any time, however you will have to go through the sign up proccess again.</p>
+          </div>
+          <div class="gap"></div>
+          <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+            <button  class="btn-primary btn-lg"  data-bs-dismiss="modal">Go back</button>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 ">
+            <button  class="btn-primary btn-lg btn-delete-account" data-bs-toggle="modal" data-bs-target="#deleteAccount">Delete</button>
+        </div>
+    </div>
+  </div>
+</div>
 
 <span id="postjobmodal">
   <!--Import post job modal-->

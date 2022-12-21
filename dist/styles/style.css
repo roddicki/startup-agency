@@ -508,6 +508,8 @@ h5{
 	line-height: 20px;
 	color: #0C0B0D;
   }
+  
+
 
   .center-text{
 	text-align: center;
@@ -602,6 +604,7 @@ h5{
 	margin-left: 10px;
 	margin-right: 15px;
 	float: right;
+	display: none;
   }
   
   .accordion-item{
@@ -968,17 +971,19 @@ h5{
 	margin-bottom: 10px;
 
   }
-  .filter-mobile-nav{
-	z-index: 2005;
-	position:absolute;
-	float:right;
-	right: 0px;
-	width: 18em;
+
+  #project-img-showcase-edit-2{
 	display: none;
-	top: 0px;
   }
 
+  #project-img-showcase-edit-3{
+	display: none;
+  }
 
+  #project-img-edit-1{
+	border: 2px solid #244F8E;
+
+  }
   @media(max-width: 991px){
 	.steps{
 		margin-left:0%;
@@ -1151,6 +1156,23 @@ margin-top: 20px;
     margin-left: 70px;
 }
 
+
+.carousel-indicators {
+	margin-bottom: 70px;
+	position: relative;
+	display: block;
+	margin-left: 0px;
+	margin-right: 0px;
+	
+	border-radius: 10px;
+}
+
+
+.carousel-indicators button[data-bs-target] {
+	width: 200px;
+
+}
+
 .edit-size{
 	font-size: 17px;
 	margin-bottom: 0px;
@@ -1158,7 +1180,20 @@ margin-top: 20px;
 	float: right;
 }
 
-
+@media (max-width: 996px){
+	.filter-mobile-nav{
+		z-index: 2005;
+		position:absolute;
+		float:right;
+		right: 0px;
+		width: 18em;
+		display: none;
+		top: 0px;
+	  }
+	  .filter-close-button{
+		display: block;
+	  }
+	}
 
 /* ===================================== */
 /* ===FOOTER=== */
@@ -1169,19 +1204,19 @@ footer {
 } 
 
 @media (max-width: 996px){
-	.filter-box{
-		display: none;
+	/* .filter-box{
+	//	display: none;
 	}
 	.filter-mobile-nav{
 		//display: block;
-	}
+	} */
 }
 @media (min-width: 997px) {
-    .filter-box{
+    /* .filter-box{
 		display: block;
 	}
 	.filter-mobile-nav{
-	 display: none !important;
+	// display: none !important; */
 	}
 @media (max-width: 767px) {
     .carousel-inner .carousel-item > div {
@@ -1192,6 +1227,8 @@ footer {
     }
 	
 }
+
+
 
 .carousel-inner .carousel-item.active,
 .carousel-inner .carousel-item-next,
@@ -1221,26 +1258,16 @@ footer {
 
 
 
-.carousel-indicators {
-	margin-bottom: 70px;
-	position: relative;
-	display: block;
-	margin-left: 0px;
-	margin-right: 0px;
-	
-	border-radius: 10px;
-}
 
-
-.carousel-indicators button[data-bs-target] {
-	width: 200px;
-
+.btn-delete-account{
+	background-color: #f70000;
+	color: rgb(255, 255, 255);
 }
 
 .carousel-thumbnail-size{
 	width:170px;
-	height:132px;
-	object-fit: cpver;
+	height:150px;
+	object-fit: cover;
 	background-color: #f8f8f8;
 	cursor: pointer;
 }
@@ -1259,5 +1286,6 @@ footer {
 	
 	border-radius: 10px !important;
 }
+
 
 

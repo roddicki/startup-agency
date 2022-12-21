@@ -178,24 +178,34 @@
         <div class="port-block">
           <div class="row">
             <div class="col-12">
-              <button type="button" class="button-showcase" data-bs-toggle="modal" data-bs-target="#showcaseImageModal1">
+              <button type="button" class="button-showcase" id="project-img-showcase-edit-1">
                 <img class="port-edit-img-main" src="./assets/img/jamie-profile-img/sweetdreams1.png">                 
+              </button>
+            </div>
+            <div class="col-12">
+              <button type="button" class="button-showcase" id="project-img-showcase-edit-2">
+                <img class="port-edit-img-main" src="./assets/img/jamie-profile-img/sweetdreams2.png">                 
+              </button>
+            </div>
+            <div class="col-12">
+              <button type="button" class="button-showcase" id="project-img-showcase-edit-3">
+                <img class="port-edit-img-main" src="./assets/img/jamie-profile-img/sweetdreams3.png">                 
               </button>
             </div>
             <div class="gap">
             </div>
             <div class="col-4">
-              <button type="button" class="button-showcase" data-bs-toggle="modal" data-bs-target="#showcaseImageModal2">
+              <button type="button" class="button-showcase" id="project-img-edit-1">
                 <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams1.png">
               </button>
             </div>
             <div class="col-4">
-              <button type="button" class="button-showcase" data-bs-toggle="modal" data-bs-target="#showcaseImageModal3">
+              <button type="button" class="button-showcase"  id="project-img-edit-2">
                 <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams2.png">
               </button>
             </div>
             <div class="col-4">
-              <button type="button" class="button-showcase" data-bs-toggle="modal" data-bs-target="#showcaseImageModal4">
+              <button type="button" class="button-showcase" id="project-img-edit-3">
                 <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams3.png">
               </button>
             </div>
@@ -223,17 +233,9 @@
                   <a class="dropdown-item text-danger" href="#">Delete Project
                   </a>
                 </li>
-                <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
               </ul>
             </h2>
           </div>
-          <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> <i  class="bi bi-pencil-square float-right cursor-pointer"></i></button></h2>
-</div>
-<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-<li><a class="dropdown-item" href="#">Action</a></li>
-<li><a class="dropdown-item" href="#">Another action</a></li>
-<li><a class="dropdown-item" href="#">Something else here</a></li>
-</ul> -->
           <div class="col-12">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna mauris, at urna ...
             </p>
@@ -1056,51 +1058,6 @@
 </div>
 
 
-<!--Popup image modals-->
-<div id="showcaseImageModal1" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-xl modal-dialog-centered">
-    <div class="modal-content">
-      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
-      </button>
-      <div class="col-12">
-        <img class="modal-showcase-img" src="./assets/img/jamie-profile-img/sweetdreams1.png" class="img-responsive">
-      </div>
-    </div>
-  </div>
-</div>
-<div id="showcaseImageModal2" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-xl modal-dialog-centered">
-    <div class="modal-content">
-      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
-      </button>
-      <div class="col-12">
-        <img class="modal-showcase-img" src="./assets/img/jamie-profile-img/sweetdreams1.png" class="img-responsive">
-      </div>
-    </div>
-  </div>
-</div>
-<div id="showcaseImageModal3" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-xl modal-dialog-centered">
-    <div class="modal-content">
-      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
-      </button>
-      <div class="col-12">
-        <img class="modal-showcase-img" src="./assets/img/jamie-profile-img/sweetdreams2.png" class="img-responsive">
-      </div>
-    </div>
-  </div>
-</div>
-<div id="showcaseImageModal4" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-xl modal-dialog-centered">
-    <div class="modal-content">
-      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
-      </button>
-      <div class="col-12">
-        <img class="modal-showcase-img" src="./assets/img/jamie-profile-img/sweetdreams3.png" class="img-responsive">
-      </div>
-    </div>
-  </div>
-</div>
 <span id="postjobmodal">
   <!--Import post job modal-->
 </span>
@@ -1126,7 +1083,7 @@
 <script>
   $('.input-images').imageUploader({
     extensions: ['.jpg', '.jpeg', '.png', '.gif'],
-    mimes: ['image/jpeg', 'image/png', 'image/gif'],
+    mimes: ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'],
     maxSize: 5 * 1024 * 1024,
     maxFiles: 4,
     label:' Drag & Drop files here or click to browse'
@@ -1232,6 +1189,50 @@
     document.querySelector("#SocialMedia-2-delete").style.visibility = "visible";
   };
 </script>
+
+<script>
+  document.getElementById("project-img-edit-1").onclick = function() {
+      document.getElementById("project-img-edit-1").style.border = "2px solid #244F8E";
+      document.getElementById("project-img-edit-2").style.border = "0px solid #244F8E";
+      document.getElementById("project-img-edit-3").style.border = "0px solid #244F8E";
+   
+
+      document.getElementById("project-img-showcase-edit-1").style.display = "block";
+      document.getElementById("project-img-showcase-edit-2").style.display = "none";
+      document.getElementById("project-img-showcase-edit-3").style.display = "none";
+    
+
+      
+   }
+
+   document.getElementById("project-img-edit-2").onclick = function() {
+      document.getElementById("project-img-edit-1").style.border = "0px solid #244F8E";
+      document.getElementById("project-img-edit-2").style.border = "2px solid #244F8E";
+      document.getElementById("project-img-edit-3").style.border = "0px solid #244F8E";
+    
+
+      document.getElementById("project-img-showcase-edit-2").style.display = "block";
+      document.getElementById("project-img-showcase-edit-1").style.display = "none";
+      document.getElementById("project-img-showcase-edit-3").style.display = "none";
+      
+      
+   }
+   document.getElementById("project-img-edit-3").onclick = function() {
+      document.getElementById("project-img-edit-1").style.border = "0px solid #244F8E";
+      document.getElementById("project-img-edit-2").style.border = "0px solid #244F8E";
+      document.getElementById("project-img-edit-3").style.border = "2px solid #244F8E";
+    
+
+      document.getElementById("project-img-showcase-edit-3").style.display = "block";
+      document.getElementById("project-img-showcase-edit-1").style.display = "none";
+      document.getElementById("project-img-showcase-edit-2").style.display = "none";
+      
+      
+   }
+
+
+</script>
+
 <script>
   //step 1 registration validaiton
   const EditProject1 = document.querySelector('.edit-project-form');

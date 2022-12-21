@@ -1,887 +1,603 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-  <link href="styles/style.css" rel="stylesheet">
 
-  <title>Startup Agency</title>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link href="styles/style.css" rel="stylesheet">
+
+    <title>Startup Agency</title>
 </head>
 
 <body data-page="" class="d-flex flex-column min-vh-100">
 
-<header id="header">
-  <!-- imports header + nav from src/header.html -->
-</header>
+    <header id="header">
+        <!-- imports header + nav from src/header.html -->
+    </header>
 
- 
+    <section>
 
-<section>
+        <div class="container">
 
-  <div class="container">
-
-    <div class="row">
-      <div class="d-lg-block d-md-none d-sm-none col-lg-3 col-md-3 col-sm-3 col-12 content-blocks filter-box">
-        <div class="row">
-          <div class="col-6">
-            <h2>Filters</h2>
-          </div>
-          <div class="col-6">
-            <p class="underline-filters">Reset all</p>
-          </div>
-          <div class="col-12">
-            <p class="project-showcase-text"> KEYWORD SEARCH</p>
-          </div>
-          <div class="col-12">
-            <input type="text" placeholder="Search Keyword..." class="filter-input">
-          </div>
-          <div class="gap"></div>
-          <div class="col-12">
-            <p class="project-showcase-text"> LOCATION</p>
-          </div>
-          <div class="col-12">
-            <input type="text" placeholder="Enter Location..." class="filter-input">
-          </div>
-          <div class="gap"></div>
-          <div class="col-12">
-            <p class="project-showcase-text"> AVAILABILITY</p>
-          </div>
-          <div class="col-12 form-check form-switch filter-indent-switch">
-            <input class="form-check-input form-check-input-profile" type="checkbox" id="show-available-switch">
-            <label class="form-check-label form-check-label-profile" for="show-available-switch">Show available only</label> 
-          </div> 
-          <div class="gap"></div>
-          <div class="col-12">
-            <p class="project-showcase-text">SKILLS CATEGORIES</p>
-          </div>
-          <div class="col-12">
-            <div class="accordion" id="accordionExample">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="three-d-heading">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <div class="row">
+                <div class="d-lg-block col-lg-3 col-md-3 col-sm-3 col-12 content-blocks filter-box filter-mobile-nav">
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="button" class="btn-close filter-close-button" onclick="hideSidebarFilter()" aria-label="Close"></button>
+                        </div>
+                        <div class="col-6">
+                            <h2>Filters</h2>
+                        </div>
+                        <div class="col-6">
+                            <p class="underline-filters">Reset all</p>
+                        </div>
+                        <div class="col-12">
+                            <p class="project-showcase-text"> KEYWORD SEARCH</p>
+                        </div>
+                        <div class="col-12">
+                            <input type="text" placeholder="Search Keyword..." class="filter-input">
+                        </div>
+                        <div class="gap"></div>
+                        <div class="col-12">
+                            <p class="project-showcase-text">SKILLS CATEGORIES</p>
+                        </div>
+                        <div class="col-12">
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="three-d-heading">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     <input class="form-check-input filter-checkbox" type="checkbox" value="" id="three-d-tab"> 3D Design
                   </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="three-d-heading" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="interior-design-check">   Interior design</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="model-design-check">  Model Creation</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="set-design-check">  Set Design</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="three-d-check">  3D Printing</p>
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="computer-animation-heading">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="three-d-heading" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="interior-design-check"> Interior design</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="model-design-check"> Model Creation</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="set-design-check"> Set Design</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="three-d-check"> 3D Printing</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="computer-animation-heading">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                     <input class="form-check-input filter-checkbox" type="checkbox" value="" id="computer-animation-tab">Computer Animation
                   </button>
-                </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="computer-animation-heading" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="twod-animation-check">   2D Animation</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="threed-animation-check">  3D Animation</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="threed-modeling-check"> 3D Modeling</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="compositing-check">  Compositing</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="infographic-check">   Infographics</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="motion-graphics-check">  Motion Graphics</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="stop-motion-check">  Stop Motion Animation</p>
-                    
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="fashion-heading">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="computer-animation-heading" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="twod-animation-check"> 2D Animation</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="threed-animation-check"> 3D Animation</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="threed-modeling-check"> 3D Modeling</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="compositing-check"> Compositing</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="infographic-check"> Infographics</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="motion-graphics-check"> Motion Graphics</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="stop-motion-check"> Stop Motion Animation</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="fashion-heading">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                     <input class="form-check-input filter-checkbox" type="checkbox" value="" id="fashion-tab">Fashion
                   </button>
-                </h2>
-                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="fashion-heading" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="clothing-production-check">   Clothing production</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="fashion-design-check">  Fashion Design</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="threed-modeling-check"> T-Shirt design</p>
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="graphics-design-heading">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="fashion-heading" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="clothing-production-check"> Clothing production</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="fashion-design-check"> Fashion Design</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="threed-modeling-check"> T-Shirt design</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="graphics-design-heading">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
                     <input class="form-check-input filter-checkbox" type="checkbox" value="" id="graphics-tab">Graphics Design
                   </button>
-                </h2>
-                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="brand-design-check">Brand Design</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="concept-art-check">  Concept art</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="illustration-check"> Illustration</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="logo-design-check">Logo Design</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="photoshop-check">  Photoshop</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="storyboarding-check"> Storyboarding</p>
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="graphics-design-heading">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+                                    </h2>
+                                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="brand-design-check">Brand Design</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="concept-art-check"> Concept art</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="illustration-check"> Illustration</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="logo-design-check">Logo Design</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="photoshop-check"> Photoshop</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="storyboarding-check"> Storyboarding</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="graphics-design-heading">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
                     <input class="form-check-input filter-checkbox" type="checkbox" value="" id="muisc-sound-tab">Music & Sound
                   </button>
-                </h2>
-                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="Music and sound" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="audi-editing-check">Audio recording and editing</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="boom-operator-check">  Boom operator</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="dj-check"> DJ</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="dubbing-check">Dubbing/Subtitles</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="live-performance-check">  Live performance</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="podcasting-check"> Podcasting</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="radio-check">Radio</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="sound-effcts-check">  Sound effects</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="sound-engineer-check"> Sound engineer</p>
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="performance-heading">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree">
+                                    </h2>
+                                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="Music and sound" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="audi-editing-check">Audio recording and editing</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="boom-operator-check"> Boom operator</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="dj-check"> DJ</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="dubbing-check">Dubbing/Subtitles</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="live-performance-check"> Live performance</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="podcasting-check"> Podcasting</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="radio-check">Radio</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="sound-effcts-check"> Sound effects</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="sound-engineer-check"> Sound engineer</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="performance-heading">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree">
                     <input class="form-check-input filter-checkbox" type="checkbox" value="" id="muisc-sound-tab">Performance
                   </button>
-                </h2>
-                <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="Music and sound" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="acting-check">Acting</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="ballet-check"> Ballet</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="burlesque-check"> Burlesque</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="circus-check">Circus</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="clowning-check">  Clowning</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="directing-check"> Directing</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="drag-check">Drag</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="improv-check">  Improv</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="interpretive-dance-check"> Interpretive dance</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="modern-dance-check"> Modern dance</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="performance-art-check">Performance art</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="stage-manage-check">  Stage management & production management</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="stand-up-check"> stand up comedy</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="workshops-check"> Workshops</p>
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="Photography-heading">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseThree">
+                                    </h2>
+                                    <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="Music and sound" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="acting-check">Acting</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="ballet-check"> Ballet</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="burlesque-check"> Burlesque</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="circus-check">Circus</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="clowning-check"> Clowning</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="directing-check"> Directing</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="drag-check">Drag</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="improv-check"> Improv</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="interpretive-dance-check"> Interpretive dance</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="modern-dance-check"> Modern dance</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="performance-art-check">Performance art</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="stage-manage-check"> Stage management & production management</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="stand-up-check"> stand up comedy</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="workshops-check"> Workshops</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="Photography-heading">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseThree">
                     <input class="form-check-input filter-checkbox" type="checkbox" value="" id="muisc-sound-tab">Photography
                   </button>
-                </h2>
-                <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="Photography" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="event-photography-check">Event photography</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="documentart-check"> Documentary photography</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="pet-check"> Pet photography</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="photo-editing-check">Photo editing</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="portrait-check">  Portrait photography</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="wildlife-check"> Wildlife photography</p>
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="video-heading">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseThree">
+                                    </h2>
+                                    <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="Photography" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="event-photography-check">Event photography</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="documentart-check"> Documentary photography</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="pet-check"> Pet photography</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="photo-editing-check">Photo editing</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="portrait-check"> Portrait photography</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="wildlife-check"> Wildlife photography</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="video-heading">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseThree">
                     <input class="form-check-input filter-checkbox" type="checkbox" value="" id="muisc-sound-tab">Video & Film production
                   </button>
-                </h2>
-                <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="Video" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="ariel-drone-check">Ariel Drone</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="directing-video-check"> Directing</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="lighting-artist-check"> Lighting artist</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="producer-check">Producer</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="runner-check">  Runner</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="scripting-check"> Scripting</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="video-editing-check">  Video Editing</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="videoraphy-check"> Videography</p>
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="video-games-heading">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseThree">
+                                    </h2>
+                                    <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="Video" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="ariel-drone-check">Ariel Drone</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="directing-video-check"> Directing</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="lighting-artist-check"> Lighting artist</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="producer-check">Producer</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="runner-check"> Runner</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="scripting-check"> Scripting</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="video-editing-check"> Video Editing</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="videoraphy-check"> Videography</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="video-games-heading">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseThree">
                     <input class="form-check-input filter-checkbox" type="checkbox" value="" id="video-games-tab">Video & Film production
                   </button>
-                </h2>
-                <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="Video" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="blueprint-check">Blueprint-design</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="c-plus-check"> C++</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="c-sharp-check"> C#</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="games-design-check">Games Design</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="level-design-check">  Level Design</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="qa-testong-check"> QA Testing</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="unity-check">  Unity</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="unreal-check"> Unreal 4/5</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="vr-check"> Virtual Reality</p>
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="visual-effects-heading">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTen" aria-expanded="false" aria-controls="collapseThree">
+                                    </h2>
+                                    <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="Video" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="blueprint-check">Blueprint-design</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="c-plus-check"> C++</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="c-sharp-check"> C#</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="games-design-check">Games Design</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="level-design-check"> Level Design</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="qa-testong-check"> QA Testing</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="unity-check"> Unity</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="unreal-check"> Unreal 4/5</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="vr-check"> Virtual Reality</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="visual-effects-heading">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTen" aria-expanded="false" aria-controls="collapseThree">
                     <input class="form-check-input filter-checkbox" type="checkbox" value="" id="visual-effects-tab">Vsiual Effects
                   </button>
-                </h2>
-                <div id="collapseTen" class="accordion-collapse collapse" aria-labelledby="visual-effects" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="motion-graphics-check">Motion Graphics</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="porcedual-modeling-check"> Procedural modeling</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="rotorscoping-check"> Rotorscoping</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="simulation-check">Simulation</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="texturing-check"> Texturing</p>
-                    
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="wev-dev-heading">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEleven" aria-expanded="false" aria-controls="collapseThree">
+                                    </h2>
+                                    <div id="collapseTen" class="accordion-collapse collapse" aria-labelledby="visual-effects" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="motion-graphics-check">Motion Graphics</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="porcedual-modeling-check"> Procedural modeling</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="rotorscoping-check"> Rotorscoping</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="simulation-check">Simulation</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="texturing-check"> Texturing</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="wev-dev-heading">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEleven" aria-expanded="false" aria-controls="collapseThree">
                     <input class="form-check-input filter-checkbox" type="checkbox" value="" id="web-dev-tab">Web Development 
                   </button>
-                </h2>
-                <div id="collapseEleven" class="accordion-collapse collapse" aria-labelledby="web-dev" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="ui-check">UI/UX Design</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="web-design-check"> Website design</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="web-dev-check">Website production</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="seo-check"> Search engine optimisation (SEO)</p>
-                    
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="writing-heading">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseThree">
+                                    </h2>
+                                    <div id="collapseEleven" class="accordion-collapse collapse" aria-labelledby="web-dev" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="ui-check">UI/UX Design</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="web-design-check"> Website design</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="web-dev-check">Website production</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="seo-check"> Search engine optimisation (SEO)</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="writing-heading">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseThree">
                     <input class="form-check-input filter-checkbox" type="checkbox" value="" id="writing-tab">Writing & Copy
                   </button>
-                </h2>
-                <div id="collapseTwelve" class="accordion-collapse collapse" aria-labelledby="writing" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="blogs-check">Blogs</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="copy-check"> Copywriting and proofing</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="creative-writing-check"> Creative writing</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="jounalism-check">Journalism</p>
-                    <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="script-check"> Script writing</p>
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
-      
-      </div>
+                                    </h2>
+                                    <div id="collapseTwelve" class="accordion-collapse collapse" aria-labelledby="writing" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="blogs-check">Blogs</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="copy-check"> Copywriting and proofing</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="creative-writing-check"> Creative writing</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="jounalism-check">Journalism</p>
+                                            <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="script-check"> Script writing</p>
 
-      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="col-lg-8 col-md-12 col-sm-12 col-12 content-blocks">
-          
-          <div class="row">
-          <div class="col-lg-6 col-md-4 col-sm-6 col-5">
+                </div>
 
-            <p class="project-showcase-text"> Porfolios ()</p>
+                <div class="col-lg-8 col-md-12 col-sm-12 col-12 content-blocks">
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-4 col-sm-6 col-5">
+
+                            <p class="project-showcase-text"> Porfolios ()</p>
+                        </div>
+                        <div class="col-lg-6 col-md-4 col-sm-6 col-5 d-lg-none d-md-block">
+                            <button onClick="showSidebarFilter()" class="Button-Social float-right"><u>Filters</u></button>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <!--Block for portfolio preview-->
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6  col-sm-12 ">
+                            <div class="jobblock">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="filter-center ">
+                                            <img src="assets/img/jamie-profile-img/video.jpg" alt="mdo" width="85px" height="85px" class="rounded-circle ">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-7 grad-preview">
+                                        <h5>
+                                            <Strong>Rod Dickinson</Strong>
+                                        </h5>
+                                        <h6> Game Designer</h6>
+                                        <p><img src="assets/img/mapicon.svg"> Brizzle</p>
+                                        <p class="cant-work"><i class="bi bi-circle-fill" style="font-size: 10px;"></i> Not available</p>
+                                    </div>
+                                </div>
+
+                                <p></p>
+                                <div class="lineheightjob">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <img class="grad-preview-images" src="./assets/img/jamie-profile-img/stealthvr.jpg">
+                                        </div>
+                                        <div class="col-6">
+                                            <img class="grad-preview-images" src="./assets/img/jamie-profile-img/speedrunning.jpg">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="job-footer">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <a href="">View more details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--end of porfolio block-->
+
+                        <!--Block for portfolio preview-->
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6  col-sm-12 ">
+                            <div class="jobblock">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4 col-4">
+                                        <div class="filter-center">
+                                            <img src="https://github.com/mdo.png" alt="mdo" width="85px" height="85px" class="rounded-circle">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8 col-sm-8 col-8 grad-preview">
+                                        <h5>
+                                            <Strong>Jamie Lamb</Strong>
+                                        </h5>
+                                        <h6> Game Designer</h6>
+                                        <p><img src="assets/img/mapicon.svg"> Cardiff</p>
+                                        <p class="can-work"><i class="bi bi-circle-fill" style="font-size: 10px;"></i> Available for work</p>
+                                    </div>
+                                </div>
+
+                                <p></p>
+                                <div class="lineheightjob">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <img class="grad-preview-images" src="./assets/img/jamie-profile-img/stealthvr.jpg">
+                                        </div>
+                                        <div class="col-6">
+                                            <img class="grad-preview-images" src="./assets/img/jamie-profile-img/speedrunning.jpg">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="job-footer">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <a href="">View more details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end of porfolio block-->
+                        <!--Block for portfolio preview-->
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6  col-sm-12 ">
+                            <div class="jobblock">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="filter-center ">
+                                            <img src="assets/img/jamie-profile-img/video.jpg" alt="mdo" width="85px" height="85px" class="rounded-circle ">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-7 grad-preview">
+                                        <h5>
+                                            <Strong>Rod Dickinson</Strong>
+                                        </h5>
+                                        <h6> Game Designer</h6>
+                                        <p><img src="assets/img/mapicon.svg"> Brizzle</p>
+                                        <p class="cant-work"><i class="bi bi-circle-fill" style="font-size: 10px;"></i> Not available</p>
+                                    </div>
+                                </div>
+
+                                <p></p>
+                                <div class="lineheightjob">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <img class="grad-preview-images" src="./assets/img/jamie-profile-img/stealthvr.jpg">
+                                        </div>
+                                        <div class="col-6">
+                                            <img class="grad-preview-images" src="./assets/img/jamie-profile-img/speedrunning.jpg">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="job-footer">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <a href="">View more details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--end of porfolio block-->
+
+                        <!--Block for portfolio preview-->
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6  col-sm-12 ">
+                            <div class="jobblock">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4 col-4">
+                                        <div class="filter-center">
+                                            <img src="https://github.com/mdo.png" alt="mdo" width="85px" height="85px" class="rounded-circle">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8 col-sm-8 col-8 grad-preview">
+                                        <h5>
+                                            <Strong>Jamie Lamb</Strong>
+                                        </h5>
+                                        <h6> Game Designer</h6>
+                                        <p><img src="assets/img/mapicon.svg"> Cardiff</p>
+                                        <p class="can-work"><i class="bi bi-circle-fill" style="font-size: 10px;"></i> Available for work</p>
+                                    </div>
+                                </div>
+
+                                <p></p>
+                                <div class="lineheightjob">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <img class="grad-preview-images" src="./assets/img/jamie-profile-img/stealthvr.jpg">
+                                        </div>
+                                        <div class="col-6">
+                                            <img class="grad-preview-images" src="./assets/img/jamie-profile-img/speedrunning.jpg">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="job-footer">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <a href="">View more details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end of porfolio block-->
+                    </div>
+
+                </div>
+
             </div>
-          <div class="col-lg-6 col-md-4 col-sm-6 col-5 d-lg-none d-md-block">
-            <button onClick="showSidebarFilter()" class="Button-Social float-right"><u>Filters</u></button>
-          </div>
-          
-            
-          
-          
-        </div>
-      
-      
-      <div class="row">
-       <!--Block for portfolio preview-->
-       <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6  col-sm-12 ">
-        <div class="jobblock">
-          <div class="row">
-          <div class="col-5">
-            <div class="filter-center ">
-              <img src="assets/img/jamie-profile-img/video.jpg" alt="mdo" width="85px" height="85px" class="rounded-circle ">
-            </div> 
-          </div>
-          
-        <div class="col-7 grad-preview">
-          <h5><Strong>Rod Dickinson</Strong></h5>
-          <h6> Game Designer</h6>
-          <p><img src="assets/img/mapicon.svg">  Brizzle</p>
-          <p class="cant-work"><i class="bi bi-circle-fill" style= "font-size: 10px;"></i> Not available</p>
-          </div>
-        </div>
-        
-        <p></p>
-        <div class="lineheightjob">
-          <div class="row">
-            <div class="col-6">
-            <img class="grad-preview-images" src="./assets/img/jamie-profile-img/stealthvr.jpg">
-          </div>
-          <div class="col-6">
-            <img class="grad-preview-images" src="./assets/img/jamie-profile-img/speedrunning.jpg">
-          </div>
-      </div>
         </div>
 
-        <div class="job-footer">
-            <div class="row">
-              <div class="col-12">
-                <a href="">View more details</a>
-              </div>
-            </div>
-        </div>
-      </div>
-      </div>
-    
-     <!--end of porfolio block-->
+    </section>
 
-      <!--Block for portfolio preview-->
-      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6  col-sm-12 ">
-        <div class="jobblock">
-          <div class="row">
-          <div class="col-md-4 col-sm-4 col-4">
-            <div class="filter-center">
-              <img src="https://github.com/mdo.png" alt="mdo" width="85px" height="85px" class="rounded-circle">
-            </div> 
-          </div>
-          
-        <div class="col-md-8 col-sm-8 col-8 grad-preview">
-          <h5><Strong>Jamie Lamb</Strong></h5>
-          <h6> Game Designer</h6>
-          <p><img src="assets/img/mapicon.svg">  Cardiff</p>
-          <p class="can-work"><i class="bi bi-circle-fill" style= "font-size: 10px;"></i> Available for work</p>
-          </div>
-        </div>
-        
-        <p></p>
-        <div class="lineheightjob">
-          <div class="row">
-            <div class="col-6">
-            <img class="grad-preview-images" src="./assets/img/jamie-profile-img/stealthvr.jpg">
-          </div>
-          <div class="col-6">
-            <img class="grad-preview-images" src="./assets/img/jamie-profile-img/speedrunning.jpg">
-          </div>
-      </div>
-        </div>
-
-        <div class="job-footer">
-            <div class="row">
-              <div class="col-12">
-                <a href="">View more details</a>
-              </div>
-            </div>
-        </div>
-      </div>
-      </div>
-      <!--end of porfolio block-->
-        <!--Block for portfolio preview-->
-        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6  col-sm-12 ">
-          <div class="jobblock">
-            <div class="row">
-            <div class="col-5">
-              <div class="filter-center ">
-                <img src="assets/img/jamie-profile-img/video.jpg" alt="mdo" width="85px" height="85px" class="rounded-circle ">
-              </div> 
-            </div>
-            
-          <div class="col-7 grad-preview">
-            <h5><Strong>Rod Dickinson</Strong></h5>
-            <h6> Game Designer</h6>
-            <p><img src="assets/img/mapicon.svg">  Brizzle</p>
-            <p class="cant-work"><i class="bi bi-circle-fill" style= "font-size: 10px;"></i> Not available</p>
-            </div>
-          </div>
-          
-          <p></p>
-          <div class="lineheightjob">
-            <div class="row">
-              <div class="col-6">
-              <img class="grad-preview-images" src="./assets/img/jamie-profile-img/stealthvr.jpg">
-            </div>
-            <div class="col-6">
-              <img class="grad-preview-images" src="./assets/img/jamie-profile-img/speedrunning.jpg">
-            </div>
-        </div>
-          </div>
-  
-          <div class="job-footer">
-              <div class="row">
-                <div class="col-12">
-                  <a href="">View more details</a>
-                </div>
-              </div>
-          </div>
-        </div>
-        </div>
-      
-       <!--end of porfolio block-->
-  
-        <!--Block for portfolio preview-->
-        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6  col-sm-12 ">
-          <div class="jobblock">
-            <div class="row">
-            <div class="col-md-4 col-sm-4 col-4">
-              <div class="filter-center">
-                <img src="https://github.com/mdo.png" alt="mdo" width="85px" height="85px" class="rounded-circle">
-              </div> 
-            </div>
-            
-          <div class="col-md-8 col-sm-8 col-8 grad-preview">
-            <h5><Strong>Jamie Lamb</Strong></h5>
-            <h6> Game Designer</h6>
-            <p><img src="assets/img/mapicon.svg">  Cardiff</p>
-            <p class="can-work"><i class="bi bi-circle-fill" style= "font-size: 10px;"></i> Available for work</p>
-            </div>
-          </div>
-          
-          <p></p>
-          <div class="lineheightjob">
-            <div class="row">
-              <div class="col-6">
-              <img class="grad-preview-images" src="./assets/img/jamie-profile-img/stealthvr.jpg">
-            </div>
-            <div class="col-6">
-              <img class="grad-preview-images" src="./assets/img/jamie-profile-img/speedrunning.jpg">
-            </div>
-        </div>
-          </div>
-  
-          <div class="job-footer">
-              <div class="row">
-                <div class="col-12">
-                  <a href="">View more details</a>
-                </div>
-              </div>
-          </div>
-        </div>
-        </div>
-        <!--end of porfolio block-->
-    </div>
-     
-      </div>
-       
-      
-    </div>
-    <div class="filter-mobile-nav ">
-      <div class="row">
-        <div class="col-lg-3 col-md-12 col-sm-12 col-12 content-blocks ">
-          <div class="row">
-            <div class="col-12">
-              <button type="button" class="btn-close filter-close-button" onclick="hideSidebarFilter()" aria-label="Close"></button>
-            </div>
-            <div class="col-3">
-              <h2>Filters</h2>
-            </div>
-            <div class="col-9">
-              <p class="underline-filters">Reset all </p> 
-            </div>
-            <div class="col-12">
-              <p class="project-showcase-text"> KEYWORD SEARCH</p>
-            </div>
-            <div class="col-12">
-              <input type="text" placeholder="Search Keyword..." class="filter-input">
-            </div>
-            <div class="gap"></div>
-            <div class="col-12">
-              <p class="project-showcase-text"> LOCATION</p>
-            </div>
-            <div class="col-12">
-              <input type="text" placeholder="Enter Location..." class="filter-input">
-            </div>
-            <div class="gap"></div>
-            <div class="col-12">
-              <p class="project-showcase-text"> AVAILABILITY</p>
-            </div>
-            <div class="col-12 form-check form-switch filter-indent-switch">
-              <input class="form-check-input form-check-input-profile" type="checkbox" id="show-available-switch">
-              <label class="form-check-label form-check-label-profile" for="show-available-switch">Show available only</label> 
-            </div> 
-            <div class="gap"></div>
-            <div class="col-12">
-              <p class="project-showcase-text">SKILLS CATEGORIES</p>
-            </div>
-            <div class="col-12">
-              <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="three-d-heading">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      <input class="form-check-input filter-checkbox" type="checkbox" value="" id="three-d-tab"> 3D Design
-                    </button>
-                  </h2>
-                  <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="three-d-heading" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="interior-design-check">   Interior design</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="model-design-check">  Model Creation</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="set-design-check">  Set Design</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="three-d-check">  3D Printing</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="computer-animation-heading">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      <input class="form-check-input filter-checkbox" type="checkbox" value="" id="computer-animation-tab">Computer Animation
-                    </button>
-                  </h2>
-                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="computer-animation-heading" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="twod-animation-check">   2D Animation</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="threed-animation-check">  3D Animation</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="threed-modeling-check"> 3D Modeling</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="compositing-check">  Compositing</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="infographic-check">   Infographics</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="motion-graphics-check">  Motion Graphics</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="stop-motion-check">  Stop Motion Animation</p>
-                      
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="fashion-heading">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      <input class="form-check-input filter-checkbox" type="checkbox" value="" id="fashion-tab">Fashion
-                    </button>
-                  </h2>
-                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="fashion-heading" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="clothing-production-check">   Clothing production</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="fashion-design-check">  Fashion Design</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="threed-modeling-check"> T-Shirt design</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="graphics-design-heading">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
-                      <input class="form-check-input filter-checkbox" type="checkbox" value="" id="graphics-tab">Graphics Design
-                    </button>
-                  </h2>
-                  <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="brand-design-check">Brand Design</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="concept-art-check">  Concept art</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="illustration-check"> Illustration</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="logo-design-check">Logo Design</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="photoshop-check">  Photoshop</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="storyboarding-check"> Storyboarding</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="graphics-design-heading">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
-                      <input class="form-check-input filter-checkbox" type="checkbox" value="" id="muisc-sound-tab">Music & Sound
-                    </button>
-                  </h2>
-                  <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="Music and sound" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="audi-editing-check">Audio recording and editing</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="boom-operator-check">  Boom operator</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="dj-check"> DJ</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="dubbing-check">Dubbing/Subtitles</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="live-performance-check">  Live performance</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="podcasting-check"> Podcasting</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="radio-check">Radio</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="sound-effcts-check">  Sound effects</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="sound-engineer-check"> Sound engineer</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="performance-heading">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree">
-                      <input class="form-check-input filter-checkbox" type="checkbox" value="" id="muisc-sound-tab">Performance
-                    </button>
-                  </h2>
-                  <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="Music and sound" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="acting-check">Acting</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="ballet-check"> Ballet</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="burlesque-check"> Burlesque</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="circus-check">Circus</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="clowning-check">  Clowning</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="directing-check"> Directing</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="drag-check">Drag</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="improv-check">  Improv</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="interpretive-dance-check"> Interpretive dance</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="modern-dance-check"> Modern dance</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="performance-art-check">Performance art</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="stage-manage-check">  Stage management & production management</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="stand-up-check"> stand up comedy</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="workshops-check"> Workshops</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="Photography-heading">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseThree">
-                      <input class="form-check-input filter-checkbox" type="checkbox" value="" id="muisc-sound-tab">Photography
-                    </button>
-                  </h2>
-                  <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="Photography" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="event-photography-check">Event photography</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="documentart-check"> Documentary photography</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="pet-check"> Pet photography</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="photo-editing-check">Photo editing</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="portrait-check">  Portrait photography</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="wildlife-check"> Wildlife photography</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="video-heading">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseThree">
-                      <input class="form-check-input filter-checkbox" type="checkbox" value="" id="muisc-sound-tab">Video & Film production
-                    </button>
-                  </h2>
-                  <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="Video" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="ariel-drone-check">Ariel Drone</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="directing-video-check"> Directing</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="lighting-artist-check"> Lighting artist</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="producer-check">Producer</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="runner-check">  Runner</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="scripting-check"> Scripting</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="video-editing-check">  Video Editing</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="videoraphy-check"> Videography</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="video-games-heading">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseThree">
-                      <input class="form-check-input filter-checkbox" type="checkbox" value="" id="video-games-tab">Video & Film production
-                    </button>
-                  </h2>
-                  <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="Video" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="blueprint-check">Blueprint-design</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="c-plus-check"> C++</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="c-sharp-check"> C#</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="games-design-check">Games Design</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="level-design-check">  Level Design</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="qa-testong-check"> QA Testing</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="unity-check">  Unity</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="unreal-check"> Unreal 4/5</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="vr-check"> Virtual Reality</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="visual-effects-heading">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTen" aria-expanded="false" aria-controls="collapseThree">
-                      <input class="form-check-input filter-checkbox" type="checkbox" value="" id="visual-effects-tab">Vsiual Effects
-                    </button>
-                  </h2>
-                  <div id="collapseTen" class="accordion-collapse collapse" aria-labelledby="visual-effects" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="motion-graphics-check">Motion Graphics</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="porcedual-modeling-check"> Procedural modeling</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="rotorscoping-check"> Rotorscoping</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="simulation-check">Simulation</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="texturing-check"> Texturing</p>
-                      
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="wev-dev-heading">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEleven" aria-expanded="false" aria-controls="collapseThree">
-                      <input class="form-check-input filter-checkbox" type="checkbox" value="" id="web-dev-tab">Web Development 
-                    </button>
-                  </h2>
-                  <div id="collapseEleven" class="accordion-collapse collapse" aria-labelledby="web-dev" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="ui-check">UI/UX Design</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="web-design-check"> Website design</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="web-dev-check">Website production</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="seo-check"> Search engine optimisation (SEO)</p>
-                      
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="writing-heading">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseThree">
-                      <input class="form-check-input filter-checkbox" type="checkbox" value="" id="writing-tab">Writing & Copy
-                    </button>
-                  </h2>
-                  <div id="collapseTwelve" class="accordion-collapse collapse" aria-labelledby="writing" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="blogs-check">Blogs</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="copy-check"> Copywriting and proofing</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="creative-writing-check"> Creative writing</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="jounalism-check">Journalism</p>
-                      <p class="filter-indent"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="script-check"> Script writing</p>
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-      </div>
-    </div>  
-    </div>
- 
-
-  
-</section>
-
-
-<span id="signinmodal">
+    <span id="signinmodal">
   <!--Import sign in modal-->
 </span>
 
-<footer id="footer" class="mt-auto">
-  <!-- imports footer from src/footer.html -->
-</footer>
+    <footer id="footer" class="mt-auto">
+        <!-- imports footer from src/footer.html -->
+    </footer>
 
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- custom JS -->
+    <script src="scripts/app.bundle.js"></script>
 
-  
+    <script>
+        //step 1 validaiton
+        
+          // Fetch the forms we want to apply custom Bootstrap validation styles to
+          const myForm = document.querySelector('.test-form');
+        
+          const modal1 = document.querySelector('#submit1');
+          // const forenameInput = document.querySelector('#validationCustom01');
+          const modalStep1 = new bootstrap.Modal(document.querySelector('#step1'));
+          const modalStep2 = new bootstrap.Modal(document.querySelector('#step2'));
+        
+          // Loop over them and prevent submission
+          modal1.addEventListener('click', function (event) {
+            console.log("modal 1 submit clicked");
+            if (!myForm.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+              console.log("modal 1 was-NOT-validated");
+            }
+            else {
+              console.log("modal 1 was-validated");
+              modalStep1.hide();
+              modalStep2.show();
+            }
+            myForm.classList.add('was-validated');
+          }, false)
+        
+        
+          //step 2 validation
+          
+          // Fetch the forms we want to apply custom Bootstrap validation styles to
+          const myForm1 = document.querySelector('.test-form1');
+        
+          const modal2 = document.querySelector('#submit2');
+          const modalStep3 = new bootstrap.Modal(document.querySelector('#step3'));
+        
+          // Loop over them and prevent submission
+          modal2.addEventListener('click', function (event) {
+            console.log("modal 2 submit clicked");
+            if (!myForm1.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+              console.log("modal 2 was-NOT-validated");
+            }
+            else {
+              console.log("modal 2 was-validated");
+              modalStep2.hide();
+              modalStep3.show();
+            }
+            myForm1.classList.add('was-validated');
+          }, false)
+        
+        //Help form
+          // Fetch the forms we want to apply custom Bootstrap validation styles to
+          const helpForm = document.querySelector('.test-form2');
+        
+          const modalHelpButton = document.querySelector('#submit3');
+          const modalHelp = new bootstrap.Modal(document.querySelector('#help'));
+        
+          // Loop over them and prevent submission
+          modalHelpButton.addEventListener('click', function (event) {
+            console.log("modal help submit clicked");
+            if (!helpForm.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+              console.log("modal help was-NOT-validated");
+            }
+            else {
+              console.log("modal help was-validated");
+              modalHelp.hide();
+              // modalStep3.show();
+            }
+            helpForm.classList.add('was-validated');
+          }, false)
+    </script>
+    <script>
+        function showSidebarFilter(){
+          document.querySelector(".filter-mobile-nav").style.display = "block";
+          //document.querySelector(".container").style.backgroundcolour = "rgba(0, 0, 0, 0.6)";
+          }
+        
+          function hideSidebarFilter(){
+          document.querySelector(".filter-mobile-nav").style.display = "none";
+        
+          }
+    </script>
 
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<!-- custom JS -->
-<script src="scripts/app.bundle.js"></script>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        
+          // Fetch the forms we want to apply custom Bootstrap validation styles to
+         /* const myForm1 = document.querySelector('.test-form1');
+        
+          // Loop over them and prevent submission
+          myForm1.addEventListener('submit', function (event) {
+            if (!myForm1.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+        
+            myForm1.classList.add('was-validated')
+          }, false)*/
+    </script>
 
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        
+          // Fetch the forms we want to apply custom Bootstrap validation styles to
+         /* const myForm2 = document.querySelector('.test-form2');
+        
+          // Loop over them and prevent submission
+          myForm2.addEventListener('submit', function (event) {
+            if (!myForm2.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+        
+            myForm2.classList.add('was-validated')
+          }, false)*/
+    </script>
 
-<script>
-
-  //step 1 validaiton
-
-  // Fetch the forms we want to apply custom Bootstrap validation styles to
-  const myForm = document.querySelector('.test-form');
-
-  const modal1 = document.querySelector('#submit1');
-  // const forenameInput = document.querySelector('#validationCustom01');
-  const modalStep1 = new bootstrap.Modal(document.querySelector('#step1'));
-  const modalStep2 = new bootstrap.Modal(document.querySelector('#step2'));
-
-  // Loop over them and prevent submission
-  modal1.addEventListener('click', function (event) {
-    console.log("modal 1 submit clicked");
-    if (!myForm.checkValidity()) {
-      event.preventDefault();
-      event.stopPropagation();
-      console.log("modal 1 was-NOT-validated");
-    }
-    else {
-      console.log("modal 1 was-validated");
-      modalStep1.hide();
-      modalStep2.show();
-    }
-    myForm.classList.add('was-validated');
-  }, false)
-
-
-  //step 2 validation
-  
-  // Fetch the forms we want to apply custom Bootstrap validation styles to
-  const myForm1 = document.querySelector('.test-form1');
-
-  const modal2 = document.querySelector('#submit2');
-  const modalStep3 = new bootstrap.Modal(document.querySelector('#step3'));
-
-  // Loop over them and prevent submission
-  modal2.addEventListener('click', function (event) {
-    console.log("modal 2 submit clicked");
-    if (!myForm1.checkValidity()) {
-      event.preventDefault();
-      event.stopPropagation();
-      console.log("modal 2 was-NOT-validated");
-    }
-    else {
-      console.log("modal 2 was-validated");
-      modalStep2.hide();
-      modalStep3.show();
-    }
-    myForm1.classList.add('was-validated');
-  }, false)
-
-//Help form
-  // Fetch the forms we want to apply custom Bootstrap validation styles to
-  const helpForm = document.querySelector('.test-form2');
-
-  const modalHelpButton = document.querySelector('#submit3');
-  const modalHelp = new bootstrap.Modal(document.querySelector('#help'));
-
-  // Loop over them and prevent submission
-  modalHelpButton.addEventListener('click', function (event) {
-    console.log("modal help submit clicked");
-    if (!helpForm.checkValidity()) {
-      event.preventDefault();
-      event.stopPropagation();
-      console.log("modal help was-NOT-validated");
-    }
-    else {
-      console.log("modal help was-validated");
-      modalHelp.hide();
-      // modalStep3.show();
-    }
-    helpForm.classList.add('was-validated');
-  }, false)
-
-</script>
-<script>
-  function showSidebarFilter(){
-  document.querySelector(".filter-mobile-nav").style.display = "block";
-  //document.querySelector(".container").style.backgroundcolour = "rgba(0, 0, 0, 0.6)";
-  }
-
-  function hideSidebarFilter(){
-  document.querySelector(".filter-mobile-nav").style.display = "none";
-
-  }
-</script>
-
-
-<script>
-  // Example starter JavaScript for disabling form submissions if there are invalid fields
-
-  // Fetch the forms we want to apply custom Bootstrap validation styles to
- /* const myForm1 = document.querySelector('.test-form1');
-
-  // Loop over them and prevent submission
-  myForm1.addEventListener('submit', function (event) {
-    if (!myForm1.checkValidity()) {
-      event.preventDefault()
-      event.stopPropagation()
-    }
-
-    myForm1.classList.add('was-validated')
-  }, false)*/
-
-</script>
-
-<script>
-  // Example starter JavaScript for disabling form submissions if there are invalid fields
-
-  // Fetch the forms we want to apply custom Bootstrap validation styles to
- /* const myForm2 = document.querySelector('.test-form2');
-
-  // Loop over them and prevent submission
-  myForm2.addEventListener('submit', function (event) {
-    if (!myForm2.checkValidity()) {
-      event.preventDefault()
-      event.stopPropagation()
-    }
-
-    myForm2.classList.add('was-validated')
-  }, false)*/
-
-</script>
-
-<!-- event listeners -->
-<script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous"></script>
+    <!-- event listeners -->
+    <script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous"></script>
 </body>
