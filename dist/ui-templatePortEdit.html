@@ -349,8 +349,12 @@
               <div class="input-field form-group">
                 <label class="active">Add images of your work
                 </label>
-                <div class="input-images-1" id="image-uploader" style="padding-top: .5rem;">
-                </div>
+                <form method="POST" name="form-example-1" id="form-example-1" enctype="multipart/form-data">
+                  <div class="input-field">
+                    <div class="input-images" id="image-uploader" style="padding-top: .5rem;">
+                    </div>
+                  </div>
+               </form>
               </div>
             </form>
           </div>
@@ -402,9 +406,11 @@
               <div class="gap">
               </div>
               <input type="file" id="image-input" accept="image/jpeg, image/png, image/jpg">
+              <p class="delete-text text-center">Remove picture</p>
               <!--Need a remove button-->
             </div>
             <div class="col-md-4 col-sm-12">
+              
             </div>
           </div>
         </div>
@@ -1118,7 +1124,7 @@
 <script type="text/javascript" src="./image-uploader/image-uploader.min.js">
 </script>
 <script>
-  $('.input-images-1').imageUploader({
+  $('.input-images').imageUploader({
     extensions: ['.jpg', '.jpeg', '.png', '.gif'],
     mimes: ['image/jpeg', 'image/png', 'image/gif'],
     maxSize: 5 * 1024 * 1024,

@@ -475,6 +475,7 @@ h5{
 	text-decoration-line: underline;
 	color: #E41B1F;
 	margin-top: 25px;
+	cursor: pointer;
   }
 
   .warning-border{
