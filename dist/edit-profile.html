@@ -190,7 +190,7 @@
           </div>
           <div class="col-4 col-sm-4 col-md-4 col-lg-4 d-grid ">
             <!-- <button class="btn btn-primary btn-lg btn-block" >Add projects</button> -->
-            <i class="bi bi-plus-square text-right" data-bs-toggle="modal" data-bs-target="#addProject" width="24px" height="24px"></i>
+            <i class="bi bi-plus-square text-right" data-bs-toggle="modal" data-bs-target="#editProject" width="24px" height="24px"></i>
           </div>
          
         <div class="container">
@@ -294,66 +294,6 @@
           
 
 
-<!--MessageModal Add Project-->
-<div class="modal fade" id="addProject" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-centered">
-    <div class="modal-content modalcontentleft">
-      
-        <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Project title</h2>
-        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div class="row">
-          
-          <form class="row g-3 needs-validation Add-Project" novalidate>
-            <p class="project-showcase-text">PROJECT DETAILS</p> 
-            <div class=" col-lg-6 col-md-12 col-sm-12">
-              <label for="Add-Project" class="form-label">Project name*</label>
-              <input type="text" class="form-control" id="Add-project-Name" required>
-              <div class="invalid-feedback">
-                  Please add the project name 
-                </div>
-            </div>
-
-            <!--This is for the genral message-->
-            <div class="col-md-12" id="general-message">
-              <label for="Add-project-Description" class="form-label">Description*</label>
-              <textarea type="text" class="form-control" id="Add-project-Description" rows="4" required></textarea>
-              <div class="invalid-feedback">
-                  Please tell us about the job
-                </div>
-            </div>
-            <div class="gap"></div>
-            <p class="project-showcase-text">PHOTO GALLERY</p> 
-            <div class="col-sm-12">
-              <form class="add-profile">
-              
-                <div class="existing-images"></div>
-                <div class="input-field form-group">
-                    <label class="active">Add images of your work</label>
-                    <div class="input-images-1" id="image-uploader" style="padding-top: .5rem;"></div>
-                </div>
-                
-                </form>
-            </div>
-
-            <div class="gap"></div>
-          
-            <div class="gap"></div>
-            <div class="col-12 warning-border">
-              <p><i class="fa-solid fa-triangle-exclamation"></i>  Before publishing the project, make sure you hold required copyright and publication rights. </p>
-            </div>
-            
-            <div class="col-12">
-              <div class="set-content-right gap">
-                <button type="button" class="btn btn-secondary btn-lg btn-block apply-btn"  data-bs-dismiss="modal" >Cancel</button>
-                <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"    id="Add-Project-Submit">Submit</button>
-             </div>
-            </div>
-            
-            </form>
-          </div>
-       </div>
-    </div>
-</div>
            
   
 
@@ -865,85 +805,83 @@
 </div>
 
 
-<!--MessageModal edit Project-->
-<div class="modal fade" id="editProject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--Modal add or edit folio project-->
+<div class="modal fade" id="editProject" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modalcontentleft">
-      
-        <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Edit Project</h2>
-        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+      <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Edit Project
+      </h2>
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
+      </button>
+      <p class="project-showcase-text">PROJECT DETAILS
+      </p>
+      <form class="needs-validation edit-project-form" novalidate>
         <div class="row">
-          
-          <form class="row g-3 needs-validation edit-project-form" novalidate>
-            <p class="project-showcase-text">PROJECT DETAILS</p> 
-            <div class=" col-lg-6 col-md-12 col-sm-12">
-              <label for="editProject" class="form-label">Project name*</label>
-              <input type="text" maxlength="40" class="form-control" id="editProject" required>
-              <div class="invalid-feedback">
-                  Please add the project name 
-                </div>
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <label for="folio-project-title" class="form-label">Project name*
+            </label>
+            <input type="text" maxlength="40" class="form-control" id="folio-project-title" required>
+            <div class="invalid-feedback">
+              Please add the project name
             </div>
-
-            <!--This is for the genral message-->
-            <div class="col-md-12" id="Description-Edit">
-              <label for="Description-Edit" class="form-label">Description</label>
-              <textarea type="text" maxlength="500" class="form-control" rows="4" required></textarea>
-              <div class="invalid-feedback">
-                
-                  Please tell us about the work
-                </div>
-                <small id="passwordHelpBlock" class="form-text text-muted">
-                  Max 500 charachters
-                </small>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <label for="folio-project-link" class="form-label">Project Link
+            </label>
+            <input type="text" class="form-control" id="folio-project-link">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label for="folio-project-description" class="form-label">Description
+            </label>
+            <textarea type="text" maxlength="500" class="form-control" id="folio-project-description" rows="4">
+            </textarea>
+            <div class="invalid-feedback">
+              Please tell us about the work
             </div>
-            <div class="gap"></div>
-            <p class="project-showcase-text">PHOTO GALLERY</p> 
-            <div class="col-sm-12">
-              <form class="add-profile">
-              
-                <div class="existing-images"></div>
-                <div class="input-field form-group">
-                    <label class="active">Add images of your work</label>
-                    <div class="input-images-1" id="image-uploader" style="padding-top: .5rem;"></div>
-                </div>
-                
-                </form>
+            <small id="passwordHelpBlock" class="form-text text-muted">
+              Max 500 charachters
+            </small>
+          </div>
+          <p class="project-showcase-text mt-5">PHOTO GALLERY
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="existing-images">
             </div>
-
-            <div class="gap"></div>
-          
-            <div class="gap"></div>
-            <div class="col-12 warning-border">
-              <p><i class="fa-solid fa-triangle-exclamation"></i>  Before publishing the project, make sure you hold required copyright and publication rights. </p>
-            </div>
-            
-            <div class="col-6"><p class="float-left delete-text">Delete project</p></div>
-             <div class="col-md-6 col-sm-12 col-12">
-              <div class="set-content-right gap">
-                
-                <button type="button" class="btn btn-secondary btn-lg btn-block apply-btn" data-bs-dismiss="modal" >Cancel</button>
-                <button type="button" id="submit-edit-project" class="btn btn-primary btn-lg btn-block apply-btn" >Submit</button>
-              
+            <div class="input-field form-group">
+              <label class="active">Add images of your work
+              </label>
+              <div class="input-images-1" id="image-uploader" style="padding-top: .5rem;">
               </div>
             </div>
-
-            
-            </form>
-           
-           
-  
-  
-      </div>
-    </div>
-        <!--end of propose job brief-->    
-
-          
-            
-          </form>
-
-        
-
+          </div>
         </div>
+        <div class="row">
+          <div class="col-12 warning-border mt-5">
+            <p>
+              <i class="fa-solid fa-triangle-exclamation">
+              </i> Before publishing the project, make sure you hold required copyright and publication rights. 
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <p class="float-left delete-text">Delete project
+            </p>
+          </div>
+          <div class="col-md-6 col-sm-12 col-12">
+            <div class="set-content-right gap">
+              <button type="button" class="btn btn-secondary btn-lg btn-block apply-btn" data-bs-dismiss="modal">Cancel
+              </button>
+              <button type="button" id="submit-edit-project" class="btn btn-primary btn-lg btn-block apply-btn">Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -1137,30 +1075,6 @@ function hideSocialDiv2(){
      }
     EditProject1.classList.add('was-validated');
   }, false)
-</script>
-
-<script>
-  //step 1 registration validaiton
-const AddProject1 = document.querySelector('.Add-Project');
-const AddProjectSubmit = document.querySelector('#Add-Project-Submit');
-const AddProjectModal = new bootstrap.Modal(document.querySelector('#addProject'));
-
-
-// Loop over inputs and prevent submission
-AddProjectSubmit.addEventListener('click', function (event) {
-  console.log("modal 1 submit clicked");
-  if (!AddProject1.checkValidity()) {
-    event.preventDefault();
-    event.stopPropagation();
-    console.log("modal 1 was-NOT-validated");
-  }
-   else {
-     console.log("modal 1 was-validated");
-     AddProjectModal.hide();
-  //   regModal2.show();
-   }
-   AddProject1.classList.add('was-validated');
-}, false)
 </script>
 
 <script>
