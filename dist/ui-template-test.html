@@ -28,26 +28,19 @@
 
 <section>
   <head>
-    <meta charset="utf-8">
-    <title>Multiple Image Upload with Preview and Delete jQuery Plugin</title>
-    <link href="https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.css" rel="stylesheet">
-  </head>
+  
   <body>
-    <div id="drag-drop-area"></div>
- 
-    <script src="https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.js"></script>
-    <script>
-      var uppy = Uppy.Core()
-        .use(Uppy.Dashboard, {
-          inline: true,
-          target: '#drag-drop-area'
-        })
-        .use(Uppy.Tus, {endpoint: 'https://master.tus.io/files/'}) //you can put upload URL here, where you want to upload images
- 
-      uppy.on('complete', (result) => {
-        console.log('Upload complete! We’ve uploaded these files:', result.successful)
-      })
-    </script>
+    <form method="POST" name="form-example-2" id="form-example-2" enctype="multipart/form-data">
+
+      <div class="input-field">
+          <label class="active">Photos</label>
+          <div class="input-images" style="padding-top: .5rem;"></div>
+      </div>
+
+      <button>Submit and display data</button>
+
+  </form>
+  
   </body>
 
 </section>
@@ -64,9 +57,24 @@
   <!-- imports footer from src/footer.html -->
 </footer>
 
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="dist/image-uploader.min.js"></script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/image-uploader/image-uploader.min.js">
+</script>
+<script type="text/javascript" src="/dist/image-uploader/image-uploader.min.css">
+</script>
 
   <script>
-$('.input-images-1').imageUploader();
+$('.input-images').imageUploader({ label:' Drag & Drop images here or click to browse',
+        extensions: ['.jpg', '.jpeg', '.png', '.gif'],
+        imagesInputName: 'photos',
+        mimes: ['image/jpeg', 'image/png', 'image/gif'],
+        maxSize: 5 * 1024 * 1024,
+        maxFiles: 3,});
   </script>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
