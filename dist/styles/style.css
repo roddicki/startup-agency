@@ -57,6 +57,20 @@ a:active {
 	text-decoration: none;
 }
 
+.home-header{
+
+
+	
+	font-style: normal;
+	font-weight: 700;
+	font-size: 85px;
+	line-height: 80px;
+
+
+
+color: #000000;
+}
+
 h4{
 	font-weight: 600;
 	font-size: 18px;
@@ -167,6 +181,24 @@ h5{
     position: relative;
 }
 
+.home-top{
+	margin-top: 100px;
+	margin-bottom: 50px;
+	padding-bottom: 50px;
+	padding-top:100px;
+}
+
+.about-image{
+	height: 495px;
+	width: 100%;
+
+	border-radius: 20px;
+	object-fit: cover;
+}
+
+.white-background{
+	background-color: rgb(255, 255, 255);
+}
 
 .signinclosebutton{
 	position: absolute;
