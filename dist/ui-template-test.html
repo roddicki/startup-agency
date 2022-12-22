@@ -8,15 +8,93 @@
   <link href="styles/style.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  
-  <link type="text/css" rel="stylesheet" href="http://example.com/image-uploader.min.css">
-  <script type="text/javascript" src="http://example.com/jquery.min.js"></script>
-  <script type="text/javascript" src="http://example.com/image-uploader.js"></script>
-  <link rel="stylesheet" href="dist/image-uploader.min.css">
   <link href="https://fonts.googleapis.com/css?family=Lato:300,700|Montserrat:300,400,500,600,700|Source+Code+Pro&display=swap"
         rel="stylesheet">
 
+
   <title>Startup Agency</title>
+  <style>
+    @charset "UTF-8";
+html * {
+  box-sizing: border-box;
+}
+
+p {
+  margin: 0;
+}
+
+.upload__box {
+  padding: 40px;
+}
+.upload__inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.upload__btn {
+  display: inline-block;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  min-width: 116px;
+  padding: 5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid;
+  background-color: #4045ba;
+  border-color: #4045ba;
+  border-radius: 10px;
+  line-height: 26px;
+  font-size: 14px;
+}
+.upload__btn:hover {
+  background-color: unset;
+  color: #4045ba;
+  transition: all 0.3s ease;
+}
+.upload__btn-box {
+  margin-bottom: 10px;
+}
+.upload__img-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+.upload__img-box {
+  width: 200px;
+  padding: 0 10px;
+  margin-bottom: 12px;
+}
+.upload__img-close {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  text-align: center;
+  line-height: 24px;
+  z-index: 1;
+  cursor: pointer;
+}
+.upload__img-close:after {
+  content: "✖";
+  font-size: 14px;
+  color: white;
+}
+
+.img-bg {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  padding-bottom: 100%;
+}
+  </style>
 </head>
 
 <body data-page="" class="d-flex flex-column min-vh-100">
@@ -27,20 +105,24 @@
 
 
 <section>
-  <head>
   
   <body>
-    <form method="POST" name="form-example-2" id="form-example-2" enctype="multipart/form-data">
-
-      <div class="input-field">
-          <label class="active">Photos</label>
-          <div class="input-images" style="padding-top: .5rem;"></div>
+    <h2>From https://codepen.io/mrtokachh/pen/LYGvPBj</h2>
+   <!-- partial:index.partial.html -->
+    <div class="upload__box">
+      <div class="upload__btn-box">
+        <label class="upload__btn">
+          <p>Upload images</p>
+          <input type="file" multiple data-max_length="3" accept="image/png, image/gif, image/jpeg, image/jpg" class="upload__inputfile image-upload">
+        </label>
+        <div class="invalid-feedback upload-images">
+          Please add 3 images only
+        </div>
       </div>
-
-      <button>Submit and display data</button>
-
-  </form>
-  
+      <div class="upload__img-wrap"></div>
+    </div>
+    <!-- partial -->
+    <button type="button" class="btn btn-primary save-img">Save</button>
   </body>
 
 </section>
@@ -57,37 +139,131 @@
   <!-- imports footer from src/footer.html -->
 </footer>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="dist/image-uploader.min.js"></script>
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/image-uploader/image-uploader.min.js">
-</script>
-<script type="text/javascript" src="/dist/image-uploader/image-uploader.min.css">
-</script>
-
-  <script>
-$('.input-images').imageUploader({ label:' Drag & Drop images here or click to browse',
-        extensions: ['.jpg', '.jpeg', '.png', '.gif'],
-        imagesInputName: 'photos',
-        mimes: ['image/jpeg', 'image/png', 'image/gif'],
-        maxSize: 5 * 1024 * 1024,
-        maxFiles: 3,});
-  </script>
-
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> -->
+  
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<!-- custom JS -->
+
 <script src="scripts/app.bundle.js"></script>
 <!-- event listeners -->
 <script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous"></script>
 <!-- form validation -->
 <script src="scripts/form-validation.js"></script>
-<script type="text/javascript" src="http://example.com/jquery.min.js"></script>
-<script type="text/javascript" src="http://example.com/image-uploader.js"></script>
+
+<script>
+
+const saveBtn = document.querySelector('.save-img');
+saveBtn.addEventListener('click', function(e){
+  e.preventDefault();
+  getFilePath();
+  console.log('clicked save');
+});
+
+
+// get pdf file from edit-profile modal
+function getFilePath(){
+  const fileInput = document.querySelector('.image-upload');
+  let fileList = fileInput.files;
+  console.log(fileList)
+  for (var i = 0; i < fileList.length; i++) {
+    console.log(fileList[i])
+  }
+}
+
+let maxLength = document.querySelector('.upload__box .image-upload').getAttribute('data-max_length');
+let imgWrap = "";
+let imgArray = [];
+let preloaded = ['https://picsum.photos/500/500?random=1','https://picsum.photos/500/500?random=2'];
+
+function addExistingImageFiles(){
+  const imgContainer = document.querySelector('.upload__img-wrap');
+  for (var i = 0; i < preloaded.length; i++) {
+    preloaded[i]
+    let html = "<div class='upload__img-box'><div style='background-image: url(" + preloaded[i] + ")' data-number='" + $(".upload__img-close").length + "' data-file='" + preloaded[i] + "' data-preloaded='true' class='img-bg'><div class='upload__img-close' onclick='closeThisImg(this)'></div></div></div>";
+    imgContainer.innerHTML += html;
+  }
+  console.log(maxLength, imgArray.length, preloaded.length);
+}
+
+$('.upload__inputfile').each(function () {
+  $(this).on('change', function (e) {
+    imgWrap = $(this).closest('.upload__box').find('.upload__img-wrap');
+    console.log(maxLength, imgArray.length, preloaded.length);
+
+    let files = e.target.files;
+    let filesArr = Array.prototype.slice.call(files);
+    let iterator = 0;
+    filesArr.forEach(function (f, index) {
+
+      if (!f.type.match('image.*')) {
+        return;
+      }
+
+      if (imgArray.length + preloaded.length >= maxLength) {
+        const invalid = document.querySelector('.invalid-feedback.upload-images');
+        invalid.classList.add('d-block');
+        console.log("too many images");
+        return;
+      } 
+      else {
+        let len = 0;
+        for (let i = 0; i < imgArray.length; i++) {
+          if (imgArray[i] !== undefined) {
+            len++;
+          }
+        }
+        if (len > maxLength) {
+          return false;
+        } 
+        else {
+          imgArray.push(f);
+          console.log(imgArray);
+          let reader = new FileReader();
+          reader.onload = function (e) {
+            let html = "<div class='upload__img-box'><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload__img-close").length + "' data-file='" + f.name + "' data-preloaded='false' class='img-bg'><div class='upload__img-close' onclick='closeThisImg(this)'></div></div></div>";
+            imgWrap.append(html);
+            iterator++;
+          }
+          reader.readAsDataURL(f);
+        }
+      }
+    });
+  });
+});
+
+// close this image thumbnail
+function closeThisImg(el) {
+  console.log(maxLength, imgArray.length, preloaded.length);
+  console.log($(el).parent().attr('data-preloaded'));
+  // is preloaded remove from preloaded array // delete from db
+  if ($(el).parent().attr('data-preloaded') == 'true') {
+    const url = $(el).parent().attr('data-file');
+    console.log("the index of the deleted image is", preloaded.indexOf(url));
+    preloaded.splice(preloaded.indexOf(url),1);
+  }
+  
+  if (imgArray.length + preloaded.length <= maxLength) {
+    const invalid = document.querySelector('.invalid-feedback.upload-images');
+    invalid.classList.remove('d-block');
+  }
+  let file = $(el).parent().data("file");
+  for (let i = 0; i < imgArray.length; i++) {
+    if (imgArray[i].name === file) {
+      imgArray.splice(i, 1);
+      break;
+    }
+  }
+  $(el).parent().parent().remove();
+
+  console.log("new lengths ", maxLength, imgArray.length, preloaded.length);
+}
+
+addExistingImageFiles();
+
+
+</script>
 
 
 </body>
