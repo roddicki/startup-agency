@@ -130,6 +130,22 @@ h5{
 	margin-right: 20px;
 }
 
+.btn-no-background{
+	background-color: white;
+	color: none;
+	border: none;
+	 margin-top: 0px !important;
+	
+}
+
+.btn-delete-account{
+	background-color: #f70000;
+	color: rgb(255, 255, 255);
+	border:  2px solid #000;
+	float: right;
+	
+}
+
 .modal-content{
 	display: flex;
 	flex-direction: column;
@@ -1259,10 +1275,7 @@ footer {
 
 
 
-.btn-delete-account{
-	background-color: #f70000;
-	color: rgb(255, 255, 255);
-}
+
 
 .carousel-thumbnail-size{
 	width:170px;
@@ -1286,5 +1299,7 @@ footer {
 	
 	border-radius: 10px !important;
 }
+
+
 
 
