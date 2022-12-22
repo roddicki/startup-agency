@@ -14,14 +14,6 @@
 
   <title>Startup Agency</title>
   <style>
-    @charset "UTF-8";
-html * {
-  box-sizing: border-box;
-}
-
-p {
-  margin: 0;
-}
 
 .upload__box {
   padding: 40px;
@@ -34,27 +26,7 @@ p {
   position: absolute;
   z-index: -1;
 }
-.upload__btn {
-  display: inline-block;
-  font-weight: 600;
-  color: #fff;
-  text-align: center;
-  min-width: 116px;
-  padding: 5px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  border: 2px solid;
-  background-color: #4045ba;
-  border-color: #4045ba;
-  border-radius: 10px;
-  line-height: 26px;
-  font-size: 14px;
-}
-.upload__btn:hover {
-  background-color: unset;
-  color: #4045ba;
-  transition: all 0.3s ease;
-}
+
 .upload__btn-box {
   margin-bottom: 10px;
 }
@@ -111,10 +83,10 @@ p {
    <!-- partial:index.partial.html -->
     <div class="upload__box">
       <div class="upload__btn-box">
-        <label class="upload__btn">
-          <p>Upload images</p>
-          <input type="file" multiple data-max_length="3" accept="image/png, image/gif, image/jpeg, image/jpg" class="upload__inputfile image-upload">
-        </label>
+        <label for="modal-image-uploader" class="upload__btn form-label btn btn-primary">Upload images</label>
+         <!--  <p>Upload images</p> -->
+          <input type="file" multiple data-max_length="3" accept="image/png, image/gif, image/jpeg, image/jpg" id="modal-image-uploader" class="upload__inputfile image-upload form-control">
+        
         <div class="invalid-feedback upload-images">
           Please add 3 images only
         </div>
@@ -177,6 +149,7 @@ let imgWrap = "";
 let imgArray = [];
 let preloaded = ['https://picsum.photos/500/500?random=1','https://picsum.photos/500/500?random=2'];
 
+// add existing image files
 function addExistingImageFiles(){
   const imgContainer = document.querySelector('.upload__img-wrap');
   for (var i = 0; i < preloaded.length; i++) {
@@ -187,6 +160,7 @@ function addExistingImageFiles(){
   console.log(maxLength, imgArray.length, preloaded.length);
 }
 
+// image uploader
 $('.upload__inputfile').each(function () {
   $(this).on('change', function (e) {
     imgWrap = $(this).closest('.upload__box').find('.upload__img-wrap');
