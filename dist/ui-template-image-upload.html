@@ -11,61 +11,11 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:300,700|Montserrat:300,400,500,600,700|Source+Code+Pro&display=swap"
         rel="stylesheet">
 
-
+  <link href="image-uploader/image-uploader.css" rel="stylesheet">      
   <title>Startup Agency</title>
   <style>
 
-.upload__box {
-  padding: 40px;
-}
-.upload__inputfile {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
 
-.upload__btn-box {
-  margin-bottom: 10px;
-}
-.upload__img-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 -10px;
-}
-.upload__img-box {
-  width: 200px;
-  padding: 0 10px;
-  margin-bottom: 12px;
-}
-.upload__img-close {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.5);
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  text-align: center;
-  line-height: 24px;
-  z-index: 1;
-  cursor: pointer;
-}
-.upload__img-close:after {
-  content: "✖";
-  font-size: 14px;
-  color: white;
-}
-
-.img-bg {
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  position: relative;
-  padding-bottom: 100%;
-}
   </style>
 </head>
 
@@ -78,24 +28,24 @@
 
 <section>
   
-  <body>
-    <h2>From https://codepen.io/mrtokachh/pen/LYGvPBj</h2>
-   <!-- partial:index.partial.html -->
+
+  <h2>From https://codepen.io/mrtokachh/pen/LYGvPBj</h2>
+   
+   <!-- image uploader -->
     <div class="upload__box">
       <div class="upload__btn-box">
         <label for="modal-image-uploader" class="upload__btn form-label btn btn-primary">Upload images</label>
          <!--  <p>Upload images</p> -->
-          <input type="file" multiple data-max_length="3" accept="image/png, image/gif, image/jpeg, image/jpg" id="modal-image-uploader" class="upload__inputfile image-upload form-control">
-        
+        <input type="file" multiple data-max_length="3" accept="image/png, image/gif, image/jpeg, image/jpg" id="modal-image-uploader" class="upload__inputfile image-upload form-control">
         <div class="invalid-feedback upload-images">
           You can only add 3 images per project showcase
         </div>
       </div>
       <div class="upload__img-wrap"></div>
     </div>
-    <!-- partial -->
+    <!-- image uploader -->
+
     <button type="button" class="btn btn-primary save-img">Save</button>
-  </body>
 
 </section>
 
@@ -123,6 +73,8 @@
 <script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous"></script>
 <!-- form validation -->
 <script src="scripts/form-validation.js"></script>
+<!-- image uploader -->
+<script src="image-uploader/image-uploader.js"></script>
 
 <script>
 
@@ -144,97 +96,9 @@ function getFilePath(){
   }
 }
 
-let maxLength = document.querySelector('.upload__box .image-upload').getAttribute('data-max_length');
-let imgWrap = "";
-let imgArray = [];
-let preloaded = ['https://picsum.photos/500/500?random=1','https://picsum.photos/500/500?random=2'];
 
-// add existing image files
-function addExistingImageFiles(){
-  const imgContainer = document.querySelector('.upload__img-wrap');
-  for (var i = 0; i < preloaded.length; i++) {
-    preloaded[i]
-    let html = "<div class='upload__img-box'><div style='background-image: url(" + preloaded[i] + ")' data-number='" + $(".upload__img-close").length + "' data-file='" + preloaded[i] + "' data-preloaded='true' class='img-bg'><div class='upload__img-close' onclick='closeThisImg(this)'></div></div></div>";
-    imgContainer.innerHTML += html;
-  }
-  console.log(maxLength, imgArray.length, preloaded.length);
-}
 
-// image uploader
-$('.upload__inputfile').each(function () {
-  $(this).on('change', function (e) {
-    imgWrap = $(this).closest('.upload__box').find('.upload__img-wrap');
-    console.log(maxLength, imgArray.length, preloaded.length);
 
-    let files = e.target.files;
-    let filesArr = Array.prototype.slice.call(files);
-    let iterator = 0;
-    filesArr.forEach(function (f, index) {
-
-      if (!f.type.match('image.*')) {
-        return;
-      }
-
-      if (imgArray.length + preloaded.length >= maxLength) {
-        const invalid = document.querySelector('.invalid-feedback.upload-images');
-        invalid.classList.add('d-block');
-        console.log("too many images");
-        return;
-      } 
-      else {
-        let len = 0;
-        for (let i = 0; i < imgArray.length; i++) {
-          if (imgArray[i] !== undefined) {
-            len++;
-          }
-        }
-        if (len > maxLength) {
-          return false;
-        } 
-        else {
-          imgArray.push(f);
-          console.log(imgArray);
-          let reader = new FileReader();
-          reader.onload = function (e) {
-            let html = "<div class='upload__img-box'><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload__img-close").length + "' data-file='" + f.name + "' data-preloaded='false' class='img-bg'><div class='upload__img-close' onclick='closeThisImg(this)'></div></div></div>";
-            imgWrap.append(html);
-            iterator++;
-          }
-          reader.readAsDataURL(f);
-        }
-      }
-    });
-  });
-});
-
-// close this image thumbnail
-function closeThisImg(el) {
-  console.log(maxLength, imgArray.length, preloaded.length);
-  console.log($(el).parent().attr('data-preloaded'));
-  // is preloaded remove from preloaded array // delete from db
-  if ($(el).parent().attr('data-preloaded') == 'true') {
-    const url = $(el).parent().attr('data-file');
-    console.log("the index of the deleted image is", preloaded.indexOf(url));
-    preloaded.splice(preloaded.indexOf(url),1);
-  }
-  
-  if (imgArray.length + preloaded.length <= maxLength) {
-    const invalid = document.querySelector('.invalid-feedback.upload-images');
-    invalid.classList.remove('d-block');
-  }
-  let file = $(el).parent().data("file");
-  for (let i = 0; i < imgArray.length; i++) {
-    if (imgArray[i].name === file) {
-      imgArray.splice(i, 1);
-      break;
-    }
-  }
-  $(el).parent().parent().remove();
-
-  console.log("new lengths ", maxLength, imgArray.length, preloaded.length);
-}
-
-addExistingImageFiles();
 
 
 </script>

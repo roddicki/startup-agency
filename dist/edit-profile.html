@@ -7,10 +7,10 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="styles/style.css" rel="stylesheet">
 
-  <!-- image uploader -->
-  <link rel="stylesheet" href="image-uploader/image-uploader.min.css">
+  
   <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
+  <!-- image uploader -->
+  <link href="image-uploader/image-uploader.css" rel="stylesheet">
   <title>Startup Agency - build profile</title>
 </head>
 
@@ -186,7 +186,7 @@
         <div class= "row content-blocks">
           
           <div class="col-8 col-sm-8 col-md-8 col-lg-8 project-showcase-text">
-            <p>PROJECT SHOWCASE (0)</p>
+            <p>PROJECT SHOWCASES</p>
           </div>
           <div class="col-4 col-sm-4 col-md-4 col-lg-4 d-grid ">
             <!-- <button class="btn btn-primary btn-lg btn-block" >Add projects</button> -->
@@ -809,7 +809,7 @@
 <div class="modal fade" id="editProject" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modalcontentleft">
-      <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Create or Edit Project
+      <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Create / Edit Project Showcase
       </h2>
       <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
       </button>
@@ -849,14 +849,20 @@
         </div>
         <div class="row">
           <div class="col-sm-12">
-            <div class="existing-images">
-            </div>
-            <div class="input-field form-group">
-              <label class="active">Add images of your work
-              </label>
-              <div class="input-images-1" id="image-uploader" style="padding-top: .5rem;">
+            <!-- image uploader -->
+            <div class="upload__box">
+              <div class="upload__btn-box">
+                <p>Upload up to 3 images of your work, up to 1024kb per image</p>
+                <label for="modal-image-uploader" class="upload__btn form-label btn btn-primary">Select images</label>
+                  
+                <input type="file" multiple data-max_length="3" accept="image/png, image/gif, image/jpeg, image/jpg" id="modal-image-uploader" class="upload__inputfile image-upload form-control">
+                <div class="invalid-feedback upload-images">
+                  Add up to 3 images (each under 1024kb) per project showcase
+                </div>
               </div>
+              <div class="upload__img-wrap"></div>
             </div>
+            <!-- image uploader -->
           </div>
         </div>
         <div class="row">
@@ -909,26 +915,14 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 <script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-<!-- image uploader -->
-<script type="text/javascript" src="image-uploader/image-uploader.min.js"></script>
+
 <!-- custom JS -->
 <script src="scripts/app.bundle.js"></script>
 <!-- form validation -->
 <script src="scripts/form-validation.js"></script>
 
-<!-- add custom scripts -->
-<script type="text/javascript" src="image-uploader/image-uploader.min.js"></script>
-<script>
-  $(document).ready(function(){
-    $('.input-folio-pdf').imageUploader({
-      extensions: ['.pdf'],
-      mimes: ['application/pdf'],
-      maxSize: undefined,
-      maxFiles: 1,
-      label:' Drag & Drop files here or click to browse',
-    });
-  });
-</script>
+<!-- image uploader -->
+<script src="image-uploader/image-uploader.js"></script>
 
 <script>
   // validate pdf file upload
@@ -948,7 +942,7 @@
 
 
   // jamie add page specific JS here
-  let items = document.querySelectorAll('.carousel .carousel-item')
+/*  let items = document.querySelectorAll('.carousel .carousel-item')
 
 items.forEach((el) => {
     const minPerSlide = 4
@@ -962,19 +956,20 @@ items.forEach((el) => {
         el.appendChild(cloneChild.children[0])
         next = next.nextElementSibling
     }
-})
+})*/
 
 </script>
 <script>
+  // add profile image
   const image_input = document.querySelector("#image-input");
   image_input.addEventListener("change", function() {
   const reader = new FileReader();
   reader.addEventListener("load", () => {
-    const uploaded_image = reader.result;
-    document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`;
+      const uploaded_image = reader.result;
+      document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`;
+    });
+    reader.readAsDataURL(this.files[0]);
   });
-  reader.readAsDataURL(this.files[0]);
-});
 </script>
 
 <script>
@@ -1054,31 +1049,27 @@ function hideSocialDiv2(){
 </script>
 
 <script>
-    //step 1 registration validaiton
-  const EditProject1 = document.querySelector('.edit-project-form');
-  const EditProjectSubmit = document.querySelector('#submit-edit-project');
-  const EditProjectModal = new bootstrap.Modal(document.querySelector('#editProject'));
- 
+const editProjectModal = new bootstrap.Modal(document.querySelector('#editProject'));
 
+function validateEditProjectForm(event) {
+  const editProjectForm = document.querySelector('.edit-project-form');
   // Loop over inputs and prevent submission
-  EditProjectSubmit.addEventListener('click', function (event) {
-    console.log("modal 1 submit clicked");
-    if (!EditProject1.checkValidity()) {
-      event.preventDefault();
-      event.stopPropagation();
-      console.log("modal 1 was-NOT-validated");
-    }
-     else {
-       console.log("modal 1 was-validated");
-       EditProjectModal.hide();
-    //   regModal2.show();
-     }
-    EditProject1.classList.add('was-validated');
-  }, false)
-</script>
+  console.log("submit edit project modal clicked");
+  if (!editProjectForm.checkValidity()) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log("edit project modal was-NOT-validated");
+  }
+  else {
+     console.log("edit project modal was-validated");
+     editProjectModal.hide();
+     return true;
+   }
+  editProjectForm.classList.add('was-validated');
+}
+  
 
-<script>
-  //step 1 registration validaiton
+//change details registration
 const changeDetailsForm = document.querySelector('.change-Details');
 const changeDetailsSubmit = document.querySelector('#change-Details-Submit');
 const changeDetailsModal = new bootstrap.Modal(document.querySelector('#edit-details'));

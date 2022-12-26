@@ -158,7 +158,7 @@ function createJobDoc() {
 
 
 // upload image - argument is a base64 string
-// inserts a reference to the uploaded image/s into the logged in users profile
+// inserts a reference to the uploaded image/s into the logged into storgare using users profile
 async function uploadBase64Image(base64string) {
   console.log("base64= " + base64string);
   // url is From Storage - not a new image - or doesn't exist - exit with a return
@@ -201,7 +201,7 @@ async function uploadBase64Image(base64string) {
   return uploadUrl;
 }
 
-//
+// update user doc with profile pic image reference
 async function updateUserDocProfilePic(imageUrl) {
   // update user profile with image url
   let docRef = doc(db, 'users', currentUserData.uid);
@@ -210,9 +210,68 @@ async function updateUserDocProfilePic(imageUrl) {
   })
   .then(function () {
     console.log("added new profile image reference to user profile");
-
   });
 } 
+
+
+// upload images - argument is array of base64 strings
+// inserts a reference to the uploaded image/s into the logged into storgare using users profile
+async function uploadBase64Images(base64strings) {
+  console.log("base64s array= " + base64strings.length);
+  let uploadUrls = [];
+  // PROBLEM INFINITE LOOP WTF
+ /* for (var i = 0; i < base64strings.length; i++) {
+    //console.log(base64strings[i]);
+    uploadUrls.push(base64strings[i]);
+  }
+  console.log(uploadUrls);
+  return uploadUrls;*/
+
+  // loop through all strings / images
+  for (var i = 0; i < base64strings.length; i++) {
+    // url is From Storage - not a new image - or doesn't exist - exit with a return
+    if (base64strings[i].includes("firebasestorage") || base64strings[i] == false) {
+      return base64strings[i];
+    }
+    // get filetype from string
+    let fileSuffix = "";
+    const fileTypes = ["png", "jpg", "jpeg", "svg"];
+    // split string to get binary and test for what file ending
+    const splitStr = base64strings[i].split(",");
+    const base64Type = splitStr[0];
+    console.log("image: " + i, splitStr[0]);
+    for (var j = 0; j < fileTypes.length; j++) {
+      if (base64Type.includes(fileTypes[j])) {
+        fileSuffix = fileTypes[j];
+        console.log("image: " + i, fileSuffix);
+        break;
+      }
+    }
+    // if couldn't find a filetype stop
+    if (fileSuffix == "") {
+      return;
+    }
+    // create upload url
+    const randStr = Math.random().toString(36).substr(2, 5);
+    const uploadUrl = "images/"+ currentUserData.uid + "/img-project-showcase-"+randStr+"." + fileSuffix;
+    //console.log(uploadUrl);
+    // if not from storage else return base64strings[i]
+    const storageRef = ref(storage, uploadUrl);
+    // upload
+    const uploaded = await uploadString(storageRef, base64strings[i], 'data_url')
+    .then(function() {
+      console.log('Uploaded a base64url string!', uploadUrl);
+      
+    })
+    .catch(function(error){
+      console.log("Error: uploading pic:", error); 
+    });
+
+    uploadUrls.push(uploadUrl);
+  }
+  console.log(uploadUrls);
+  return uploadUrls;
+}
 
 
 // get pdf file from edit-profile modal
@@ -859,27 +918,6 @@ function showSignedInUser(user, id, forename, surname) {
   a.addEventListener('click', signOutUser);
 
   liDropdown.appendChild(ul);
-  // get name
-
-  // get profile pic
-
-  // add name
-  /*const accountDropdown = document.querySelector('.dropdown-menu');
-  // edit drop down contents
-  const name = document.querySelector('.dropdown-toggle');
-  name.innerHTML = forename + " " + surname;
-
-  const dashboardLink = document.querySelector('.dropdown-menu .dashboard');
-  dashboardLink.href = 'profile.html?id='+id;
-
-  const portfolioLink = document.querySelector('.dropdown-menu .portfolio');
-  portfolioLink.href = 'profile.html?id='+id;
-
-  const accountLink = document.querySelector('.dropdown-menu .account');
-  accountLink.href = 'profile.html?id='+id;
-
-  const signoutLink = document.querySelector('.dropdown-menu .sign-out');
-  signoutLink.addEventListener('click', signOutUser);*/
 }
 
 
@@ -1278,8 +1316,54 @@ function populateSocials(vals) {
   }
 }
 
+// ======CREATE AND EDIT PROFILE SHOWCASE FUNCTIONS======
+
+// add or update a project showcase details
+async function updateProjectShowcase(uid, imageUrls){
+  // get form content
+  const projectForm = document.querySelector('#editProject .edit-project-form');
+  let project = {};
+  let projectDetails = {};
+  let projectId = projectForm.projectId.value;
+  let randomStr = (Math.random() + 1).toString(36).substring(7);
+  if (! projectForm.projectId.value) {
+    projectId = randomStr;
+  }
+  projectDetails.name = projectForm.projectName.value;
+  projectDetails.link = projectForm.projectLink.value;
+  projectDetails.description = projectForm.projectDescription.value;
+  projectDetails.images = imageUrls;
+  project[projectId] = projectDetails;
+  console.log(project);
+  // update doc
+  const updated = await setDoc(doc(db, "users", uid), {
+    projects: project
+  }, { merge: true })
+  .then(function(){
+    console.log("successfully updated user doc with new project details");
+  })
+  .catch(function(error){
+    console.log("Error: Getting document:", error); 
+  });
+
+  return projectId;
+}
+
+// get upload images for a project showcase 
+function getUploadImgs(){
+  // get images using data attr
+  const imageContainers = document.querySelectorAll('#editProject .upload__img-box [data-preloaded="false"]');
+  let dataImgUrls = [];
+  for (var i = 0; i < imageContainers.length; i++) {
+    const url = imageContainers[i].style.backgroundImage.slice(5, -2);
+    dataImgUrls.push(url);
+  }
+  //console.log(dataImgUrls);
+  return dataImgUrls;
+}
 
 
+// OLD
 // watch for new uploaded images add edit caption icon
 function uploadImageWatcher(){
   const captionImg = document.querySelector('#caption-image');
@@ -1336,6 +1420,7 @@ function uploadImageWatcher(){
   observer.observe(document.querySelector("#image-uploader"), { subtree: true, childList: true });
 }
 
+// OLD
 // save edited caption from caption modal to hidden input for upload image
 function saveCaption(e) {
 	e.preventDefault();
@@ -2009,6 +2094,26 @@ if (page == "edit-profile") {
         pageEdited = true;
       });
     });
+  });
+
+  // add or edit a project showcase
+  const submitProject = document.querySelector('#editProject #submit-edit-project');
+  submitProject.addEventListener('click', function(e){
+    e.preventDefault();
+    let validated = validateEditProjectForm(e); // from edit-profile.html
+    if (validated) {
+      let uploadImgs = getUploadImgs();
+      // upload images
+      uploadBase64Images(uploadImgs).then(function(imageUrls){
+        // update db with modal form details
+        console.log(imageUrls);
+        updateProjectShowcase(currentUserData.uid, imageUrls).then(function(projectId, imageUrls){
+          console.log("updated project showcase with projectId", projectId);
+          // then upload images and update db using projectId
+          pageEdited = true;
+        });
+      });
+    }
   });
 
 
