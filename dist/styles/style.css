@@ -782,17 +782,16 @@ h5{
 	object-fit: contain;
 	max-height: 150px;
 	min-height: 150px;
-	cursor: pointer;
 	background-color: #F8F8F8 ;
   }
+
   .port-edit-img{
-	width: 100%;
-	border-radius: 10px;
-	max-height: 50px;
-	min-height: 50px;
-	object-fit: cover;
-	cursor: pointer;
-	background-color: #F8F8F8 
+  	max-height: 60px;
+  	overflow: hidden;
+  	cursor: pointer;
+  	background-color: #F8F8F8;
+  	border-radius: 8px;
+  	padding: 2px !important;
   }
 
   .button-showcase{
@@ -1020,7 +1019,7 @@ h5{
 
   }
 
-  #project-img-showcase-edit-2{
+  /*#project-img-showcase-edit-2{
 	display: none;
   }
 
@@ -1030,8 +1029,8 @@ h5{
 
   #project-img-edit-1{
 	border: 2px solid #244F8E;
+  }*/
 
-  }
   @media(max-width: 991px){
 	.steps{
 		margin-left:0%;

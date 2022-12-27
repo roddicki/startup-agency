@@ -1109,7 +1109,7 @@ function populateBio(vals) {
   jobTitle.innerHTML = vals.jobTitle;
   // website
   let website = document.querySelector(".edit-section #personal-details-link");
-  website.innerHTML = vals.website;
+  website.innerHTML = "<a target='_blank' href='"+vals.website+"'>"+vals.website+"</a>";
   // location
   let location = document.querySelector(".edit-section #personal-details-location");
   location.innerHTML = vals.location;
@@ -1139,7 +1139,7 @@ function populateDownloadFile(vals){
     // get matadata add link, text, size
     getMetadata(storageRef)
       .then(function(metadata) {
-        console.log(metadata);
+        //console.log(metadata);
         downloadSize.innerHTML = Math.round(metadata.size/1000) + " KB";
       })
       .catch(function(err) {
@@ -1317,6 +1317,60 @@ function populateSocials(vals) {
 }
 
 // ======CREATE AND EDIT PROFILE SHOWCASE FUNCTIONS======
+
+// create cards with thumbs and details for each project showcase
+function ppulateProjectShowcases(vals) {
+  //console.log(vals.projects);
+  const showcaseContainer = document.querySelector('#projects-showcase-container');
+  const showcaseAddBtn = document.querySelector('#add-project-showcase');
+  showcaseContainer.innerHTML = "";
+  let showcaseTotal = 0;
+  for (const [key, value] of Object.entries(vals.projects)) {
+    //console.log(key, value.name +"\n"+ value.description +"\n"+ value.images +"\n"+ value.link);
+    // add html
+    showcaseTotal ++;
+    let description = '';
+    if (value.description != "") {description = '<p>'+value.description+'</p>'}
+    let link = '';
+    if (value.link != "") {link = '<p><a class="underline" href="'+value.link+'" target="_blank">'+value.link+'</a></p>'}
+    /*let valueStr = JSON.stringify(value);
+    console.log(valueStr);*/
+
+    let showcaseComponent = '<!--start of project showcase--> <div class="col-lg-6 col-md-12 mt-4"> <div class="port-block"> <div id="'+key+'-hero-img" class="row"> <!-- inject hero col and image --> </div><div id="'+key+'-thumbs" class="row d-flex justify-content-evenly"> <!-- inject thumbs --> </div> <div class="row"> <div class="col-10 mt-4"> <h2><strong>'+value.name+'</strong></h2> </div> <div class="col-2 mt-4"> <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> <i class="bi bi-pencil-square cursor-pointer edit-size" height="16px"> </i> </button> <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"> <li> <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editProject" data-id="'+key+'" onclick="populateProjectModal(\''+key+'\',\''+value.name+'\',\''+value.link+'\',\''+value.description+'\')" href="#">Edit Project </a> </li> <li> <hr class="dropdown-divider"> </li> <li> <a class="dropdown-item text-danger" data-id="'+key+'" href="#">Delete Project </a> </li> </ul> </div> </div> <div class="row"> <div class="col-12">'+description+link+'</div> </div> </div> </div> <!--end of project showcase-->';
+    // add showcase
+    showcaseContainer.innerHTML += showcaseComponent;
+    // get and add images
+    for (var i = 0; i < value.images.length; i++) {
+      //value.images[i]
+      // get download link
+      const storageRef = ref(storage, value.images[i]);
+      // get download image ref 
+      getDownloadURL(storageRef)
+        .then(function(url) {
+          // add thumbnail
+          document.querySelector('#'+key+'-thumbs').innerHTML += '<div class="col-4 mt-4 d-flex align-items-center port-edit-img"> <img class="rounded-3 img-fluid" onclick="swapHeroImg(this, \'hero-'+key+'\')" src="'+url+'"> </div>';
+          // add hero
+          document.querySelector('#'+key+'-hero-img').innerHTML = '<div class="col-12"> <img class="port-edit-img-main" id="hero-'+key+'" src="'+url+'"> </div> ';
+          
+        })
+        .catch(function(err){
+          console.log("download link error", err);
+        })
+    }
+  }
+  // remove add showcase button if 4 showcases
+  if (showcaseTotal > 3) {
+    showcaseAddBtn.classList.add("d-none");
+  }
+  else {
+    showcaseAddBtn.classList.remove("d-none");
+  }
+}
+
+// populate project showcase modal // NOTE at the bottom of edit-profile to use onclick
+/*function populateProjectModal(projectId, projectInfo) {
+  console.log(projectId, projectInfo);
+}*/
 
 // add or update a project showcase details
 async function updateProjectShowcase(uid, imageUrls){
@@ -2008,7 +2062,8 @@ if (page == "edit-profile") {
         populateProfilePic(vals);
         // populate profile pic in modal
         populateProfilePicModal(vals);
-
+        // populate project showcase
+        ppulateProjectShowcases(vals);
       });
     } 
   }) 
@@ -2108,8 +2163,9 @@ if (page == "edit-profile") {
         // update db with modal form details
         console.log(imageUrls);
         updateProjectShowcase(currentUserData.uid, imageUrls).then(function(projectId, imageUrls){
-          console.log("updated project showcase with projectId", projectId);
-          // then upload images and update db using projectId
+          console.log("updated project showcase with projectId:", projectId);
+          // next load data into page and back into modal when clicked
+          // work out how to remove photos from the project showcase.
           pageEdited = true;
         });
       });

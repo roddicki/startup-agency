@@ -177,10 +177,6 @@
       </div>
 
 
-
-
-
-
       <!--Right side of the page-->
       <div class="col-sm-12 col-md-12 col-lg-8 ">
         <div class= "row content-blocks">
@@ -189,102 +185,21 @@
             <p>PROJECT SHOWCASES</p>
           </div>
           <div class="col-4 col-sm-4 col-md-4 col-lg-4 d-grid ">
-            <!-- <button class="btn btn-primary btn-lg btn-block" >Add projects</button> -->
-            <i class="bi bi-plus-square text-right" data-bs-toggle="modal" data-bs-target="#editProject" width="24px" height="24px"></i>
+            <i class="bi bi-plus-square text-right" id="add-project-showcase" data-bs-toggle="modal" data-bs-target="#editProject" width="24px" height="24px"></i>
           </div>
          
-        <div class="container">
-    
-          <hr></hr>
+          <div class="container">
+            <hr></hr>
+            <div class="row" id="projects-showcase-container">
 
-          <div class="gap"></div>
-          <div class="row">
-          <!--start of projects edit-->
-              <div class="col-lg-6 col-md-12">
-                <div class="port-block">
-                  <div class="row">
-                    <div class="col-12">
-                      <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams1.png">
-                    </div>
-                    <div class="gap"></div>
-                    <div class="col-4">
-                      <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams1.png">
-                    </div>
-                    <div class="col-4">
-                      <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams2.png">
-                    </div>
-                    <div class="col-4">
-                      <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams3.png">
-                    </div>
-                  </div>
-                  <div class="gap"></div>
-                  <div class="col-12">
-                    <h2>
-                      <strong>Sweet Dreams</strong>
-                      <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i  class="bi bi-pencil-square cursor-pointer edit-size" height="16px"></i>
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editProject" href="#">Edit Project</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger" href="#">Delete Project</a></li>
-                      </ul>
-                    </h2>
-                  </div>
-                  <div class="col-12">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna mauris, at urna ...</p>
-                  </div>
-                </div>
-              </div>
-          
-          <!--end of project showcase-->
-              <!--start of projects edit-->
-              <div class="col-lg-6 col-md-12">
-                <div class="port-block">
-                  <div class="row">
-                    <div class="col-12">
-                      <img class="port-edit-img" src="./assets/img/jamie-profile-img/stealthvr.jpg">
-                    </div>
-                    <div class="gap"></div>
-                    <div class="col-4">
-                      <img class="port-edit-img" src="./assets/img/jamie-profile-img/stealthvr.jpg">
-                    </div>
-                    <div class="col-4">
-                      <img class="port-edit-img" src="./assets/img/jamie-profile-img/speedrunning.jpg">
-                    </div>
-                    <div class="col-4">
-                      <img class="port-edit-img" src="./assets/img/jamie-profile-img/stealthvr1.jpg">
-                    </div>
-                  </div>
-                  <div class="gap"></div>
-                  <div class="col-12">
-                    <h2><strong>MGS VR</strong>
-                      <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i  class="bi bi-pencil-square cursor-pointer edit-size" height="16px"></i>
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editProject" href="#">Edit Project</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger" href="#">Delete Project</a></li>
-                        <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-                      </ul></h2>
-                  </div>
-                  <div class="col-12">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna mauris, at urna ...</p>
-                  </div>
-                  
-                </div>
-              </div>
-          
-          <!--end of project showcase-->
+              <!--start of projects showcases-->
+              
+              <!--end of project showcases-->
+
+            </div>
+          </div>
         </div>
-        </div>
-
-    </div>
-    
-    
-
-    </div>
+      </div>
 
   </div>
 
@@ -874,15 +789,11 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-6">
-            <p class="float-left delete-text">Delete project
-            </p>
-          </div>
-          <div class="col-md-6 col-sm-12 col-12">
+          <div class="col-md-12 col-sm-12 col-12">
             <div class="set-content-right gap">
               <button type="button" class="btn btn-secondary btn-lg btn-block apply-btn" data-bs-dismiss="modal">Cancel
               </button>
-              <button type="button" id="submit-edit-project" class="btn btn-primary btn-lg btn-block apply-btn">Submit
+              <button type="button" id="submit-edit-project" class="btn btn-primary btn-lg btn-block apply-btn">Save
               </button>
             </div>
           </div>
@@ -925,6 +836,36 @@
 <script src="image-uploader/image-uploader.js"></script>
 
 <script>
+  let preloadedImages = [];
+
+  // populate project showcase modal
+  async function populateProjectModal(projectId, name, link, description) {
+    console.log(projectId, name, description, link);
+    // get form content
+    const projectForm = document.querySelector('#editProject .edit-project-form');
+    projectForm.projectId.value = projectId;
+    projectForm.projectName.value = name;
+    projectForm.projectLink.value = link;
+    projectForm.projectDescription.value = description;
+    // get images
+    preloadedImages = [];
+    const imgContainer = document.querySelector('#editProject .upload__img-wrap');
+    imgContainer.innerHTML = "";
+
+    let images = document.querySelectorAll('#'+projectId+'-thumbs .port-edit-img .img-fluid');
+    for (var i = 0; i < images.length; i++) {
+      console.log(images[i].src);
+      preloadedImages.push(images[i].src);
+    }
+    addExistingImageFiles(preloadedImages); // in image-uploader.js
+  }
+
+  // swap images in project showcase
+  function swapHeroImg(el, id) {
+    const heroImg = document.querySelector('#'+id);
+    heroImg.src = el.src;
+  }
+
   // validate pdf file upload
   const fileInputBtn = document.querySelector('#edit-details #pdf-folio-file');
   fileInputBtn.addEventListener('change', function(e){
@@ -938,28 +879,6 @@
     }
   });
   
-
-
-
-  // jamie add page specific JS here
-/*  let items = document.querySelectorAll('.carousel .carousel-item')
-
-items.forEach((el) => {
-    const minPerSlide = 4
-    let next = el.nextElementSibling
-    for (var i=1; i<minPerSlide; i++) {
-        if (!next) {
-            // wrap carousel by using first child
-          next = items[0]
-        }
-        let cloneChild = next.cloneNode(true)
-        el.appendChild(cloneChild.children[0])
-        next = next.nextElementSibling
-    }
-})*/
-
-</script>
-<script>
   // add profile image
   const image_input = document.querySelector("#image-input");
   image_input.addEventListener("change", function() {

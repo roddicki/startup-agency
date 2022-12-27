@@ -173,50 +173,30 @@
     <div class="gap">
     </div>
     <div class="row">
-      <!--start of projects edit-->
-      <div class="col-lg-6 col-md-12">
+      <!--start of projects showcase-->
+      <div class="col-lg-6 col-md-12 mt-4">
         <div class="port-block">
           <div class="row">
             <div class="col-12">
-              <button type="button" class="button-showcase" id="project-img-showcase-edit-1">
-                <img class="port-edit-img-main" src="./assets/img/jamie-profile-img/sweetdreams1.png">                 
-              </button>
-            </div>
-            <div class="col-12">
-              <button type="button" class="button-showcase" id="project-img-showcase-edit-2">
-                <img class="port-edit-img-main" src="./assets/img/jamie-profile-img/sweetdreams2.png">                 
-              </button>
-            </div>
-            <div class="col-12">
-              <button type="button" class="button-showcase" id="project-img-showcase-edit-3">
-                <img class="port-edit-img-main" src="./assets/img/jamie-profile-img/sweetdreams3.png">                 
-              </button>
-            </div>
-            <div class="gap">
-            </div>
-            <div class="col-4">
-              <button type="button" class="button-showcase" id="project-img-edit-1">
-                <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams1.png">
-              </button>
-            </div>
-            <div class="col-4">
-              <button type="button" class="button-showcase"  id="project-img-edit-2">
-                <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams2.png">
-              </button>
-            </div>
-            <div class="col-4">
-              <button type="button" class="button-showcase" id="project-img-edit-3">
-                <img class="port-edit-img" src="./assets/img/jamie-profile-img/sweetdreams3.png">
-              </button>
+                <img class="port-edit-img-main" id="hero-xyza" src="./assets/img/jamie-profile-img/sweetdreams1.png">                 
             </div>
           </div>
-          <div class="gap">
+          <div class="row d-flex justify-content-evenly">
+            <div class="col-4 mt-4 d-flex align-items-center port-edit-img">
+                <img class="rounded-3 img-fluid" onclick="swapHeroImg(this, 'hero-xyza')" src="./assets/img/jamie-profile-img/sweetdreams1.png">
+            </div>
+            <div class="col-4 mt-4 d-flex align-items-center port-edit-img">
+                <img class="rounded-3 img-fluid" onclick="swapHeroImg(this, 'hero-xyza')" src="./assets/img/jamie-profile-img/sweetdreams2.png">
+            </div>
+            <div class="col-4 mt-4 d-flex align-items-center port-edit-img">
+                <img class="rounded-3 img-fluid" onclick="swapHeroImg(this, 'hero-xyza')" src="./assets/img/jamie-profile-img/sweetdreams3.png">
+            </div>
           </div>
-          <div class="col-12">
-            <!--data-bs-toggle="modal" data-bs-target="#editProject"-->
-            <h2>
-              <strong>Sweet Dreams
-              </strong>
+          <div class="row">
+            <div class="col-10 mt-4">
+              <h2><strong>Sweet Dreams</strong></h2>
+            </div>
+            <div class="col-2 mt-4">
               <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 <i  class="bi bi-pencil-square cursor-pointer edit-size" height="16px">
                 </i>
@@ -234,67 +214,19 @@
                   </a>
                 </li>
               </ul>
-            </h2>
+            </div>
           </div>
-          <div class="col-12">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna mauris, at urna ...
-            </p>
-          </div>
-        </div>
-      </div>
-      <!--end of project showcase-->
-      <!--start of projects edit-->
-      <div class="col-lg-6 col-md-12">
-        <div class="port-block">
           <div class="row">
             <div class="col-12">
-              <img class="port-edit-img-main" src="./assets/img/jamie-profile-img/stealthvr.jpg">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna mauris, at urna Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna mauris, at urna Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna mauris, at urna Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna mauris, at urna Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna mauris, at urna
+              </p>
+              <p><a class="underline" href="https://www.mywebsite-mee.com" target="_blank">https://www.mywebsite-mee.com</a></p>
             </div>
-            <div class="gap">
-            </div>
-            <div class="col-4">
-              <img class="port-edit-img" src="./assets/img/jamie-profile-img/stealthvr.jpg">
-            </div>
-            <div class="col-4">
-              <img class="port-edit-img" src="./assets/img/jamie-profile-img/speedrunning.jpg">
-            </div>
-            <div class="col-4">
-              <img class="port-edit-img" src="./assets/img/jamie-profile-img/stealthvr1.jpg">
-            </div>
-          </div>
-          <div class="gap">
-          </div>
-          <div class="col-12">
-            <h2>
-              <strong>MGS VR
-              </strong>
-              <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <i  class="bi bi-pencil-square cursor-pointer edit-size" height="16px">
-                </i>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li>
-                  <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editProject" href="#">Edit Project
-                  </a>
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li>
-                  <a class="dropdown-item text-danger" href="#">Delete Project
-                  </a>
-                </li>
-                <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-              </ul>
-            </h2>
-          </div>
-          <div class="col-12">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna mauris, at urna ...
-            </p>
           </div>
         </div>
       </div>
       <!--end of project showcase-->
+      
     </div>
   </div>
 </div>
@@ -1133,6 +1065,14 @@
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 <script>
+
+  // swap images in project showcase
+  function swapHeroImg(el, id) {
+    const heroImg = document.querySelector('#'+id);
+    heroImg.src = el.src;
+  }
+  
+
   const image_input = document.querySelector("#image-input");
   image_input.addEventListener("change", function() {
     const reader = new FileReader();

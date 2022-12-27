@@ -1,9 +1,9 @@
 
 let uploadImgList = [];
-let preloadedImages = ['https://picsum.photos/500/500?random=1','https://picsum.photos/500/500?random=2'];
+//let preloadedImages = ['https://picsum.photos/500/500?random=1','https://picsum.photos/500/500?random=2'];
 
 // add existing image files
-function addExistingImageFiles(){
+function addExistingImageFiles(preloadedImages){
   const imgContainer = document.querySelector('.upload__img-wrap');
   for (var i = 0; i < preloadedImages.length; i++) {
     preloadedImages[i]
@@ -96,4 +96,4 @@ function closeThisImg(el) {
 }
 
 imageUploader();
-addExistingImageFiles();
+//addExistingImageFiles(preloadedImages);
