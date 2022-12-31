@@ -60,7 +60,7 @@ async function getCurrentUserDetails(uid) {
   const docRef = doc(db, 'users', uid);
   const singleDoc = await getDoc(docRef);
   if (singleDoc.exists()) {
-    console.log("Logged in user document data:", singleDoc.data());
+    console.log("Login user document data:", singleDoc.data());
     currentUserData = singleDoc.data();
     currentUserData.uid = uid;
     return singleDoc.data();
@@ -217,16 +217,8 @@ async function updateUserDocProfilePic(imageUrl) {
 // upload images - argument is array of base64 strings
 // inserts a reference to the uploaded image/s into the logged into storgare using users profile
 async function uploadBase64Images(base64strings) {
-  console.log("base64s array= " + base64strings.length);
+  //console.log("base64s array= " + base64strings.length);
   let uploadUrls = [];
-  // PROBLEM INFINITE LOOP WTF
- /* for (var i = 0; i < base64strings.length; i++) {
-    //console.log(base64strings[i]);
-    uploadUrls.push(base64strings[i]);
-  }
-  console.log(uploadUrls);
-  return uploadUrls;*/
-
   // loop through all strings / images
   for (var i = 0; i < base64strings.length; i++) {
     // url is From Storage - not a new image - or doesn't exist - exit with a return
@@ -239,11 +231,11 @@ async function uploadBase64Images(base64strings) {
     // split string to get binary and test for what file ending
     const splitStr = base64strings[i].split(",");
     const base64Type = splitStr[0];
-    console.log("image: " + i, splitStr[0]);
+    //console.log("image: " + i, splitStr[0]);
     for (var j = 0; j < fileTypes.length; j++) {
       if (base64Type.includes(fileTypes[j])) {
         fileSuffix = fileTypes[j];
-        console.log("image: " + i, fileSuffix);
+        //console.log("image: " + i, fileSuffix);
         break;
       }
     }
@@ -260,8 +252,8 @@ async function uploadBase64Images(base64strings) {
     // upload
     const uploaded = await uploadString(storageRef, base64strings[i], 'data_url')
     .then(function() {
-      console.log('Uploaded a base64url string!', uploadUrl);
-      
+      console.log('Uploaded a base64url string!');
+      //console.log('Uploaded a base64url string!', uploadUrl);
     })
     .catch(function(error){
       console.log("Error: uploading pic:", error); 
@@ -269,7 +261,6 @@ async function uploadBase64Images(base64strings) {
 
     uploadUrls.push(uploadUrl);
   }
-  console.log(uploadUrls);
   return uploadUrls;
 }
 
@@ -1319,14 +1310,18 @@ function populateSocials(vals) {
 // ======CREATE AND EDIT PROFILE SHOWCASE FUNCTIONS======
 
 // create cards with thumbs and details for each project showcase
-function ppulateProjectShowcases(vals) {
+function populateProjectShowcases(vals) {
   //console.log(vals.projects);
+  // exit if no project showcases
+  if (vals.projects == null) {
+    return;
+  }
   const showcaseContainer = document.querySelector('#projects-showcase-container');
   const showcaseAddBtn = document.querySelector('#add-project-showcase');
   showcaseContainer.innerHTML = "";
   let showcaseTotal = 0;
   for (const [key, value] of Object.entries(vals.projects)) {
-    //console.log(key, value.name +"\n"+ value.description +"\n"+ value.images +"\n"+ value.link);
+    //console.log(key, value.name +"\n"+ value.images);
     // add html
     showcaseTotal ++;
     let description = '';
@@ -1336,19 +1331,21 @@ function ppulateProjectShowcases(vals) {
     /*let valueStr = JSON.stringify(value);
     console.log(valueStr);*/
 
-    let showcaseComponent = '<!--start of project showcase--> <div class="col-lg-6 col-md-12 mt-4"> <div class="port-block"> <div id="'+key+'-hero-img" class="row"> <!-- inject hero col and image --> </div><div id="'+key+'-thumbs" class="row d-flex justify-content-evenly"> <!-- inject thumbs --> </div> <div class="row"> <div class="col-10 mt-4"> <h2><strong>'+value.name+'</strong></h2> </div> <div class="col-2 mt-4"> <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> <i class="bi bi-pencil-square cursor-pointer edit-size" height="16px"> </i> </button> <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"> <li> <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editProject" data-id="'+key+'" onclick="populateProjectModal(\''+key+'\',\''+value.name+'\',\''+value.link+'\',\''+value.description+'\')" href="#">Edit Project </a> </li> <li> <hr class="dropdown-divider"> </li> <li> <a class="dropdown-item text-danger" data-id="'+key+'" href="#">Delete Project </a> </li> </ul> </div> </div> <div class="row"> <div class="col-12">'+description+link+'</div> </div> </div> </div> <!--end of project showcase-->';
+    let showcaseComponent = '<!--start of project showcase--> <div class="col-lg-6 col-md-12 mt-4"> <div class="port-block"> <div id="'+key+'-hero-img" class="row"> <!-- inject hero col and image --> </div><div id="'+key+'-thumbs" class="row d-flex justify-content-evenly"> <!-- inject thumbs --> </div> <div class="row"> <div class="col-10 mt-4"> <h2><strong>'+value.name+'</strong></h2> </div> <div class="col-2 mt-4"> <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> <i class="bi bi-pencil-square cursor-pointer edit-size" height="16px"> </i> </button> <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"> <li> <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editProject" data-id="'+key+'" onclick="populateProjectModal(\''+key+'\',\''+value.name+'\',\''+value.link+'\',\''+value.description+'\')" href="#">Edit Project </a> </li> <li> <hr class="dropdown-divider"> </li> <li> <a class="dropdown-item text-danger" data-id="'+key+'" href="#" data-bs-toggle="modal" data-bs-target="#deleteShowcase" onclick="populateDeleteModal(\''+key+'\')">Delete Project </a> </li> </ul> </div> </div> <div class="row"> <div class="col-12">'+description+link+'</div> </div> </div> </div> <!--end of project showcase--> ';
     // add showcase
-    showcaseContainer.innerHTML += showcaseComponent;
+    showcaseContainer.innerHTML += showcaseComponent;    
     // get and add images
     for (var i = 0; i < value.images.length; i++) {
       //value.images[i]
       // get download link
       const storageRef = ref(storage, value.images[i]);
+      let imgUrl = value.images[i];
+      //console.log(imgUrl);
       // get download image ref 
       getDownloadURL(storageRef)
         .then(function(url) {
           // add thumbnail
-          document.querySelector('#'+key+'-thumbs').innerHTML += '<div class="col-4 mt-4 d-flex align-items-center port-edit-img"> <img class="rounded-3 img-fluid" onclick="swapHeroImg(this, \'hero-'+key+'\')" src="'+url+'"> </div>';
+          document.querySelector('#'+key+'-thumbs').innerHTML += '<div class="col-4 mt-4 d-flex align-items-center port-edit-img"> <img class="rounded-3 img-fluid" onclick="swapHeroImg(this, \'hero-'+key+'\')" src="'+url+'" data-imgurl="'+imgUrl+'"> </div>';
           // add hero
           document.querySelector('#'+key+'-hero-img').innerHTML = '<div class="col-12"> <img class="port-edit-img-main" id="hero-'+key+'" src="'+url+'"> </div> ';
           
@@ -1372,6 +1369,25 @@ function ppulateProjectShowcases(vals) {
   console.log(projectId, projectInfo);
 }*/
 
+async function deleteProjectShowcase(uid, vals) {
+  const modalForm = document.querySelector('#deleteShowcase #delete-project-form');
+  const projectId = modalForm.projectId.value;
+  let allProjects = vals.projects;
+  delete allProjects[projectId];
+  // update doc
+  const updated = await updateDoc(doc(db, "users", uid), {
+    projects: allProjects,
+  })
+  .then(function(){
+    console.log("successfully deleted project from user doc");
+  })
+  .catch(function(error){
+    console.log("Error: Getting document:", error); 
+  });
+  return projectId;
+
+}
+
 // add or update a project showcase details
 async function updateProjectShowcase(uid, imageUrls){
   // get form content
@@ -1379,7 +1395,7 @@ async function updateProjectShowcase(uid, imageUrls){
   let project = {};
   let projectDetails = {};
   let projectId = projectForm.projectId.value;
-  let randomStr = (Math.random() + 1).toString(36).substring(7);
+  let randomStr = "id-"+(Math.random() + 1).toString(36).substring(7);
   if (! projectForm.projectId.value) {
     projectId = randomStr;
   }
@@ -1388,10 +1404,10 @@ async function updateProjectShowcase(uid, imageUrls){
   projectDetails.description = projectForm.projectDescription.value;
   projectDetails.images = imageUrls;
   project[projectId] = projectDetails;
-  console.log(project);
   // update doc
   const updated = await setDoc(doc(db, "users", uid), {
-    projects: project
+    projects: project,
+    //"projects.projectId.images": imageUrls
   }, { merge: true })
   .then(function(){
     console.log("successfully updated user doc with new project details");
@@ -1399,11 +1415,10 @@ async function updateProjectShowcase(uid, imageUrls){
   .catch(function(error){
     console.log("Error: Getting document:", error); 
   });
-
   return projectId;
 }
 
-// get upload images for a project showcase 
+// get new upload images for a project showcase 
 function getUploadImgs(){
   // get images using data attr
   const imageContainers = document.querySelectorAll('#editProject .upload__img-box [data-preloaded="false"]');
@@ -1414,6 +1429,18 @@ function getUploadImgs(){
   }
   //console.log(dataImgUrls);
   return dataImgUrls;
+}
+
+// urls of preloaded images for a project showcase 
+function getPreloadedImgs(){
+  // get images using data attr
+  const imageContainers = document.querySelectorAll('#editProject .upload__img-box [data-preloaded="true"]');
+  let preloadedImgUrls = [];
+  for (var i = 0; i < imageContainers.length; i++) {
+    const url = imageContainers[i].dataset.ref;
+    preloadedImgUrls.push(url);
+  }
+  return preloadedImgUrls;
 }
 
 
@@ -2063,7 +2090,7 @@ if (page == "edit-profile") {
         // populate profile pic in modal
         populateProfilePicModal(vals);
         // populate project showcase
-        ppulateProjectShowcases(vals);
+        populateProjectShowcases(vals);
       });
     } 
   }) 
@@ -2160,18 +2187,40 @@ if (page == "edit-profile") {
       let uploadImgs = getUploadImgs();
       // upload images
       uploadBase64Images(uploadImgs).then(function(imageUrls){
+        // add preloaded images
+        let allImageUrls = imageUrls.concat(getPreloadedImgs());
         // update db with modal form details
-        console.log(imageUrls);
-        updateProjectShowcase(currentUserData.uid, imageUrls).then(function(projectId, imageUrls){
+        updateProjectShowcase(currentUserData.uid, allImageUrls).then(function(projectId, imageUrls){
           console.log("updated project showcase with projectId:", projectId);
           // next load data into page and back into modal when clicked
-          // work out how to remove photos from the project showcase.
+          getCurrentUserDetails(currentUserData.uid).then(function(vals){
+            // populate project showcase
+            populateProjectShowcases(vals);
+            // empty modal
+            emptyProjectModal(); // from edit-profile.js
+          });
           pageEdited = true;
         });
       });
     }
   });
 
+  // delete a project showcase
+  const deleteProjectBtn = document.querySelector('#deleteShowcase #confirm-delete-showcase');
+  deleteProjectBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    console.log("delete project");
+    getCurrentUserDetails(currentUserData.uid).then(function(vals){
+      // populate socials modal
+      deleteProjectShowcase(currentUserData.uid, vals).then(function(){
+        console.log('deleted');
+        // populate project showcase
+        populateProjectShowcases(vals);
+        pageEdited = true;
+      })
+      
+    });
+  })
 
   // listen for a page focus change change and use this to send an email to admin
   document.addEventListener("visibilitychange", function(){

@@ -6,8 +6,8 @@ let uploadImgList = [];
 function addExistingImageFiles(preloadedImages){
   const imgContainer = document.querySelector('.upload__img-wrap');
   for (var i = 0; i < preloadedImages.length; i++) {
-    preloadedImages[i]
-    let html = "<div class='upload__img-box'><div style='background-image: url(" + preloadedImages[i] + ")' data-number='" + $(".upload__img-close").length + "' data-file='" + preloadedImages[i] + "' data-preloaded='true' class='img-bg'><div class='upload__img-close' onclick='closeThisImg(this)'></div></div></div>";
+    //preloadedImages[i]
+    let html = "<div class='upload__img-box'><div style='background-image: url(" + preloadedImages[i].src + ")' data-number='" + $(".upload__img-close").length + "' data-ref='" + preloadedImages[i].ref + "' data-file='" + preloadedImages[i].src + "' data-preloaded='true' class='img-bg'><div class='upload__img-close' onclick='closeThisImg(this)'></div></div></div>";
     imgContainer.innerHTML += html;
   }
   //console.log(maxLength, uploadImgList.length, preloadedImages.length);
@@ -34,7 +34,7 @@ function imageUploader(){
         if (uploadImgList.length + preloadedImages.length >= maxLength || f.size > 1024000) {
           const invalid = document.querySelector('.invalid-feedback.upload-images');
           invalid.classList.add('d-block');
-          console.log("too many images "+uploadImgList.length + preloadedImages.length+" or too big" + f.size);
+          console.log("too many images "+uploadImgList.length + " " + preloadedImages.length+" or too big " + f.size);
           return;
         } 
         else {
