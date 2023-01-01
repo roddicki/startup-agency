@@ -10,7 +10,7 @@ import { initializeApp } from 'firebase/app';
 import { getStorage, ref, uploadBytes, getDownloadURL, getMetadata, uploadString, connectStorageEmulator } from "firebase/storage";
 
 import { getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc, deleteField, doc, query, where, orderBy, getDoc, serverTimestamp, updateDoc, setDoc,  Timestamp, arrayUnion, connectFirestoreEmulator} from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, signInWithPhoneNumber, ActionCodeURL } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, signInWithPhoneNumber, ActionCodeURL, deleteUser } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAq7-QGjZ8O1RVe_seOfdYjVLCjLdwrHYE",
@@ -891,7 +891,7 @@ function showSignedInUser(user, id, forename, surname) {
   li = document.createElement("li");
   a = document.createElement("a");
   a.className = "dropdown-item account";
-  a.href = 'profile.html?id='+id;
+  a.href = 'account.html?id='+id;
   a.innerHTML = "Account settings";
   li.appendChild(a);
   ul.appendChild(li);
@@ -1085,28 +1085,39 @@ function populatePersonalDetailsModal(vals){
 // show personal details in the bio column of edit-profile
 function populateBio(vals) {
   // available for work
-  let available = document.querySelector(".edit-section #available-for-work");
-  if (vals.available) {
-    available.checked = true;
+  try {
+    let available = document.querySelector("section #available-for-work");
+    if (vals.available) {
+      available.checked = true;
+    }
+    else {
+      available.checked = false;
+    }
   }
-  else {
-    available.checked = false;
+  catch(err) {
+    console.log(err.message);
   }
+  
   // name
-  let name = document.querySelector(".edit-section #personal-details-name");
+  let name = document.querySelector("section #personal-details-name");
   name.innerHTML = vals.forename + " " + vals.surname;
   // title
-  let jobTitle = document.querySelector(".edit-section #personal-details-title");
+  let jobTitle = document.querySelector("section #personal-details-title");
   jobTitle.innerHTML = vals.jobTitle;
   // website
-  let website = document.querySelector(".edit-section #personal-details-link");
+  let website = document.querySelector("section #personal-details-link");
   website.innerHTML = "<a target='_blank' href='"+vals.website+"'>"+vals.website+"</a>";
   // location
-  let location = document.querySelector(".edit-section #personal-details-location");
+  let location = document.querySelector("section #personal-details-location");
   location.innerHTML = vals.location;
   // bio
-  let bio = document.querySelector(".edit-section #personal-details-bio");
-  bio.innerHTML = vals.bio;
+  try {
+    let bio = document.querySelector("section #personal-details-bio");
+    bio.innerHTML = vals.bio;
+  }
+   catch(err) {
+    console.log(err.message);
+  }
 }
 
 // populate downloadable file
@@ -1181,7 +1192,7 @@ function populateProfilePic(vals) {
   if (! vals.profilePic) {
     return;
   }
-  const profilePicContainer = document.querySelector('.edit-section .profile-img div');
+  const profilePicContainer = document.querySelector('section .profile-img div');
   const storageRef = ref(storage, vals.profilePic);
   // get download image ref - don't need this 
   getDownloadURL(storageRef)
@@ -1306,6 +1317,8 @@ function populateSocials(vals) {
     socialContainer.appendChild(container);
   }
 }
+
+
 
 // ======CREATE AND EDIT PROFILE SHOWCASE FUNCTIONS======
 
@@ -1585,7 +1598,7 @@ function getProfileImageUrl(){
 }
 
 
-
+// old check if needed before delete
 // get upload image urls - return an object with all the new upload image urls
 async function getImageUrls(e){
   e.preventDefault();
@@ -1890,42 +1903,34 @@ function getTags(){
   return tags;
 }
 
-// return job form elements
-/* function getJobForm() {
-  const jobDetailsForm = document.querySelector('.jobDetails');
-  let formValues = "";
-  for (let i = 0; i < jobDetailsForm.length; i++) {
-    if (jobDetailsForm.elements[i].name == 'longdescription' || jobDetailsForm.elements[i].name == 'shortdescription') {
-      console.log(jobDetailsForm.elements[i].value);
-      formValues += jobDetailsForm.elements[i].value.replace(/\n\r?/g, '<br>');
-    }
-    else if (jobDetailsForm.elements[i].type != 'checkbox') {
-      formValues += jobDetailsForm.elements[i].name+ " : " +jobDetailsForm.elements[i].value + "<br>";
-    }
+
+// ======ACCOUNT SETTINGS FUNCTIONS======
+
+// disable the availability tag
+function populateAvailability(vals){
+  const available = document.querySelector('.available-tag');
+  if (! vals.available) {
+    available.classList.add("availability-disabled");
+    available.innerHTML = "Not available";
   }
-  return formValues;
 }
- */
-// create preview of job details
-/* function previewJob(e, tags, formValues) {
-  e.preventDefault();
-  document.querySelector(".preview").innerHTML = formValues + "tag: " + tags;
-} */
 
+// delete profile
+async function deleteProfile(uid){
+  console.log(uid);
+  const deleted = await deleteDoc(doc(db, 'users', uid))
+    .then(function(){
+      console.log("user doc deleted");
+    });
 
-
-// enable / disable post job submit btn
-/* function enableSubmitJob() {
-  const tc = document.querySelector("#tc");
-  console.log(tc.checked);
-  if (tc.checked) {
-    const submit = document.querySelector('#submit');
-    submit.active = true;
-    submit.disabled = false;
-  } else {
-    submit.disabled = true;
-  }
-} */
+  const user = auth.currentUser;
+  deleteUser(user).then(function() {
+    console.log("user deleted");
+    window.location.href = "index.html";
+  }).catch(function(error) {
+    console.log("error", error);
+  });
+}
 
 
 //==========================================
@@ -2055,6 +2060,37 @@ window.addEventListener('DOMContentLoaded', function(){
   }
 });
 
+// ACCOUNT SETTINGS PAGE
+if (page == "account-seetings") {
+  console.log("account-seetings  page");
+  let section = document.querySelector("section");
+  // show name on page load on add-profile page
+  onAuthStateChanged(auth, function(user) {
+    if (user) {
+      // User logged in already or has just logged in.
+      console.log("user "+user.uid+" logged in");
+      getCurrentUserDetails(user.uid).then(function(vals){
+        // show page when logged in
+        section.classList.remove("d-none");
+        // populate profile pic in modal
+        populateProfilePic(vals);
+        // populate bio section and available for work
+        populateBio(vals);
+        // available or not
+        populateAvailability(vals);
+      });
+    } 
+  }) 
+
+  const deleteProfileBtn = document.querySelector('#deleteAccount #delete-profile');
+  deleteProfileBtn.addEventListener('click', function(){
+    console.log('clicked delete-profile');
+    deleteProfile(currentUserData.uid);
+  });
+  
+
+
+}
 
 // EDIT PROFILE PAGE edit-profile.html
 if (page == "edit-profile") {
@@ -2390,6 +2426,7 @@ if (page == "job-details") {
 
   }, false)
 }
+
 
 
 

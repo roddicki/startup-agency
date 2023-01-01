@@ -422,16 +422,8 @@ h5{
 	display: inline-block;
   }
 
-  .availiable-tag{
-	padding: 8px 16px;
-	gap: 10px;
-	border-radius: 30px;
-	background: #572F88;
-	margin-right: 10px;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	color: #fff;
-	display: inline-block;
+  .availability-disabled {
+  	background: #cccccc;
   }
 
   .lineheightjob{
@@ -1107,8 +1099,11 @@ header .container-fluid {
 
 .float-right{
 	float:right;
-	margin-right:15px;
-	margin-bottom: 15px;
+	
+}
+
+.btn-primary.btn-padding {
+	padding:15px;
 }
 
 input[type=file]::file-selector-button {
