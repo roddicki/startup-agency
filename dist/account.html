@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="styles/style.css" rel="stylesheet">
+
+  <title>Startup Agency</title>
+</head>
+
+<body data-page="account-seetings" class="d-flex flex-column min-vh-100">
+
+<header id="header">
+  <!-- imports header + nav from src/header.html -->
+</header>
+
+
+<section class="d-none">
+  <div class="container">
+    <!-- basic grid -->
+    <div class="row">
+      <div class="col-lg-4 col-md-12">
+        <div class="content-blocks">
+          <div class="available-tag">
+            Available
+          </div>
+          <div class="text-center">
+            <div class="profile-img d-flex justify-content-center">
+              <div style="width:128px; height:128px; background-size: cover; background-image:url('./assets/img/generic-profile.jpg');" class="rounded-circle">
+              </div>
+            </div> 
+            <div>
+              <h2 id="personal-details-name"><!-- name --></h2>
+            </div>
+            <div>
+              <h3 id="personal-details-title"><!-- title --></h2>
+            </div>
+            <div>
+              <p class="underline" id="personal-details-link"><!-- web site --></p>
+            </div>
+            <div class="col-12 gap">
+              <img src="./assets/img/mapicon.svg"  width="16" height="16">
+              <span id="personal-details-location"><!-- location --></span>
+            </div>
+            <div class="col-12 gap">
+              <a href="edit-profile.html"  class="btn-primary btn-lg btn-padding">Edit profile</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 col-md-12">
+        <div class="row">
+          <div class="content-blocks">
+            <div class="col-12">
+              <h2>Account details</h2>
+            </div>
+            <div class="gap"></div>
+            <div class="col-12 project-showcase-text">
+              General
+            </div>
+            <div class="col-12">
+              <p>This account is connected to: </p>
+            </div>
+            <form class="edit-details-form">
+              <div class="row">
+                <div class="col-6">
+                  <p>Phone number</p>
+                  <input type="number" name="phone" class="form-control signincontent">
+                  <div id="phoneHelp" class="form-text">
+                    Your phone number or email will not be publicly visible on your profile
+                  </div>
+                </div>
+                <div class="col-6">
+                  <p>Email</p>
+                  <input type="text" name="email" class="form-control signincontent">
+                </div>
+                <div class="col-12">
+                  <button type="submit" id="save-details" class="btn-primary btn-lg float-right">Save</button>
+                </div>
+                <div class="col-12 save-success text-end mt-3 text-success d-none">
+                  Successfully saved
+                </div>
+                <div class="col-12 save-error text-end mt-3 text-danger d-none">
+                  Error saving, please try logging in and out again
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="row"> 
+          <div class="content-blocks">
+            <div class="col-12">
+              <h2>Account Settings</h2>
+            </div>
+            <div class="col-md-6 col-sm-12 project-showcase-text">
+              <p>Change Password:</p>
+              <button class="btn-no-background" data-bs-toggle="modal" data-bs-target="#forgot-pass"><u>Click here to reset password</u></button>
+            </div>
+            <div class="col-md-6 col-sm-12 project-showcase-text">
+              <p>Delete Account:</p>
+              <button class="delete-text btn-no-background " data-bs-toggle="modal" data-bs-target="#deleteAccount">Click here to delete your account</button>
+            </div>
+          </div> <!-- content-block -->
+        </div>
+         
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- delete account modal -->
+<div class="modal fade" id="deleteAccount"  tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modalcontentleft">
+      <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Are you sure you want to delete your account
+      </h2>
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
+      </button>
+        <div class="row">
+          <div class="col-sm-12">
+            <p>You are about to permanently delete your account from the freelance agency platform.</p>
+            <p>You can sign back up at any time, however you will have to go through the sign up proccess again.</p>
+          </div>
+          <div class="gap"></div>
+          <div class="col-lg-6 col-md-6 col-sm-12 text-left">
+            <button  class="btn-secondary btn-lg"  data-bs-dismiss="modal">Go back</button>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 ">
+            <button id="delete-profile" class="btn-primary btn-lg btn-delete-account"  data-bs-toggle="modal" data-bs-target="#deleteAccount">Delete</button>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<span id="postjobmodal">
+  <!--Import post job modal-->
+</span>
+
+<span id="signinmodal">
+  <!--Import sign in modal-->
+</span>
+
+<footer id="footer" class="mt-auto">
+  <!-- imports footer from src/footer.html -->
+</footer>
+
+
+  
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!-- custom JS -->
+<script src="scripts/app.bundle.js"></script>
+<!-- event listeners -->
+<script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous"></script>
+<!-- form validation -->
+<script src="scripts/form-validation.js"></script>
+
+</body>
