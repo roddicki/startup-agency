@@ -188,6 +188,17 @@ h5{
 	padding-top:100px;
 }
 
+.home-contact {
+	margin-top: 0;
+    margin-bottom: 30px;
+    padding-bottom: 0;
+    padding-top:100px;
+}
+
+.profile-top {
+	height: 80px;
+}
+
 .about-image{
 	height: 495px;
 	width: 100%;
@@ -414,12 +425,16 @@ h5{
 	padding: 8px 16px;
 	gap: 10px;
 	border-radius: 30px;
-	background: #244F8E;
+	/*background: #244F8E;*/
 	margin-right: 10px;
 	margin-top: 5px;
 	margin-bottom: 5px;
 	color: #fff;
 	display: inline-block;
+  }
+
+  .availability-active {
+  	background: #244F8E;
   }
 
   .availability-disabled {

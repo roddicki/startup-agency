@@ -1,5 +1,5 @@
 
-import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, updateUserDoc, isUserSignedIn, getUserUid, getAllJobData, getAllCurrentJobData, getSingleJob, getAllUserData, resetPassword} from './firebase-library.js';
+import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, updateUserDoc, isUserSignedIn, getUserUid, getAllJobData, getAllCurrentJobData, getSingleJob, getAllUserData, resetPassword, getRandomDocs} from './firebase-library.js';
 
 import {getSkillsTags, getCategories} from './tags-categories.js';
 
@@ -10,7 +10,7 @@ import { initializeApp } from 'firebase/app';
 import { getStorage, ref, uploadBytes, getDownloadURL, getMetadata, uploadString, connectStorageEmulator } from "firebase/storage";
 
 import { getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc, deleteField, doc, query, where, orderBy, getDoc, serverTimestamp, updateDoc, setDoc,  Timestamp, arrayUnion, connectFirestoreEmulator} from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, signInWithPhoneNumber, ActionCodeURL, deleteUser } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, signInWithPhoneNumber, ActionCodeURL, deleteUser, updateEmail } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAq7-QGjZ8O1RVe_seOfdYjVLCjLdwrHYE",
@@ -868,19 +868,13 @@ function showSignedInUser(user, id, forename, surname) {
   // Dashboard dropdown link
   let li = document.createElement("li");
   let a = document.createElement("a");
-  a.className = "dropdown-item dashboard";
-  a.href = 'profile.html?id='+id;
-  a.innerHTML = "Dashboard";
-  li.appendChild(a);
-  ul.appendChild(li);
   // line break
   let hr = document.createElement("hr");
-  ul.appendChild(hr);
   // Folio dropdown link
   li = document.createElement("li");
   a = document.createElement("a");
   a.className = "dropdown-item portfolio";
-  a.href = 'profile.html?id='+id;
+  a.href = 'profile.html?id='+id+ "&preview=true";
   a.innerHTML = "Portfolio profile";
   li.appendChild(a);
   ul.appendChild(li);
@@ -1298,7 +1292,7 @@ function populateSocials(vals) {
     return;
   }
   const icons = {"instagram" : "./assets/img/InstagramSocial.svg", "twitter": "./assets/img/TwitterSocial.svg", "facebook": "./assets/img/WebSocialIcon.svg", "dribble": "./assets/img/WebSocialIcon.svg"};
-  const socialContainer = document.querySelector(".edit-section .socials-details");
+  const socialContainer = document.querySelector("section .socials-details");
   // empty the div to prevent duplication
   socialContainer.innerHTML = "";
   // create and ad social links with icons
@@ -1760,7 +1754,7 @@ function showProfileData(userData) {
 // ======PROFILE FUNCTIONS======
 
 // show profile 
-function showProfile(userData) {
+/*function showProfile(userData) {
   console.log(userData);
   const forename = document.querySelector('.single-profile .forename');
   const surname = document.querySelector('.single-profile .surname');
@@ -1809,21 +1803,29 @@ function showProfile(userData) {
         })
     }
   }
-}
+}*/
 
 
 // add edit btn to current user
 function showEditBtn (userID, paramID) {
+  const backContainer = document.querySelector('section .edit-profile-back-container');
   if (userID == paramID) {
-    //console.log(userID, paramID, "showEditBtn current user id");
-    const container = document.querySelector('.edit');
+    console.log(userID, paramID, "showEditBtn current user id");
+    const btnContainer = document.querySelector('section .edit-profile-btn-container');
     let btn = document.createElement('button');
-    btn.className = "btn btn-primary edit-profile-btn";
+    btn.className = "btn btn-primary btn-lg btn-block float-right";
     btn.innerHTML = "Edit profile";
-    container.appendChild(btn);
+    btnContainer.appendChild(btn);
     btn.addEventListener('click', function (e) {
-      window.location.href = "add-profile.html?id="+userID;
+      window.location.href = "edit-profile.html?id="+userID;
     })
+  }
+  // hide go back to folios if preview
+  if (getParamKey("preview") == "true") {
+    backContainer.innerHTML = "";
+  }
+  else {
+    backContainer.innerHTML = '<a href="#"><i class="bi bi-chevron-left"></i> Back to portfolios</a>';
   }
 }
 
@@ -1912,7 +1914,45 @@ function populateAvailability(vals){
   if (! vals.available) {
     available.classList.add("availability-disabled");
     available.innerHTML = "Not available";
+  } 
+  else {
+    available.classList.add("availability-active");
+    available.innerHTML = "Available for work";
   }
+}
+
+// populate phone and email
+function populateAcccountDetails(vals){
+  const settingsForm = document.querySelector('.edit-details-form');
+  settingsForm.phone.value = vals.phone;
+  settingsForm.email.value = vals.email;
+}
+
+async function saveDetails(uid) {
+  const settingsForm = document.querySelector('.edit-details-form');
+  const successMsg = document.querySelector('.edit-details-form .save-success');
+  const errMsg = document.querySelector('.edit-details-form .save-error');
+  const updated = await updateDoc(doc(db, "users", uid), {
+    phone: settingsForm.phone.value,
+    email: settingsForm.email.value
+  })
+  .then(function(){
+    console.log("successfully updated user doc");
+  })
+  .catch(function(error){
+    console.log("Error: Getting document:", error); 
+  });
+
+  // update login auth email
+  updateEmail(auth.currentUser, settingsForm.email.value).then(function() {
+    // Email updated!
+    console.log("Email updated!");
+    successMsg.classList.remove("d-none");
+  }).catch(function(error) {
+    // An error occurred
+    console.log("Error: updating email:", error); 
+    errMsg.classList.remove("d-none");
+  });
 }
 
 // delete profile
@@ -2051,7 +2091,6 @@ if (signupForm) {
 window.addEventListener('DOMContentLoaded', function(){
   // load category buttons into the post job modal
   createCategoryButtons();
-
   //getTag();
   if(allUserData) {
     getAllUserData(getParam(), function(userData){
@@ -2059,6 +2098,15 @@ window.addEventListener('DOMContentLoaded', function(){
     });
   }
 });
+
+
+// HOME / INDEX PAGE
+if (page == "home") {
+  console.log("home page");
+  getRandomDocs(3).then(function(docs){
+    console.log(docs);
+  });
+}
 
 // ACCOUNT SETTINGS PAGE
 if (page == "account-seetings") {
@@ -2068,7 +2116,6 @@ if (page == "account-seetings") {
   onAuthStateChanged(auth, function(user) {
     if (user) {
       // User logged in already or has just logged in.
-      console.log("user "+user.uid+" logged in");
       getCurrentUserDetails(user.uid).then(function(vals){
         // show page when logged in
         section.classList.remove("d-none");
@@ -2078,17 +2125,28 @@ if (page == "account-seetings") {
         populateBio(vals);
         // available or not
         populateAvailability(vals);
+        // populate phone and email
+        populateAcccountDetails(vals);
       });
     } 
   }) 
 
+  // delete account and profile
   const deleteProfileBtn = document.querySelector('#deleteAccount #delete-profile');
   deleteProfileBtn.addEventListener('click', function(){
-    console.log('clicked delete-profile');
+    //console.log('clicked delete-profile');
     deleteProfile(currentUserData.uid);
   });
-  
 
+  // save edited account details
+  const saveDetailsBtn = document.querySelector('.edit-details-form #save-details');
+  saveDetailsBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    console.log('clicked save details');
+    saveDetails(currentUserData.uid).then(function(){
+      console.log('saved details');
+    });
+  });
 
 }
 
@@ -2256,7 +2314,13 @@ if (page == "edit-profile") {
       })
       
     });
-  })
+  });
+
+  // show client view
+  const clientViewBtn = document.querySelector('#client-view');
+  clientViewBtn.addEventListener('click', function(){
+    window.location.href = "profile.html?id="+ currentUserData.uid + "&preview=true";
+  });
 
   // listen for a page focus change change and use this to send an email to admin
   document.addEventListener("visibilitychange", function(){
@@ -2331,17 +2395,32 @@ if (page == "add-profile") {
 if (page == "single-profile") {
   console.log("profile page");
   // show profile passed as param
-  getUserData(getParam()).then(function(vals){
-      showProfile(vals);
-    });
+  const id = getParamKey("id");
+  getUserData(id).then(function(vals){
+      console.log(vals);
+      // available or not
+      populateAvailability(vals);
+      // populate profile pic in modal
+      populateProfilePic(vals);
+      // populate bio section 
+      populateBio(vals);
+      // populate downloadable file
+      populateDownloadFile(vals);
+      // populate skills 
+      populateSkills(vals);
+      // populate socials section
+      populateSocials(vals);
+      // populate project showcase
+      //populateProjectShowcases(vals);
+  });
   
   // on login add edit my profile btn
   onAuthStateChanged(auth, function(user) {
     if (user) {
-        // User logged in already or has just logged in.
-        console.log("profile page logged in user is", user.uid);
-        showEditBtn(user.uid, getParam());
-      } 
+      // User logged in already or has just logged in.
+      console.log("profile page logged in user is", user.uid);
+      showEditBtn(user.uid, id);
+    } 
   })
 }
 

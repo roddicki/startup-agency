@@ -322,3 +322,30 @@ export function getAllUserData(tag, fn) {
     fn(usersCollection); // callback to 'return' result
   });
 }
+
+// get random docs
+export async function getRandomDocs(n){
+  console.log("docs = " + n);
+  let docs = [];
+  // get all uids & data
+  const querySnapshot = await getDocs(collection(db, "users"));
+  querySnapshot.forEach((doc) => {
+    let obj = {}
+    obj.id = doc.id;
+    let merged = {...obj, ...doc.data()};
+    docs.push(merged);
+    //console.log(doc.data());
+  })
+  // get n random docs
+  const shuffled = docs.sort(() => 0.5 - Math.random());
+  let selected = shuffled.slice(0, n);
+  return selected;
+}
+
+
+
+
+
+
+
+

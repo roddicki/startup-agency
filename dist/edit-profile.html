@@ -30,9 +30,9 @@
 <section class="edit-section">
   <div class="container">
     <div class="row">
-      <div class="col-md-9 col-sm-12"></div>
-      <div class="col-md-3 col-sm-12">
-        <button class="btn btn-primary btn-lg btn-block float-right" data-bs-toggle="modal" data-bs-target="#client-preview">Client preview</button>
+      <div class="col-md-9 col-sm-12 mb-4"></div>
+      <div class="col-md-3 col-sm-12 mb-4">
+        <button class="btn btn-primary btn-lg btn-block float-right" id="client-view">Client view</button>
       </div>
     </div>
 
@@ -107,7 +107,7 @@
         <div class="content-blocks">
           <div class="row">
             <div class="col-12 project-showcase-text">
-              <p>SKILLS CATEGORIES <i class="bi bi-pencil-square float-right cursor-pointer" data-bs-toggle="modal" data-bs-target="#skills-categories"></i></button></p>
+              <p>SKILLS CATEGORIES <i class="bi bi-pencil-square float-right cursor-pointer" data-bs-toggle="modal" data-bs-target="#skills-categories"></i></p>
             </div>
             <div id="skills-categories-list">
               <div class="col-12 placeholder-category">
@@ -166,7 +166,7 @@
         </div>
         <div class="content-blocks">
           <div class="col-12 project-showcase-text">
-            <p>SOCIALS  <i class="bi bi-pencil-square float-right cursor-pointer" data-bs-toggle="modal" data-bs-target="#social-modal"></i></button></p> 
+            <p>SOCIALS <i class="bi bi-pencil-square float-right cursor-pointer" data-bs-toggle="modal" data-bs-target="#social-modal"></i></p> 
           </div>
           
           <div class="row socials-details">
@@ -771,7 +771,7 @@
                   
                 <input type="file" multiple data-max_length="3" accept="image/png, image/gif, image/jpeg, image/jpg" id="modal-image-uploader" class="upload__inputfile image-upload form-control">
                 <div class="invalid-feedback upload-images">
-                  Add up to 3 images (each under 1024kb) per project showcase
+                  Add between 1 and 3 images (each under 1024kb) per project showcase
                 </div>
               </div>
               <div class="upload__img-wrap"></div>
@@ -823,7 +823,6 @@
 <!-- end delete project showcase modal -->
 
 
-
 <span id="postjobmodal">
   <!--Import post job modal-->
 </span>
@@ -843,8 +842,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-<script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<!-- <script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous"></script> -->
 
 <!-- custom JS -->
 <script src="scripts/app.bundle.js"></script>
@@ -855,6 +853,7 @@
 <script src="image-uploader/image-uploader.js"></script>
 
 <script>
+  
   const addShowcaseBtn = document.querySelector('#add-project-showcase');
   addShowcaseBtn.addEventListener('click', function(){
     emptyProjectModal();
@@ -1013,24 +1012,33 @@ function hideSocialDiv2(){
   document.querySelector("#SocialMedia-2-add").style.visibility = "visible";
   document.querySelector("#SocialMedia-2-delete").style.visibility = "visible";
 }; 
-</script>
 
-<script>
+
 const editProjectModal = new bootstrap.Modal(document.querySelector('#editProject'));
-
+// validate edit project modal form
 function validateEditProjectForm(event) {
   const editProjectForm = document.querySelector('.edit-project-form');
+  // get mumber of images
+  const images = document.querySelectorAll('#editProject .upload__img-box');
+  console.log(images.length);
   // Loop over inputs and prevent submission
   //console.log("submit edit project modal clicked");
+  const invalid = document.querySelector('.invalid-feedback.upload-images');
   if (!editProjectForm.checkValidity()) {
     event.preventDefault();
     event.stopPropagation();
     console.log("edit project modal was-NOT-validated");
   }
+  else if (images.length < 1){
+    event.preventDefault();
+    event.stopPropagation();
+    invalid.classList.add('d-block');
+  }
   else {
-     console.log("edit project modal was-validated");
-     editProjectModal.hide();
-     return true;
+    console.log("edit project modal was-validated");
+    invalid.classList.remove('d-block');
+    editProjectModal.hide();
+    return true;
    }
   editProjectForm.classList.add('was-validated');
 }
