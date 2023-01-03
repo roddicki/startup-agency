@@ -120,7 +120,7 @@ export function signInUser(e) {
       console.log("Signed in", cred.user.uid);
       loginForm.reset();
       // go to profile page
-      window.location.href = "profile.html?id="+cred.user.uid;
+      window.location.href = "profile.html?id="+cred.user.uid+"&preview=true";
     })
     .catch(function(err) {
       console.log(err.message);
