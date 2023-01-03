@@ -332,7 +332,7 @@ function confirmDeletion(){
 
 // upload image - argument is an object - {upload url : blob url}
 // inserts a reference to the uploaded image/s into the logged in users profile
-async function uploadImage(urls) {
+/*async function uploadImage(urls) {
   // update user data with image urls
   let docRef = doc(db, 'users', currentUserData.uid);
   // delete image urls from user profile
@@ -383,11 +383,11 @@ async function uploadImage(urls) {
     }
   }
 
-}
+}*/
 
 
 // add to profile 
-function addToProfile(e, tags) {
+/*function addToProfile(e, tags) {
   e.preventDefault()
   const profileForm = document.querySelector('.add-profile');
   let bio = profileForm.bio.value.replace(/\n\r?/g, '<br>');
@@ -406,7 +406,7 @@ function addToProfile(e, tags) {
     // go to profile on completion
     //window.location.href = "index.html";
   });
-}
+}*/
 
 
 
@@ -875,7 +875,7 @@ function showSignedInUser(user, id, forename, surname) {
   a = document.createElement("a");
   a.className = "dropdown-item portfolio";
   a.href = 'profile.html?id='+id+ "&preview=true";
-  a.innerHTML = "Portfolio profile";
+  a.innerHTML = "<i class=\"bi bi-person\"></i> Portfolio profile";
   li.appendChild(a);
   ul.appendChild(li);
   // line break
@@ -886,7 +886,7 @@ function showSignedInUser(user, id, forename, surname) {
   a = document.createElement("a");
   a.className = "dropdown-item account";
   a.href = 'account.html?id='+id;
-  a.innerHTML = "Account settings";
+  a.innerHTML = "<i class=\"bi bi-gear\"></i> Account settings";
   li.appendChild(a);
   ul.appendChild(li);
   // line break
@@ -897,7 +897,7 @@ function showSignedInUser(user, id, forename, surname) {
   a = document.createElement("a");
   a.className = "dropdown-item sign-out";
   a.href = 'profile.html?id='+id;
-  a.innerHTML = "Sign Out";
+  a.innerHTML = "<i class=\"bi bi-box-arrow-right\"></i> Sign Out";
   li.appendChild(a);
   ul.appendChild(li);
   a.addEventListener('click', signOutUser);
@@ -1453,7 +1453,7 @@ function getPreloadedImgs(){
 
 // OLD
 // watch for new uploaded images add edit caption icon
-function uploadImageWatcher(){
+/*function uploadImageWatcher(){
   const captionImg = document.querySelector('#caption-image');
   // add edit icon to each new upload image
   const observer = new MutationObserver(function(mutations_list) {
@@ -1506,11 +1506,11 @@ function uploadImageWatcher(){
   });
 
   observer.observe(document.querySelector("#image-uploader"), { subtree: true, childList: true });
-}
+}*/
 
 // OLD
 // save edited caption from caption modal to hidden input for upload image
-function saveCaption(e) {
+/*function saveCaption(e) {
 	e.preventDefault();
 	// copy value from caption modal input to hidden imput
 	const captionModalInput = document.querySelector('#captionModal #caption');
@@ -1519,10 +1519,10 @@ function saveCaption(e) {
 	hiddenInput.value = captionModalInput.value;
 	// close modal
 	$("#captionModal").modal("hide");	
-}
+}*/
 
 // save edited hero switch from caption modal to hidden input for upload image
-function saveHero(e) {
+/*function saveHero(e) {
   e.preventDefault();
   // copy switch value from caption modal input to hidden imput
   const heroModalSwitch = document.querySelector('#captionModal #hero-image-switch');
@@ -1539,10 +1539,10 @@ function saveHero(e) {
       }
     }
   }
-}
+}*/
 
 // OLD
-// show profile preview
+/*// show profile preview
 function showPreview(selectedTags){
   const profileForm = document.querySelector('.add-profile');
   const gallery = document.querySelector('.gallery');
@@ -1580,7 +1580,7 @@ function showPreview(selectedTags){
     data += `${property}: ${currentUserData[property]}<br>`
   }
   userData.innerHTML = data;
-}
+}*/
 
 
 // get upload image portrait url - return an object with all the new upload image urls
@@ -1594,7 +1594,7 @@ function getProfileImageUrl(){
 
 // old check if needed before delete
 // get upload image urls - return an object with all the new upload image urls
-async function getImageUrls(e){
+/*async function getImageUrls(e){
   e.preventDefault();
   const suffix = {'image/jpeg':'jpg', 'image/png':'png', 'image/gif':'gif'};
   // all upload images
@@ -1635,11 +1635,11 @@ async function getImageUrls(e){
   }
   //console.log(images);
   return images; 
-}
+}*/
 
 // OLD
 // show all existing profile data in form fields
-function showProfileData(userData) {
+/*function showProfileData(userData) {
   console.log("show user data", userData.tags);
   const welcomeMsg = document.querySelector('.welcome-msg');
   const profileForm = document.querySelector('.add-profile');
@@ -1747,11 +1747,10 @@ function showProfileData(userData) {
         })
     }
   }
-}
+}*/
 
 
 
-// ======PROFILE FUNCTIONS======
 
 // show profile 
 /*function showProfile(userData) {
@@ -1805,6 +1804,7 @@ function showProfileData(userData) {
   }
 }*/
 
+// ======PROFILE FUNCTIONS======
 
 // add edit btn to current user
 function showEditBtn (userID, paramID) {
@@ -1835,7 +1835,7 @@ function showEditBtn (userID, paramID) {
 
 // ======POST JOB FUNCTIONS======
 // create tag checkboxes
-function createTagCheckboxes() {
+/*function createTagCheckboxes() {
   let checkboxContainer = document.querySelector("#tag-checkboxes");
   for (var i = 0; i < tags.length; i++) {
     let str = tags[i].replaceAll("-", ' ');
@@ -1862,11 +1862,11 @@ function createTagCheckboxes() {
 
     checkboxContainer.appendChild(div);
   }
-}
+}*/
 
 
 // add tag badge on change
-function addTagBadge(){
+/*function addTagBadge(){
   const tagList = document.querySelector('#tag-list');
   let name = this.dataset.label;
   let checkbox = document.querySelector("input[data-label='"+name+"']");
@@ -1889,11 +1889,11 @@ function addTagBadge(){
 
     tagList.appendChild(badge);
   }
-}
+}*/
 
 
 // return checked tags
-function getTags(){
+/*function getTags(){
   let tags = [];
   // get tags
   const tagCheckboxes = document.querySelector('#tag-checkboxes').getElementsByTagName('input');
@@ -1903,7 +1903,7 @@ function getTags(){
     }
   }
   return tags;
-}
+}*/
 
 
 // ======ACCOUNT SETTINGS FUNCTIONS======
@@ -2335,7 +2335,7 @@ if (page == "edit-profile") {
 
 
 // ADD PROFILE PAGE add-profile.html
-if (page == "add-profile") {
+/*if (page == "add-profile") {
   console.log("add-profile page");
   // show name on page load on add-profile page
   onAuthStateChanged(auth, function(user) {
@@ -2388,7 +2388,7 @@ if (page == "add-profile") {
       });
   }); 
 
-}
+}*/
 
 
 // SHOW PROFILE
