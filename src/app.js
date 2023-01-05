@@ -104,6 +104,35 @@ function emailSentConfirmation() {
   thankYouTick.style.display = "inline";
 }
 
+// HOME PAGE FUNCTIONS
+
+// create graduate preview cards
+async function createGradPreview(docsArray) {
+  console.log(docsArray);
+  const container = document.querySelector('#grad-preview-container');
+  for (var i = 0; i < docsArray.length; i++) {
+    console.log(docsArray[i].id, docsArray[i].forename+' '+docsArray[i].surname);
+    let location = "<p></p>";
+    if (docsArray[i].location) {
+      location = '<p><img src="assets/img/mapicon.svg"> '+docsArray[i].location+'</p>';
+    }
+    console.log(location);
+    let available = '<p class="cant-work"><i class="bi bi-circle-fill"></i> Not available</p>';
+    if (docsArray[i].available && docsArray[i].available == true){
+      available = '<p class="can-work"><i class="bi bi-circle-fill"></i> Available for work</p>';
+    }
+    console.log(available);
+
+    let previewCard = '<!-- grad preview card --> <div class="grad-preview-card col-lg-4 col-md-6 col-sm-12"> <div class="grad-preview-block"> <div class="row"> <div class="col-xl-auto col-sm-4 col-4 padding-left-0"> <div style="width:85px; height:85px; background-size:cover; background-image:url(\'assets/img/jamie-profile-img/test-profile.jpg\');" class="rounded-circle"> </div> </div> <div class="col-xl-auto col-sm-8 col-8 grad-preview"> <h5><Strong class="grad-preview-name">'+docsArray[i].forename+' '+docsArray[i].surname+'</Strong></h5> <h6>Fashion Designer</h6> '+location+available+' </div> </div> <div class="lineheightjob row mt-3"> <div class="col grad-preview-images-container"> <img class="grad-preview-images" src="assets/img/jamie-profile-img/stealthvr.jpg"> </div> <div class="col"> <img class="grad-preview-images" src="assets/img/jamie-profile-img/speedrunning.jpg"> </div> </div> <div class="job-footer row"> <div class="col-12 padding-left-0"> <a href="profile.html?id='+docsArray[i].id+'">View more details</a> </div> </div> </div> </div> <!-- grad preview card -->';
+
+    container.innerHTML += previewCard;
+
+    // create array of images
+  }
+}
+
+
+
 // POST A JOB FUNCTIONS
 // create doc for job 
 function createJobDoc() {
@@ -2104,7 +2133,7 @@ window.addEventListener('DOMContentLoaded', function(){
 if (page == "home") {
   console.log("home page");
   getRandomDocs(3).then(function(docs){
-    console.log(docs);
+    createGradPreview(docs);
   });
 }
 
