@@ -396,7 +396,6 @@ h5{
 	margin-bottom: 5px;
 	height:380px;
 	position: relative;
-	
   }
 
   .filtertag{
@@ -448,8 +447,12 @@ h5{
   .job-footer{
 	position: absolute;
 	bottom: 20px;
-		
   }
+
+  .job-footer a:link {
+	 text-decoration: underline;
+   }
+
 
   .filter-input{
 	background: #FFFFFF;
@@ -821,22 +824,59 @@ h5{
 	width:4em !important;
 }
 
+.grad-preview-block{
+	box-sizing: border-box;
+	padding: 30px;
+	gap: 24px;
+	background: rgba(255, 255, 255, 0.95);
+	border: 1px solid #EDEBEE;
+	border-radius: 20px;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	height:300px;
+	position: relative;
+}
 
 .grad-preview{
 	line-height: 5px;
+	overflow-x: hidden;
+	white-space: nowrap;
+}
+
+.grad-preview p {
+	font-size: 12px;
+	margin-bottom: 6px;
+}
+
+.grad-preview h6 {
+	margin-bottom: 0.3rem;
+}
+
+.grad-preview-name {
+	font-size: 18px;
+}
+
+.grad-preview-images-container{
+	padding-left: 0;
+	padding-right: 0;
 }
 
 .grad-preview-images{
 	width: 100%;
-	border-radius: 10px;
-	height: 120px;
-	object-fit: cover;
+    border-radius: 10px;
+    height: 90px;
+    object-fit: cover;
 }
 
-	.form-check-label-profile{
-		margin-top: 7px;
-    	margin-left: 10px;
-	}
+.padding-left-0 {
+   	padding-left: 0;
+}
+
+.form-check-label-profile{
+	margin-top: 7px;
+	margin-left: 10px;
+}
+
 .underline{
 	text-decoration: underline;
 	color:#7E7984;
