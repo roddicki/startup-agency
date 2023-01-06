@@ -870,6 +870,7 @@ h5{
     border-radius: 10px;
     height: 90px;
     object-fit: cover;
+    padding: 5px;
 }
 
 .padding-left-0 {
