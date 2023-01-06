@@ -246,51 +246,86 @@
       <h3 class="text-center">Get in touch</h3>
       <p class="text-center">Do you have any questions we haven’t covered? Get in touch and our admin team will reply shortly</p>
       
-      <form class="row g-3 needs-validation test-form2" novalidate> 
+      <form class="row g-3 needs-validation send-home-form" novalidate> 
         <div class="col-md-6 col-sm-12">
           <label for="validationCustom01" class="form-label">First name*</label>
-          <input type="text" class="form-control" id="validationCustom01" required>
+          <input type="text" class="form-control" id="first-name-contact-home" required>
           <div class="invalid-feedback">
               Please add your forename.
             </div>
         </div>
         <div class="col-md-6 col-sm-12">
           <label for="validationCustom02" class="form-label">Last name*</label>
-          <input type="text" class="form-control" id="validationCustom02" required>
+          <input type="text" class="form-control" id="last-name-contact-home" required>
           <div class="invalid-feedback">
               Please add your surname.
             </div>
         </div>
         <div class="col-md-6 col-sm-12">
           <label for="validationCustom03" class="form-label">Email*</label>
-          <input type="email" name="email"  class="form-control" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+          <input type="email" name="email"  class="form-control" id="email-contact-home" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
           <div class="invalid-feedback">
             Please provide a valid Email.
           </div>
         </div>
         <div class="col-md-6 col-sm-12">
           <label for="validationCustom03" class="form-label">Phone*</label>
-          <input type="tel" class="form-control" id="validationCustom03" required>
+          <input type="number" class="form-control" id="phone-contact-home">
           <div class="invalid-feedback">
             Please provide a valid phone number.
           </div>
         </div>
         <div class="col-md-12" id="general-message">
           <label for="validationCustom04" class="form-label">General message*</label>
-          <textarea type="text" class="form-control" id="validationCustom07" rows="3" required></textarea>
+          <textarea type="text" class="form-control" id="genral-message-contact-home" rows="3" required></textarea>
           <div class="invalid-feedback">
               Please tell us about the job
             </div>
         </div>
         <div class="gap"></div>
         <div class="col-12">
-          <button class="btn-primary btn-lg float-right">Send Message</button>
+          <button type="button" class="btn-primary btn-lg float-right" id="submit-home-message">Send Message</button>
         </div>
         </form>
     </div>
 </div>
 </div>
+
 </section>
+
+<!--Modal for submitted job-->
+<div class="modal fade" id="home-submitted-form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+        <img src="/dist/assets/img/Tickcircle.svg" height="150">
+        <div class="row">
+          <div class="col-12">
+        <h2 class="modal-title signinheader modalheaddrmid" id="exampleModalLabel">Thank you for your submission!</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <p>
+              (TEXT NEEDS UPDATING)If your application and stiwdio portfolio are what the client is looking for, we will contact you to set up next steps and connect you to the client.
+            </p>
+            <p>
+              If you’re not successful with this one - don’t worry! There will soon be another opportunity to apply for! Keep browsing the job board and check your emails regurarly as we will send matching job briefs to your inbox.
+            </p>
+      </div>
+      </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="set-content-right">
+              <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-dismiss="modal">Close</button>
+              
+            </div>
+          </div>
+        </div>
+        
+    </div>
+   </div>
+</div>
 
 <span id="postjobmodal">
   <!--Import post job modal-->
@@ -305,7 +340,7 @@
 </footer>
 
 
-  
+
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -317,4 +352,29 @@
 <!-- form validation -->
 <script src="scripts/form-validation.js"></script>
 
+<script>
+  //step 1 registration validaiton
+  const SendHomeForm = document.querySelector('.send-home-form');
+  const SendHomeSubmit = document.querySelector('#submit-home-message');
+  const ContactedHomeModal = new bootstrap.Modal(document.querySelector('#home-submitted-form'));
+
+ 
+ 
+  // Loop over inputs and prevent submission
+  SendHomeSubmit.addEventListener('click', function (event) {
+    console.log("modal 1 submit clicked");
+    if (!SendHomeForm.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("modal 1 was-NOT-validated");
+    }
+    else {
+      console.log("modal 1 was-validated");
+      ContactedHomeModal.show();
+     
+    }
+    SendHomeForm.classList.add('was-validated');
+  }
+                                     , false)
+</script>
 </body>
