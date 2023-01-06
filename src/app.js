@@ -116,19 +116,62 @@ async function createGradPreview(docsArray) {
     if (docsArray[i].location) {
       location = '<p><img src="assets/img/mapicon.svg"> '+docsArray[i].location+'</p>';
     }
-    console.log(location);
     let available = '<p class="cant-work"><i class="bi bi-circle-fill"></i> Not available</p>';
     if (docsArray[i].available && docsArray[i].available == true){
       available = '<p class="can-work"><i class="bi bi-circle-fill"></i> Available for work</p>';
     }
-    console.log(available);
-
-    let previewCard = '<!-- grad preview card --> <div class="grad-preview-card col-lg-4 col-md-6 col-sm-12"> <div class="grad-preview-block"> <div class="row"> <div class="col-xl-auto col-sm-4 col-4 padding-left-0"> <div style="width:85px; height:85px; background-size:cover; background-image:url(\'assets/img/jamie-profile-img/test-profile.jpg\');" class="rounded-circle"> </div> </div> <div class="col-xl-auto col-sm-8 col-8 grad-preview"> <h5><Strong class="grad-preview-name">'+docsArray[i].forename+' '+docsArray[i].surname+'</Strong></h5> <h6>Fashion Designer</h6> '+location+available+' </div> </div> <div class="lineheightjob row mt-3"> <div class="col grad-preview-images-container"> <img class="grad-preview-images" src="assets/img/jamie-profile-img/stealthvr.jpg"> </div> <div class="col"> <img class="grad-preview-images" src="assets/img/jamie-profile-img/speedrunning.jpg"> </div> </div> <div class="job-footer row"> <div class="col-12 padding-left-0"> <a href="profile.html?id='+docsArray[i].id+'">View more details</a> </div> </div> </div> </div> <!-- grad preview card -->';
-
+    // create card
+    let previewCard = '<!-- grad preview card --> <div id="id-'+docsArray[i].id+'" class="grad-preview-card col-lg-4 col-md-6 col-sm-12"> <div class="grad-preview-block"> <div class="row"> <div class="col-xl-auto col-sm-4 col-4 padding-left-0"> <div style="width:85px; height:85px; background-size:cover; background-image:url(\'assets/img/generic-profile.jpg\');" class="rounded-circle profile-pic"> </div> </div> <div class="col-xl-auto col-sm-8 col-8 grad-preview"> <h5><Strong class="grad-preview-name">'+docsArray[i].forename+' '+docsArray[i].surname+'</Strong></h5> <h6>Fashion Designer</h6> '+location+available+' </div> </div> <div id="images-container" class="lineheightjob row mt-3">  </div> <div class="job-footer row"> <div class="col-12 padding-left-0"> <a href="profile.html?id='+docsArray[i].id+'">View more details</a> </div> </div> </div> </div> <!-- grad preview card -->';
+    // insert into page
     container.innerHTML += previewCard;
-
-    // create array of images
   }
+  // insert profile pic 
+  for (var i = 0; i < docsArray.length; i++) {
+    // insert profile pic
+    if (docsArray[i].profilePic != null) {
+      const profilePicContainer = document.querySelector('#id-'+docsArray[i].id+' .profile-pic');
+      const storageRef = ref(storage, docsArray[i].profilePic);
+      // get download image ref - don't need this 
+      getDownloadURL(storageRef)
+        .then(function(url) {
+          //console.log(url);
+          // add to modal as background image
+          profilePicContainer.style.backgroundImage = "url("+url+")";
+        });
+    }
+  }
+  // get project images add to card
+  for (var i = 0; i < docsArray.length; i++) {
+    // if projects
+    if (docsArray[i].projects != null) {
+      //console.log(docsArray[i].id, docsArray[i].forename+' '+docsArray[i].surname);
+      let projects = docsArray[i].projects;
+      //console.log(projects);
+      let j = 0;
+      // get key value for first 2 projects
+      for (const [key, value] of Object.entries(projects)) {
+        j++;
+        try {
+          if (j < 3) {
+            //console.log(key, value.images[0]);
+            const projectPicContainer = document.querySelector('#id-'+docsArray[i].id+' #images-container');
+            const storageRef = ref(storage, value.images[0]);
+            // get download image ref - don't need this 
+            getDownloadURL(storageRef)
+              .then(function(url) {
+                //console.log(url);
+                // add to card as col + image
+                projectPicContainer.innerHTML += '<div class="col grad-preview-images-container"> <img class="grad-preview-images" src="'+url+'">';
+              });
+          }
+        }
+        catch(err) {
+          console.log(err);
+        } 
+      }
+    }
+  }
+
 }
 
 
