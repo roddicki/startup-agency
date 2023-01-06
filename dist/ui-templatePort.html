@@ -45,7 +45,7 @@
             </div>
             <div class="col-12 gap"><img src="./assets/img/mapicon.svg"  width="16" height="16">  Cardiff, Wales</div>
             <div class="d-grid gap">
-              <button class="btn btn-primary btn-lg btn-block" data-bs-toggle= "modal" data-bs-target="#contact">Message / Propose job</button>
+              <button class="btn btn-primary btn-lg btn-block" data-bs-toggle= "modal" data-bs-target="#grad-message-modal">Message / Propose job</button>
             </div>
           </div>
             <div class="gap">
@@ -183,17 +183,17 @@
                   <div class="col-lg-12 col-md-4 col-sm-4 col-12 text-center ">
                   <button type="button" data-bs-target="#carouselslider1" class="active img-thumbnail"
                       data-bs-slide-to="0">
-                      <img src="/dist/assets/img/jamie-profile-img/sweetdreams1.png" alt="" class="d-block w-100 rounded-border carousel-thumbnail-size">
+                      <img src="/dist/assets/img/jamie-profile-img/sweetdreams1.png" alt="" class="d-block w-100 carousel-thumbnail-size rounded-border">
                   </button>
                 </div>
                 <div class="col-lg-12 col-md-4 col-sm-4 col-12 text-center ">
-                  <button type="button" data-bs-target="#carouselslider1" class="img-thumbnail" data-bs-slide-to="1">
-                      <img src="/dist/assets/img/jamie-profile-img/sweetdreams2.png" alt="" class="d-block w-100 rounded-border carousel-thumbnail-size">
+                  <button type="button" data-bs-target="#carouselslider1" class="img-thumbnail " data-bs-slide-to="1">
+                      <img src="/dist/assets/img/jamie-profile-img/sweetdreams2.png" alt="" class="d-block w-100 carousel-thumbnail-size rounded-border">
                   </button>
                 </div>
                   <div class="col-lg-12 col-md-4 col-sm-4 col-12 text-center ">
                   <button type="button" data-bs-target="#carouselslider1" class="img-thumbnail   " data-bs-slide-to="2">
-                      <img src="/dist/assets/img/jamie-profile-img/sweetdreams3.png" alt="" class="d-block w-100 rounded-border carousel-thumbnail-size">
+                      <img src="/dist/assets/img/jamie-profile-img/sweetdreams3.png" alt="" class="d-block w-100  carousel-thumbnail-size rounded-border">
                   </button>
                 </div>
                 </div>
@@ -440,89 +440,95 @@
   </div>
 </section>
 <!--MessageModal-->
-<div class="modal fade" id="contact" tabindex="-1"  aria-hidden="true">
+
+<div class="modal fade" id="grad-message-modal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modalcontentleft">
-      
-        <h2 class="modal-title signinheader modalheaddrapply">Contact stiwdio member</h2>
-        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div class="row">
-          
-          <form class="row g-3 needs-validation test-form2" novalidate>
-            <p class="project-showcase-text">PERSONAL DETAILS</p> 
-            <div class="col-md-6 col-sm-12">
-              <label for="validationCustom01" class="form-label">First name*</label>
-              <input type="text" class="form-control" id="validationCustom01" required>
-              <div class="invalid-feedback">
-                  Please add your forename.
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-12">
-              <label for="validationCustom02" class="form-label">Last name*</label>
-              <input type="text" class="form-control" id="validationCustom02" required>
-              <div class="invalid-feedback">
-                  Please add your surname.
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-12">
-              <label for="validationCustom03" class="form-label">Email*</label>
-              <input type="email" name="email"  class="form-control" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
-              <div class="invalid-feedback">
-                Please provide a valid Email.
-              </div>
-            </div>
-            <div class="col-md-6 col-sm-12">
-              <label for="validationCustom03" class="form-label">Phone*</label>
-              <input type="number" class="form-control" id="validationCustom03" required>
-              <div class="invalid-feedback">
-                Please provide a valid phone number.
-              </div>
-            </div>
-            </form>
-           <!--Put button for job bfeif thingy on figma here -->
-           <div class="gap"></div>
-           <div class="row">
-            <p class="project-showcase-text">MESSAGE DETAILS</p> 
-              <form class="row g-3 needs-validation test-form2" novalidate>
-              <div class="col-lg-6 col-md-12 col-sm-12">
-                <div class="btn btn-primary message-portfolio-button" id="general-button">Send general message</div>
-              </div>
-              <div class="col-lg-6 col-md-12 col-sm-12">
-                <div class="btn btn-primary message-portfolio-button" id="propose-button">Propose Job breif</div>
-              </div>
-           </div>
-           <div class="gap"></div>
-           <!--This is for the genral message-->
-            <div class="col-md-12" id="general-message">
-              <label for="validationCustom04" class="form-label">General message*</label>
-              <textarea type="text" class="form-control" id="validationCustom07" rows="3" required></textarea>
-              <div class="invalid-feedback">
-                  Please tell us about the job
-                </div>
-            </div>
 
-              <!--This is the Propose job breif-->
-          <div class="propose-job" id="propose-job">
-            <div class="row">
-            <form class="g-3 needs-validation test-form1" novalidate>
-              <div class="col-md-12">
-                <label for="validationCustom06" class="form-label">Job title*</label>
-                <input type="text" class="form-control" id="validationCustom06" required>
-                <div class="invalid-feedback">
-                    Please add a job title
+      <h2 class="modal-title signinheader modalheaddrapply">Contact stiwdio member</h2>
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="row">
+
+        <form class="row g-3 needs-validation send-grad-message" novalidate>
+          <p class="project-showcase-text">PERSONAL DETAILS</p>
+          <div class="col-md-6 col-sm-12">
+
+            <label for="validationCustom01" class="form-label">First name*</label>
+            <input type="text" class="form-control" id="first-name-contact-grad" required>
+            <div class="invalid-feedback">
+              Please add your forename.
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <label for="validationCustom02" class="form-label">Last name*</label>
+            <input type="text" class="form-control" id="second-name-contact-grad" required>
+            <div class="invalid-feedback">
+              Please add your surname.
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <label for="validationCustom03" class="form-label">Email*</label>
+            <input type="email" name="email" class="form-control" id="email-contact-grad" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+            <div class="invalid-feedback">
+              Please provide a valid Email.
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <label for="validationCustom03" class="form-label">Phone*</label>
+            <input type="number" class="form-control" id="phone-contact-grad" required>
+            <div class="invalid-feedback">
+              Please provide a valid phone number.
+            </div>
+          </div>
+          <!--This is for the genral message-->
+          <div class="col-md-12" id="general-message">
+            <label for="validationCustom04" class="form-label">General message*</label>
+            <textarea type="text" class="form-control" id="general-message-contact-grad" rows="3" required></textarea>
+            <div class="invalid-feedback">
+              Please tell us about the job
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="set-content-right gap">
+              <button type="button" class="btn btn-secondary btn-lg btn-block apply-btn" data-bs-dismiss="modal">Back</button>
+              <button type="button" id="submit-grad-message" class="btn btn-primary btn-lg btn-block apply-btn" >Submit</button>
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+              <!--This is the Old Propose job breif-->
+              <!-- <div class="propose-job" id="propose-job">
+                <div class="row">
+                <form class="g-3 needs-validation test-form1" novalidate>
+                  <div class="col-md-12">
+                    <label for="validationCustom06" class="form-label">Job title*</label>
+                    <input type="text" class="form-control" id="validationCustom06" required>
+                    <div class="invalid-feedback">
+                        Please add a job title
+                      </div>
                   </div>
-              </div>
-              <div class="gap"></div>
-              <div class="col-md-12">
-                <label for="validationCustom04" class="form-label">Company name*</label>
-                <input type="text" class="form-control" id="validationCustom07" required>
-                <div class="invalid-feedback">
-                    Please add your company name
+                  <div class="gap"></div>
+                  <div class="col-md-12">
+                    <label for="validationCustom04" class="form-label">Company name*</label>
+                    <input type="text" class="form-control" id="validationCustom07" required>
+                    <div class="invalid-feedback">
+                        Please add your company name
+                      </div>
                   </div>
-              </div>
-  
+                  <div class="col-12">
+                  
+                 </div> 
+                </div>
+                       
+          </div> -->
+
               <!--Completion radios -->
-              <div class="col-md-6 col-sm-12 gap">
+              <!-- <div class="col-md-6 col-sm-12 gap">
                 <div class="form-check">
                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="Set-budget-radio">
                 <label class="form-check-label" for="flexRadioDefault1">
@@ -601,20 +607,43 @@
               Please tell us about the job
             </div>
         </div>
-      </div>
-     </div>
+      </div> -->
+     
         <!--end of propose job brief-->    
+  
+<!--Modal for submitted job-->
+<div class="modal fade" id="grad-contact-submitted" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+        <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+        <img src="/dist/assets/img/Tickcircle.svg" height="150">
+        <div class="row">
           <div class="col-12">
-             <div class="set-content-right gap">
-                  <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-target="#postmodal" data-bs-dismiss="modal" >Back</button>
-                  <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-dismiss="modal" >Submit</button>
-             </div>
-          </div> 
+        <h2 class="modal-title signinheader modalheaddrmid" id="exampleModalLabel">Thank you for your submission!</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <p>
+              (TEXT NEEDS UPDATING)If your application and stiwdio portfolio are what the client is looking for, we will contact you to set up next steps and connect you to the client.
+            </p>
+            <p>
+              If you’re not successful with this one - don’t worry! There will soon be another opportunity to apply for! Keep browsing the job board and check your emails regurarly as we will send matching job briefs to your inbox.
+            </p>
+      </div>
+      </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="set-content-right">
+              <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#submitted">Close</button>
+              <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#submitted" data-bs-dismiss="modal" >Return to portfolio</button>
+            </div>
+          </div>
+        </div>
+        
       </div>
     </div>
   </div>
-</div>
-
 
 
 
@@ -654,7 +683,30 @@ items.forEach((el) => {
 })
 
 </script>
-
+<script>
+  //step 1 registration validaiton
+  const SendGradMessage = document.querySelector('.send-grad-message');
+  const SendGradSubmit = document.querySelector('#submit-grad-message');
+  const SendGradModal = new bootstrap.Modal(document.querySelector('#grad-message-modal'));
+  const ContactedGradModal = new bootstrap.Modal(document.querySelector('#grad-contact-submitted'));
+  SendGradModal.show();
+  // Loop over inputs and prevent submission
+  SendGradSubmit.addEventListener('click', function (event) {
+    console.log("modal 1 submit clicked");
+    if (!SendGradMessage.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("modal 1 was-NOT-validated");
+    }
+    else {
+      console.log("modal 1 was-validated");
+      SendGradModal.hide();
+     ContactedGradModal.show();
+    }
+    SendGradMessage.classList.add('was-validated');
+  }
+                                     , false)
+</script>
 
 
 
@@ -766,6 +818,8 @@ items.forEach((el) => {
 
 ;
 </script>
+
+
 
 <!-- custom JS -->
 <script src="scripts/app.bundle.js"></script>
