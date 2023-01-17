@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <!-- carousel -->
+  <link rel="stylesheet" href="carousel/splide.min.css">
   <link href="styles/style.css" rel="stylesheet">
 
   <title>Startup Agency</title>
@@ -117,56 +119,99 @@
         <div class="row content-blocks">
 
           <div class="col-sm-8 col-md-8 col-lg-8 project-showcase-text">
-            <p>PROJECT SHOWCASE (0)</p>
+            <p>PROJECT SHOWCASES</p>
           </div>
           <div class="col-sm-4 col-md-4 col-lg-4 d-grid">
             <!-- <button class="btn btn-primary btn-lg btn-block">Manage projects</button> -->
           </div>
 
-          <div class="container">
-            <div class="row">
-              <div class="col-3">
-                <img src="/dist/assets/img/pexels-mikhail-fesenko-9553909.jpg" class="portfolio-headder-img" id="project-img1">
-              </div>
-              <div class="col-3">
-                <img src="/dist/assets/img/jamie-profile-img/rexit.png" class="portfolio-headder-img" id="project-img2">
-              </div>
-              <div class="col-3">
-                <img src="/dist/assets/img/jamie-profile-img/primetime.png" class="portfolio-headder-img" id="project-img3">
-              </div>
-              <div class="col-3">
-                <img src="/dist/assets/img/jamie-profile-img/idq.png" class="portfolio-headder-img" id="project-img4">
+          
+          <div class="container" id="project-showcase-nav">
+            <!-- project showcase nav -->
+            <div class="splide" aria-label="Portfolio navigation">
+              <div class="splide__track">
+                <ul class="splide__list">
+                  <li class="splide__slide">
+                    <img src="assets/img/pexels-mikhail-fesenko-9553909.jpg" class="portfolio-header-img" id="project-img1" onclick="showcaseShow('project1', this);">
+                  </li>
+                  <li class="splide__slide">
+                    <img src="assets/img/jamie-profile-img/rexit.png" class="portfolio-header-img" id="project-img2" onclick="showcaseShow('project2', this);">
+                  </li>
+                  <li class="splide__slide">
+                    <img src="assets/img/jamie-profile-img/primetime.png" class="portfolio-header-img" id="project-img3" onclick="showcaseShow('project3', this);">
+                  </li>
+                  <li class="splide__slide">
+                    <img src="assets/img/jamie-profile-img/idq.png" class="portfolio-header-img" id="project-img4" onclick="showcaseShow('project4', this);">
+                  </li>
+                </ul>
               </div>
             </div>
+            <!-- end project showcase nav -->
           </div>
-          <hr>
-          </hr>
-          <div class="gap"></div>
 
-          <!--Project 1-->
-          <div class="project1" id="project1">
-            <div class="row text-center">
-              <div class="col-sm-3 col-md-3 col-lg-3">
-                <a class="text-nowrap" href="#">
-                  <p><i class="bi bi-chevron-left"></i> Previous Project </p>
-                </a>
+          <hr>
+          
+          <!-- showcase -->
+          <div class="project1 project-showcase" id="id-hn6au">
+            <div class="row text-center my-5">
+              <div class="col-3"> <a class="text-nowrap" href="#"><i class="bi bi-chevron-left"></i> Previous</a> </div>
+              <div class="col-6 justify-content-center">
+                <h3><b>UX for The BBC</b></h3>
               </div>
-              <div class="col-sm-6 col-md-6 col-lg-6 justify-content-center">
-                <h3><b>Sweet Dreams</b></h3>
-              </div>
-              <div class="col-sm-3 col-md-3 col-lg-3">
-                <a class="text-nowrap" href="#">
-                  <p> Next project <i class="bi bi-chevron-right"></i></p>
-                </a>
+              <div class="col-3"> <a class="text-nowrap" href="#">Next <i class="bi bi-chevron-right"></i></a> </div>
+            </div>
+            <!--carousel-->
+            <div id="carouselslider-id-hn6au" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-showcase-container">
+                <!-- hero flex col -->
+                <div class="carousel-showcase-hero pe-2">
+                  <div class="carousel-inner rounded-border">
+                    <div class="carousel-item active"><img id="hero-0-id-hn6au" src="https://firebasestorage.googleapis.com/v0/b/studio-freelancer-agency.appspot.com/o/images%2FbvVwQYr7ErUAsQvF27wkf43YohI2%2Fimg-project-showcase-3gwp9.jpeg?alt=media&amp;token=e2169a94-c8ba-4d59-bc2a-f6368c332c3e" alt="UX for The BBC thumbnail image" class="d-block w-100 carousel-main-size"></div>
+                    <div class="carousel-item"><img id="hero-1-id-hn6au" src="https://firebasestorage.googleapis.com/v0/b/studio-freelancer-agency.appspot.com/o/images%2FbvVwQYr7ErUAsQvF27wkf43YohI2%2Fimg-project-showcase-202px.jpeg?alt=media&amp;token=4b1fa205-2754-403b-9934-1255e57c59fa" alt="UX for The BBC thumbnail image" class="d-block w-100 carousel-main-size"></div>
+                    <div class="carousel-item"><img id="hero-2-id-hn6au" src="https://firebasestorage.googleapis.com/v0/b/studio-freelancer-agency.appspot.com/o/images%2FbvVwQYr7ErUAsQvF27wkf43YohI2%2Fimg-project-showcase-wan9a.jpeg?alt=media&amp;token=3b625bf8-05c1-48d4-939f-66498cdccbec" alt="UX for The BBC thumbnail image" class="d-block w-100 carousel-main-size"></div>
+                  </div>
+                </div> <!-- thumb flex col -->
+                <div class="carousel-showcase-thumbs">
+                  <!-- Indicator start -->
+                  <div class="carousel-indicators">
+                    <div data-bs-target="#carouselslider-id-hn6au" class="active carousel-thumbs" data-bs-slide-to="0"><img id="thumb-0-id-hn6au" src="https://firebasestorage.googleapis.com/v0/b/studio-freelancer-agency.appspot.com/o/images%2FbvVwQYr7ErUAsQvF27wkf43YohI2%2Fimg-project-showcase-3gwp9.jpeg?alt=media&amp;token=e2169a94-c8ba-4d59-bc2a-f6368c332c3e" alt="UX for The BBC thumbnail image" class="d-block w-100 carousel-thumbnail-size rounded-border"></div>
+                    <div data-bs-target="#carouselslider-id-hn6au" class="active carousel-thumbs" data-bs-slide-to="1"><img id="thumb-1-id-hn6au" src="https://firebasestorage.googleapis.com/v0/b/studio-freelancer-agency.appspot.com/o/images%2FbvVwQYr7ErUAsQvF27wkf43YohI2%2Fimg-project-showcase-202px.jpeg?alt=media&amp;token=4b1fa205-2754-403b-9934-1255e57c59fa" alt="UX for The BBC thumbnail image" class="d-block w-100 carousel-thumbnail-size rounded-border"></div>
+                    <div data-bs-target="#carouselslider-id-hn6au" class="active carousel-thumbs" data-bs-slide-to="2"><img id="thumb-2-id-hn6au" src="https://firebasestorage.googleapis.com/v0/b/studio-freelancer-agency.appspot.com/o/images%2FbvVwQYr7ErUAsQvF27wkf43YohI2%2Fimg-project-showcase-wan9a.jpeg?alt=media&amp;token=3b625bf8-05c1-48d4-939f-66498cdccbec" alt="UX for The BBC thumbnail image" class="d-block w-100 carousel-thumbnail-size rounded-border"></div>
+                  </div>
+                </div> <!-- Indicator Close -->
               </div>
             </div>
-            <div class="gap"></div>
-            <!--Corusel start-->
+            <!--carousel-->
+            <!-- text block -->
+            <div class="row text-left">
+              <div class="col-md-12 ">
+                <p>Etiam cursus eleifend tincidunt. Nam eros libero, elementum vitae nibh a, imperdiet cursus urna. Proin gravida nibh libero, nec consequat purus feugiat a. Fusce imperdiet ligula non ligula euismod, et varius orci ullamcorper. Cras bibendum, lorem sed tincidunt finibus, sem justo ullamcorper felis, eu feugiat sapien risus quis ligula. Fusce ornare pretium leo, sed elementum purus condimentum non. Aenean ut vehicula mauris. </p>
+                <p><a href="https://www.bbc.com">https://www.bbc.com</a></p>
+              </div>
+            </div> <!-- text block -->
+          </div> 
+          <!-- showcase -->
 
 
+          <!--Project 1--> <!-- MASTER -->
+          <!-- showcase -->
+          <div class="project1 project-showcase" id="project1">
+            <div class="row text-center my-5">
+              <div class="col-3">
+                <a class="text-nowrap" href="#"><i class="bi bi-chevron-left"></i> Previous</a>
+              </div>
+              <div class="col-6 justify-content-center">
+                <h3><b><!-- Showcase title --></b></h3>
+              </div>
+              <div class="col-3">
+                <a class="text-nowrap" href="#">Next <i class="bi bi-chevron-right"></i></a>
+              </div>
+            </div>
+            <!--carousel start-->
             <div id="carouselslider1" class="carousel slide" data-bs-ride="carousel">
-              <div class="row">
-                <div class="col-lg-9 col-md-12 col-sm-12">
+              <div class="carousel-showcase-container">
+                <!-- hero flex col -->
+                <div class="carousel-showcase-hero pe-2"> 
                   <div class="carousel-inner rounded-border">
                     <div class="carousel-item active">
                       <img src="/dist/assets/img/jamie-profile-img/sweetdreams1.png" class="d-block w-100 carousel-main-size">
@@ -179,35 +224,25 @@
                     </div>
                   </div>
                 </div>
-
-                <div class="col-lg-3 col-md-12 col-sm-12">
-
+                <!-- thumb flex col -->
+                <div class="carousel-showcase-thumbs"> 
                   <!-- Indicator start -->
-                  <div class="carousel-indicators ">
-                    <div class="row">
-                      <div class="col-lg-12 col-md-4 col-sm-4 col-12 text-center ">
-                        <button type="button" data-bs-target="#carouselslider1" class="active img-thumbnail" data-bs-slide-to="0">
-                          <img src="/dist/assets/img/jamie-profile-img/sweetdreams1.png" alt="" class="d-block w-100 carousel-thumbnail-size rounded-border">
-                        </button>
-                      </div>
-                      <div class="col-lg-12 col-md-4 col-sm-4 col-12 text-center ">
-                        <button type="button" data-bs-target="#carouselslider1" class="img-thumbnail " data-bs-slide-to="1">
-                          <img src="/dist/assets/img/jamie-profile-img/sweetdreams2.png" alt="" class="d-block w-100 carousel-thumbnail-size rounded-border">
-                        </button>
-                      </div>
-                      <div class="col-lg-12 col-md-4 col-sm-4 col-12 text-center ">
-                        <button type="button" data-bs-target="#carouselslider1" class="img-thumbnail   " data-bs-slide-to="2">
-                          <img src="/dist/assets/img/jamie-profile-img/sweetdreams3.png" alt="" class="d-block w-100  carousel-thumbnail-size rounded-border">
-                        </button>
-                      </div>
+                  <div class="carousel-indicators">
+                    <div data-bs-target="#carouselslider1" class="active carousel-thumbs" data-bs-slide-to="0">
+                      <img src="/dist/assets/img/jamie-profile-img/sweetdreams1.png" alt="" class="d-block w-100 carousel-thumbnail-size rounded-border">
+                    </div>
+                    <div data-bs-target="#carouselslider1" class="carousel-thumbs" data-bs-slide-to="1">
+                      <img src="/dist/assets/img/jamie-profile-img/sweetdreams2.png" alt="" class="d-block w-100 carousel-thumbnail-size rounded-border">
+                    </div>
+                    <div data-bs-target="#carouselslider1" class="carousel-thumbs" data-bs-slide-to="2">
+                      <img src="/dist/assets/img/jamie-profile-img/sweetdreams3.png" alt="" class="d-block w-100  carousel-thumbnail-size rounded-border">
                     </div>
                   </div>
                 </div>
                 <!-- Indicator Close -->
               </div>
             </div>
-
-
+            <!-- showcase text -->
             <div class="row text-left">
               <div class="col-md-12 ">
                 <p>Sweet dreams is an endless runner made in Unreal 4 as part of a tech and engine game jam in my university masters course. Run and get the sweet to survive as long a possible. AD to turn and avoid the obstacles.
@@ -216,78 +251,15 @@
 
                   Designers - Jamie Lamb, Owen Whitley
 
-                  Artists - Danii Savage, Grace Jones</p><a href="">
-                  <p>www.cooperdesigns.co.uk/freshapp</p>
-                </a>
+                  Artists - Danii Savage, Grace Jones</p>
+                  <p><a href="#">www.cooperdesigns.co.uk/freshapp</a></p>
               </div>
             </div>
           </div>
-
-          <!--Project 2-->
-          <div class="project2" id="project2">
-            <div class="row text-center">
-              <div class="col-sm-3 col-md-3 col-lg-3">
-                <a href="#">
-                  <p>
-                    < Previous Project </p>
-                </a>
-              </div>
-              <div class="col-sm-6 col-md-6 col-lg-6 justify-content-center">
-                <h3>Theresa May: Rexit</h3>
-              </div>
-              <div class="col-sm-3 col-md-3 col-lg-3">
-                <a href="#">
-                  <p> Next project ></p>
-                </a>
-              </div>
-            </div>
-            <div class="gap"></div>
-
-            <!--Corusel start-->
+          <!-- showcase -->
+          <!--end Project 1--> <!-- MASTER -->
 
 
-            <div id="carouselslider2" class="carousel slide" data-bs-ride="carousel">
-              <div class="row">
-                <div class="col-md-9 col-sm-12">
-                  <div class="carousel-inner rounded-border">
-                    <div class="carousel-item active">
-                      <img src="/dist/assets/img/jamie-profile-img/stealthvr1.jpg" class="d-block w-100 carousel-main-size">
-                    </div>
-                    <div class="carousel-item rounded-border">
-                      <img src="/dist/assets/img/jamie-profile-img/stealthvr.jpg" class="d-block w-100 carousel-main-size">
-                    </div>
-                    <div class="carousel-item rounded-border">
-                      <img src="/dist/assets/img/jamie-profile-img/video.jpg" class="d-block w-100 carousel-main-size">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-3 col-sm-12">
-
-                  <!-- Indicator start -->
-                  <div class="carousel-indicators ">
-                    <div class="row">
-                      <div class="col-lg-12 col-md-4 col-sm-4 col-12 text-center ">
-                        <button type="button" data-bs-target="#carouselslider2" class="active img-thumbnail" data-bs-slide-to="0">
-                          <img src="/dist/assets/img/jamie-profile-img/stealthvr1.jpg" alt="" class="d-block w-100 rounded-border carousel-thumbnail-size">
-                        </button>
-                      </div>
-                      <div class="col-lg-12 col-md-4 col-sm-4 col-12 text-center ">
-                        <button type="button" data-bs-target="#carouselslider2" class="img-thumbnail" data-bs-slide-to="1">
-                          <img src="/dist/assets/img/jamie-profile-img/stealthvr.jpg" alt="" class="d-block w-100 rounded-border carousel-thumbnail-size">
-                        </button>
-                      </div>
-                      <div class="col-lg-12 col-md-4 col-sm-4 col-12 text-center ">
-                        <button type="button" data-bs-target="#carouselslider2" class="img-thumbnail   " data-bs-slide-to="2">
-                          <img src="/dist/assets/img/jamie-profile-img/video.jpg" alt="" class="d-block w-100 rounded-border carousel-thumbnail-size">
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Indicator Close -->
-              </div>
-            </div>
 
 
 
@@ -304,7 +276,7 @@
           </div>
 
           <!--Project 3-->
-          <div class="project3" id="project3">
+          <div class="project3 project-showcase" id="project3">
             <div class="row text-center">
               <div class="col-sm-3 col-md-3 col-lg-3">
                 <a href="#">
@@ -346,17 +318,17 @@
                     <div class="carousel-indicators ">
                       <div class="row">
                         <div class="col-lg-12 col-md-4 col-sm-4 col-12 text-center ">
-                          <button type="button" data-bs-target="#carouselslider3" class="active img-thumbnail" data-bs-slide-to="0">
+                          <button type="button" data-bs-target="#carouselslider3" class="active " data-bs-slide-to="0">
                             <img src="/dist/assets/img/jamie-profile-img/idq.png" alt="" class="d-block w-100 rounded-border carousel-thumbnail-size">
                           </button>
                         </div>
                         <div class="col-lg-12 col-md-4 col-sm-4 col-12 text-center ">
-                          <button type="button" data-bs-target="#carouselslider3" class="img-thumbnail" data-bs-slide-to="1">
+                          <button type="button" data-bs-target="#carouselslider3" class="" data-bs-slide-to="1">
                             <img src="/dist/assets/img/jamie-profile-img/hacked.png" alt="" class="d-block w-100 rounded-border carousel-thumbnail-size">
                           </button>
                         </div>
                         <div class="col-lg-12 col-md-4 col-sm-4 col-12 text-center ">
-                          <button type="button" data-bs-target="#carouselslider3" class="img-thumbnail   " data-bs-slide-to="2">
+                          <button type="button" data-bs-target="#carouselslider3" class="   " data-bs-slide-to="2">
                             <img src="/dist/assets/img/jamie-profile-img/speedrunning.jpg" alt="" class="d-block w-100 rounded-border carousel-thumbnail-size">
                           </button>
                         </div>
@@ -383,7 +355,7 @@
 
 
           <!--Project 4-->
-          <div class="project4" id="project4">
+          <div class="project4 project-showcase" id="project4">
             <div class="row text-center">
               <div class="col-sm-3 col-md-3 col-lg-3">
                 <a href="#">
@@ -425,17 +397,17 @@
                     <div class="carousel-indicators ">
                       <div class="row">
                         <div class="col-lg-12 col-md-4 col-sm-4 col-12 text-center ">
-                          <button type="button" data-bs-target="#carouselslider4" class="active img-thumbnail" data-bs-slide-to="0">
+                          <button type="button" data-bs-target="#carouselslider4" class="active " data-bs-slide-to="0">
                             <img src="/dist/assets/img/jamie-profile-img/hacked.png" alt="" class="d-block w-100 rounded-border carousel-thumbnail-size">
                           </button>
                         </div>
                         <div class="col-lg-12 col-md-4 col-sm-4 col-12 text-center ">
-                          <button type="button" data-bs-target="#carouselslider4" class="img-thumbnail" data-bs-slide-to="1">
+                          <button type="button" data-bs-target="#carouselslider4" class="" data-bs-slide-to="1">
                             <img src="/dist/assets/img/jamie-profile-img/idq.png" alt="" class="d-block w-100 rounded-border carousel-thumbnail-size">
                           </button>
                         </div>
                         <div class="col-lg-12 col-md-4 col-sm-4 col-12 text-center">
-                          <button type="button" data-bs-target="#carouselslider4" class="img-thumbnail   " data-bs-slide-to="2">
+                          <button type="button" data-bs-target="#carouselslider4" class="   " data-bs-slide-to="2">
                             <img src="/dist/assets/img/jamie-profile-img/speedrunning.jpg" alt="" class="d-block w-100 rounded-border carousel-thumbnail-size">
                           </button>
                         </div>
@@ -472,7 +444,6 @@
       <h2 class="modal-title signinheader modalheaddrapply">Contact stiwdio member</h2>
       <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
       <div class="row">
-
         <form class="row g-3 needs-validation send-grad-message" novalidate>
           <p class="project-showcase-text">PERSONAL DETAILS</p>
           <div class="col-md-6 col-sm-12">
@@ -669,7 +640,9 @@
     </div>
   </div>
 
-
+<span id="postjobmodal">
+  <!--Import post job modal-->
+</span>
 
 <span id="signinmodal">
   <!--Import sign in modal-->
@@ -686,13 +659,31 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!-- carousel -->
+<script src="carousel/splide.min.js"></script>
 
 <!-- add custom scripts -->
 <script>
+  document.addEventListener( 'DOMContentLoaded', function() {
+    // create splide carousel
+    var splide = new Splide( '.splide', {
+      autoWidth: true,
+      focus: 0,
+      omitEnd: true,
+      classes: {
+        arrows: 'splide__arrows carousel-arrows',
+        arrow : 'splide__arrow carousel-arrow',
+        prev  : 'splide__arrow--prev carousel-prev',
+        next  : 'splide__arrow--next carousel-next',
+      }
+    });
+
+    splide.mount();
+  });
+
   // jamie add page specific JS here
   let items = document.querySelectorAll('.carousel .carousel-item')
-
-items.forEach((el) => {
+  items.forEach((el) => {
     const minPerSlide = 4
     let next = el.nextElementSibling
     for (var i=1; i<minPerSlide; i++) {
@@ -704,7 +695,7 @@ items.forEach((el) => {
         el.appendChild(cloneChild.children[0])
         next = next.nextElementSibling
     }
-})
+  })
 
 </script>
 <script>
@@ -713,137 +704,43 @@ items.forEach((el) => {
   const SendGradSubmit = document.querySelector('#submit-grad-message');
   const SendGradModal = new bootstrap.Modal(document.querySelector('#grad-message-modal'));
   const ContactedGradModal = new bootstrap.Modal(document.querySelector('#grad-contact-submitted'));
-  SendGradModal.show();
+  //SendGradModal.show();
   // Loop over inputs and prevent submission
   SendGradSubmit.addEventListener('click', function (event) {
-    console.log("modal 1 submit clicked");
+    console.log("SendGradSubmit submit clicked");
     if (!SendGradMessage.checkValidity()) {
       event.preventDefault();
       event.stopPropagation();
-      console.log("modal 1 was-NOT-validated");
+      console.log("SendGradModal was-NOT-validated");
     }
     else {
-      console.log("modal 1 was-validated");
+      console.log("SendGradModal was-validated");
       SendGradModal.hide();
      ContactedGradModal.show();
     }
     SendGradMessage.classList.add('was-validated');
+  });
+
+  // show showcase
+  function showcaseShow(showcase, el){
+    // hide all projects
+    const showcases = document.querySelectorAll('.project-showcase');
+    for (var i = 0; i < showcases.length; i++) {
+      showcases[i].style.display = "none";
+    }
+    // show selected project
+    document.getElementById(showcase).style.display = "block";
+    const thumbs = document.querySelectorAll('.portfolio-header-img');
+    // remove borders
+    for (var i = 0; i < thumbs.length; i++) {
+      thumbs[i].style.border = "0px";
+    }
+    // add selected border
+    el.style.border = "2px solid #244F8E";
   }
-                                     , false)
-</script>
 
-
-
-<script>
-    document.getElementById("general-button").onclick = function() {
-      document.getElementById("propose-job").style.display = "none";
-      document.getElementById("general-message").style.display = "block";
-      document.getElementById("propose-button").style.background = "#FAFAFA";
-      document.getElementById("general-button").style.background = "#572F88";
-      document.getElementById("general-button").style.color= "#fff";
-      document.getElementById("propose-button").style.color= "#7E7984";
-      console.log("Genral Clicked");
-    }
-
-    document.getElementById("propose-button").onclick = function() {
-      document.getElementById("propose-job").style.display = "block";
-      document.getElementById("general-message").style.display = "none";
-      document.getElementById("propose-button").style.background = "#572F88";
-      document.getElementById("general-button").style.background = "#FAFAFA";
-      document.getElementById("general-button").style.color= "#7E7984";
-      document.getElementById("propose-button").style.color= "#fff";
-      console.log("propose Clicked");
-    }
-</script>
-
-
-<script>
-  document.getElementById("project-img1").onclick = function() {
-      document.getElementById("project-img1").style.border = "2px solid #244F8E";
-      document.getElementById("project-img2").style.border = "0px solid #244F8E";
-      document.getElementById("project-img3").style.border = "0px solid #244F8E";
-      document.getElementById("project-img4").style.border = "0px solid #244F8E";
-
-      document.getElementById("project1").style.display = "block";
-      document.getElementById("project2").style.display = "none";
-      document.getElementById("project3").style.display = "none";
-      document.getElementById("project4").style.display = "none";
-
-      
-   }
-
-   document.getElementById("project-img2").onclick = function() {
-      document.getElementById("project-img1").style.border = "0px solid #244F8E";
-      document.getElementById("project-img2").style.border = "2px solid #244F8E";
-      document.getElementById("project-img3").style.border = "0px solid #244F8E";
-      document.getElementById("project-img4").style.border = "0px solid #244F8E";
-
-      document.getElementById("project2").style.display = "block";
-      document.getElementById("project1").style.display = "none";
-      document.getElementById("project3").style.display = "none";
-      document.getElementById("project4").style.display = "none";
-      
-   }
-   document.getElementById("project-img3").onclick = function() {
-      document.getElementById("project-img1").style.border = "0px solid #244F8E";
-      document.getElementById("project-img2").style.border = "0px solid #244F8E";
-      document.getElementById("project-img3").style.border = "2px solid #244F8E";
-      document.getElementById("project-img4").style.border = "0px solid #244F8E";
-
-      document.getElementById("project3").style.display = "block";
-      document.getElementById("project1").style.display = "none";
-      document.getElementById("project2").style.display = "none";
-      document.getElementById("project4").style.display = "none";
-      
-   }
-   document.getElementById("project-img4").onclick = function() {
-      document.getElementById("project-img1").style.border = "0px solid #244F8E";
-      document.getElementById("project-img2").style.border = "0px solid #244F8E";
-      document.getElementById("project-img3").style.border = "0px solid #244F8E";
-      document.getElementById("project-img4").style.border = "2px solid #244F8E";
-
-      document.getElementById("project4").style.display = "block";
-      document.getElementById("project1").style.display = "none";
-      document.getElementById("project3").style.display = "none";
-      document.getElementById("project2").style.display = "none";
-      
-   }
 
 </script>
-<!--disable forms-->
-<script>
-  document.getElementById('Set-budget-radio').onchange = function() {
-    document.getElementById('Set-budget-Text').disabled = !this.checked;
-    document.getElementById('Set-hourly-text').disabled = this.checked;
-    document.getElementById('Set-hourly-text').value = "";
-  }
-    document.getElementById('Set-hourly-radio').onchange = function() {
-    document.getElementById('Set-hourly-text').disabled = !this.checked;
-    document.getElementById('Set-budget-Text').disabled = this.checked
-    document.getElementById('Set-budget-Text').value = "";
-    }
-    document.getElementById('remote-radio').onchange = function() {
-    document.getElementById('job-location-text').disabled = this.checked
-    
-    document.getElementById('job-location-text').value = "";
-    }
-    document.getElementById('duration-radio').onchange = function() {
-    document.getElementById('duration-date').disabled = !this.checked;
-    document.getElementById('completion-date').disabled = this.checked
-    document.getElementById('completion-date').value = "";
-    }
-    document.getElementById('completion-radio').onchange = function() {
-    document.getElementById('completion-date').disabled = !this.checked;
-    document.getElementById('duration-date').disabled = this.checked
-    document.getElementById('duration-date').value = "";
-    }
-
-
-
-;
-</script>
-
-
 
 <!-- custom JS -->
 <script src="scripts/app.bundle.js"></script>
