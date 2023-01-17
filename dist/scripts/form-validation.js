@@ -25,14 +25,14 @@ const regModal2 = new bootstrap.Modal(document.querySelector('#register-modal2')
 
 // Loop over inputs and prevent submission
 regForm1Submit.addEventListener('click', function (event) {
-  console.log("modal 1 submit clicked");
+  console.log("modal reg 1 submit clicked");
   if (!regForm1.checkValidity()) {
     event.preventDefault();
     event.stopPropagation();
-    console.log("modal 1 was-NOT-validated");
+    console.log("modal reg 1 was-NOT-validated");
   }
   else {
-    console.log("modal 1 was-validated");
+    console.log("modal reg 1 was-validated");
     regModal1.hide();
     regModal2.show();
   }
@@ -54,7 +54,7 @@ function validateRegForm2(regForm2) {
   if (regForm2.checkValidity() == false ) {
     event.preventDefault();
     event.stopPropagation();
-    console.log("modal reg 2was-NOT-validated");
+    console.log("modal reg 2 was-NOT-validated");
   }
   else {
     console.log("modal reg 2 was-validated");
