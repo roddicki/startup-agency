@@ -37,8 +37,8 @@ onAuthStateChanged(auth, function(user) {
   if (user) {
       // User logged in already or has just logged in.
       console.log(user.uid, user.email, "logged in");
-      showSignedInUser(user.email, user.uid);
       loadPages();
+      showSignedInUser(user.email, user.uid);
       currentUserData.uid = user.uid;
       currentUserData.email = user.email;
     } else {
@@ -410,6 +410,11 @@ if (page == "login") {
 };
 
 function loadPages(){
+  // LOGIN PAGE
+  if (page == "login") {
+    window.location.href = "jobboard.html";
+  }
+
   // GRADUATE / USER PAGE
   if (page == "graduates") {
     console.log("graduate page");
@@ -507,4 +512,4 @@ function loadPages(){
 
 
 
-
+console.log('hello from admin.js tucked at the bottom');

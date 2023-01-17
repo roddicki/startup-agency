@@ -40,7 +40,7 @@
 									<form class="login">
 										<div class="mb-3">
 											<label class="form-label">Email</label>
-											<input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" />
+											<input class="form-control form-control-lg" type="email" id="email" name="email" placeholder="Enter your email" />
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Password</label>
@@ -51,11 +51,11 @@
 										</div>
 										<div>
 											<label class="form-check">
-            <input class="form-check-input" type="checkbox" value="remember-me" name="remember-me" checked>
-            <span class="form-check-label">
-              Remember me next time
-            </span>
-          </label>
+									            <input class="form-check-input" type="checkbox" value="lsRememberMe" id="rememberMe" name="rememberMe" >
+									            <span class="form-check-label">
+									              Remember me
+									            </span>
+									          </label>
 										</div>
 										<div id="login-err" class="alert text-danger alert-dismissible fade show" hidden role="alert">
 							              	Either your password or email is incorrect.
@@ -63,7 +63,7 @@
 							            </div>
 										<div class="text-center mt-3">
 											<!-- <a href="graduates.html" class="btn btn-lg btn-primary">Sign in</a> -->
-											<button class="btn btn-primary">Login</button>
+											<button class="btn btn-primary" onclick="lsRememberMe()">Login</button>
 											<!-- <button type="submit" class="btn btn-lg btn-primary">Sign in</button> -->
 										</div>
 									</form>
@@ -80,6 +80,28 @@
 	<script src="js/app.js"></script>
 	<!-- custom JS -->
 	<script src="../scripts/admin.bundle.js"></script>
+	<script>
+		const rmCheck = document.getElementById("rememberMe");
+		const emailInput = document.getElementById("email");
+
+		if (localStorage.checkbox && localStorage.checkbox !== "") {
+		  rmCheck.setAttribute("checked", "checked");
+		  emailInput.value = localStorage.username;
+		} else {
+		  rmCheck.removeAttribute("checked");
+		  emailInput.value = "";
+		}
+
+		function lsRememberMe() {
+		  if (rmCheck.checked && emailInput.value !== "") {
+		    localStorage.username = emailInput.value;
+		    localStorage.checkbox = rmCheck.value;
+		  } else {
+		    localStorage.username = "";
+		    localStorage.checkbox = "";
+		  }
+		}
+	</script>
 
 </body>
 

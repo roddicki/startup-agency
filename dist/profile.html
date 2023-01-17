@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-  
+  <!-- carousel -->
+  <link rel="stylesheet" href="carousel/splide.min.css">
   <link href="styles/style.css" rel="stylesheet">
 
   <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -171,23 +172,26 @@
 
 
       <!--Right side of the page-->
-      <div class="col-sm-12 col-md-12 col-lg-8 ">
+      <div class="col-sm-12 col-md-12 col-lg-8">
         <div class= "row content-blocks">
           
           <div class="col-12 project-showcase-text">
             <p>PROJECT SHOWCASES </p>
           </div>
-          
-         
-          <div class="container">
-            <hr></hr>
-            <div class="row" id="projects-showcase-container">
+
+          <div class="col-12 container" id="project-showcase-nav">
+            <!-- inject project showcase nav -->
+          </div>
+
+          <hr>
+
+          <div class="col-12 container" id="project-showcase">
+            
 
               <!--start of projects showcases-->
               
               <!--end of project showcases-->
 
-            </div>
           </div>
         </div>
       </div>
@@ -223,5 +227,55 @@
 <script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous"></script>
 <!-- form validation -->
 <script src="scripts/form-validation.js"></script>
+<!-- carousel -->
+<script src="carousel/splide.min.js"></script>
+<script>
+  let splide;
+  function createCarousel() {
+    if (document.querySelector('.splide')) {
+      // create splide carousel
+      splide = new Splide( '.splide', {
+        autoWidth: true,
+        focus: 0,
+        omitEnd: true,
+        classes: {
+          arrows: 'splide__arrows carousel-arrows',
+          arrow : 'splide__arrow carousel-arrow',
+          prev  : 'splide__arrow--prev carousel-prev',
+          next  : 'splide__arrow--next carousel-next',
+        }
+      });
+      splide.mount();
+    } 
+  }
+
+  // show showcase
+  function showcaseShow(showcase, el) {
+    // hide all projects
+    const showcases = document.querySelectorAll('.project-showcase');
+    for (var i = 0; i < showcases.length; i++) {
+      showcases[i].classList.remove("d-none");
+      showcases[i].classList.add("d-none");
+    }
+    // show selected project
+    document.getElementById(showcase).classList.remove("d-none");
+    const thumbs = document.querySelectorAll('.portfolio-header-img');
+    // remove borders
+    for (var i = 0; i < thumbs.length; i++) {
+      thumbs[i].style.border = "0px";
+    }
+    // add selected border
+    try {
+      el.style.border = "2px solid #244F8E";
+    }
+    catch(err) {
+      console.log(err);
+    }
+    
+  }
+
+
+
+</script>
 
 </body>

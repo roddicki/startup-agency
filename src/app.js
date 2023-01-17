@@ -799,11 +799,11 @@ function displaySingleJob(jobData) {
       return x.category === category;
     });
     console.log(categoryObj);
-    let tagBtn = document.createElement("a");
-    tagBtn.setAttribute("style", "text-transform: capitalize;");
+    let tagBtn = document.createElement("span");
+    tagBtn.setAttribute("style", "text-transform: capitalize;cursor: default;");
     tagBtn.className = "btn btn-primary filtertag";
     tagBtn.name = category;
-    tagBtn.href = "#";
+    //tagBtn.href = "#";
     tagBtn.innerHTML = categoryObj.description;
 
     tagContainer.appendChild(tagBtn);
@@ -1275,7 +1275,7 @@ function populateProfilePicNav(vals) {
   if (! vals.profilePic) {
     return;
   }
-  console.log(vals.profilePic);
+  //console.log(vals.profilePic);
   const storageRef = ref(storage, vals.profilePic);
   // get download image ref - don't need this 
   getDownloadURL(storageRef)
@@ -1902,6 +1902,127 @@ function showEditBtn (userID, paramID) {
 }
 
 
+// create carousel navigation for profile page showcases
+// using https://splidejs.com/
+function populateShowcasesNav(vals) {
+  // exit if no project showcases
+  if (vals.projects == null) {
+    return;
+  }
+  const showcaseNavContainer = document.querySelector('#project-showcase-nav');
+  let navComponentStart = '<!-- project showcase nav --> <div class="splide" aria-label="Portfolio navigation"> <div class="splide__track"> <ul class="splide__list">';
+  let navComponentEnd = '</ul> </div> </div> <!-- project showcase nav -->';
+  let navComponentSlides = "";
+  // get images
+  for (const [key, value] of Object.entries(vals.projects)) {
+    //console.log(key, value.name);
+    // create a slide for each image
+    navComponentSlides += '<li class="splide__slide"><img data-id="'+key+'" src="" class="portfolio-header-img" onclick="showcaseShow(\''+key+'\', this);"></li>';
+    // get download link
+    const storageRef = ref(storage, value.images[0]);
+    getDownloadURL(storageRef)
+      .then(function(url) {
+        // add image to slide
+        document.querySelector('#project-showcase-nav img[data-id="'+key+'"]').src = url;        
+      })
+      .catch(function(err){
+        console.log("download link error", err);
+      })
+  }
+  showcaseNavContainer.innerHTML = navComponentStart + navComponentSlides + navComponentEnd;
+  createCarousel();
+}
+
+
+// create showcases for profile page
+async function populateShowcases(vals) {
+  // exit if no project showcases
+  if (vals.projects == null) {
+    return;
+  }
+  let index = 0;
+  let showcaseVisibility = "";
+  const showcaseContainer = document.querySelector('#project-showcase');
+  // make previous and next
+  let previousID = "";
+  let nextID = "";
+  let keys = [];
+  // create array of showcase ids
+  for (const [key, value] of Object.entries(vals.projects)) {
+    keys.push(key);
+  }
+  //console.log(keys);
+
+  for (const [key, value] of Object.entries(vals.projects)) {
+    console.log("---\n", value.name, key, index);
+    let heroImages = "";
+    let thumbImages = "";
+    let activeSlide = "";
+    //let activeThumb = "document.querySelector(\"#project-showcase-nav img[data-id="+key+"]\")";
+    let activeThumb = "document.querySelector('#project-showcase-nav img[data-id=\"id-2t4w4f\"]')"; // doesnt work
+    if (index > 0) {
+      showcaseVisibility = "d-none";
+    }
+
+    if (index > 0) {
+      //previousID = keys[index+1];
+      previousID = '<a class="text-nowrap" href="#"><i class="bi bi-chevron-left"></i> Previous</a>';
+      //previousID = '<a class="text-nowrap" onclick="showcaseShow(\"'+key+'\", \'hello\');" href="#"><i class="bi bi-chevron-left"></i> Previous</a>'; // doesn't work
+      console.log(keys[index+1]);
+    }
+    else {
+      console.log("no previous");
+    }
+    if (index < keys.length-1) {
+      //nextID = keys[index+1];
+      nextID = '<a class="text-nowrap" href="#">Next <i class="bi bi-chevron-right"></i></a>';
+      console.log(keys[index+1]);
+    }
+    else {
+      console.log("no next");
+      nextID = "";
+    }
+
+    index++;
+    for (var i = 0; i < value.images.length; i++) {
+      //console.log(value.images[i]);
+      if (i == 0) {
+        activeSlide = "active";
+      } else {
+        activeSlide = "";
+      }
+      heroImages += '<div class="carousel-item '+activeSlide+'"><img id="hero-'+i+'-'+key+'" src="assets/img/dummy-900X600.png" alt="'+value.name+' thumbnail image" class="d-block w-100 carousel-main-size"></div>';
+      thumbImages += '<div data-bs-target="#carouselslider-'+key+'" class="active carousel-thumbs" data-bs-slide-to="'+i+'"><img id="thumb-'+i+'-'+key+'" src="assets/img/dummy-900X600.png" alt="'+value.name+' thumbnail image" class="d-block w-100 carousel-thumbnail-size rounded-border"></div>';
+    }
+    let link = "";
+    if (value.link) {
+      link = '<p><a href="'+value.link+'">'+value.link+'</a></p>';
+    }
+    let showcaseStart = '<div class="'+showcaseVisibility+' project-showcase" id="'+key+'"> <div class="row text-center my-5"> <div class="col-3"> '+previousID+' </div> <div class="col-6 justify-content-center"> <h3><b>'+value.name+'</b></h3> </div> <div class="col-3"> '+nextID+' </div> </div>';
+    let showcaseCarousel = '<!--carousel--> <div id="carouselslider-'+key+'" class="carousel slide" data-bs-ride="carousel"> <div class="carousel-showcase-container"> <!-- hero flex col --> <div class="carousel-showcase-hero pe-2"> <div class="carousel-inner rounded-border"> '+heroImages+' </div> </div> <!-- thumb flex col --> <div class="carousel-showcase-thumbs"> <!-- Indicator start --> <div class="carousel-indicators"> '+thumbImages+' </div> </div> <!-- Indicator Close --> </div> </div> <!--carousel-->';
+    let showcaseEnd = '<!-- text block --> <div class="row text-left"> <div class="col-md-12 "> <p>'+value.description+'</p> '+link+' </div> </div> <!-- text block --> </div> <!-- showcase -->';
+    showcaseContainer.innerHTML += showcaseStart + showcaseCarousel + showcaseEnd;
+    // get images
+    for (var j = 0; j < value.images.length; j++) {
+      let heroImgID = "#hero-"+j+"-"+key;
+      let thumbImgID = "#thumb-"+j+"-"+key;
+      // get download link
+      const storageRef = ref(storage, value.images[j]);
+      getDownloadURL(storageRef)
+        .then(function(url) {
+          // add image to slide
+          document.querySelector(heroImgID).src = url;
+          document.querySelector(thumbImgID).src = url;        
+        })
+        .catch(function(err){
+          console.log("download link error", err);
+        });
+    }
+  }
+
+}
+
+
 
 
 
@@ -1996,7 +2117,9 @@ function populateAvailability(vals){
 // populate phone and email
 function populateAcccountDetails(vals){
   const settingsForm = document.querySelector('.edit-details-form');
-  settingsForm.phone.value = vals.phone;
+  if (vals.phone) {
+    settingsForm.phone.value = vals.phone;
+  }
   settingsForm.email.value = vals.email;
 }
 
@@ -2483,7 +2606,8 @@ if (page == "single-profile") {
       // populate socials section
       populateSocials(vals);
       // populate project showcase
-      //populateProjectShowcases(vals);
+      populateShowcasesNav(vals);
+      populateShowcases(vals);
   });
   
   // on login add edit my profile btn
