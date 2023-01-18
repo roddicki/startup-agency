@@ -51,7 +51,7 @@ export function signUpUser(e) {
     .catch(function(err) {
       console.log(err.message);
       if (err.message.includes("email-already-in-use")) {
-        document.querySelector("#register-modal2 .alert-danger").innerHTML += "Email already in use, please ty another or reset your password";
+        document.querySelector("#register-modal2 .alert-danger").innerHTML += "Email already in use, please try another or reset your password";
       }
       else {
         document.querySelector("#register-modal2 .alert-danger").innerHTML += "Error registering";

@@ -1363,7 +1363,7 @@ function populateSocials(vals) {
   if (! vals.socials) {
     return;
   }
-  const icons = {"instagram" : "./assets/img/InstagramSocial.svg", "twitter": "./assets/img/TwitterSocial.svg", "facebook": "./assets/img/WebSocialIcon.svg", "dribble": "./assets/img/WebSocialIcon.svg"};
+  const icons = {"instagram" : "./assets/img/InstagramSocial.svg", "twitter": "./assets/img/TwitterSocial.svg", "facebook": "./assets/img/FaceBookIcon.svg", "dribble": "./assets/img/WebSocialIcon.svg"};
   const socialContainer = document.querySelector("section .socials-details");
   // empty the div to prevent duplication
   socialContainer.innerHTML = "";
@@ -1917,7 +1917,7 @@ function populateShowcasesNav(vals) {
   for (const [key, value] of Object.entries(vals.projects)) {
     //console.log(key, value.name);
     // create a slide for each image
-    navComponentSlides += '<li class="splide__slide"><img data-id="'+key+'" src="" class="portfolio-header-img" onclick="showcaseShow(\''+key+'\', this);"></li>';
+    navComponentSlides += '<li class="splide__slide"><img data-id="'+key+'" src="" class="portfolio-header-img" onclick="showcaseShow(\''+key+'\');"></li>';
     // get download link
     const storageRef = ref(storage, value.images[0]);
     getDownloadURL(storageRef)
@@ -1954,32 +1954,31 @@ async function populateShowcases(vals) {
   //console.log(keys);
 
   for (const [key, value] of Object.entries(vals.projects)) {
-    console.log("---\n", value.name, key, index);
+    //console.log("---\n", value.name, key, index);
     let heroImages = "";
     let thumbImages = "";
     let activeSlide = "";
     //let activeThumb = "document.querySelector(\"#project-showcase-nav img[data-id="+key+"]\")";
-    let activeThumb = "document.querySelector('#project-showcase-nav img[data-id=\"id-2t4w4f\"]')"; // doesnt work
+    let activeThumb = document.querySelector('#project-showcase-nav img[data-id=\"id-2t4w4f\"]'); // doesnt work
+    //console.log(document.querySelector('#project-showcase-nav img[data-id=\"id-2t4w4f\"]'));
     if (index > 0) {
       showcaseVisibility = "d-none";
     }
 
     if (index > 0) {
-      //previousID = keys[index+1];
-      previousID = '<a class="text-nowrap" href="#"><i class="bi bi-chevron-left"></i> Previous</a>';
-      //previousID = '<a class="text-nowrap" onclick="showcaseShow(\"'+key+'\", \'hello\');" href="#"><i class="bi bi-chevron-left"></i> Previous</a>'; // doesn't work
-      console.log(keys[index+1]);
+      previousID = '<a class="text-nowrap" onclick="showcaseShow(\''+keys[index-1]+'\');" href="#"><i class="bi bi-chevron-left"></i> Previous</a>'; 
+      //console.log(keys[index-1]);
     }
     else {
-      console.log("no previous");
+      //console.log("no previous");
     }
     if (index < keys.length-1) {
       //nextID = keys[index+1];
-      nextID = '<a class="text-nowrap" href="#">Next <i class="bi bi-chevron-right"></i></a>';
-      console.log(keys[index+1]);
+      nextID = '<a class="text-nowrap" onclick="showcaseShow(\''+keys[index+1]+'\');" href="#">Next <i class="bi bi-chevron-right"></i></a>';
+      //console.log(keys[index+1]);
     }
     else {
-      console.log("no next");
+      //console.log("no next");
       nextID = "";
     }
 
@@ -2000,7 +1999,7 @@ async function populateShowcases(vals) {
     }
     let showcaseStart = '<div class="'+showcaseVisibility+' project-showcase" id="'+key+'"> <div class="row text-center my-5"> <div class="col-3"> '+previousID+' </div> <div class="col-6 justify-content-center"> <h3><b>'+value.name+'</b></h3> </div> <div class="col-3"> '+nextID+' </div> </div>';
     let showcaseCarousel = '<!--carousel--> <div id="carouselslider-'+key+'" class="carousel slide" data-bs-ride="carousel"> <div class="carousel-showcase-container"> <!-- hero flex col --> <div class="carousel-showcase-hero pe-2"> <div class="carousel-inner rounded-border"> '+heroImages+' </div> </div> <!-- thumb flex col --> <div class="carousel-showcase-thumbs"> <!-- Indicator start --> <div class="carousel-indicators"> '+thumbImages+' </div> </div> <!-- Indicator Close --> </div> </div> <!--carousel-->';
-    let showcaseEnd = '<!-- text block --> <div class="row text-left"> <div class="col-md-12 "> <p>'+value.description+'</p> '+link+' </div> </div> <!-- text block --> </div> <!-- showcase -->';
+    let showcaseEnd = '<!-- text block --> <div class="row text-left"> <div class="col-md-12 pt-4"> <p>'+value.description+'</p> '+link+' </div> </div> <!-- text block --> </div> <!-- showcase -->';
     showcaseContainer.innerHTML += showcaseStart + showcaseCarousel + showcaseEnd;
     // get images
     for (var j = 0; j < value.images.length; j++) {
@@ -2022,8 +2021,40 @@ async function populateShowcases(vals) {
 
 }
 
+// add freelancer name to contact modal
+function populateContactModals(vals) {
+  // message modal & success modal
+  const nameContainer = document.querySelector('#grad-message-modal .modal-title span');
+  if (vals.forename) {
+    nameContainer.innerHTML = vals.forename + " " + vals.surname; // message modal
+  } else {
+    nameContainer.innerHTML = "stiwdio member";
+  }
+}
+
+// get values from contact form
+function getContactFormValues(vals) {
+  const sendGradMessageForm = document.querySelector('#grad-message-modal .send-grad-message');
+  let formValues = {};
+  //formValues.message = "test from contact form";
+  formValues.message = "<h2>This is a message to Freelancer: "+vals.forename+" "+vals.surname+"<br>Email: "+vals.email+" <br>Student ID: "+vals.studentid+"<br>Profile: <a href="+window.location.href+">"+window.location.href+"</a></h2><h2>Message From prospective client: "+sendGradMessageForm.forename.value+" "+sendGradMessageForm.surname.value+"<br>Email: "+sendGradMessageForm.email.value+"<br>Tel: "+sendGradMessageForm.phone.value+"</h2><h2>Message:</h2><p>"+sendGradMessageForm.message.value+"</p>";
+  formValues.from = sendGradMessageForm.email.value;
+  formValues.to = "stiwdiofreelanceragency@gmail.com";
+  return formValues;
+}
 
 
+// confirm ent from contact from - change spinner and message on thank-you / confirmation modal
+function messageSentConfirmation(vals) {
+  const messageTitle = document.querySelector("#help-thank-you .modal-title");
+  messageTitle.innerHTML = "Thank you for your message!";
+  const message = document.querySelector("#help-thank-you .modal-message");
+  message.innerHTML = "<p>Your message will be send to our admin team who will forward it to  "+vals.forename+" "+vals.surname+"</p>";
+  const spinner = document.querySelector("#help-thank-you .sending-spinner");
+  spinner.style.display = "none";
+  const thankYouTick = document.querySelector("#help-thank-you  .sent-thank-you-tick");
+  thankYouTick.style.display = "inline";
+}
 
 
 // ======POST JOB FUNCTIONS======
@@ -2231,7 +2262,6 @@ regForm2Submit.addEventListener('click', function (e) {
 // reset password
 //resetPassword("rod@roddickinson.net");
 const forgotPassSubmit = document.querySelector('#submit-forgot1');
-
 forgotPassSubmit.addEventListener('click', function (event) {
   let validated = validateEmail(); // from form-validation.js
   const forgotForm = document.querySelector('#forgot-pass-form');
@@ -2608,6 +2638,29 @@ if (page == "single-profile") {
       // populate project showcase
       populateShowcasesNav(vals);
       populateShowcases(vals);
+      // populate contact thank you mobile
+      populateContactModals(vals);
+  });
+
+  // contact form send messsage
+  const sendGradSubmit = document.querySelector('#submit-grad-message');
+  const sentModal = new bootstrap.Modal(document.querySelector('#help-thank-you'));
+  sendGradSubmit.addEventListener('click', function (event) {
+    let validated = validateContactForm(event);
+    if (validated) {
+      sentModal.show();
+      // get profile data 
+      getUserData(id).then(function(vals){
+          // get form vals and create email message
+          let formValues = getContactFormValues(vals);
+          // send email if help modal validated
+          createSentEmailDoc(formValues.to, formValues.from, formValues.message).then(function(){
+            // when sent change message and graphic
+            console.log("email sent success");
+            messageSentConfirmation(vals);
+          });
+      });
+    }
   });
   
   // on login add edit my profile btn
@@ -2696,7 +2749,7 @@ if (page == "job-details") {
         // when sent change message and graphic
         applicationSentConfirmation();
       });
-      console.log("success success");
+      console.log("email sent success");
     }
 
   }, false)

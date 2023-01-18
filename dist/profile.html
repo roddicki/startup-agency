@@ -58,7 +58,7 @@
               <span id="personal-details-location"><!-- location --></span>
             </div>
             <div class="d-grid gap">
-              <button class="btn btn-primary btn-lg btn-block" data-bs-toggle= "modal" data-bs-target="#contact">Message / Propose job</button>
+              <button class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#grad-message-modal">Contact me / Propose job</button>
             </div>
           </div>
             <div class="gap">
@@ -201,6 +201,67 @@
   </div>
 </div>
 </section>
+
+
+<!--MessageModal-->
+<div class="modal fade" id="grad-message-modal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content modalcontentleft">
+
+      <h2 class="modal-title signinheader modalheaddrapply">Contact <span></span></h2>
+      <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="row">
+        <form class="row g-3 needs-validation send-grad-message" novalidate>
+          <p class="project-showcase-text">PERSONAL DETAILS</p>
+          <div class="col-md-6 col-sm-12">
+
+            <label for="validationCustom01" class="form-label">First name*</label>
+            <input type="text" class="form-control" id="first-name-contact-grad" name="forename" placeholder="Your first name" required>
+            <div class="invalid-feedback">
+              Please add your forename.
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <label for="validationCustom02" class="form-label">Last name*</label>
+            <input type="text" class="form-control" id="second-name-contact-grad" name="surname" placeholder="Your surname" required>
+            <div class="invalid-feedback">
+              Please add your surname.
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <label for="validationCustom03" class="form-label">Email*</label>
+            <input type="email" name="email" class="form-control" id="email-contact-grad" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Your email" name="email" required>
+            <div class="invalid-feedback">
+              Please provide a valid Email.
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <label for="validationCustom03" class="form-label">Phone*</label>
+            <input type="number" class="form-control" id="phone-contact-grad" placeholder="012345678" name="phone" required>
+            <div class="invalid-feedback">
+              Please provide a valid phone number.
+            </div>
+          </div>
+          <!--This is for the genral message-->
+          <div class="col-md-12" id="general-message">
+            <label for="validationCustom04" class="form-label">General message*</label>
+            <textarea type="text" class="form-control" id="general-message-contact-grad" rows="3" name="message" placeholder="Your message"  required></textarea>
+            <div class="invalid-feedback">
+              Please add a messsage
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="set-content-right gap">
+              <button type="button" class="btn btn-secondary btn-lg btn-block apply-btn" data-bs-dismiss="modal">Back</button>
+              <button type="button" id="submit-grad-message" class="btn btn-primary btn-lg btn-block apply-btn" >Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
           
 
 <span id="postjobmodal">
@@ -230,6 +291,27 @@
 <!-- carousel -->
 <script src="carousel/splide.min.js"></script>
 <script>
+  const sendGradModal = new bootstrap.Modal(document.querySelector('#grad-message-modal'));
+  function validateContactForm(event) {
+    // contact me validation
+    const sendGradMessage = document.querySelector('.send-grad-message');
+    // Loop over inputs and prevent submission
+    console.log("sendGradSubmit submit clicked");
+    if (!sendGradMessage.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("sendGradModal was-NOT-validated");
+    }
+    else {
+      console.log("sendGradModal was-validated");
+      sendGradModal.hide();
+      return true;
+    }
+    sendGradMessage.classList.add('was-validated');
+  }
+  
+
+  // create splide carousel
   let splide;
   function createCarousel() {
     if (document.querySelector('.splide')) {
@@ -250,7 +332,7 @@
   }
 
   // show showcase
-  function showcaseShow(showcase, el) {
+  function showcaseShow(showcase) {
     // hide all projects
     const showcases = document.querySelectorAll('.project-showcase');
     for (var i = 0; i < showcases.length; i++) {
@@ -265,13 +347,8 @@
       thumbs[i].style.border = "0px";
     }
     // add selected border
-    try {
-      el.style.border = "2px solid #244F8E";
-    }
-    catch(err) {
-      console.log(err);
-    }
-    
+    let thumb = document.querySelector('#project-showcase-nav img[data-id=\"'+showcase+'\"]');
+    thumb.style.border = "2px solid #244F8E";
   }
 
 
