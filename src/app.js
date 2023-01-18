@@ -1301,22 +1301,28 @@ function populateSkills(vals){
     placeholder.classList.remove("d-none");
   }
   // find tags and categories
-  for (var i = 0; i < vals.tags.length; i++) {
-    // find category
-    let category = vals.tags[i].split('-');
-    // unhide category
-    let el = document.querySelector('[data-category="'+category[0]+'"]');
-    el.classList.remove('d-none');    
-    // add tag
-    let tagTitle = vals.tags[i].replace(category[0], "").replace("-", "");
-    tagTitle = tagTitle.split('-').join(' ');
-    //let tagEl = "<div class=\"filter-tag-profile\">"+tagTitle+"</div>";
-    let tagEl = document.createElement('div');
-    tagEl.className = "filter-tag-profile text-capitalize";
-    tagEl.innerHTML = tagTitle;
-    let tagContainer = document.querySelector('[data-category="'+category[0]+'"] .skills-tags');
-    tagContainer.appendChild(tagEl);
+  try {
+    for (var i = 0; i < vals.tags.length; i++) {
+      // find category
+      let category = vals.tags[i].split('-');
+      // unhide category
+      let el = document.querySelector('[data-category="'+category[0]+'"]');
+      el.classList.remove('d-none');    
+      // add tag
+      let tagTitle = vals.tags[i].replace(category[0], "").replace("-", "");
+      tagTitle = tagTitle.split('-').join(' ');
+      //let tagEl = "<div class=\"filter-tag-profile\">"+tagTitle+"</div>";
+      let tagEl = document.createElement('div');
+      tagEl.className = "filter-tag-profile text-capitalize";
+      tagEl.innerHTML = tagTitle;
+      let tagContainer = document.querySelector('[data-category="'+category[0]+'"] .skills-tags');
+      tagContainer.appendChild(tagEl);
+    }
   }
+  catch(err) {
+    console.log(err);
+  }
+  
   // hide categories title if no div skill-tags
   for (var i = 0; i < allTagContainers.length; i++) {
     if (allTagContainers[i].innerHTML == "") {
@@ -2183,16 +2189,15 @@ async function saveDetails(uid) {
 
 // delete profile
 async function deleteProfile(uid){
-  console.log(uid);
-  const deleted = await deleteDoc(doc(db, 'users', uid))
-    .then(function(){
-      console.log("user doc deleted");
-    });
-
   const user = auth.currentUser;
   deleteUser(user).then(function() {
     console.log("user deleted");
     window.location.href = "index.html";
+    // delete use then delete doc
+    deleteDoc(doc(db, 'users', uid))
+      .then(function(){
+        console.log("user doc deleted");
+      });
   }).catch(function(error) {
     console.log("error", error);
   });
