@@ -1324,6 +1324,11 @@ input[type=file]::file-selector-button {
 		width: 30% !important; /*issue*/
 		/*margin-right: 0;*/
 	}
+
+	.showcase-text-nav {
+		position: relative;
+		top: -40px;
+	}
 }
 
 @media only screen and (max-width: 375px) {

@@ -119,15 +119,15 @@
 </section>
 
 <!-- delete account modal -->
-<div class="modal fade" id="deleteAccount"  tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="deleteAccount"  tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content modalcontentleft">
-      <h2 class="modal-title signinheader modalheaddrapply" id="exampleModalLabel">Are you sure you want to delete your account
+      <h2 class="modal-title signinheader modalheaddrapply">Are you sure you want to delete your account
       </h2>
       <button type="button" class="btn-close signinclosebutton" data-bs-dismiss="modal" aria-label="Close">
       </button>
         <div class="row">
-          <div class="col-sm-12">
+          <div class="col-sm-12 modal-body">
             <p>You are about to permanently delete your account from the freelance agency platform.</p>
             <p>You can sign back up at any time, however you will have to go through the sign up proccess again.</p>
           </div>
@@ -136,7 +136,7 @@
             <button  class="btn-secondary btn-lg"  data-bs-dismiss="modal">Go back</button>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-12 ">
-            <button id="delete-profile" class="btn-primary btn-lg btn-delete-account"  data-bs-toggle="modal" data-bs-target="#deleteAccount">Delete</button>
+            <button id="delete-profile" class="btn-primary btn-lg btn-delete-account">Delete</button>
           </div>
         </div>
     </div>

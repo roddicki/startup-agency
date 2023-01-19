@@ -1924,16 +1924,26 @@ function populateShowcasesNav(vals) {
     //console.log(key, value.name);
     // create a slide for each image
     navComponentSlides += '<li class="splide__slide"><img data-id="'+key+'" src="" class="portfolio-header-img" onclick="showcaseShow(\''+key+'\');"></li>';
-    // get download link
-    const storageRef = ref(storage, value.images[0]);
-    getDownloadURL(storageRef)
-      .then(function(url) {
-        // add image to slide
-        document.querySelector('#project-showcase-nav img[data-id="'+key+'"]').src = url;        
-      })
-      .catch(function(err){
-        console.log("download link error", err);
-      })
+
+    //navComponentSlides += '<li class="splide__slide"><div data-id="'+key+'" class="portfolio-header-img" onclick="showcaseShow(\''+key+'\');" style="background-size: cover;background:rgba(50,50,50,0.25);"><div style="background:rgba(50,50,50,0.25);" class="px-3 text-light text-center w-100 h-100 d-flex justify-content-center align-items-center">'+value.name+'</div></div></li>';
+
+    try {
+      // get download link
+      const storageRef = ref(storage, value.images[0]);
+      getDownloadURL(storageRef)
+        .then(function(url) {
+          // add image to slide
+          document.querySelector('#project-showcase-nav img[data-id="'+key+'"]').src = url;  
+          //document.querySelector('#project-showcase-nav div[data-id="'+key+'"]').style.backgroundImage = "url('"+url+"')";       
+        })
+        .catch(function(err){
+          console.log("download link error", err);
+        });
+    }
+    catch(err) {
+      console.log(err);
+    }
+    
   }
   showcaseNavContainer.innerHTML = navComponentStart + navComponentSlides + navComponentEnd;
   createCarousel();
@@ -1972,7 +1982,7 @@ async function populateShowcases(vals) {
     }
 
     if (index > 0) {
-      previousID = '<a class="text-nowrap" onclick="showcaseShow(\''+keys[index-1]+'\');" href="#"><i class="bi bi-chevron-left"></i> Previous</a>'; 
+      previousID = '<a class="text-nowrap showcase-text-nav" onclick="showcaseShow(\''+keys[index-1]+'\');event.preventDefault();" href="#!"><i class="bi bi-chevron-left"></i> Previous</a>'; 
       //console.log(keys[index-1]);
     }
     else {
@@ -1980,7 +1990,7 @@ async function populateShowcases(vals) {
     }
     if (index < keys.length-1) {
       //nextID = keys[index+1];
-      nextID = '<a class="text-nowrap" onclick="showcaseShow(\''+keys[index+1]+'\');" href="#">Next <i class="bi bi-chevron-right"></i></a>';
+      nextID = '<a class="text-nowrap showcase-text-nav" onclick="showcaseShow(\''+keys[index+1]+'\');event.preventDefault();" href="#!">Next <i class="bi bi-chevron-right"></i></a>';
       //console.log(keys[index+1]);
     }
     else {
@@ -2199,7 +2209,12 @@ async function deleteProfile(uid){
         console.log("user doc deleted");
       });
   }).catch(function(error) {
-    console.log("error", error);
+    console.log("error deleting profile", error);
+    // show alert
+    const deleteModalTitle = document.querySelector('#deleteAccount .signinheader');
+    deleteModalTitle.innerHTML = "Oops... account not deleted..."
+    const deleteModalText = document.querySelector('#deleteAccount .modal-body');
+    deleteModalText.innerHTML = "<p>To delete your account you must be recently logged in.</p><p>Please log out and log back in, then try deleting your account again.</p>";
   });
 }
 
