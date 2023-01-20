@@ -87,7 +87,7 @@ async function createSentEmailDoc(to, from, msg){
 function getHelpFormValues() {
   const helpForm = document.querySelector('.post-job-form2');
   let formValues = {};
-  formValues.message = "<b>Enquiry about help posting a Job:</b><br><br><b>Message from:</b> " + helpForm.helpForename.value + " " + helpForm.helpSurname.value + " <br><br><b>Message:</b><br>" + helpForm.helpDesc.value;
+  formValues.message = "<h2>Enquiry about help posting a Job:<br>Message from: " + helpForm.helpForename.value + " " + helpForm.helpSurname.value + "<br>Reply to: "+helpForm.helpEmail.value+"<br><br>Message:</h2>" + helpForm.helpDesc.value;
   formValues.from = helpForm.helpEmail.value;
   formValues.to = "stiwdiofreelanceragency@gmail.com";
   return formValues;
@@ -173,6 +173,31 @@ async function createGradPreview(docsArray) {
   }
 
 }
+
+// contact form
+function getContactFormValues() {
+  // contact form
+  const contactMessageForm = document.querySelector('#contact .send-home-form');
+  let formValues = {};
+  //formValues.message = "test from contact form";
+  formValues.message = "<h2>Message From stiwdio agency contact form<br>From: "+contactMessageForm.forename.value+" "+contactMessageForm.surname.value+"<br>Email: "+contactMessageForm.email.value+"<br>Tel: "+contactMessageForm.phone.value+"</h2><h2>Message:</h2><p>"+contactMessageForm.message.value+"</p>";
+  formValues.from = contactMessageForm.email.value;
+  formValues.to = "stiwdiofreelanceragency@gmail.com";
+  return formValues;
+}
+
+// confirm ent from contact from - change spinner and message on thank-you / confirmation modal
+function homepageMessageSent() {
+  const messageTitle = document.querySelector("#help-thank-you .modal-title");
+  messageTitle.innerHTML = "Thank you for your message";
+  const message = document.querySelector("#help-thank-you .modal-message");
+  message.innerHTML = "<p>Your message has been sent to our admin team</p>";
+  const spinner = document.querySelector("#help-thank-you .sending-spinner");
+  spinner.style.display = "none";
+  const thankYouTick = document.querySelector("#help-thank-you  .sent-thank-you-tick");
+  thankYouTick.style.display = "inline";
+}
+
 
 
 
@@ -505,27 +530,6 @@ function getParam() {
 }
 
 // ======SHOW JOB FUNCTIONS======
-// validate job help
-function validateHelpForm(event) {
-  const helpForm = document.querySelector('.post-job-form2');
-  const modalHelp = new bootstrap.Modal(document.querySelector('#help'));
-  let wasValidated = false;
-  console.log("modal help submit clicked");
-    if (!helpForm.checkValidity()) {
-      event.preventDefault();
-      event.stopPropagation();
-      console.log("modal help was-NOT-validated");
-    }
-    else {
-      console.log("modal help was-validated");
-      modalHelp.hide();
-      wasValidated = true;
-      // modalStep3.show();
-      //createSentEmailDoc("rod@roddickinson.net", "me@myemail.com", "Here is a message");
-    }
-    helpForm.classList.add('was-validated');
-    return wasValidated;
-}
 
 // add category buttons in the post job modal
 function createCategoryButtons(){
@@ -2049,7 +2053,7 @@ function populateContactModals(vals) {
 }
 
 // get values from contact form
-function getContactFormValues(vals) {
+function getContactMeFormValues(vals) {
   const sendGradMessageForm = document.querySelector('#grad-message-modal .send-grad-message');
   let formValues = {};
   //formValues.message = "test from contact form";
@@ -2065,7 +2069,7 @@ function messageSentConfirmation(vals) {
   const messageTitle = document.querySelector("#help-thank-you .modal-title");
   messageTitle.innerHTML = "Thank you for your message!";
   const message = document.querySelector("#help-thank-you .modal-message");
-  message.innerHTML = "<p>Your message will be send to our admin team who will forward it to  "+vals.forename+" "+vals.surname+"</p>";
+  message.innerHTML = "<p>Your message will be sent to our admin team who will forward it to  "+vals.forename+" "+vals.surname+"</p>";
   const spinner = document.querySelector("#help-thank-you .sending-spinner");
   spinner.style.display = "none";
   const thankYouTick = document.querySelector("#help-thank-you  .sent-thank-you-tick");
@@ -2348,9 +2352,30 @@ window.addEventListener('DOMContentLoaded', function(){
 // HOME / INDEX PAGE
 if (page == "home") {
   console.log("home page");
+  // populate page with profiles
   getRandomDocs(3).then(function(docs){
     createGradPreview(docs);
   });
+
+  // contact form send messsage
+  const getInTouchSubmit = document.querySelector('#contact #submit-home-message');
+  const messageSentModal = new bootstrap.Modal(document.querySelector('#help-thank-you'));
+  const getInTouchForm = document.querySelector('#contact  .send-home-form'); 
+  getInTouchSubmit.addEventListener('click', function (event) {
+    let validated = validateHomeContactForm(event, getInTouchForm);
+    if (validated) {
+      messageSentModal.show();
+      // get form vals and create email message
+      let formValues = getContactFormValues();
+      // send email if help modal validated
+      createSentEmailDoc(formValues.to, formValues.from, formValues.message).then(function(){
+        console.log("email sent success");
+        homepageMessageSent(); // when sent change message and graphic
+        getInTouchForm.reset();  // reset form
+      });
+    }
+  });
+
 }
 
 // ACCOUNT SETTINGS PAGE
@@ -2672,7 +2697,7 @@ if (page == "single-profile") {
       // get profile data 
       getUserData(id).then(function(vals){
           // get form vals and create email message
-          let formValues = getContactFormValues(vals);
+          let formValues = getContactMeFormValues(vals);
           // send email if help modal validated
           createSentEmailDoc(formValues.to, formValues.from, formValues.message).then(function(){
             // when sent change message and graphic
