@@ -215,12 +215,13 @@ export function getAllCurrentJobData(sort, fn) {
   // getDocs(colRef)
   getDocs(orderByDate)
     .then(function(snapshot) {
-      //console.log(snapshot.docs);
       let jobCollection = [];
       for (let i = 0; i < snapshot.docs.length; i++) {
         let job = snapshot.docs[i].data();
         job.id = snapshot.docs[i].id;
-        jobCollection.push(job);
+        if (job.approved) {
+          jobCollection.push(job);
+        }
       }
       // sort results based on incoming parameter
       let sortedArr = jobCollection;

@@ -554,8 +554,10 @@ function displayAllJobs (itemsPerPage, page, jobCollection) {
   let jobContainer = document.querySelector(".all-job-data");
   jobContainer.innerHTML = "";
   // display total jobs available
-  let jobCount = document.querySelector(".jobs-available");
-  jobCount.innerHTML = "AVALABLE JOBS ("+jobCollection.length+")";
+  
+  let jobCount = jobCollection.length;
+  let jobCountContainer = document.querySelector(".jobs-available");
+  jobCountContainer.innerHTML = "AVALABLE JOBS ("+jobCount+")";
 
 
   // get initial start and end items 
@@ -721,6 +723,7 @@ function createPagination(pageParam, itemsPerPage, jobs) {
     // previous
     if(i == 0) {
       pageLink.setAttribute("aria-label", "Previous");
+      currentUrl.searchParams.delete('page');
       currentUrl.searchParams.append('page', previous);
       pageLink.href = currentUrl.href;
       pageLink.innerHTML = '<span aria-hidden="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>';
@@ -728,12 +731,14 @@ function createPagination(pageParam, itemsPerPage, jobs) {
     // next
     else if (i == pageLinksLength-1) {
       pageLink.setAttribute("aria-label", "Next");
+      currentUrl.searchParams.delete('page');
       currentUrl.searchParams.append('page', forward);
       pageLink.href = currentUrl.href;
       pageLink.innerHTML = '<span aria-hidden="true"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>';
     }
     // page links
     else {
+      currentUrl.searchParams.delete('page');
       currentUrl.searchParams.append('page', i);
       pageLink.href = currentUrl.href;
       pageLink.innerHTML = i;
