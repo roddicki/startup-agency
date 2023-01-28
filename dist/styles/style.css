@@ -1158,6 +1158,7 @@ header .container-fluid {
 
 .navbar {
 	padding-top: 0px;
+	height: 112px;
 }
 
 /*nav and footer*/
