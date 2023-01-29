@@ -144,6 +144,10 @@ h5{
 	margin-right: 20px;
 }
 
+.btn-secondary:hover{
+	background-color: #0d6efd;
+}
+
 .btn-no-background{
 	background-color: white;
 	color: none;
@@ -405,11 +409,12 @@ h5{
   .filtertag{
 	padding: 8px 16px;
 	gap: 10px;
-	border-radius: 30px;
-	background: #0a53be;
+	background: #f8f8f8;
 	border-radius: 30px;
 	margin-right: 10px;
 	margin-top: 10px;
+	color: #000000;
+	border:1.4px solid 572F88;
   }
 
   .filter-tag-profile{
