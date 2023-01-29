@@ -264,32 +264,4 @@ function validateEmail() {
 }
 
 
-//disable forms
-
-  document.getElementById('Set-budget-radio').onchange = function() {
-    document.getElementById('Set-budget-Text').disabled = !this.checked;
-    document.getElementById('Set-hourly-text').disabled = this.checked;
-    document.getElementById('Set-hourly-text').value = "";
-  }
-    document.getElementById('Set-hourly-radio').onchange = function() {
-    document.getElementById('Set-hourly-text').disabled = !this.checked;
-    document.getElementById('Set-budget-Text').disabled = this.checked
-    document.getElementById('Set-budget-Text').value = "";
-    }
-    document.getElementById('remote-radio').onchange = function() {
-    document.getElementById('job-location-text').disabled = this.checked
-    
-    document.getElementById('job-location-text').value = "";
-    }
-    document.getElementById('duration-radio').onchange = function() {
-    document.getElementById('duration-date').disabled = !this.checked;
-    document.getElementById('completion-date').disabled = this.checked
-    document.getElementById('completion-date').value = "";
-    }
-    document.getElementById('completion-radio').onchange = function() {
-    document.getElementById('completion-date').disabled = !this.checked;
-    document.getElementById('duration-date').disabled = this.checked
-    document.getElementById('duration-date').value = "";
-    }
-
 
