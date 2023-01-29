@@ -263,18 +263,21 @@ function validateEmail() {
   forgotPassForm.classList.add('was-validated');
 }
 
-
 //disable forms
 
   document.getElementById('Set-budget-radio').onchange = function() {
     document.getElementById('Set-budget-Text').disabled = !this.checked;
     document.getElementById('Set-hourly-text').disabled = this.checked;
     document.getElementById('Set-hourly-text').value = "";
+    document.getElementById('duration-date').required =  this.checked;
+    document.getElementById('Set-hourly-text').required =  !this.checked;
   }
     document.getElementById('Set-hourly-radio').onchange = function() {
     document.getElementById('Set-hourly-text').disabled = !this.checked;
     document.getElementById('Set-budget-Text').disabled = this.checked
     document.getElementById('Set-budget-Text').value = "";
+    document.getElementById('duration-date').required =  !this.checked;
+    document.getElementById('Set-hourly-text').required =  this.checked;
     }
     document.getElementById('remote-radio').onchange = function() {
     document.getElementById('job-location-text').disabled = this.checked
@@ -285,11 +288,40 @@ function validateEmail() {
     document.getElementById('duration-date').disabled = !this.checked;
     document.getElementById('completion-date').disabled = this.checked
     document.getElementById('completion-date').value = "";
+    document.getElementById('duration-date').required =  this.checked;
+    document.getElementById('completion-date').required =  !this.checked;
     }
     document.getElementById('completion-radio').onchange = function() {
     document.getElementById('completion-date').disabled = !this.checked;
     document.getElementById('duration-date').disabled = this.checked
     document.getElementById('duration-date').value = "";
+    document.getElementById('duration-date').required =  !this.checked;
+    document.getElementById('completion-date').required =  this.checked;
+ 
     }
+    
+   
+    window.onload = function(){
 
-
+      var d = new Date();
+    
+      // Build ISO 8601 format date string
+      var s = d.getFullYear() + '-' + 
+              ('0' + (d.getMonth()+1)).slice(-2) + '-' +
+              ('0' + d.getDate()).slice(-2);
+    
+      // Set the value of the value and min attributes
+      var node = document.getElementById('completion-date');
+      var node1 = document.getElementById('deadline-date');
+      if (node) {
+        node.setAttribute('min', s);
+        node.setAttribute('value', s);
+      }
+      if (node1) {
+        node1.setAttribute('min', s);
+        node1.setAttribute('value', s);
+      }
+      
+    }
+  
+    

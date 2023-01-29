@@ -72,7 +72,7 @@
               </div>
               <div class="col-md-6 col-sm-12">
                 <label for="validationCustom03" class="form-label">Email*</label>
-                <input type="text" class="form-control" name="email" id="validationCustom03" placeholder="Your email" required>
+                <input type="email" class="form-control" name="email" id="validationCustom03" placeholder="Your email" required>
                 <div class="invalid-feedback">
                   Please provide a valid Email.
                 </div>
@@ -80,14 +80,14 @@
               
               <div class="col-md-6 col-sm-12">
                 <label for="validationCustom05" class="form-label">Phone Number*</label>
-                <input type="text" class="form-control" name="phone" id="validationCustom05" placeholder="Your phone no" required>
+                <input type="tel" class="form-control" name="phone" id="validationCustom05" placeholder="Your phone no" required>
                 <div class="invalid-feedback">
                   Please provide a valid phone number.
                 </div>
               </div>
               <div class="col-12">
                 <div class="set-content-right">
-                  <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-target="#post-job-modal0" data-bs-dismiss="modal" >Back</button>
+                  <button type="button" class="btn btn-secondary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-target="#post-job-modal0" data-bs-dismiss="modal" >Back</button>
                   <button type="button" id="submit1" class="btn btn-primary btn-lg btn-block apply-btn">Next Step</button>
                 </div>
               </div>
@@ -121,7 +121,7 @@
       <div class="row g-3">
         <div class="col-md-12">
           <label for="validationCustom06" class="form-label">Job title*</label>
-          <input type="text" class="form-control" name="title" id="validationCustom06" placeholder="Descriptive job title" required>
+          <input type="text" class="form-control" name="title" id="validationCustom06" maxlength="50" placeholder="Descriptive job title" required>
           <div class="invalid-feedback">
               Please add a job title
           </div>
@@ -131,7 +131,7 @@
       <div class="row pt-3">
         <div class="col-md-6 col-sm-12">
           <label for="validationCustom04" class="form-label">Company name*</label>
-          <input type="text" class="form-control" name="company" id="validationCustom07" placeholder="Your company" required>
+          <input type="text" class="form-control" name="company" id="validationCustom07" maxlength="30" placeholder="Your company" required>
           <div class="invalid-feedback">
               Please add your company name
           </div>
@@ -149,7 +149,7 @@
         <!--Completion radios -->
         <div class="col-md-6 col-sm-12">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="Set-budget-radio">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" maxlength="8" id="Set-budget-radio" required>
             <label class="form-check-label" for="BudgetRadio">
               Set budget
             </label>
@@ -158,13 +158,13 @@
             <div class="input-group-prepend">
               <span class="input-group-text">£</span>
             </div>
-            <input type="text" class="form-control" id="Set-budget-Text"  disabled>
+            <input type="number" class="form-control" id="Set-budget-Text" maxlength="8" disabled required>
           </div>
         </div>
 
         <div class="col-md-6 col-sm-12">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="Set-hourly-radio">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="Set-hourly-radio" required>
             <label class="form-check-label" for="HourlyRadio">
               Hourly Rate
             </label>
@@ -173,7 +173,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text">£</span>
             </div>
-            <input type="text" class="form-control" id="Set-hourly-text" rows="1" disabled>
+            <input type="number" class="form-control" id="Set-hourly-text" rows="1" required disabled>
           </div>
         </div>
       </div>
@@ -183,7 +183,8 @@
       <div class="row">
         <div class="col-md-6 col-sm-12">
           <label for="validationCustom04" class="form-label pb-2">Deadline to apply for this job*</label>
-          <input class="date-input" type="date" name="applicationDeadline" value="now" required>
+          <input class="date-input" id="deadline-date"  min="01/01/2023" type="date" onclick="checkDate()" name="applicationDeadline" value="now" min="2023-01-01" max="2099-09-13" required>
+          <!-- <div id="datewarn"></div> -->
           <div class="invalid-feedback">
               Please add a application deadline
           </div>
@@ -221,19 +222,18 @@
           Completion date
         </label>
       </div>  
-      <input class="date-input date-margin" type="date" id="completion-date" name="trip-start"
-          value="now"
-          required disabled>
+      <input class="date-input date-margin" id="completion-date" type="date" id="completion-date"  name="trip-start"
+          value="now" required disabled>
     </div>
   
     <div class="col-md-6 col-sm-12 gap">
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault1" id="duration-radio">
+        <input class="form-check-input date-margin" type="radio" name="flexRadioDefault1" id="duration-radio" required>
         <label class="form-check-label" for="flexRadioDefault2">
           Duration period 
         </label>
     </div>
-    <input class="form-control" type="number" min="1" name="duration" id="duration-date" disabled>
+    <input class="date-margin form-control" type="text" min="1" name="duration" id="duration-date" required disabled>
   </div>
 </div>
       <!-- end row -->
@@ -242,7 +242,8 @@
       <div class="row pt-3">
         <div class="col-md-12">
           <label for="validationCustom04" class="form-label">Job brief*</label>
-          <textarea class="form-control" id="validationCustom03" name="jobBrief" rows="7" placeholder="Decription of the job" ></textarea>
+          <textarea class="form-control" id="validationCustom03" name="jobBrief" rows="7" placeholder="Decription of the job " maxlength="500"></textarea>
+          <small class="form-text text-muted">Max 500 charachters</small>
           <div class="invalid-feedback">
             Please tell us about the job
           </div>
@@ -263,7 +264,7 @@
       <div class="row">
         <div class="col-12">
           <div class="set-content-right gap">
-            <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#post-job-modal1" data-bs-dismiss="modal">Back</button>
+            <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#post-job-modal1" data-bs-dismiss="modal">Back</button>
             <button type="button" id="submit2" class="btn btn-primary btn-lg btn-block">Preview Job</button>
           </div>
         </div>
@@ -335,7 +336,7 @@
             </div>
             <div class="col-12">
               <div class="set-content-right gap">
-                <button type="button" class="btn btn-primary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#post-job-modal2" data-bs-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-secondary btn-lg btn-block"  data-bs-toggle= "modal" data-bs-target="#post-job-modal2" data-bs-dismiss="modal">Back</button>
                 <button type="button" class="btn btn-primary btn-lg btn-block submit-job-details"  data-bs-toggle= "modal" data-bs-target="#submit" data-bs-dismiss="modal" >Submit job</button>
               </div>
             </div>
@@ -407,7 +408,7 @@
               </div>
               <div class="col-md-6 col-sm-12">
                 <label for="validationCustom11" class="form-label">Email*</label>
-                <input type="text" class="form-control" name="helpEmail" id="validationCustom03" required>
+                <input type="email" class="form-control" name="helpEmail" id="validationCustom03" required>
                 <div class="invalid-feedback">
                   Please provide a valid Email.
                 </div>
@@ -415,7 +416,8 @@
               
               <div class="col-md-12">
                 <label for="validationCustom12" class="form-label">Job details*</label>
-                <textarea type="text" class="form-control" name="helpDesc" id="validationCustom07" rows="3" required></textarea>
+                <textarea type="text" class="form-control" name="helpDesc" id="validationCustom07" rows="3" maxlength="500" required></textarea>
+                <small class="form-text text-muted">Max 500 charachters</small>
                 <div class="invalid-feedback">
                     Please tell us about the job
                   </div>
@@ -423,7 +425,7 @@
               <row>
                 <div class="col-12">
                   <div class="set-content-right gap">
-                    <button type="button" class="btn btn-primary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-target="#post-job-modal0" data-bs-dismiss="modal" >Back</button>
+                    <button type="button" class="btn btn-secondary btn-lg btn-block apply-btn"  data-bs-toggle= "modal"   data-bs-target="#post-job-modal0" data-bs-dismiss="modal" >Back</button>
                     <button type="button" id="submit3" class="btn btn-primary btn-lg btn-block send-help-email" >Send</button>
                  </div>
                 </div>
