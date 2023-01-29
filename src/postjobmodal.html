@@ -15,7 +15,7 @@
               
               <p>We know how important for you is to find the right person for the job. The way you frame the job brief it is significant to find the right applicant. </p>
   
-              <p>We often find that even though people know what their needed outcome is, they don’t always know what and who they are looking for exactly to meet the desired delivery. </p>
+              <p>We often find that even though people know what their needed outcome is, they don’t always know what and who they are looking for exacly to meet the desired delivery. </p>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12">
               <div class="modal-border">
@@ -141,7 +141,7 @@
 
       <div class="row pt-3">
         <div class="col-md-12">
-          Please either set a Budget or add an Hourly Rate*
+          Please either set a Budget or add an Hourly Ratee*
         </div>
       </div>
 
@@ -149,8 +149,8 @@
         <!--Completion radios -->
         <div class="col-md-6 col-sm-12">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="budgetRadio" id="flexRadioDefault1">
-            <label class="form-check-label" for="budgetRadio">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="Set-budget-radio">
+            <label class="form-check-label" for="BudgetRadio">
               Set budget
             </label>
           </div>
@@ -158,14 +158,14 @@
             <div class="input-group-prepend">
               <span class="input-group-text">£</span>
             </div>
-            <input type="text" class="form-control" name="budget" id="validationCustom03">
+            <input type="text" class="form-control" id="Set-budget-Text"  disabled>
           </div>
         </div>
 
         <div class="col-md-6 col-sm-12">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="hourlyRadio" id="flexRadioDefault1">
-            <label class="form-check-label" for="hourlyRadio">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="Set-hourly-radio">
+            <label class="form-check-label" for="HourlyRadio">
               Hourly Rate
             </label>
           </div>
@@ -173,10 +173,11 @@
             <div class="input-group-prepend">
               <span class="input-group-text">£</span>
             </div>
-            <input type="text" class="form-control" name="rate" id="validationCustom03">
+            <input type="text" class="form-control" id="Set-hourly-text" rows="1" disabled>
           </div>
         </div>
       </div>
+
       <!-- end row -->
 
       <div class="row">
@@ -193,7 +194,7 @@
       <div class="row pt-3">
         <div class="col-md-6 col-sm-12">
           <label for="validationCustom04" class="form-label">Job location (or remote work)*</label>
-          <input type="text" class="form-control" name="location" id="validationCustom07" placeholder="Where is the job based" required>
+          <input type="text" class="form-control" name="location" id="job-location-text" placeholder="Where is the job based" required>
           <div class="invalid-feedback">
               Please tell the location of the job
           </div>
@@ -201,7 +202,7 @@
         <div class="col-md-6 col-sm-12 pt-3 remotejob">
           <div class="form-check checkbox-pos">
             <label class="form-check-label" for="remoteRadio">Remote Job</label>
-            <input class="form-check-input" type="checkbox" name="remoteRadio" value="" id="flexCheckDefault">
+            <input class="form-check-input" type="checkbox" name="remoteRadio" value="" id="remote-radio">
           </div>
         </div>
       </div>
@@ -212,29 +213,36 @@
           Please either set a Completion date for the job or how many days work you expect it to be*
         </div>
       </div>
-
       <div class="row pt-3">
-        <div class="col-md-6 col-sm-12">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="completionRadio" id="flexRadioDefault2">
-            <label class="form-check-label" for="completionRadio">Completion date</label>
-          </div>  
-          <input class="date-input date-margin" type="date" name="completionDate" value="now" required>
-        </div>
-        <div class="col-md-6 col-sm-12 pt-1">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="durationRadio" id="flexRadioDefault2">
-            <label class="form-check-label" for="durationRadio">Duration (days of work)</label>
-          </div>
-          <input class="form-control" type="number" min="1" name="duration" required>
-        </div>
-      </div>
+      <div class="col-md-6 col-sm-12 gap">
+        <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault1" id="completion-radio">
+        <label class="form-check-label" for="flexRadioDefault2">
+          Completion date
+        </label>
+      </div>  
+      <input class="date-input date-margin" type="date" id="completion-date" name="trip-start"
+          value="now"
+          required disabled>
+    </div>
+  
+    <div class="col-md-6 col-sm-12 gap">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault1" id="duration-radio">
+        <label class="form-check-label" for="flexRadioDefault2">
+          Duration period 
+        </label>
+    </div>
+    <input class="form-control" type="number" min="1" name="duration" id="duration-date" disabled>
+  </div>
+</div>
       <!-- end row -->
+    
 
       <div class="row pt-3">
         <div class="col-md-12">
           <label for="validationCustom04" class="form-label">Job brief*</label>
-          <textarea class="form-control" id="validationCustom03" name="jobBrief" rows="7" placeholder="Decription of the job" required></textarea>
+          <textarea class="form-control" id="validationCustom03" name="jobBrief" rows="7" placeholder="Decription of the job" ></textarea>
           <div class="invalid-feedback">
             Please tell us about the job
           </div>
@@ -351,7 +359,7 @@
           <div class="row">
             <div class="col-12">
               <p>
-                We will review and publish your job shortly. If we find any issues with submission we will get in touch with you to explain why and work with you to fix it.  
+                We will review and publish your job shortly. If we find any issues with submission we will get in touch with you to exlain why and work with you to fix it.  
               </p>
               <p>
                 After the application deadline, we will forward to you all freelancers who applied for the job so you can select the successful applicant(s). Then we will arrange the contact between you to discuss any other details.
