@@ -1100,6 +1100,7 @@ h5{
 
   }
 
+  
   /*#project-img-showcase-edit-2{
 	display: none;
   }
@@ -1250,10 +1251,17 @@ input[type=file]::file-selector-button {
 	
 }
 
-/*project showcase thumb nav*/
-.showcase-thumb-nav {
+.HIW-border{
+	background: #FFFFFF;
+/* Gray-100 */
 
+border: 1px solid #EDEBEE;
+border-radius: 10px;
+padding: 20px;
+margin-bottom: 10px;
 }
+
+
 
 /*project showcase carousel layout*/
 .carousel-showcase-container {
@@ -1289,6 +1297,7 @@ input[type=file]::file-selector-button {
 		display: flex;
     	flex-wrap: wrap;
 	}
+	
 
 	.carousel-showcase-hero {
 		flex-grow: 0;
@@ -1325,6 +1334,12 @@ input[type=file]::file-selector-button {
 		height:70px;
 	}
 
+	.w-sm-100{
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	
+
 	.carousel-showcase-thumbs .carousel-indicators [data-bs-target] {
 		width: 30% !important; /*issue*/
 		/*margin-right: 0;*/
@@ -1355,9 +1370,6 @@ input[type=file]::file-selector-button {
 	
 }
  
-.bordertest{
-	//border:  #EDEBEE 2px solid;
-}
 
 .SocialMedia-1-container,
 .SocialMedia-2-container,
@@ -1511,6 +1523,8 @@ footer p {
     .carousel-inner .carousel-item > div:first-child {
         display: block;
     }
+
+	
 	
 }
 
@@ -1538,9 +1552,9 @@ footer p {
 
 .carousel-inner .carousel-item-end,
 .carousel-inner .carousel-item-start { 
-  transform: translateX(0); */
+  transform: translateX(0); 
   
-} 
+} */
 
 
 
