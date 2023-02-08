@@ -2510,6 +2510,17 @@ if (page == "queries") {
   getAllParams();
 }
 
+// QUERIES TEST PAGE
+if (page == "portfolios") {
+  console.log("portfolios  page");
+  // navigate to new url
+  setCategoryParams();
+  setTagParams();
+  // set checkboxes
+  setFiltersFromParams();
+  getAllParams();
+}
+
 // ACCOUNT SETTINGS PAGE
 if (page == "account-seetings") {
   console.log("account-seetings  page");
