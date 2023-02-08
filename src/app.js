@@ -199,6 +199,122 @@ function homepageMessageSent() {
 }
 
 
+//===========================
+// BROWSE FOLIOS FUNCTIONS
+// create url & search params from category filters
+function setCategoryParams() {
+  // check category check sub categories 
+  const categoryCheckboxes = document.querySelectorAll('#filters input.category');
+  let currentUrl = new URL(window.location); 
+  for (var i = 0; i < categoryCheckboxes.length; i++) {
+    if (categoryCheckboxes[i].type === 'checkbox') {
+      categoryCheckboxes[i].onclick = function(e) {
+        console.log("clicked category", this.dataset.skills);
+        const tags = document.querySelectorAll('#filters .tag input[data-category="'+this.dataset.skills+'"]');
+        if (this.checked && this.dataset.skills != undefined) {
+          // add category search param 
+          //currentUrl.searchParams.append(this.dataset.skills, 'category');
+          // check other sub categories
+          for (var j = 0; j < tags.length; j++) {
+            tags[j].checked = true;
+            // add tags search param here
+            currentUrl.searchParams.append(tags[j].dataset.skills, 'tag');
+          }
+        } 
+        else {
+          for (var k = 0; k < tags.length; k++) {
+            tags[k].checked = false;
+            // add tags search param here
+            currentUrl.searchParams.delete(this.dataset.skills);
+            currentUrl.searchParams.delete(tags[k].dataset.skills);
+          }
+        }
+        window.history.pushState({}, '', currentUrl);
+      }
+    }
+  }
+  
+}
+
+
+// create url & search params from tag filters
+function setTagParams() {
+  const checkboxes = document.querySelectorAll('#filters .tag input');
+  for (var i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].type === 'checkbox') {
+      checkboxes[i].onclick = function(e) {
+        let currentUrl = new URL(window.location); 
+        if (this.checked && this.dataset.skills != undefined) {
+          // if a category
+          currentUrl.searchParams.append(this.dataset.skills, 'tag');
+        } 
+        else {
+          currentUrl.searchParams.delete(this.dataset.skills);
+        }
+        // set checked / indeterminate
+        setCategoryCheckbox(this);
+        window.history.pushState({}, '', currentUrl);
+      } 
+    }
+  }
+
+}
+
+
+// set checked / indeterminate
+function setCategoryCheckbox(el){
+  // set checked / indeterminate // get checked tags and all tags
+  const tags = document.querySelectorAll('.tag input[data-category="'+el.dataset.category+'"]');
+  const tagsChecked = document.querySelectorAll('.tag input[data-category="'+el.dataset.category+'"]:checked');
+  const categoryCheckbox = document.querySelector('input[data-skills="'+el.dataset.category+'"]');
+  if (tagsChecked.length == tags.length) {
+    categoryCheckbox.indeterminate = false;
+    categoryCheckbox.checked = true;
+  }
+  else if (tagsChecked.length == 0) {
+    categoryCheckbox.indeterminate = false;
+    categoryCheckbox.checked = false;
+  }
+  else if (tagsChecked.length != tags.length) {
+    categoryCheckbox.indeterminate = true;
+    console.log("three");
+  }
+}
+
+
+// read params and check checkbox filters
+function setFiltersFromParams() {
+  let filters = [];
+  const checkboxes = document.querySelectorAll('#filters input');
+  const params = new URLSearchParams(window.location.search);
+  // create array of params
+  for (const key of params.keys()) {
+    filters.push(key);
+  }
+  // match checkbox to param
+  for (var i = 0; i < checkboxes.length; i++) {
+    const skill = checkboxes[i].dataset.skills;
+    // search filters array for match
+    const found = filters.find( function(el) { return el == skill } );
+    if (found) {
+      checkboxes[i].checked = true;
+      setCategoryCheckbox(checkboxes[i]);
+    }
+  }
+}
+
+
+// read params for queries
+function getAllParams() {
+  const searchParams = new URLSearchParams(window.location.search);
+  const checkboxes = document.querySelectorAll('#filters input');
+  // Log the values
+  console.log("\nfrom getAllParams()")
+  searchParams.forEach(function(value, key) {
+    console.log(value, key);
+  });
+}
+
 
 
 // POST A JOB FUNCTIONS
@@ -2381,6 +2497,17 @@ if (page == "home") {
     }
   });
 
+}
+
+// QUERIES TEST PAGE
+if (page == "queries") {
+  console.log("queries  page");
+  // navigate to new url
+  setCategoryParams();
+  setTagParams();
+  // set checkboxes
+  setFiltersFromParams();
+  getAllParams();
 }
 
 // ACCOUNT SETTINGS PAGE
