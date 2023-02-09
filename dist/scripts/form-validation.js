@@ -189,14 +189,16 @@ function createJobPreview() {
   const jobTitle = document.querySelector(".job-title-preview");
   jobTitle.innerHTML = form1.title.value;
   const company = document.querySelector(".company-name-preview");
+  const RadioBudget = document.getElementById("Set-budget-radio");
+  const RadioCompletion = document.getElementById("completion-radio");
   company.innerHTML = form1.company.value;
   const budgetHeader = document.querySelector(".budget-hourly-header");
   const budgetPreview = document.querySelector(".budget-hourly-preview");
-  if(form1.budgetRadio.checked) {
+  if(RadioBudget.checked) {
     budgetHeader.innerHTML = "Budget";
     budgetPreview.innerHTML = "Set budget - £"+form1.budget.value;
   }
-  else {
+  else {s
     budgetHeader.innerHTML = "Hourly Rate";
     budgetPreview.innerHTML = "£"+form1.rate.value + " p/h";
   }
@@ -211,7 +213,7 @@ function createJobPreview() {
   // completion deadline / duration period
   let completionDate = new Date(form1.completionDate.value);
   const completionDeadline = document.querySelector(".completion-deadline-preview");
-  if(form1.completionRadio.checked) {
+  if(RadioCompletion.checked) {
     completionDeadline.innerHTML = "Completion deadline - " + completionDate.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"});
   }
   else {
