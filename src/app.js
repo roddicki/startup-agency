@@ -201,6 +201,7 @@ function homepageMessageSent() {
 
 //===========================
 // BROWSE FOLIOS FUNCTIONS
+
 // create url & search params from category filters
 function setCategoryParams() {
   // check category check sub categories 
@@ -309,12 +310,59 @@ function getAllParams() {
   const searchParams = new URLSearchParams(window.location.search);
   const checkboxes = document.querySelectorAll('#filters input');
   // Log the values
-  console.log("\nfrom getAllParams()")
+  //console.log("\nfrom getAllParams()");
+  let paramsArr = [];
   searchParams.forEach(function(value, key) {
-    console.log(value, key);
+    //console.log(value, key);
+    let paramsObj = {};
+    paramsObj[value] = key;
+    paramsArr.push(paramsObj);
   });
+  return paramsArr;
 }
 
+
+// query / filter users by tag
+async function filterUsers(allParams) {
+  console.log("\nFiltered docs");
+  let tags = [];
+  let docs = [];
+  let docIds = [];
+  // create array of all tags
+  for (var i = 0; i < allParams.length; i++) {
+    tags.push(allParams[i].tag);
+  }
+  // while tags array is not empty
+  while (tags.length > 1) {
+    // create tag sub array / batch of 10
+    let tagsBatch = [];
+    let n = 10; // get batches of 10 tags
+    if (tags.length < 10) {
+      n = tags.length;
+    }
+    for (var j = 0; j < n; j++) {
+      tagsBatch.push(tags[0]);
+      tags.shift(); // delete first item from tags
+    }
+    // create query from tagsBatch - max of 10 array items to query
+    const q = query(collection(db, "users"), where('tags', 'array-contains-any', tagsBatch));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // doc has not already been added to array of docs
+      const notInArr = !docIds.includes(doc.id);
+      if (notInArr) {
+        docIds.push(doc.id);
+        // add dod.id to doc & push to docs array
+        let obj = {}
+        obj.id = doc.id;
+        let merged = {...obj, ...doc.data()};
+        docs.push(merged);
+        console.log(doc.data().forename, " => ", doc.id);
+      }
+    });
+  }
+  return docIds;
+} 
 
 
 // POST A JOB FUNCTIONS
@@ -2510,7 +2558,8 @@ if (page == "queries") {
   getAllParams();
 }
 
-// QUERIES TEST PAGE
+
+// PORTFOLIOS PAGE
 if (page == "portfolios") {
   console.log("portfolios  page");
   // navigate to new url
@@ -2518,8 +2567,24 @@ if (page == "portfolios") {
   setTagParams();
   // set checkboxes
   setFiltersFromParams();
-  getAllParams();
+  // set filters onload
+  let allParams = getAllParams();
+  //console.log(allParams);
+  filterUsers(allParams).then(function(docs) {
+    console.log("filtered docs", docs);
+  });
+  // detect if checkbox clicked and filter
+  const allCheckboxes = document.querySelectorAll('#filters input');
+  for (var i = 0; i < allCheckboxes.length; i++) {
+    allCheckboxes[i].addEventListener("click", function() {
+      allParams = getAllParams();
+      filterUsers(allParams).then(function(docs) {
+        console.log("filtered docs", docs);
+      });
+    });
+  }
 }
+
 
 // ACCOUNT SETTINGS PAGE
 if (page == "account-seetings") {
