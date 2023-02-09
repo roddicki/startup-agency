@@ -198,7 +198,7 @@ function createJobPreview() {
     budgetHeader.innerHTML = "Budget";
     budgetPreview.innerHTML = "Set budget - £"+form1.budget.value;
   }
-  else {s
+  else {
     budgetHeader.innerHTML = "Hourly Rate";
     budgetPreview.innerHTML = "£"+form1.rate.value + " p/h";
   }
@@ -273,13 +273,17 @@ function validateEmail() {
     document.getElementById('Set-hourly-text').value = "";
     document.getElementById('duration-date').required =  this.checked;
     document.getElementById('Set-hourly-text').required =  !this.checked;
+    document.getElementById("Set-hourly-radio").checked = false;
+    document.getElementById("Set-hourly-radio").required =  !this.checked;
   }
     document.getElementById('Set-hourly-radio').onchange = function() {
     document.getElementById('Set-hourly-text').disabled = !this.checked;
     document.getElementById('Set-budget-Text').disabled = this.checked
     document.getElementById('Set-budget-Text').value = "";
-    document.getElementById('duration-date').required =  !this.checked;
+    document.getElementById('duration-date').required =    !this.checked;
     document.getElementById('Set-hourly-text').required =  this.checked;
+    document.getElementById("Set-budget-radio").checked = false;
+    document.getElementById("Set-budget-radio").required =  !this.checked;
     }
     document.getElementById('remote-radio').onchange = function() {
     document.getElementById('job-location-text').disabled = this.checked
@@ -287,11 +291,16 @@ function validateEmail() {
     document.getElementById('job-location-text').value = "";
     }
     document.getElementById('duration-radio').onchange = function() {
+      const newdate = new Date();
     document.getElementById('duration-date').disabled = !this.checked;
     document.getElementById('completion-date').disabled = this.checked
-    document.getElementById('completion-date').value = "";
+    
     document.getElementById('duration-date').required =  this.checked;
     document.getElementById('completion-date').required =  !this.checked;
+    document.getElementById("completion-radio").checked = false;
+    document.getElementById("completion-radio").required =  !this.checked;
+    document.getElementById("completion-date").style.color = '#fff';
+    
     }
     document.getElementById('completion-radio').onchange = function() {
     document.getElementById('completion-date').disabled = !this.checked;
@@ -299,7 +308,9 @@ function validateEmail() {
     document.getElementById('duration-date').value = "";
     document.getElementById('duration-date').required =  !this.checked;
     document.getElementById('completion-date').required =  this.checked;
- 
+    document.getElementById("duration-radio").checked = false;
+    document.getElementById("duration-radio").required =  !this.checked;
+    document.getElementById("completion-date").style.color = '#000';
     }
     
    
