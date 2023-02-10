@@ -328,13 +328,16 @@ function getAllParams() {
 
 // query / filter users by tag
 async function filterUsers(allParams) {
-  console.log("\nFiltered docs");
+  //console.log("\nFiltered docs");
   let tags = [];
   let docs = [];
   let docIds = [];
   // create array of all tags
   for (var i = 0; i < allParams.length; i++) {
-    tags.push(allParams[i].tag);
+    // if param is 'tag' (not 'page' or anything else) add to array
+    if (allParams[i].tag) {
+      tags.push(allParams[i].tag);
+    }
   }
   // while tags array is not empty
   while (tags.length > 1) {
@@ -372,6 +375,34 @@ async function filterUsers(allParams) {
 function setFolioNum(docs) {
   const folioNumContainer = document.querySelector('.project-showcase-text .folio-numbers');
   folioNumContainer.innerHTML = docs.length;
+}
+
+// return the docs to display accroding to the 'page='' param
+function getDocsBatch(itemsPerPage, page, docs) {
+  // get page
+  //let page = 
+  console.log("itemsPerPage =",itemsPerPage, "| page =",page, "| docs.length =",docs.length);
+  // get initial start and end items 
+  let start = 0;
+  let end;
+  if (itemsPerPage < docs.length) {
+    end = itemsPerPage;
+  }
+  else {
+    end = docs.length;
+  }
+  // get start and end items for each page if using ?page=x param
+  if(page) {
+    page = page -1;
+    start = page * itemsPerPage;
+    end = start + itemsPerPage;
+    if (start + itemsPerPage > docs.length) {
+      end = docs.length; 
+    }
+  }
+  console.log("start", start, "end", end);
+  console.log(docs.slice(start, end));
+  return(docs.slice(start, end));
 }
 
 
@@ -686,6 +717,14 @@ function confirmDeletion(){
 //===========================================
 //===========================================
 //===========DOM FUNCTIONS===================
+
+// set a param
+function setParam(key, value) {
+  let currentUrl = new URL(window.location); 
+  currentUrl.searchParams.set(key, value);
+  console.log(currentUrl); // "foo=1&bar=2&baz=3"
+  window.history.pushState({}, '', currentUrl);
+}
 
 // get query by param key
 function getParamKey(key) {
@@ -2575,25 +2614,32 @@ if (page == "portfolios") {
   // navigate to new url
   setCategoryParams();
   setTagParams();
-  // set checkboxes
+  // set checkboxes onload
   setFiltersFromParams();
   // set filters onload
   let allParams = getAllParams();
   //console.log(allParams);
+  const cardsPerPage = 4;
   filterUsers(allParams).then(function(docs) {
     console.log("filtered docs", docs);
-    createGradPreview(docs);
+    let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), docs); 
+    createGradPreview(docsBatch);
     setFolioNum(docs);
+    createPagination(getParamKey("page"), cardsPerPage, docs.length);
   });
   // detect if checkbox clicked and filter
   const allCheckboxes = document.querySelectorAll('#filters input');
   for (var i = 0; i < allCheckboxes.length; i++) {
     allCheckboxes[i].addEventListener("click", function() {
+      // set page param to 1
+      setParam("page", 1);
       allParams = getAllParams();
       filterUsers(allParams).then(function(docs) {
         console.log("filtered docs", docs);
-        createGradPreview(docs);
+        let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), docs); 
+        createGradPreview(docsBatch);
         setFolioNum(docs);
+        createPagination(getParamKey("page"), cardsPerPage, docs.length);
       });
     });
   }
@@ -2954,7 +3000,7 @@ if (page == "jobs") {
   }
   // retrieve all current jobs and display
   getAllCurrentJobData(sortVal, function(jobData){
-    displayAllJobs(itemsPerPage, getParamKey("page"), jobData); // err
+    displayAllJobs(itemsPerPage, getParamKey("page"), jobData); 
     createPagination(getParamKey("page"), itemsPerPage, jobData.length);
   });
 
