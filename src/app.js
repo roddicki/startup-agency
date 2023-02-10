@@ -110,6 +110,8 @@ function emailSentConfirmation() {
 async function createGradPreview(docsArray) {
   console.log(docsArray);
   const container = document.querySelector('#grad-preview-container');
+  // empty container
+  container.innerHTML = "";
   for (var i = 0; i < docsArray.length; i++) {
     console.log(docsArray[i].id, docsArray[i].forename+' '+docsArray[i].surname);
     let location = "<p></p>";
@@ -121,7 +123,7 @@ async function createGradPreview(docsArray) {
       available = '<p class="can-work"><i class="bi bi-circle-fill"></i> Available for work</p>';
     }
     // create card
-    let previewCard = '<!-- grad preview card --> <div id="id-'+docsArray[i].id+'" class="grad-preview-card col-lg-4 col-md-6 col-sm-12"> <div class="grad-preview-block"> <div class="row"> <div class="col-xl-auto col-sm-4 col-4 padding-left-0"> <div style="width:85px; height:85px; background-size:cover; background-image:url(\'assets/img/generic-profile.jpg\');" class="rounded-circle profile-pic"> </div> </div> <div class="col-xl-auto col-sm-8 col-8 grad-preview"> <h5><Strong class="grad-preview-name">'+docsArray[i].forename+' '+docsArray[i].surname+'</Strong></h5> <h6>Fashion Designer</h6> '+location+available+' </div> </div> <div id="images-container" class="lineheightjob row mt-3">  </div> <div class="job-footer row"> <div class="col-12 padding-left-0"> <a href="profile.html?id='+docsArray[i].id+'">View more details</a> </div> </div> </div> </div> <!-- grad preview card -->';
+    let previewCard = '<!-- grad preview card --> <div id="id-'+docsArray[i].id+'" class="grad-preview-card col-lg-6 col-md-6 col-sm-12"> <div class="grad-preview-block"> <div class="row"> <div class="col-xl-auto col-sm-4 col-4 padding-left-0"> <div style="width:85px; height:85px; background-size:cover; background-image:url(\'assets/img/generic-profile.jpg\');" class="rounded-circle profile-pic"> </div> </div> <div class="col-xl-auto col-sm-8 col-8 grad-preview"> <h5><Strong class="grad-preview-name">'+docsArray[i].forename+' '+docsArray[i].surname+'</Strong></h5> <h6>Fashion Designer</h6> '+location+available+' </div> </div> <div id="images-container" class="lineheightjob row mt-3">  </div> <div class="job-footer row"> <div class="col-12 padding-left-0"> <a href="profile.html?id='+docsArray[i].id+'">View more details</a> </div> </div> </div> </div> <!-- grad preview card -->';
     // insert into page
     container.innerHTML += previewCard;
   }
@@ -146,6 +148,8 @@ async function createGradPreview(docsArray) {
     if (docsArray[i].projects != null) {
       //console.log(docsArray[i].id, docsArray[i].forename+' '+docsArray[i].surname);
       let projects = docsArray[i].projects;
+      const projectPicContainer = document.querySelector('#id-'+docsArray[i].id+' #images-container');
+      projectPicContainer.innerHTML = "";
       //console.log(projects);
       let j = 0;
       // get key value for first 2 projects
@@ -154,7 +158,7 @@ async function createGradPreview(docsArray) {
         try {
           if (j < 3) {
             //console.log(key, value.images[0]);
-            const projectPicContainer = document.querySelector('#id-'+docsArray[i].id+' #images-container');
+            //const projectPicContainer = document.querySelector('#id-'+docsArray[i].id+' #images-container');
             const storageRef = ref(storage, value.images[0]);
             // get download image ref - don't need this 
             getDownloadURL(storageRef)
@@ -361,8 +365,14 @@ async function filterUsers(allParams) {
       }
     });
   }
-  return docIds;
+  return docs;
 } 
+
+// display the number of filtered portfolios
+function setFolioNum(docs) {
+  const folioNumContainer = document.querySelector('.project-showcase-text .folio-numbers');
+  folioNumContainer.innerHTML = docs.length;
+}
 
 
 // POST A JOB FUNCTIONS
@@ -2572,6 +2582,8 @@ if (page == "portfolios") {
   //console.log(allParams);
   filterUsers(allParams).then(function(docs) {
     console.log("filtered docs", docs);
+    createGradPreview(docs);
+    setFolioNum(docs);
   });
   // detect if checkbox clicked and filter
   const allCheckboxes = document.querySelectorAll('#filters input');
@@ -2580,6 +2592,8 @@ if (page == "portfolios") {
       allParams = getAllParams();
       filterUsers(allParams).then(function(docs) {
         console.log("filtered docs", docs);
+        createGradPreview(docs);
+        setFolioNum(docs);
       });
     });
   }
