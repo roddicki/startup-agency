@@ -189,10 +189,12 @@ function createJobPreview() {
   const jobTitle = document.querySelector(".job-title-preview");
   jobTitle.innerHTML = form1.title.value;
   const company = document.querySelector(".company-name-preview");
+  const RadioBudget = document.getElementById("Set-budget-radio");
+  const RadioCompletion = document.getElementById("completion-radio");
   company.innerHTML = form1.company.value;
   const budgetHeader = document.querySelector(".budget-hourly-header");
   const budgetPreview = document.querySelector(".budget-hourly-preview");
-  if(form1.budgetRadio.checked) {
+  if(RadioBudget.checked) {
     budgetHeader.innerHTML = "Budget";
     budgetPreview.innerHTML = "Set budget - £"+form1.budget.value;
   }
@@ -211,7 +213,7 @@ function createJobPreview() {
   // completion deadline / duration period
   let completionDate = new Date(form1.completionDate.value);
   const completionDeadline = document.querySelector(".completion-deadline-preview");
-  if(form1.completionRadio.checked) {
+  if(RadioCompletion.checked) {
     completionDeadline.innerHTML = "Completion deadline - " + completionDate.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"});
   }
   else {
@@ -271,13 +273,17 @@ function validateEmail() {
     document.getElementById('Set-hourly-text').value = "";
     document.getElementById('duration-date').required =  this.checked;
     document.getElementById('Set-hourly-text').required =  !this.checked;
+    document.getElementById("Set-hourly-radio").checked = false;
+    document.getElementById("Set-hourly-radio").required =  !this.checked;
   }
     document.getElementById('Set-hourly-radio').onchange = function() {
     document.getElementById('Set-hourly-text').disabled = !this.checked;
     document.getElementById('Set-budget-Text').disabled = this.checked
     document.getElementById('Set-budget-Text').value = "";
-    document.getElementById('duration-date').required =  !this.checked;
+    document.getElementById('duration-date').required =    !this.checked;
     document.getElementById('Set-hourly-text').required =  this.checked;
+    document.getElementById("Set-budget-radio").checked = false;
+    document.getElementById("Set-budget-radio").required =  !this.checked;
     }
     document.getElementById('remote-radio').onchange = function() {
     document.getElementById('job-location-text').disabled = this.checked
@@ -285,11 +291,16 @@ function validateEmail() {
     document.getElementById('job-location-text').value = "";
     }
     document.getElementById('duration-radio').onchange = function() {
+      const newdate = new Date();
     document.getElementById('duration-date').disabled = !this.checked;
     document.getElementById('completion-date').disabled = this.checked
-    document.getElementById('completion-date').value = "";
+    
     document.getElementById('duration-date').required =  this.checked;
     document.getElementById('completion-date').required =  !this.checked;
+    document.getElementById("completion-radio").checked = false;
+    document.getElementById("completion-radio").required =  !this.checked;
+    document.getElementById("completion-date").style.color = '#fff';
+    
     }
     document.getElementById('completion-radio').onchange = function() {
     document.getElementById('completion-date').disabled = !this.checked;
@@ -297,7 +308,9 @@ function validateEmail() {
     document.getElementById('duration-date').value = "";
     document.getElementById('duration-date').required =  !this.checked;
     document.getElementById('completion-date').required =  this.checked;
- 
+    document.getElementById("duration-radio").checked = false;
+    document.getElementById("duration-radio").required =  !this.checked;
+    document.getElementById("completion-date").style.color = '#000';
     }
     
    

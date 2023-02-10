@@ -145,8 +145,7 @@
         </div>
       </div>
 
-      <div class="row">
-        <!--Completion radios -->
+      <div class="row pt-3">
         <div class="col-md-6 col-sm-12">
           <div class="form-check">
             <input class="form-check-input" type="radio" name="budgetRadio" maxlength="8" id="Set-budget-radio" required>
@@ -161,7 +160,6 @@
             <input type="number" class="form-control" name="budget" id="Set-budget-Text" maxlength="8" disabled required>
           </div>
         </div>
-
         <div class="col-md-6 col-sm-12">
           <div class="form-check">
             <input class="form-check-input" type="radio" name="hourlyRadio" id="Set-hourly-radio" required>
@@ -183,7 +181,7 @@
       <div class="row">
         <div class="col-md-6 col-sm-12">
           <label for="validationCustom04" class="form-label pb-2">Deadline to apply for this job*</label>
-          <input class="date-input" id="deadline-date" name="applicationDeadline" min="01/01/2023" type="date" onclick="checkDate()" name="applicationDeadline" value="now" min="2023-01-01" max="2099-09-13" required>
+          <input class="date-input" id="deadline-date" name="applicationDeadline" min="01/01/2023" type="date" name="applicationDeadline" value="now" min="2023-01-01" max="2099-09-13" required>
           <!-- <div id="datewarn"></div> -->
           <div class="invalid-feedback">
               Please add a application deadline
@@ -217,18 +215,18 @@
       <div class="row pt-3">
       <div class="col-md-6 col-sm-12 ">
         <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault1" id="completion-radio">
+        <input class="form-check-input" type="radio" name="completionRadio" id="completion-radio">
         <label class="form-check-label" for="flexRadioDefault2">
           Completion date
         </label>
       </div>  
-      <input class="date-input date-margin" id="completion-date" type="date" id="completion-date"  name="trip-start"
-          value="" required disabled>
+      <input class="date-input date-margin" id="completion-date" type="date"  name="completionDate"
+          value="now" required disabled>
     </div>
   
     <div class="col-md-6 col-sm-12 ">
       <div class="form-check">
-        <input class="form-check-input date-margin" type="radio" name="flexRadioDefault1" id="duration-radio" required>
+        <input class="form-check-input date-margin" type="radio" name="durationRadio" id="duration-radio" required>
         <label class="form-check-label date-margin" for="flexRadioDefault2">
           Duration period (Days)
         </label>
