@@ -110,8 +110,18 @@ function emailSentConfirmation() {
 async function createGradPreview(docsArray) {
   console.log(docsArray);
   const container = document.querySelector('#grad-preview-container');
-  // empty container
+  // empty the container
   container.innerHTML = "";
+  // if carousel wrap in <li>
+  let isCarousel = container.dataset.carousel;
+  let carouselLi = "";
+  let carouselLiClose = "";
+  if (isCarousel) {
+    carouselLi = '<li class="splide__slide mx-3">';
+    carouselLiClose = '</li>';
+  }
+ 
+  // create grad preview cards
   for (var i = 0; i < docsArray.length; i++) {
     console.log(docsArray[i].id, docsArray[i].forename+' '+docsArray[i].surname);
     let location = "<p></p>";
@@ -123,23 +133,29 @@ async function createGradPreview(docsArray) {
       available = '<p class="can-work"><i class="bi bi-circle-fill"></i> Available for work</p>';
     }
     // create card
-    let previewCard = '<!-- grad preview card --> <div id="id-'+docsArray[i].id+'" class="grad-preview-card col-lg-6 col-md-6 col-sm-12"> <div class="grad-preview-block"> <div class="row"> <div class="col-xl-auto col-sm-4 col-4 padding-left-0"> <div style="width:85px; height:85px; background-size:cover; background-image:url(\'assets/img/generic-profile.jpg\');" class="rounded-circle profile-pic"> </div> </div> <div class="col-xl-auto col-sm-8 col-8 grad-preview"> <h5><Strong class="grad-preview-name">'+docsArray[i].forename+' '+docsArray[i].surname+'</Strong></h5> <h6>Fashion Designer</h6> '+location+available+' </div> </div> <div id="images-container" class="lineheightjob row mt-3">  </div> <div class="job-footer row"> <div class="col-12 padding-left-0"> <a href="profile.html?id='+docsArray[i].id+'">View more details</a> </div> </div> </div> </div> <!-- grad preview card -->';
+    let previewCard = '<!-- grad preview card --> <div id="id-'+docsArray[i].id+'" class="grad-preview-card col col-md-6 col-sm-12"> <div class="grad-preview-block"> <div class="row"> <div class="col-xl-auto col-sm-4 col-4 padding-left-0"> <div style="width:85px; height:85px; background-size:cover; background-image:url(\'assets/img/generic-profile.jpg\');" class="rounded-circle profile-pic"> </div> </div> <div class="col-xl-auto col-sm-8 col-8 grad-preview"> <h5><Strong class="grad-preview-name">'+docsArray[i].forename+' '+docsArray[i].surname+'</Strong></h5> <h6>Fashion Designer</h6> '+location+available+' </div> </div> <div id="images-container" class="lineheightjob row mt-3">  </div> <div class="job-footer row"> <div class="col-12 padding-left-0"> <a href="profile.html?id='+docsArray[i].id+'">View more details</a> </div> </div> </div> </div> <!-- grad preview card -->';
     // insert into page
-    container.innerHTML += previewCard;
+    container.innerHTML += carouselLi + previewCard + carouselLiClose;
   }
   // insert profile pic 
   for (var i = 0; i < docsArray.length; i++) {
     // insert profile pic
     if (docsArray[i].profilePic != null) {
       const profilePicContainer = document.querySelector('#id-'+docsArray[i].id+' .profile-pic');
-      const storageRef = ref(storage, docsArray[i].profilePic);
-      // get download image ref - don't need this 
-      getDownloadURL(storageRef)
-        .then(function(url) {
-          //console.log(url);
-          // add to modal as background image
-          profilePicContainer.style.backgroundImage = "url("+url+")";
-        });
+      try {
+        const storageRef = ref(storage, docsArray[i].profilePic);
+        // get download image ref - don't need this 
+        getDownloadURL(storageRef)
+          .then(function(url) {
+            //console.log(url);
+            // add to modal as background image
+            profilePicContainer.style.backgroundImage = "url("+url+")";
+          });
+      }
+      catch(err) {
+        console.log(err);
+      } 
+      
     }
   }
   // get project images add to card
@@ -150,14 +166,12 @@ async function createGradPreview(docsArray) {
       let projects = docsArray[i].projects;
       const projectPicContainer = document.querySelector('#id-'+docsArray[i].id+' #images-container');
       projectPicContainer.innerHTML = "";
-      //console.log(projects);
       let j = 0;
       // get key value for first 2 projects
       for (const [key, value] of Object.entries(projects)) {
         j++;
         try {
           if (j < 3) {
-            //console.log(key, value.images[0]);
             //const projectPicContainer = document.querySelector('#id-'+docsArray[i].id+' #images-container');
             const storageRef = ref(storage, value.images[0]);
             // get download image ref - don't need this 
@@ -174,6 +188,10 @@ async function createGradPreview(docsArray) {
         } 
       }
     }
+  }
+  // if cards are in a carousel initialise it
+  if (isCarousel) {
+    createCarousel();
   }
 
 }
@@ -282,7 +300,6 @@ function setCategoryCheckbox(el){
   }
   else if (tagsChecked.length != tags.length) {
     categoryCheckbox.indeterminate = true;
-    console.log("three");
   }
 }
 
@@ -323,6 +340,18 @@ function getAllParams() {
     paramsArr.push(paramsObj);
   });
   return paramsArr;
+}
+
+// return true if any params exist bar page=
+function paramsExist() {
+  const searchParams = new URLSearchParams(window.location.search);
+  let noParams = true;
+  searchParams.forEach(function(value, key) {
+    if (key != "page") {
+      noParams = false;
+    }
+  });
+  return noParams;
 }
 
 
@@ -379,9 +408,7 @@ function setFolioNum(docs) {
 
 // return the docs to display accroding to the 'page='' param
 function getDocsBatch(itemsPerPage, page, docs) {
-  // get page
-  //let page = 
-  console.log("itemsPerPage =",itemsPerPage, "| page =",page, "| docs.length =",docs.length);
+  //console.log("itemsPerPage =",itemsPerPage, "| page =",page, "| docs.length =",docs.length);
   // get initial start and end items 
   let start = 0;
   let end;
@@ -400,9 +427,36 @@ function getDocsBatch(itemsPerPage, page, docs) {
       end = docs.length; 
     }
   }
-  console.log("start", start, "end", end);
   console.log(docs.slice(start, end));
   return(docs.slice(start, end));
+}
+
+// search keyword
+async function searchKeyword(e) {
+  e.preventDefault();
+  const searchForm = document.querySelector('#search');
+  console.log(search.searchField.value);
+  let searchTerm = search.searchField.value;
+  // create query
+  let docs = [];
+  let docIds = [];
+  const queryOne = query(collection(db, "users"), where('category', 'array-contains', 'fashion'));
+  //const queryOne = query(collection(db, "users"), where('tags', 'array-contains', searchTerm));
+  const querySnapshot = await getDocs(queryOne);
+  querySnapshot.forEach((doc) => {
+    console.log(doc.data().forename, " => ", doc.id);
+    // doc has not already been added to array of docs
+    /*const notInArr = !docIds.includes(doc.id);
+    if (notInArr) {
+      docIds.push(doc.id);
+      // add dod.id to doc & push to docs array
+      let obj = {}
+      obj.id = doc.id;
+      let merged = {...obj, ...doc.data()};
+      docs.push(merged);
+      console.log(doc.data().forename, " => ", doc.id);
+    }*/
+  });
 }
 
 
@@ -893,9 +947,9 @@ function displayAllJobs (itemsPerPage, page, jobCollection) {
 
 
 // create jobs page pagination links
-function createPagination(pageParam, itemsPerPage, jobs) {
+function createPagination(pageParam, itemsPerPage, docs) {
   // set forward and previous
-  let totalPages = Math.ceil(jobs/itemsPerPage);
+  let totalPages = Math.ceil(docs/itemsPerPage);
   let currentPageNo = parseInt(pageParam);
   let forward;
   if (pageParam && currentPageNo != totalPages) {
@@ -907,7 +961,7 @@ function createPagination(pageParam, itemsPerPage, jobs) {
   else {
     forward = 2;
   }
-  console.log("forward " + forward);
+  //console.log("forward " + forward);
   let previous;
   if (pageParam && currentPageNo != 1) {
     previous = parseInt(pageParam)-1;
@@ -915,7 +969,7 @@ function createPagination(pageParam, itemsPerPage, jobs) {
   else {
     previous = 1;
   }
-  console.log("previous" + previous);
+  //console.log("previous" + previous);
   
   let nav = document.querySelector(".pagination-nav"); 
   nav.innerHTML = "";
@@ -924,7 +978,6 @@ function createPagination(pageParam, itemsPerPage, jobs) {
   
   // create page links / li elements
   let pageLinksLength = totalPages+2;
-  console.log("no of pages", totalPages);
 
   for (var i = 0; i < pageLinksLength; i++) {  
     // set pagination urls
@@ -932,7 +985,12 @@ function createPagination(pageParam, itemsPerPage, jobs) {
     let pageLi = document.createElement("li");
     pageLi.className = "page-item";
     let pageLink = document.createElement("a");
-    pageLink.className = "page-link";
+    if (i == currentPageNo) {
+      pageLink.className = "page-link active";
+    }
+    else {
+      pageLink.className = "page-link";
+    }
     // previous
     if(i == 0) {
       pageLink.setAttribute("aria-label", "Previous");
@@ -1075,7 +1133,6 @@ function applyForJobAddUserdata(userData) {
   portfolio.innerHTML = userData.website;
 }
 
-console.log(window.location.href);
 // apply for job get form values
 function getApplyForJobValues(userData, jobData) {
   const how = document.querySelector('#applymodal #apply-for-job-text1');
@@ -2125,7 +2182,7 @@ function showEditBtn (userID, paramID) {
     backContainer.innerHTML = "";
   }
   else {
-    backContainer.innerHTML = '<a href="#"><i class="bi bi-chevron-left"></i> Back to portfolios</a>';
+    backContainer.innerHTML = '<a onclick="history.back()" href="#"><i class="bi bi-chevron-left"></i> Back</a>';
   }
 }
 
@@ -2174,13 +2231,15 @@ function populateShowcasesNav(vals) {
 
 // create showcases for profile page
 async function populateShowcases(vals) {
+  const showcaseContainer = document.querySelector('#project-showcase');
   // exit if no project showcases
   if (vals.projects == null) {
+    // if no projects add no showcase projects placeholder image
+    showcaseContainer.innerHTML = '<div class="text-center"><img class="img-fluid" alt="No showcase projects to show" src="https://via.placeholder.com/600x600/e9ecef?text=No+project+showcase+placeholder"></div>';
     return;
   }
   let index = 0;
   let showcaseVisibility = "";
-  const showcaseContainer = document.querySelector('#project-showcase');
   // make previous and next
   let previousID = "";
   let nextID = "";
@@ -2189,10 +2248,8 @@ async function populateShowcases(vals) {
   for (const [key, value] of Object.entries(vals.projects)) {
     keys.push(key);
   }
-  //console.log(keys);
 
   for (const [key, value] of Object.entries(vals.projects)) {
-    //console.log("---\n", value.name, key, index);
     let heroImages = "";
     let thumbImages = "";
     let activeSlide = "";
@@ -2459,7 +2516,7 @@ const tags = ["Animation", "Visual-Effects", "Graphic-Design", "Games-Design-and
 const page = document.body.getAttribute('data-page');
 const userSection = document.querySelector('.user-data');
 const addUserDataForm = document.querySelector('.add-user-data');
-const allUserData = document.querySelector('.all-user-data');
+//const allUserData = document.querySelector('.all-user-data');
 const signedInName = document.querySelector('.welcome-name');
 
 
@@ -2555,7 +2612,7 @@ if (signupForm) {
 
 //===========PAGE SPECIFIC EVENT LISTENERS AND PROCESSES===================
 // add listeners if dom element present
-window.addEventListener('DOMContentLoaded', function(){
+/*window.addEventListener('DOMContentLoaded', function(){
   // load category buttons into the post job modal
   createCategoryButtons();
   //getTag();
@@ -2564,14 +2621,14 @@ window.addEventListener('DOMContentLoaded', function(){
       displayAllUserData("user data:", userData);
     });
   }
-});
+});*/
 
 
 // HOME / INDEX PAGE
 if (page == "home") {
   console.log("home page");
   // populate page with profiles
-  getRandomDocs(3).then(function(docs){
+  getRandomDocs(8).then(function(docs){
     createGradPreview(docs);
   });
 
@@ -2596,17 +2653,6 @@ if (page == "home") {
 
 }
 
-// QUERIES TEST PAGE
-if (page == "queries") {
-  console.log("queries  page");
-  // navigate to new url
-  setCategoryParams();
-  setTagParams();
-  // set checkboxes
-  setFiltersFromParams();
-  getAllParams();
-}
-
 
 // PORTFOLIOS PAGE
 if (page == "portfolios") {
@@ -2619,7 +2665,9 @@ if (page == "portfolios") {
   // set filters onload
   let allParams = getAllParams();
   //console.log(allParams);
-  const cardsPerPage = 4;
+
+  // display cards based on params onload
+  const cardsPerPage = 6;
   filterUsers(allParams).then(function(docs) {
     console.log("filtered docs", docs);
     let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), docs); 
@@ -2627,7 +2675,19 @@ if (page == "portfolios") {
     setFolioNum(docs);
     createPagination(getParamKey("page"), cardsPerPage, docs.length);
   });
-  // detect if checkbox clicked and filter
+
+  // if no params (filters set) get all get all cards
+  let noParams = paramsExist();
+  if (noParams) {
+    getAllUserData(undefined, function(allDocs){
+      let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), allDocs); 
+      createGradPreview(docsBatch);
+      setFolioNum(allDocs);
+      createPagination(getParamKey("page"), cardsPerPage, allDocs.length);
+    });
+  }
+  
+  // if checkbox clicked filter results
   const allCheckboxes = document.querySelectorAll('#filters input');
   for (var i = 0; i < allCheckboxes.length; i++) {
     allCheckboxes[i].addEventListener("click", function() {
@@ -2641,8 +2701,25 @@ if (page == "portfolios") {
         setFolioNum(docs);
         createPagination(getParamKey("page"), cardsPerPage, docs.length);
       });
+      // if no params (filters set) get all get all cards
+      let noParams = paramsExist();
+      if (noParams) {
+        getAllUserData(undefined, function(allDocs){
+          console.log("user data:", allDocs);
+          let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), allDocs); 
+          createGradPreview(docsBatch);
+          setFolioNum(allDocs);
+          createPagination(getParamKey("page"), cardsPerPage, allDocs.length);
+        });
+      }
     });
   }
+
+  // search keywords
+  const searchBtn = document.querySelector('#search #search-keyword');
+  searchBtn.addEventListener('click', function(e){
+    searchKeyword(e);
+  })
 }
 
 
