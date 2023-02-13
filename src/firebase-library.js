@@ -319,7 +319,7 @@ export function getAllUserData(tag, fn) {
         user.id = snapshot.docs[i].id;
         usersCollection.push(user);
     }
-    console.log(usersCollection);
+    //console.log(usersCollection);
     fn(usersCollection); // callback to 'return' result
   });
 }

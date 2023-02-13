@@ -372,6 +372,15 @@ h5{
 	margin: 4px;
 	border: 1px solid #EDEBEE;
   }
+
+  .page-link.active{
+	color: #000000;
+	border-radius: 2px;
+	margin: 4px;
+	border: 1px solid #572F88;
+  }
+
+
   .sortbyform{
 	border-color: #FFFFFF;
 	margin-top: 10px;
@@ -856,6 +865,10 @@ h5{
 	height:2em;
 	width:4em !important;
 }
+.grad-preview-card {
+	max-width: 440px;
+	min-width: 350px;
+}
 
 .grad-preview-block{
 	box-sizing: border-box;
@@ -866,9 +879,9 @@ h5{
 	border-radius: 20px;
 	margin-top: 10px;
 	margin-bottom: 5px;
-	height:300px;
+	height:330px;
 	position: relative;
-	max-width: 350px;
+	/*max-width: 350px;*/
 }
 
 .grad-preview{
@@ -898,7 +911,7 @@ h5{
 .grad-preview-images{
 	width: 100%;
     border-radius: 10px;
-    height: 90px;
+    height: 120px;
     object-fit: cover;
     padding: 5px;
 }
