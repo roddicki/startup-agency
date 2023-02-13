@@ -37,11 +37,11 @@
               <div class="col-12">
                 <p class="project-showcase-text"> KEYWORD SEARCH</p>
               </div>
-              
+
               <div class="col-12">
                 <form id="search">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search Keyword..." class="filter-input" aria-label="Search keyword" aria-describedby="addon-wrapping">
+                    <input type="text" class="form-control" placeholder="Search Keyword..." class="filter-input" aria-label="Search keyword" name="searchField" aria-describedby="addon-wrapping">
                     <span class="input-group-text" id="search-keyword"><i class="bi bi-search"></i></span>
                   </div>
                 </form>
@@ -277,12 +277,12 @@
 
           </div>
 
-          <div class="col-lg-8 col-md-12 col-sm-12 col-12 content-blocks">
+          <div class="col-lg-8 col-md-12 col-sm-12 col-12 content-blocks d-flex flex-column">
 
             <div class="row">
               <div class="col-lg-6 col-md-4 col-sm-6 col-5">
 
-                <p class="project-showcase-text"> Porfolios ()</p>
+                <p class="project-showcase-text"> Porfolios (<span class="folio-numbers"> </span>)</p>
               </div>
               <div class="col-lg-6 col-md-4 col-sm-6 col-5 d-lg-none d-md-block">
                 <button onClick="showSidebarFilter()" class="Button-Social float-right"><u>Filters</u></button>
@@ -290,9 +290,9 @@
 
             </div>
 
-            <div class="row">
+            <div class="row" id="grad-preview-container">
               <!--Block for portfolio preview-->
-              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6  col-sm-12 ">
+              <!-- <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6  col-sm-12 ">
                 <div class="jobblock">
                   <div class="row">
                     <div class="col-5">
@@ -331,12 +331,12 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
               <!--end of porfolio block-->
 
               <!--Block for portfolio preview-->
-              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6  col-sm-12 ">
+              <!-- <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6  col-sm-12 ">
                 <div class="jobblock">
                   <div class="row">
                     <div class="col-md-4 col-sm-4 col-4">
@@ -375,10 +375,10 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <!--end of porfolio block-->
               <!--Block for portfolio preview-->
-              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6  col-sm-12 ">
+              <!-- <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6  col-sm-12 ">
                 <div class="jobblock">
                   <div class="row">
                     <div class="col-5">
@@ -417,12 +417,12 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
               <!--end of porfolio block-->
 
               <!--Block for portfolio preview-->
-              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6  col-sm-12 ">
+             <!--  <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6  col-sm-12 ">
                 <div class="jobblock">
                   <div class="row">
                     <div class="col-md-4 col-sm-4 col-4">
@@ -461,9 +461,19 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <!--end of porfolio block-->
             </div>
+            <!-- bottom content row -->
+            <div class="row mt-auto p-2">
+              <div class="col-8"></div>
+              <div class="col-4">
+                <nav class="pagination-nav">
+                  <!-- insert page links -->
+                </nav>
+              </div>
+            </div>
+            <!-- end bottom content job row -->
 
           </div>
 
