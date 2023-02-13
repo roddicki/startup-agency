@@ -440,7 +440,7 @@ async function searchKeyword(e) {
   // create query
   let docs = [];
   let docIds = [];
-  const queryOne = query(collection(db, "users"), where('category', 'array-contains', 'fashion'));
+  const queryOne = query(collection(db, "users"), where('tags', 'array-contains-any', ['graphics-brand-design', 'graphics-concept-art', 'graphics-illustration','graphics-logo-design']));
   //const queryOne = query(collection(db, "users"), where('tags', 'array-contains', searchTerm));
   const querySnapshot = await getDocs(queryOne);
   querySnapshot.forEach((doc) => {
