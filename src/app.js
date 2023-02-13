@@ -865,10 +865,10 @@ function displayAllJobs (itemsPerPage, page, jobCollection) {
       jobDetails.className = "lineheightjob";
 
       let cost;
-      if(jobCollection[i].budget != null) {
+      if(jobCollection[i].budget != "") {
         cost = "£"+jobCollection[i].budget;
       } 
-      else if(jobCollection[i].hourlyrate != null){
+      else if(jobCollection[i].hourlyrate != ""){
         cost = jobCollection[i].hourlyrate + " p/h";
       }
       let budget = document.createElement("p");
@@ -883,12 +883,14 @@ function displayAllJobs (itemsPerPage, page, jobCollection) {
       location.innerHTML = "<i class='fa-solid fa-location-dot'></i>  Location: <strong>"+jobCollection[i].location+"</strong>";
       
       let completionVal;
-      if(jobCollection[i].deadline != null){
-        let completionDate = new Date(jobCollection[i].deadline.seconds*1000);
-        completionVal = completionDate.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"});
-      } else if(jobCollection[i].duration != null){
+      if(jobCollection[i].duration != ""){
         completionVal = jobCollection[i].duration + " days";
       }
+      else if(jobCollection[i].deadline != ""){
+        let completionDate = new Date(jobCollection[i].deadline.seconds*1000);
+        completionVal = completionDate.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"});
+      } 
+
       let completion = document.createElement("p");
       completion.innerHTML = "<i class='fa-solid fa-arrow-trend-up'></i>  Completion: <strong>"+completionVal+"</strong>";
 
@@ -1035,10 +1037,10 @@ function displaySingleJob(jobData) {
 
   let jobDetails = document.querySelector(".quickjobspec");
   let cost;
-  if(jobData.budget != null) {
+  if(jobData.budget != "") {
     cost = "£"+jobData.budget;
   } 
-  else if(jobData.hourlyrate != null){
+  else if(jobData.hourlyrate != ""){
     cost = jobData.hourlyrate + " p/h";
   }
   let budget = document.createElement("p");
@@ -1053,12 +1055,14 @@ function displaySingleJob(jobData) {
   location.innerHTML = "<i class='fa-solid fa-location-dot'></i>  Location: <strong>"+jobData.location+"</strong>";
   
   let completionVal;
-  if(jobData.deadline != null){
-    let completionDate = new Date(jobData.deadline.seconds*1000);
-    completionVal = completionDate.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"});
-  } else if(jobData.duration != null){
+  if(jobData.duration != ""){
     completionVal = jobData.duration + " days";
   }
+  else if(jobData.deadline != ""){
+    let completionDate = new Date(jobData.deadline.seconds*1000);
+    completionVal = completionDate.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"});
+  } 
+  
   let completion = document.createElement("p");
   completion.innerHTML = "<i class='fa-solid fa-arrow-trend-up'></i>  Completion: <strong>"+completionVal+"</strong>";
 
