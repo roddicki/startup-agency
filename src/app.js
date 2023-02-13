@@ -2521,6 +2521,17 @@ const signedInName = document.querySelector('.welcome-name');
 
 
 //===========EVENT LISTENERS===================
+// add listeners if dom element present
+window.addEventListener('DOMContentLoaded', function(){
+  // load category buttons into the post job modal
+  createCategoryButtons();
+  //getTag();
+  /*if(allUserData) {
+    getAllUserData(getParam(), function(userData){
+      displayAllUserData("user data:", userData);
+    });
+  }*/
+});
 
 //===========NON PAGE SPECIFIC EVENT LISTENERS AND PROCESSES===================
 // submit job to db
@@ -2611,17 +2622,7 @@ if (signupForm) {
 //addUserDataForm.addEventListener('submit', addUserData);
 
 //===========PAGE SPECIFIC EVENT LISTENERS AND PROCESSES===================
-// add listeners if dom element present
-/*window.addEventListener('DOMContentLoaded', function(){
-  // load category buttons into the post job modal
-  createCategoryButtons();
-  //getTag();
-  if(allUserData) {
-    getAllUserData(getParam(), function(userData){
-      displayAllUserData("user data:", userData);
-    });
-  }
-});*/
+
 
 
 // HOME / INDEX PAGE
