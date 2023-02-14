@@ -31,6 +31,7 @@ const auth = getAuth();
 const storage = getStorage();
 
 let currentUserData = {};
+const adminEmail = "stiwdiofreelanceragency@gmail.com";
 
 // on login state change
 onAuthStateChanged(auth, function(user) {
@@ -55,7 +56,8 @@ function signInAdmin(e) {
   const loginForm = document.querySelector('.login');
   let email = loginForm.email.value;
   let password = loginForm.password.value;
-  signInWithEmailAndPassword(auth, email, password)
+  if (email == adminEmail) {
+    signInWithEmailAndPassword(auth, email, password)
     .then(function(cred){
       console.log("Signed in", cred.user.uid);
       loginForm.reset();
@@ -66,6 +68,12 @@ function signInAdmin(e) {
       console.log(err.message);
       document.querySelector("#login-err").removeAttribute("hidden");
     });
+  }
+  else {
+    document.querySelector("#login-err-admin").removeAttribute("hidden");
+  }
+  
+  
 }
 
 // show signed in user
