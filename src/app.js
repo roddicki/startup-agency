@@ -126,7 +126,7 @@ async function createGradPreview(docsArray) {
     console.log(docsArray[i].id, docsArray[i].forename+' '+docsArray[i].surname);
     let location = "<p></p>";
     if (docsArray[i].location) {
-      location = '<p><img src="assets/img/mapicon.svg"> '+docsArray[i].location+'</p>';
+      location = '<p><img alt="map icon" src="assets/img/mapicon.svg"> '+docsArray[i].location+'</p>';
     }
     let available = '<p class="cant-work"><i class="bi bi-circle-fill"></i> Not available</p>';
     if (docsArray[i].available && docsArray[i].available == true){
@@ -179,7 +179,7 @@ async function createGradPreview(docsArray) {
               .then(function(url) {
                 //console.log(url);
                 // add to card as col + image
-                projectPicContainer.innerHTML += '<div class="col grad-preview-images-container"> <img class="grad-preview-images" src="'+url+'">';
+                projectPicContainer.innerHTML += '<div class="col grad-preview-images-container"> <img alt="graduate artwork" class="grad-preview-images" src="'+url+'">';
               });
           }
         }
@@ -440,10 +440,27 @@ async function searchKeyword(e) {
   // create query
   let docs = [];
   let docIds = [];
-  const queryOne = query(collection(db, "users"), where('tags', 'array-contains-any', ['graphics-brand-design', 'graphics-concept-art', 'graphics-illustration','graphics-logo-design']));
+  const queryOne = query(collection(db, "users"), where('categories', 'array-contains-any', [searchTerm])); //graphics-brand-design
   //const queryOne = query(collection(db, "users"), where('tags', 'array-contains', searchTerm));
-  const querySnapshot = await getDocs(queryOne);
-  querySnapshot.forEach((doc) => {
+  const querySnapshotOne = await getDocs(queryOne);
+  querySnapshotOne.forEach((doc) => {
+    console.log(doc.data().forename, " => ", doc.id);
+    // doc has not already been added to array of docs
+    /*const notInArr = !docIds.includes(doc.id);
+    if (notInArr) {
+      docIds.push(doc.id);
+      // add dod.id to doc & push to docs array
+      let obj = {}
+      obj.id = doc.id;
+      let merged = {...obj, ...doc.data()};
+      docs.push(merged);
+      console.log(doc.data().forename, " => ", doc.id);
+    }*/
+  });
+  const queryTwo = query(collection(db, "users"), where('tags', 'array-contains-any', [searchTerm])); //graphics-brand-design
+  //const queryOne = query(collection(db, "users"), where('tags', 'array-contains', searchTerm));
+  const querySnapshotTwo = await getDocs(queryTwo);
+  querySnapshotTwo.forEach((doc) => {
     console.log(doc.data().forename, " => ", doc.id);
     // doc has not already been added to array of docs
     /*const notInArr = !docIds.includes(doc.id);
@@ -1062,7 +1079,7 @@ function displaySingleJob(jobData) {
     let completionDate = new Date(jobData.deadline.seconds*1000);
     completionVal = completionDate.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"});
   } 
-  
+
   let completion = document.createElement("p");
   completion.innerHTML = "<i class='fa-solid fa-arrow-trend-up'></i>  Completion: <strong>"+completionVal+"</strong>";
 
@@ -1693,13 +1710,14 @@ function populateProjectShowcases(vals) {
     // add html
     showcaseTotal ++;
     let description = '';
-    if (value.description != "") {description = '<p>'+value.description+'</p>'}
+    if (value.description != "") {description = '<p id="'+key+'-description">'+value.description+'</p>'}
     let link = '';
     if (value.link != "") {link = '<p><a class="underline" href="'+value.link+'" target="_blank">'+value.link+'</a></p>'}
     /*let valueStr = JSON.stringify(value);
     console.log(valueStr);*/
-
-    let showcaseComponent = '<!--start of project showcase--> <div class="col-lg-6 col-md-12 mt-4"> <div class="port-block"> <div id="'+key+'-hero-img" class="row"> <!-- inject hero col and image --> </div><div id="'+key+'-thumbs" class="row d-flex justify-content-evenly"> <!-- inject thumbs --> </div> <div class="row"> <div class="col-10 mt-4"> <h2><strong>'+value.name+'</strong></h2> </div> <div class="col-2 mt-4"> <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> <i class="bi bi-pencil-square cursor-pointer edit-size" height="16px"> </i> </button> <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"> <li> <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editProject" data-id="'+key+'" onclick="populateProjectModal(\''+key+'\',\''+value.name+'\',\''+value.link+'\',\''+value.description+'\')" href="#">Edit Project </a> </li> <li> <hr class="dropdown-divider"> </li> <li> <a class="dropdown-item text-danger" data-id="'+key+'" href="#" data-bs-toggle="modal" data-bs-target="#deleteShowcase" onclick="populateDeleteModal(\''+key+'\')">Delete Project </a> </li> </ul> </div> </div> <div class="row"> <div class="col-12">'+description+link+'</div> </div> </div> </div> <!--end of project showcase--> ';
+    let projectName = value.name;
+    console.log(projectName);
+    let showcaseComponent = '<!--start of project showcase--> <div class="col-lg-6 col-md-12 mt-4"> <div class="port-block"> <div id="'+key+'-hero-img" class="row"> <!-- inject hero col and image --> </div><div id="'+key+'-thumbs" class="row d-flex justify-content-evenly"> <!-- inject thumbs --> </div> <div class="row"> <div class="col-10 mt-4"> <h2><strong id="'+key+'-name">'+value.name+'</strong></h2> </div> <div class="col-2 mt-4"> <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> <i class="bi bi-pencil-square cursor-pointer edit-size" height="16px"> </i> </button> <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"> <li> <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editProject" data-id="'+key+'" onclick="populateProjectModal(\''+key+'\',\''+value.link+'\')" href="#">Edit Project </a> </li> <li> <hr class="dropdown-divider"> </li> <li> <a class="dropdown-item text-danger" data-id="'+key+'" href="#" data-bs-toggle="modal" data-bs-target="#deleteShowcase" onclick="populateDeleteModal(\''+key+'\')">Delete Project </a> </li> </ul> </div> </div> <div class="row"> <div class="col-12">'+description+link+'</div> </div> </div> </div> <!--end of project showcase--> ';
     // add showcase
     showcaseContainer.innerHTML += showcaseComponent;    
     // get and add images
@@ -1713,9 +1731,9 @@ function populateProjectShowcases(vals) {
       getDownloadURL(storageRef)
         .then(function(url) {
           // add thumbnail
-          document.querySelector('#'+key+'-thumbs').innerHTML += '<div class="col-4 mt-4 d-flex align-items-center port-edit-img"> <img class="rounded-3 img-fluid" onclick="swapHeroImg(this, \'hero-'+key+'\')" src="'+url+'" data-imgurl="'+imgUrl+'"> </div>';
+          document.querySelector('#'+key+'-thumbs').innerHTML += '<div class="col-4 mt-4 d-flex align-items-center port-edit-img"> <img alt="graduate artwork" class="rounded-3 img-fluid" onclick="swapHeroImg(this, \'hero-'+key+'\')" src="'+url+'" data-imgurl="'+imgUrl+'"> </div>';
           // add hero
-          document.querySelector('#'+key+'-hero-img').innerHTML = '<div class="col-12"> <img class="port-edit-img-main" id="hero-'+key+'" src="'+url+'"> </div> ';
+          document.querySelector('#'+key+'-hero-img').innerHTML = '<div class="col-12"> <img alt="graduate artwork" class="port-edit-img-main" id="hero-'+key+'" src="'+url+'"> </div> ';
           
         })
         .catch(function(err){
@@ -1767,9 +1785,13 @@ async function updateProjectShowcase(uid, imageUrls){
   if (! projectForm.projectId.value) {
     projectId = randomStr;
   }
-  projectDetails.name = projectForm.projectName.value;
+  let projectName = projectForm.projectName.value;
+  projectName = projectName.replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+  projectDetails.name = projectName;
   projectDetails.link = projectForm.projectLink.value;
-  projectDetails.description = projectForm.projectDescription.value;
+  let projectDescription = projectForm.projectDescription.value;
+  projectDescription = projectDescription.replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+  projectDetails.description = projectDescription;
   projectDetails.images = imageUrls;
   project[projectId] = projectDetails;
   // update doc

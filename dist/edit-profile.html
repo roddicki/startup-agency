@@ -869,8 +869,12 @@
   let preloadedImages = [];
 
   // populate project showcase modal
-  async function populateProjectModal(projectId, name, link, description) {
-    //console.log(projectId, name, description, link);
+  async function populateProjectModal(projectId, link) {
+    const descriptionContainer = document.querySelector('#'+projectId+'-description');
+    const description = descriptionContainer.innerHTML;
+    const nameContainer = document.querySelector('#'+projectId+'-name');
+    const name = nameContainer.innerHTML;
+    console.log(projectId, name, description, link);
     // get form content
     const projectForm = document.querySelector('#editProject .edit-project-form');
     projectForm.projectId.value = projectId;
