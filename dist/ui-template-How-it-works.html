@@ -1,109 +1,292 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="styles/style.css" rel="stylesheet">
 
-  <title>Startup Agency</title>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles/style.css" rel="stylesheet">
+
+    <title>Startup Agency</title>
 </head>
 
 <body data-page="" class="d-flex flex-column min-vh-100">
 
-<header id="header">
-  <!-- imports header + nav from src/header.html -->
-</header>
+    <header id="header">
+        <!-- imports header + nav from src/header.html -->
+    </header>
 
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 content-blocks">
+                    <div class="col-12">
+                        <h1><b>How it works</b></h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="gap"></div>
+                            <p> Your business will have odd jobs that crop up. These jobs can be anything: a video to edit, a new initiative to market, or a 3D render urgently required before building can begin.</p>
+                            <div class="gap"></div>
+                            <p> Degree-certified professionals are waiting to help you out.</p>
 
-<section>
-  <div class="container">
-    <div class="row">
-      <div class="col-12 content-blocks">
-        <div class="col-12">
-          <h1><b>How it works</b></h1>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="">
+                                <h3 id="Client-Underline" style="display: inline-block; padding-right: 15px " onclick="ShowClient()">Informaiton for clients</h3>
+                                <h3 id="Freelance-Underline" style="display: inline-block; " onclick="ShowFreelance()">Informaiton for freelancers</h3>
+                            </div>
+
+                            <div id="client-Info">
+                                <div class="HIW-border">
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingOne">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        How do I post a job?
+                      </button>
+                                            </h2>
+                                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="HIW-border">
+                                                        <h4>How do I post a job?</h4>
+                                                        <div class="gap"></div>
+                                                        <p><b>Summary:</b></p>
+                                                        <p>If you need any more info on these steps, we break them down in greater detail below. For now, here is a quick overview. We like to keep things simple here.</p>
+                                                        <p>Steps:</p>
+                                                        <p>1.) Submit a job here</p>
+                                                        <p>2.) Await approval. Admin will email once your brief is sent out to the relevant freelancers. If your brief needs adjustment, we will be in touch to walk you through it.
+                                                        </p>
+                                                        <p>3.) Proposal deadline. You set this in the job brief. At the given date, we will close the application window and send you all the freelancer proposals.
+                                                        </p>
+                                                        <p>4.) Make your choice. Let us know who you want to work with, we will unite you via email and send out the relevant contracts.
+                                                        </p>
+                                                        <p>5.) Complete the job!</p>
+                                                        <p>6.) Payment. Once the job is complete to your satisfaction, we will send you an invoice for the agreed amount.</p>
+                                                        <p>7.) Celebrate! </p>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingTwo">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        In detail...
+                      </button>
+                                            </h2>
+                                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="HIW-border">
+                                                        <h4>In detail</h4>
+                                                        <div class="gap"></div>
+                                                        <p><b>How do I post a job?</b></p>
+                                                        <p>You can “Post a Job” here.link to job post page</p>
+                                                        <p> First, we will need some personal details- your name, phone number and email address so that we can forward freelancer proposals on to you and keep you up to date throughout the project.</p>
+                                                        <p><b>Then tell us a little about your brief:</b> </p>
+                                                        <p><b>Job title</b> a short summary ( i.e. ‘Videographer needed to film a business seminar’) </p>
+                                                        <p><b>Cost</b> Here you can choose to set a budget or set an hourly rate.</p>
+                                                        <p> Whichever option you choose, 15% agency fee will be added along with 20% VAT on top. </p>
+                                                        <p><b>Deadline to apply for this job</b> At this date, we will remove your job from the board and send you all the freelancer proposals we have received so far. </p>
+                                                        <p>Job Location ( or remote work)= Next, tell us the location... If there is no particular location, simply select “remote”</p>
+                                                        <p>Timeframe= Select either a completion date or the job’s duration. The completion date is when you want to receive the finished work. Alternatively, you can choose to tell us the job’s duration- the amount of time the job is expected to take once a freelancer has been chosen and the contracts signed.( ‘3 days’, ‘2 weeks’, etc)</p>
+                                                        <p>Job brief= here’s where you put all the details- a description of the job, when and where it takes place, the software and equipment needed. (i.e ‘Videographer needed to film a 3-hour business seminar in Ebbw Vale on 4th June- exact location provided to the successful applicant. The final film must include audio and be delivered in HD Mp4 format before the stated deadline.’)</p>
+                                                        <p>Related categories= Skill tags to help us match with corresponding freelancers. To use the videographer example above- “video” would be a relevant tag. </p>
+                                                        <p>Then, preview your brief, check that all the details are correct, and send it over to us for approval. </p>
+                                                        <p>If you can’t answer one or more of the questions, that’s fine too- just get in touch link to get in touch with our Admin here, and they can help you work out what you need first.</p>
+                                                        <p>What next?</p>
+                                                        <p>If your job brief is approved, we will send your brief out to matching freelancers. After the application deadline, we will email their proposals to you.
+                                                        </p>
+                                                        <p>Once you have browsed the freelancer proposals and their profiles, let us know your decision and we will unite the two of you via email.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingThree">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        How much does it cost?
+                      </button>
+                                            </h2>
+                                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="HIW-border">
+                                                        <h4>How much does it cost?</h4>
+                                                        <div class="gap"></div>
+                                                        <p>We pride ourselves on top-notch customer service at an affordable price
+                                                        </p>
+                                                        <p>On the “post a job” page, you can choose your set budget/ hourly rate. Please remember that 15% will be added on top of this as a commission We are a VAT-registered company, so you will need to add a further 20%
+                                                        </p>
+                                                        <p><b>Example: </b></p>
+                                                        <p>£100 payment to the freelancer </p>
+                                                        <p>2.) Await approval. Admin will email once your brief is sent out to the relevant freelancers. If your brief needs adjustment, we will be in touch to walk you through it.
+                                                        </p>
+                                                        <p>(15%) £15 commission fee
+                                                        </p>
+                                                        <p>Total: £115
+                                                        </p>
+                                                        <p>(+ VAT 20%)</p>
+                                                        <p><b>£138.00 payment in total ( with VAT)</b></p>
+                                                        <p><b>What if I want to hire a particular freelancer?</b></p>
+                                                        <p>If you’re browsing our freelancers and find a freelancer you really want to work with, you can submit a job directly to them by selecting “message/ propose job” </p>
+                                                        <p>A job brief sent this way will still be sent to admin for approval, but will only be sent out to the freelancer of your choice.</p>
+                                                        <p><b>Why might my job brief be declined?</b></p>
+                                                        <p>If it is not approved: We will work with you to fix it The most common areas for improvement are:</p>
+                                                        <p>Brief summary: In rare cases, a brief is too ill-defined to work out what you really want. If this is the case, we’ll get in contact and help you refine what you want and then post it to the job board!
+                                                        </p>
+                                                        <p><b>Budget:</b> Sometimes the budget is far too low/ high. Again, we can talk this through and come to a solution.</p>
+                                                        <p>Sometimes budgets don’t stretch, so we will liaise with you and work out how to get the freelance work you need at a price you can afford.
+                                                            <p><b>Deadline:</b> Sometimes the given deadline is just too tight for the level of work. In these cases, we work to understand your needs and come to a mutually beneficial solution.
+                                                            </p>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div id="freelance-info">
+                                <div class="HIW-border">
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingOne">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseOne">
+                          How do I set up an account?
+                        </button>
+                                            </h2>
+                                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="HIW-border">
+                                                        <h4>How do I set up an account?</h4>
+                                                        <div class="gap"></div>
+
+                                                        <p>You can set up a freelance account here link to freelancer registration </p>
+                                                        <p>First of all, we will need some personal details, to check that you are a University of South Wales (USW) graduate.</p>
+                                                        <p>Your name, course studied, graduation date and student ID are all we need.</p>
+                                                        <p><b>What if I haven’t graduated yet?</b></p>
+                                                        <p>The Stiwdio Agency is only for degree-certified professionals, so to sign up, you need to have graduated from at least one USW course. If you are still studying and would like to pre-register, please add your name to the early sign up form <a href="https://forms.gle/j6edf1QhnDh1ogi57">HERE</a></p>
+                                                        <p>In the mean time, there are plenty of other opportunities to current USW students
+                                                            <a href="https://careers.southwales.ac.uk/"></a>USW Careers | University of South Wales</a>
+                                                        </p>
+                                                        <p><b>What if I’m not from USW?</b></p>
+                                                        <p>At this time, the Stiwdio Agency only facilitates freelancers from The University of South Wales</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingTwo">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseTwo">
+                          What's next?
+                        </button>
+                                            </h2>
+                                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="HIW-border">
+                                                        <h4>What's next?</h4>
+                                                        <div class="gap"></div>
+                                                        <p>Once you have added your email address and created a password, your details will be sent to Admin for verification.</p>
+                                                        <p>We will check the details against USW records and get back to you via email when you have been verified. </p>
+                                                        <p>From there, you will be invited to join a 2-day freelance fast track, either online or in person, where we cover the basics of self-employment- from insurance to invoicing..</p>
+                                                        <p><b>Insurance</b></p>
+                                                        <p>All freelancers are required to obtain their own insurance cover, a minimum level of £50,000 professional indemnity and £1 million public liability. We will help you to find the best and most cost-effective cover before you get started at the Agency.</p>
+                                                        <p><b>Ready to go</b></p>
+                                                        <p>When you have completed the Freelance Fast track and obtained insurance, you will be sent the relevant contracts to sign, and you will be a fully authorised member of the Stiwdio Agency!</p>
+                                                        <p><b>How will I hear about jobs?</b></p>
+                                                        <p>When we receive a job brief that matches your skill set, it will be emailed to you. Each brief will have a description, location, budget, delivery deadline and application, as well as skill tags. You will only receive briefs with skill tags that match yours.</p>
+                                                        <p>You are under no obligation to apply for work, if you decide to submit a proposal, simply explain why you suit the job and link back to your profile.</p>
+                                                        <p>If the client chooses you, we will bring you together via email and send out the relevant contracts. </p>
+                                                        <p>When the job is completed to the client’s satisfaction, you will invoice the Agency for the promised fee.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingThree">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree">
+                          Can I personalise my profile?
+                        </button>
+                                            </h2>
+                                            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="HIW-border">
+                                                        <h4>Can I personalise my profile?</h4>
+                                                        <div class="gap"></div>
+                                                        <p>Of course. While you are waiting for Admin to verify your account, you can spend time editing your profile to make yourself stand out to potential clients.</p>
+                                                        <p>Skills: Select skill tags, so we know which job briefs to send to you. They should have some relevance to your degree subject.</p>
+                                                        <p>Projects: You can add up to 4 projects, each with its own description and 3 accompanying images. Include your best uni work, extra-curricular projects and anything else that might impress the client. Make sure it’s your own work though, and that you have permission to share it.</p>
+                                                        <p>Extra info: You can also add your preferred pronouns, current job title, location and socials, as well as a CV or folio PDF</p>
+                                                        <p><b>What if I don’t want to be sent job briefs?</b></p>
+                                                        <p>If you know you will be busy, or away for a time and unable to take on more work, set yourself as “unavailable". This can be done via the slider on the top left of your profile. </p>
+                                                        <p>You can reverse the action at any time, but while unavailable, you will not be emailed any job briefs.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="HIW-border">
+                                <h3>Terms and conditions</h3>
+                                <p>You can be removed from the Stiwdio Agency if you are in breach of any of the Terms and Conditions. <a href="">Available here </a></p>
+                                <p><b>About the Stiwdio Agency </b></p>
+                                <p>Our graduates live and breathe what they do, and have been trained on industry standard practices. They have been trained to degree level, they are USW certified and they have spent the last few years working to deadlines and project briefs.</p>
+                                <p>Want the next generation to spread some innovation through your business? Out their skills to the test.</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row">
-        <div class="col-lg-12 col-md-12">
-          <div class="gap"></div>
-            <p> Your business will have odd jobs that crop up. These jobs can be anything: a video to edit, a new initiative to market, or a 3D render urgently required before building can begin.</p>
-            <div class="gap"></div>
-            <p> Degree-certified professionals are waiting to help you out.</p>
-         
         </div>
-        <div class="col-lg-12 col-md-12">
-          <div class="">
-            <h3>Informaiton for clients</h3>
-            <h3>Informaiton for Freelancers</h3>
-          </div>
-          <div class="HIW-border">
-            <h4>How do I post a job?</h4>
-            <p>Summary:</p>
-            <p>If you need any more info on these steps, we break them down in greater detail below. For now, here is a quick overview. We like to keep things simple here.</p>
-            <p>Steps:</p>
-            <p>1.) Submit a job here</p>
-            <p>2.) Await approval. Admin will email once your brief is sent out to the relevant freelancers. If your brief needs adjustment, we will be in touch to walk you through it.
-            </p>
-            <p>3.) Proposal deadline. You set this in the job brief. At the given date, we will close the application window and send you all the freelancer proposals.
-            </p>
-            <p>4.) Make your choice. Let us know who you want to work with, we will unite you via email and send out the relevant contracts.
-            </p>
-            <p>5.) Complete the job!</p>
-            <p>6.) Payment. Once the job is complete to your satisfaction, we will send you an invoice for the agreed amount.</p>
-            <p>7.) Celebrate! </p>
-          
-          </div>
-          <div class="HIW-border">
-            <h4>How do I post a job?</h4>
-            <p>Summary:</p>
-            <p>If you need any more info on these steps, we break them down in greater detail below. For now, here is a quick overview. We like to keep things simple here.</p>
-            <p>Steps:</p>
-            <p>1.) Submit a job here</p>
-            <p>2.) Await approval. Admin will email once your brief is sent out to the relevant freelancers. If your brief needs adjustment, we will be in touch to walk you through it.
-            </p>
-            <p>3.) Proposal deadline. You set this in the job brief. At the given date, we will close the application window and send you all the freelancer proposals.
-            </p>
-            <p>4.) Make your choice. Let us know who you want to work with, we will unite you via email and send out the relevant contracts.
-            </p>
-            <p>5.) Complete the job!</p>
-            <p>6.) Payment. Once the job is complete to your satisfaction, we will send you an invoice for the agreed amount.</p>
-            <p>7.) Celebrate! </p>
-          
-          </div>
+    </section>
 
-        </div>
-      </div>
-    </div>
-     </div>
-  </div>
-  </div>
-  Test
-</section>
-
-<span id="postjobmodal">
+    <span id="postjobmodal">
   <!--Import post job modal-->
 </span>
 
-<span id="signinmodal">
+    <span id="signinmodal">
   <!--Import sign in modal-->
 </span>
 
-<footer id="footer" class="mt-auto">
-  <!-- imports footer from src/footer.html -->
-</footer>
+    <footer id="footer" class="mt-auto">
+        <!-- imports footer from src/footer.html -->
+    </footer>
 
+    <script>
+        function ShowFreelance() {
+          document.getElementById("freelance-info").style.display = "block";
+          document.getElementById("Freelance-Underline").style.textDecoration = "underline";
+          document.getElementById("Freelance-Underline").style.fontWeight = "700";
+          document.getElementById("client-Info").style.display = "none";
+          document.getElementById("Client-Underline").style.textDecoration = "none";
+          document.getElementById("Client-Underline").style.fontWeight = "500";
+        }
+        
+        function ShowClient() {
+          document.getElementById("freelance-info").style.display = "none";
+          document.getElementById("Freelance-Underline").style.textDecoration = "none";
+          document.getElementById("Freelance-Underline").style.fontWeight = "500";
+          document.getElementById("client-Info").style.display = "block";
+          document.getElementById("Client-Underline").style.textDecoration = "underline";
+          document.getElementById("Client-Underline").style.fontWeight = "700";
+        
+          }
+    </script>
 
-  
-
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<!-- custom JS -->
-<script src="scripts/app.bundle.js"></script>
-<!-- event listeners -->
-<script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous"></script>
-<!-- form validation -->
-<script src="scripts/form-validation.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- custom JS -->
+    <script src="scripts/app.bundle.js"></script>
+    <!-- event listeners -->
+    <script src="https://kit.fontawesome.com/1c17130413.js" crossorigin="anonymous"></script>
+    <!-- form validation -->
+    <script src="scripts/form-validation.js"></script>
 
 </body>

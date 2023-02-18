@@ -675,6 +675,7 @@ h5{
 	width: 24px;
 	margin-right: 8px ;
 	margin-top: -2px;
+	min-width: ;
   }
 
   .filter-close-button{
@@ -716,6 +717,14 @@ h5{
 	border: 3px solid #8F346C;
   }
 
+  #freelance-info{
+	display:  none;
+  }
+
+  #Client-Underline{
+	text-decoration: underline;
+	font-weight: 700;
+  }
   .steps{
 	margin-left:7.5%;
   }
@@ -867,7 +876,7 @@ h5{
 }
 .grad-preview-card {
 	max-width: 440px;
-	min-width: 350px;
+	min-width: 310px;
 }
 
 .grad-preview-block{
@@ -1184,9 +1193,11 @@ header .container-fluid {
 /*nav and footer*/
 .navbar .logo, footer .logo {
 	background-image: url("../assets/img/560_102px.png"); 
-	background-color: #cccccc; 
-	width: 280px; 
+	background-color: #fff; 
+	width: 100%; 
 	height: 51px;
+	max-width: 280px;
+	margin: auto;
 	background-position: center; 
 	background-repeat: no-repeat; 
 	background-size: contain; 
@@ -1538,6 +1549,9 @@ footer p {
     .carousel-inner .carousel-item > div:first-child {
         display: block;
     }
+	.navbar .logo, footer .logo {
+		float: left;
+	}
 
 	
 	
