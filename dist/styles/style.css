@@ -149,6 +149,16 @@ h5{
 	background-color: #0d6efd;
 }
 
+.btn-secondary :focus {
+	background-color: #fff !important;
+}
+
+.btn-check:focus+.btn-secondary, .btn-secondary:focus {
+	background-color: #0d6efd;
+}
+
+
+
 .btn-no-background{
 	background-color: white;
 	color: none;
@@ -163,6 +173,10 @@ h5{
 	border:  none;
 	float: right;
 	
+}
+
+.navbar>.container-fluid{
+	z-index: 1;
 }
 
 .modal-content{
@@ -730,6 +744,21 @@ h5{
   }
   .checkbox-pos{
 	margin-top:22px;
+  }
+
+  .bi-search{
+
+  }
+  .search-button :hover{
+	cursor: pointer;
+	
+  }
+  
+  .search-button{
+	background-color: #572F88;
+	color: #fff;
+	cursor: pointer;
+	border: 1px solid #ced4da;
   }
 
   .date-input{
@@ -1325,6 +1354,8 @@ margin-bottom: 10px;
 	}
 	
 
+	
+
 	.carousel-showcase-hero {
 		flex-grow: 0;
 	    flex-shrink: 0;
@@ -1507,6 +1538,7 @@ margin-bottom: 10px;
 		display: block;
 	  }
 	}
+	
 
 /* ===================================== */
 /* ===FOOTER=== */
@@ -1552,7 +1584,9 @@ footer p {
 	.navbar .logo, footer .logo {
 		float: left;
 	}
-
+	.last-item {
+		border-right: 0px solid #dee2e6;
+	}
 	
 	
 }
