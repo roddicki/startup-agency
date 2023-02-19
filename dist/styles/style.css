@@ -667,6 +667,17 @@ h5{
 	padding-top:13px;
   }
 
+  .search-icon {
+  	background-color: #572F88;
+    border-color: #572F88;
+    color: #ffffff;
+  }
+
+  .search-icon:hover {
+  	background-color: #0d6efd;
+  	border-color: #0d6efd;
+  }
+
   .filter-checkbox{
 	background: #FFFFFF;
 	border: 1px solid #EDEBEE;

@@ -229,6 +229,7 @@ function setCategoryParams() {
   // check category check sub categories 
   const categoryCheckboxes = document.querySelectorAll('#filters input.category');
   let currentUrl = new URL(window.location); 
+  currentUrl.searchParams.delete('search'); // delete search param
   for (var i = 0; i < categoryCheckboxes.length; i++) {
     if (categoryCheckboxes[i].type === 'checkbox') {
       categoryCheckboxes[i].onclick = function(e) {
@@ -267,6 +268,7 @@ function setTagParams() {
     if (checkboxes[i].type === 'checkbox') {
       checkboxes[i].onclick = function(e) {
         let currentUrl = new URL(window.location); 
+        currentUrl.searchParams.delete('search'); // delete search param
         if (this.checked && this.dataset.skills != undefined) {
           // if a category
           currentUrl.searchParams.append(this.dataset.skills, 'tag');
@@ -431,49 +433,76 @@ function getDocsBatch(itemsPerPage, page, docs) {
   return(docs.slice(start, end));
 }
 
-// search keyword
-async function searchKeyword(e) {
-  e.preventDefault();
+// if no filter or search results
+function ifNoResults(docs) {
+  if (docs.length < 1) {
+    // inject message
+    const container = document.querySelector('#grad-preview-container');
+    container.innerHTML = '<h2 class="text-center pt-5">It looks like there were no results...</h2><p class="text-center">Try a different filter or search term:<br>Search terms are best as a single keyword, like "Fashion" or "Smith".</p>';
+  }
+}
+
+
+// get search term from form
+function getSearchTerm() {
   const searchForm = document.querySelector('#search');
-  console.log(search.searchField.value);
-  let searchTerm = search.searchField.value;
-  // create query
+  let searchTerm = search.searchField.value.trim();
+  return searchTerm;
+}
+
+// uncheck all Filters / check boxes and amend params
+function uncheckAllFilters() {
+  const allCheckboxes = document.querySelectorAll('#filters input');
+  for (var i = 0; i < allCheckboxes.length; i++) {
+    allCheckboxes[i].checked = false;
+  }
+  // delete all params then re add bar page and search
+  let page = getParamKey("page");
+  let thisUrl = window.location.href;
+  // Remove all parameters from the URL
+  let amendedUrl = new URL(thisUrl.split('?')[0]);
+  if (page) {amendedUrl.searchParams.append("page", page)}
+  window.history.pushState({}, '', amendedUrl);
+}
+
+// search keyword
+function searchKeyword(allDocs, searchStr) {
+  let searchTerm = searchStr.trim();
+  let currentUrl = new URL(window.location);
+  searchTerm = searchTerm.toLowerCase();
   let docs = [];
   let docIds = [];
-  const queryOne = query(collection(db, "users"), where('categories', 'array-contains-any', [searchTerm])); //graphics-brand-design
-  //const queryOne = query(collection(db, "users"), where('tags', 'array-contains', searchTerm));
-  const querySnapshotOne = await getDocs(queryOne);
-  querySnapshotOne.forEach((doc) => {
-    console.log(doc.data().forename, " => ", doc.id);
-    // doc has not already been added to array of docs
-    /*const notInArr = !docIds.includes(doc.id);
-    if (notInArr) {
-      docIds.push(doc.id);
-      // add dod.id to doc & push to docs array
-      let obj = {}
-      obj.id = doc.id;
-      let merged = {...obj, ...doc.data()};
-      docs.push(merged);
-      console.log(doc.data().forename, " => ", doc.id);
-    }*/
-  });
-  const queryTwo = query(collection(db, "users"), where('tags', 'array-contains-any', [searchTerm])); //graphics-brand-design
-  //const queryOne = query(collection(db, "users"), where('tags', 'array-contains', searchTerm));
-  const querySnapshotTwo = await getDocs(queryTwo);
-  querySnapshotTwo.forEach((doc) => {
-    console.log(doc.data().forename, " => ", doc.id);
-    // doc has not already been added to array of docs
-    /*const notInArr = !docIds.includes(doc.id);
-    if (notInArr) {
-      docIds.push(doc.id);
-      // add dod.id to doc & push to docs array
-      let obj = {}
-      obj.id = doc.id;
-      let merged = {...obj, ...doc.data()};
-      docs.push(merged);
-      console.log(doc.data().forename, " => ", doc.id);
-    }*/
-  });
+  // test all fields of all user docs for searchTerm
+  for (var i = 0; i < allDocs.length; i++) {
+    let isMatched = false;
+    for (const [key, value] of Object.entries(allDocs[i])) {
+      // test any value that is in string form
+      if (typeof value === 'string') {
+        let searchStr = value.toLowerCase();
+        isMatched = searchStr.includes(searchTerm);
+      }
+      // test any value that is an array (categories etc)
+      else if (Array.isArray(value)) {
+        isMatched = value.includes(searchTerm);
+      }
+      // found add to results array docs
+      if (isMatched) {
+        //console.log(allDocs[i].forename+" ==> "+allDocs[i].id);
+        const notInArr = !docIds.includes(allDocs[i].id);
+        if (notInArr) {
+          docIds.push(allDocs[i].id);
+          docs.push(allDocs[i]);
+        }
+      }
+    }
+  }
+  //console.log(docs);
+  // manage the parameters
+  // delete search params then re add 
+  currentUrl.searchParams.delete("search");
+  currentUrl.searchParams.append("search", searchTerm);
+  window.history.pushState({}, '', currentUrl);
+  return docs;
 }
 
 
@@ -2701,11 +2730,24 @@ if (page == "portfolios") {
     createGradPreview(docsBatch);
     setFolioNum(docs);
     createPagination(getParamKey("page"), cardsPerPage, docs.length);
+    ifNoResults(docs);
   });
 
   // if no params (filters set) get all get all cards
   let noParams = paramsExist();
-  if (noParams) {
+  // if search param - load search results - paginated
+  if (getParamKey("search")) {
+    getAllUserData(undefined, function(allDocs){ 
+      let resultsDocs = searchKeyword(allDocs, getParamKey("search")); 
+      let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), resultsDocs); 
+      createGradPreview(docsBatch);
+      setFolioNum(resultsDocs);
+      createPagination(getParamKey("page"), cardsPerPage, resultsDocs.length);
+      ifNoResults(resultsDocs);
+    });
+  }
+  // if no params (filters set) get all get all cards
+  else if (noParams) {
     getAllUserData(undefined, function(allDocs){
       let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), allDocs); 
       createGradPreview(docsBatch);
@@ -2727,6 +2769,7 @@ if (page == "portfolios") {
         createGradPreview(docsBatch);
         setFolioNum(docs);
         createPagination(getParamKey("page"), cardsPerPage, docs.length);
+        ifNoResults(docs);
       });
       // if no params (filters set) get all get all cards
       let noParams = paramsExist();
@@ -2745,7 +2788,18 @@ if (page == "portfolios") {
   // search keywords
   const searchBtn = document.querySelector('#search #search-keyword');
   searchBtn.addEventListener('click', function(e){
-    searchKeyword(e);
+    e.preventDefault();
+    uncheckAllFilters();
+    //searchKeyword(e);
+    getAllUserData(undefined, function(allDocs){
+      let searchInput = getSearchTerm();
+      let resultsDocs = searchKeyword(allDocs, searchInput);
+      let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), resultsDocs); 
+      createGradPreview(docsBatch);
+      setFolioNum(resultsDocs);
+      createPagination(getParamKey("page"), cardsPerPage, resultsDocs.length);
+      ifNoResults(resultsDocs);
+    });
   })
 }
 
