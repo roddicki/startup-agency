@@ -229,7 +229,7 @@ function setCategoryParams() {
   // check category check sub categories 
   const categoryCheckboxes = document.querySelectorAll('#filters input.category');
   let currentUrl = new URL(window.location); 
-  currentUrl.searchParams.delete('search'); // delete search param
+  currentUrl.searchParams.delete('searchField'); // delete search param
   for (var i = 0; i < categoryCheckboxes.length; i++) {
     if (categoryCheckboxes[i].type === 'checkbox') {
       categoryCheckboxes[i].onclick = function(e) {
@@ -268,7 +268,7 @@ function setTagParams() {
     if (checkboxes[i].type === 'checkbox') {
       checkboxes[i].onclick = function(e) {
         let currentUrl = new URL(window.location); 
-        currentUrl.searchParams.delete('search'); // delete search param
+        currentUrl.searchParams.delete('searchField'); // delete search param
         if (this.checked && this.dataset.skills != undefined) {
           // if a category
           currentUrl.searchParams.append(this.dataset.skills, 'tag');
@@ -466,12 +466,50 @@ function uncheckAllFilters() {
 }
 
 // search keyword
-function searchKeyword(allDocs, searchStr) {
-  let searchTerm = searchStr.trim();
-  let currentUrl = new URL(window.location);
-  searchTerm = searchTerm.toLowerCase();
+async function searchKeyword(allDocs, searchStr) {
+  searchStr = searchStr.trim();
+  let searchArr = searchStr.split(' ');
   let docs = [];
   let docIds = [];
+  let currentUrl = new URL(window.location);
+  // loop through each word of the search terms
+  for (var i = 0; i < searchArr.length; i++) {
+    let searchTerm = searchArr[i].trim();
+    searchTerm = searchTerm.toLowerCase();
+    // test all fields of all user docs for searchTerm
+    for (var i = 0; i < allDocs.length; i++) {
+      let isMatched = false;
+      for (const [key, value] of Object.entries(allDocs[i])) {
+        // test any value that is in string form
+        if (typeof value === 'string') {
+          let searchStr = value.toLowerCase();
+          isMatched = searchStr.includes(searchTerm);
+        }
+        // test any value that is an array (categories etc)
+        else if (Array.isArray(value)) {
+          isMatched = value.includes(searchTerm);
+        }
+        // found add to results array docs
+        if (isMatched) {
+          //console.log(allDocs[i].forename+" ==> "+allDocs[i].id);
+          const notInArr = !docIds.includes(allDocs[i].id);
+          if (notInArr) {
+            docIds.push(allDocs[i].id);
+            docs.push(allDocs[i]);
+          }
+        }
+      }
+    }
+  }
+  /*console.log(searchArr);
+
+  let searchTerm = searchStr.trim();
+
+  console.log(searchTerm);
+
+  
+  searchTerm = searchTerm.toLowerCase();
+  
   // test all fields of all user docs for searchTerm
   for (var i = 0; i < allDocs.length; i++) {
     let isMatched = false;
@@ -495,12 +533,13 @@ function searchKeyword(allDocs, searchStr) {
         }
       }
     }
-  }
+  }*/
   //console.log(docs);
   // manage the parameters
   // delete search params then re add 
-  currentUrl.searchParams.delete("search");
-  currentUrl.searchParams.append("search", searchTerm);
+  
+  currentUrl.searchParams.delete("searchField");
+  currentUrl.searchParams.append("searchField", searchStr);
   window.history.pushState({}, '', currentUrl);
   return docs;
 }
@@ -839,6 +878,11 @@ function getParam() {
       //console.log(`${key}:${value}`);
       return value; // only works with one param at the mo
   }
+}
+
+function deleteParam(key) {
+  const urlParams = new URLSearchParams(location.search);
+  urlParams.delete(key)
 }
 
 // ======SHOW JOB FUNCTIONS======
@@ -2729,20 +2773,23 @@ if (page == "portfolios") {
     createGradPreview(docsBatch);
     setFolioNum(docs);
     createPagination(getParamKey("page"), cardsPerPage, docs.length);
-    ifNoResults(docs);
+    //ifNoResults(docs);
   });
 
   // if no params (filters set) get all get all cards
   let noParams = paramsExist();
+  
   // if search param - load search results - paginated
-  if (getParamKey("search")) {
+  if (getParamKey("searchField")) {
     getAllUserData(undefined, function(allDocs){ 
-      let resultsDocs = searchKeyword(allDocs, getParamKey("search")); 
-      let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), resultsDocs); 
-      createGradPreview(docsBatch);
-      setFolioNum(resultsDocs);
-      createPagination(getParamKey("page"), cardsPerPage, resultsDocs.length);
-      ifNoResults(resultsDocs);
+      let searchInput = getParamKey("searchField");
+      searchKeyword(allDocs, searchInput).then(function(resultsDocs){
+        ifNoResults(resultsDocs);
+        let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), resultsDocs); 
+        createGradPreview(docsBatch);
+        setFolioNum(resultsDocs);
+        createPagination(getParamKey("page"), cardsPerPage, resultsDocs.length);
+      });
     });
   }
   // if no params (filters set) get all get all cards
@@ -2759,6 +2806,7 @@ if (page == "portfolios") {
   const allCheckboxes = document.querySelectorAll('#filters input');
   for (var i = 0; i < allCheckboxes.length; i++) {
     allCheckboxes[i].addEventListener("click", function() {
+      console.log("clicked Checkbox");
       // set page param to 1
       setParam("page", 1);
       allParams = getAllParams();
@@ -2792,12 +2840,13 @@ if (page == "portfolios") {
     //searchKeyword(e);
     getAllUserData(undefined, function(allDocs){
       let searchInput = getSearchTerm();
-      let resultsDocs = searchKeyword(allDocs, searchInput);
-      let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), resultsDocs); 
-      createGradPreview(docsBatch);
-      setFolioNum(resultsDocs);
-      createPagination(getParamKey("page"), cardsPerPage, resultsDocs.length);
-      ifNoResults(resultsDocs);
+      searchKeyword(allDocs, searchInput).then(function(resultsDocs){
+        ifNoResults(resultsDocs);
+        let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), resultsDocs); 
+        createGradPreview(docsBatch);
+        setFolioNum(resultsDocs);
+        createPagination(getParamKey("page"), cardsPerPage, resultsDocs.length);
+      });
     });
   })
 }
