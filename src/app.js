@@ -435,7 +435,8 @@ function getDocsBatch(itemsPerPage, page, docs) {
 
 // if no filter or search results
 function ifNoResults(docs) {
-  if (docs.length < 1) {
+  //console.log("ifNoResults", docs.length);
+  if (docs.length == 0) {
     // inject message
     const container = document.querySelector('#grad-preview-container');
     container.innerHTML = '<h2 class="text-center pt-5">It looks like there were no results...</h2><p class="text-center">Try a different filter or search term:<br>Search terms are best as a single keyword, like "Fashion" or "Smith".</p>';
@@ -471,10 +472,11 @@ async function searchKeyword(allDocs, searchStr) {
   let searchArr = searchStr.split(' ');
   let docs = [];
   let docIds = [];
+  let searchTerm
   let currentUrl = new URL(window.location);
   // loop through each word of the search terms
-  for (var i = 0; i < searchArr.length; i++) {
-    let searchTerm = searchArr[i].trim();
+  for (var j = 0; j < searchArr.length; j++) {
+    searchTerm = searchArr[j].trim();
     searchTerm = searchTerm.toLowerCase();
     // test all fields of all user docs for searchTerm
     for (var i = 0; i < allDocs.length; i++) {
@@ -491,7 +493,6 @@ async function searchKeyword(allDocs, searchStr) {
         }
         // found add to results array docs
         if (isMatched) {
-          //console.log(allDocs[i].forename+" ==> "+allDocs[i].id);
           const notInArr = !docIds.includes(allDocs[i].id);
           if (notInArr) {
             docIds.push(allDocs[i].id);
@@ -501,43 +502,8 @@ async function searchKeyword(allDocs, searchStr) {
       }
     }
   }
-  /*console.log(searchArr);
-
-  let searchTerm = searchStr.trim();
-
-  console.log(searchTerm);
-
-  
-  searchTerm = searchTerm.toLowerCase();
-  
-  // test all fields of all user docs for searchTerm
-  for (var i = 0; i < allDocs.length; i++) {
-    let isMatched = false;
-    for (const [key, value] of Object.entries(allDocs[i])) {
-      // test any value that is in string form
-      if (typeof value === 'string') {
-        let searchStr = value.toLowerCase();
-        isMatched = searchStr.includes(searchTerm);
-      }
-      // test any value that is an array (categories etc)
-      else if (Array.isArray(value)) {
-        isMatched = value.includes(searchTerm);
-      }
-      // found add to results array docs
-      if (isMatched) {
-        //console.log(allDocs[i].forename+" ==> "+allDocs[i].id);
-        const notInArr = !docIds.includes(allDocs[i].id);
-        if (notInArr) {
-          docIds.push(allDocs[i].id);
-          docs.push(allDocs[i]);
-        }
-      }
-    }
-  }*/
-  //console.log(docs);
   // manage the parameters
   // delete search params then re add 
-  
   currentUrl.searchParams.delete("searchField");
   currentUrl.searchParams.append("searchField", searchStr);
   window.history.pushState({}, '', currentUrl);
@@ -2784,11 +2750,11 @@ if (page == "portfolios") {
     getAllUserData(undefined, function(allDocs){ 
       let searchInput = getParamKey("searchField");
       searchKeyword(allDocs, searchInput).then(function(resultsDocs){
-        ifNoResults(resultsDocs);
         let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), resultsDocs); 
         createGradPreview(docsBatch);
         setFolioNum(resultsDocs);
         createPagination(getParamKey("page"), cardsPerPage, resultsDocs.length);
+        ifNoResults(resultsDocs);
       });
     });
   }
@@ -2837,15 +2803,15 @@ if (page == "portfolios") {
   searchBtn.addEventListener('click', function(e){
     e.preventDefault();
     uncheckAllFilters();
-    //searchKeyword(e);
     getAllUserData(undefined, function(allDocs){
       let searchInput = getSearchTerm();
       searchKeyword(allDocs, searchInput).then(function(resultsDocs){
-        ifNoResults(resultsDocs);
+        console.log("resultsDocs", resultsDocs.length);
         let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), resultsDocs); 
         createGradPreview(docsBatch);
         setFolioNum(resultsDocs);
         createPagination(getParamKey("page"), cardsPerPage, resultsDocs.length);
+        ifNoResults(resultsDocs);
       });
     });
   })
