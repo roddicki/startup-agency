@@ -8,7 +8,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist/scripts'),
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
+    sourceMapFilename: "[name].js.map"
   },
   module: {
     rules: [
@@ -18,5 +19,6 @@ module.exports = {
       },
     ],
   },
+  devtool: "source-map",
   watch: true
 };

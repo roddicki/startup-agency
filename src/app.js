@@ -457,11 +457,11 @@ function uncheckAllFilters() {
     allCheckboxes[i].checked = false;
   }
   // delete all params then re add bar page and search
-  let page = getParamKey("page");
+  //let page = getParamKey("page");
   let thisUrl = window.location.href;
   // Remove all parameters from the URL
   let amendedUrl = new URL(thisUrl.split('?')[0]);
-  if (page) {amendedUrl.searchParams.append("page", page)}
+  //if (page) {amendedUrl.searchParams.append("page", page)}
   window.history.pushState({}, '', amendedUrl);
 }
 
@@ -551,7 +551,6 @@ function createJobDoc() {
     const thankYou = document.querySelector("#thankYouModal");
     thankYou.innerHTML = "Thank you for your submission!";
     const spinner = document.querySelector(".submitting-spinner");
-    console.log(spinner);
     spinner.style.display = "none";
     const thankYouTick = document.querySelector(".thank-you-tick");
     thankYouTick.style.display = "inline";
