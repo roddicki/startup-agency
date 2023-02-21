@@ -360,6 +360,7 @@ function paramsExist() {
 // query / filter users by tag
 async function filterUsers(allParams) {
   //console.log("\nFiltered docs");
+  //console.log("allParams", allParams);
   let tags = [];
   let docs = [];
   let docIds = [];
@@ -370,8 +371,9 @@ async function filterUsers(allParams) {
       tags.push(allParams[i].tag);
     }
   }
+  console.log(tags);
   // while tags array is not empty
-  while (tags.length > 1) {
+  while (tags.length > 0) {
     // create tag sub array / batch of 10
     let tagsBatch = [];
     let n = 10; // get batches of 10 tags
@@ -399,6 +401,7 @@ async function filterUsers(allParams) {
       }
     });
   }
+  //console.log("filterUsers - docs results", docs);
   return docs;
 } 
 
@@ -2734,7 +2737,7 @@ if (page == "portfolios") {
   // display cards based on params onload
   const cardsPerPage = 6;
   filterUsers(allParams).then(function(docs) {
-    console.log("filtered docs", docs);
+    //console.log("filtered docs", docs);
     let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), docs); 
     createGradPreview(docsBatch);
     setFolioNum(docs);
@@ -2777,7 +2780,7 @@ if (page == "portfolios") {
       setParam("page", 1);
       allParams = getAllParams();
       filterUsers(allParams).then(function(docs) {
-        console.log("filtered docs", docs);
+        //console.log("filtered docs", docs);
         let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), docs); 
         createGradPreview(docsBatch);
         setFolioNum(docs);
