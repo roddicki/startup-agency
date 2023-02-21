@@ -2302,7 +2302,7 @@ async function populateShowcases(vals) {
   // exit if no project showcases
   if (vals.projects == null) {
     // if no projects add no showcase projects placeholder image
-    showcaseContainer.innerHTML = '<div class="text-center"><img class="img-fluid" alt="No showcase projects to show" src="https://via.placeholder.com/600x600/e9ecef?text=No+project+showcase+placeholder"></div>';
+    showcaseContainer.innerHTML = '<div class="text-center"><img class="img-fluid" alt="No showcase projects to show" src="assets/img/no-projects-placeholder.svg"><h2 class="pt-5">Whoops!!</h2><p>No projects to showcase yet!<br>Stay tuned!!</p></div>';
     return;
   }
   let index = 0;
