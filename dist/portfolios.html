@@ -42,7 +42,7 @@
                 <form id="search">
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search Keyword..." class="filter-input" aria-label="Search keyword" name="searchField" aria-describedby="addon-wrapping">
-                    <span class="input-group-text search-icon" id="search-keyword"><i class="bi bi-search"></i></span>
+                    <span class="input-group-text search-icon" id="search-keyword" onclick="hideSidebarFilter()"><i class="bi bi-search"></i></span>
                   </div>
                 </form>
               </div>
@@ -77,6 +77,7 @@
                       </h2>
                       <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="computer-animation-heading">
                         <div class="accordion-body">
+                          <p class="filter-indent tag"><input class="form-check-input filter-checkbox" type="checkbox" value="" data-category="animation" data-skills="animation-2d-animation"> 2D Animation</p>
                           <p class="filter-indent tag"><input class="form-check-input filter-checkbox" type="checkbox" value="" data-category="animation" data-skills="animation-3d-animation"> 3D Animation</p>
                           <p class="filter-indent tag"><input class="form-check-input filter-checkbox" type="checkbox" value="" data-category="animation" data-skills="animation-3d-modelling"> 3D Modeling</p>
                           <p class="filter-indent tag"><input class="form-check-input filter-checkbox" type="checkbox" value="" data-category="animation" data-skills="animation-compositing"> Compositing</p>
@@ -215,7 +216,7 @@
                           <p class="filter-indent tag"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="level-design-check" data-category="games" data-skills="games-level-design"> Level Design</p>
                           <p class="filter-indent tag"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="qa-testong-check" data-category="games" data-skills="games-qa-testing"> QA Testing</p>
                           <p class="filter-indent tag"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="unity-check" data-category="games" data-skills="games-unity"> Unity</p>
-                          <p class="filter-indent tag"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="unreal-check" data-category="games" data-skills="games-unreal"> Unreal 4/5</p>
+                          <p class="filter-indent tag"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="unreal-check" data-category="games" data-skills="games-unreal"> Unreal</p>
                           <p class="filter-indent tag"><input class="form-check-input filter-checkbox" type="checkbox" value="" id="vr-check" data-category="games" data-skills="games-virtual-reality"> Virtual Reality</p>
                         </div>
                       </div>
@@ -280,11 +281,10 @@
           <div class="col-lg-8 col-md-12 col-sm-12 col-12 content-blocks d-flex flex-column">
 
             <div class="row">
-              <div class="col-lg-6 col-md-4 col-sm-6 col-5">
-
+              <div class="col-6">
                 <p class="project-showcase-text"> Porfolios (<span class="folio-numbers"> </span>)</p>
               </div>
-              <div class="col-lg-6 col-md-4 col-sm-6 col-5 d-lg-none d-md-block">
+              <div class="col-6 d-lg-none d-md-block">
                 <button onClick="showSidebarFilter()" class="Button-Social float-right"><u>Filters</u></button>
               </div>
 
