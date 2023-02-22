@@ -233,7 +233,7 @@ function createJobPreview() {
   tagsPreview.innerHTML = ""; // remove previous tags
   for (var i = 0; i < allCategoryTags.length; i++) {
     // show preview tags
-    let previewTag = "<span class=\"btn btn-primary filtertag\">"+allCategoryTags[i].innerHTML+"</span>"
+    let previewTag = "<span class=\"filter-tag-profile text-capitalize\">"+allCategoryTags[i].innerHTML+"</span>"
     tagsPreview.innerHTML += previewTag;
   }
   console.log(allCategoryTags);
