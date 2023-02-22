@@ -108,7 +108,7 @@ function emailSentConfirmation() {
 
 // create graduate preview cards
 async function createGradPreview(docsArray) {
-  console.log(docsArray);
+  //console.log(docsArray);
   const container = document.querySelector('#grad-preview-container');
   // empty the container
   container.innerHTML = "";
@@ -123,7 +123,7 @@ async function createGradPreview(docsArray) {
  
   // create grad preview cards
   for (var i = 0; i < docsArray.length; i++) {
-    console.log(docsArray[i].id, docsArray[i].forename+' '+docsArray[i].surname);
+    //console.log(docsArray[i].id, docsArray[i].forename+' '+docsArray[i].surname);
     let location = "<p></p>";
     if (docsArray[i].location) {
       location = '<p><img alt="map icon" src="assets/img/mapicon.svg"> '+docsArray[i].location+'</p>';
@@ -388,7 +388,7 @@ async function filterUsers(allParams) {
     const q = query(collection(db, "users"), where('tags', 'array-contains-any', tagsBatch));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      // doc has not already been added to array of docs
+      // doc has not already been added to array of docs and is approved
       const notInArr = !docIds.includes(doc.id);
       if (notInArr) {
         docIds.push(doc.id);
@@ -397,7 +397,6 @@ async function filterUsers(allParams) {
         obj.id = doc.id;
         let merged = {...obj, ...doc.data()};
         docs.push(merged);
-        console.log(doc.data().forename, " => ", doc.id);
       }
     });
   }
@@ -413,7 +412,6 @@ function setFolioNum(docs) {
 
 // return the docs to display accroding to the 'page='' param
 function getDocsBatch(itemsPerPage, page, docs) {
-  //console.log("itemsPerPage =",itemsPerPage, "| page =",page, "| docs.length =",docs.length);
   // get initial start and end items 
   let start = 0;
   let end;
@@ -432,8 +430,19 @@ function getDocsBatch(itemsPerPage, page, docs) {
       end = docs.length; 
     }
   }
-  console.log(docs.slice(start, end));
+  //console.log(docs.slice(start, end));
   return(docs.slice(start, end));
+}
+
+// filter out users not approved 
+function filterApproved(allDocs) {
+  let docs = [];
+  for (var i = 0; i < allDocs.length; i++) {
+    if (allDocs[i].approved) {
+      docs.push(allDocs[i])
+    }
+  }
+  return docs;
 }
 
 // if no filter or search results
@@ -497,7 +506,8 @@ async function searchKeyword(allDocs, searchStr) {
         // found add to results array docs
         if (isMatched) {
           const notInArr = !docIds.includes(allDocs[i].id);
-          if (notInArr) {
+          // if not already added to results (docIds) and approved
+          if (notInArr && allDocs[i].approved) {
             docIds.push(allDocs[i].id);
             docs.push(allDocs[i]);
           }
@@ -2259,7 +2269,7 @@ function showEditBtn (userID, paramID) {
 // using https://splidejs.com/
 function populateShowcasesNav(vals) {
   // exit if no project showcases
-  if (vals.projects == null) {
+  if (vals.projects == null || Object.keys(vals.projects).length === 0) {
     return;
   }
   const showcaseNavContainer = document.querySelector('#project-showcase-nav');
@@ -2301,7 +2311,8 @@ function populateShowcasesNav(vals) {
 async function populateShowcases(vals) {
   const showcaseContainer = document.querySelector('#project-showcase');
   // exit if no project showcases
-  if (vals.projects == null) {
+  console.log("vals.projects", vals.projects);
+  if (vals.projects == null || Object.keys(vals.projects).length === 0) {
     // if no projects add no showcase projects placeholder image
     showcaseContainer.innerHTML = '<div class="text-center"><img class="img-fluid" alt="No showcase projects to show" src="assets/img/no-projects-placeholder.svg"><h2 class="pt-5">Whoops!!</h2><p>No projects to showcase yet!<br>Stay tuned!!</p></div>';
     return;
@@ -2693,10 +2704,11 @@ if (page == "portfolios") {
   // if no params (filters set) get all get all cards
   else if (noParams) {
     getAllUserData(undefined, function(allDocs){
-      let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), allDocs); 
+      let filteredDocs = filterApproved(allDocs);
+      let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), filteredDocs); 
       createGradPreview(docsBatch);
-      setFolioNum(allDocs);
-      createPagination(getParamKey("page"), cardsPerPage, allDocs.length);
+      setFolioNum(filteredDocs);
+      createPagination(getParamKey("page"), cardsPerPage, filteredDocs.length);
     });
   }
   
@@ -2708,8 +2720,8 @@ if (page == "portfolios") {
       // set page param to 1
       setParam("page", 1);
       allParams = getAllParams();
-      filterUsers(allParams).then(function(docs) {
-        //console.log("filtered docs", docs);
+      filterUsers(allParams).then(function(resultsDocs) {
+        let docs = filterApproved(resultsDocs);
         let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), docs); 
         createGradPreview(docsBatch);
         setFolioNum(docs);
@@ -2737,9 +2749,9 @@ if (page == "portfolios") {
     uncheckAllFilters();
     getAllUserData(undefined, function(allDocs){
       let searchInput = getSearchTerm();
-      searchKeyword(allDocs, searchInput).then(function(resultsDocs){
-        console.log("resultsDocs", resultsDocs.length);
-        let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), resultsDocs); 
+      searchKeyword(allDocs, searchInput).then(function(docs){
+        let resultsDocs = filterApproved(docs);
+        let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), resultsDocs);
         createGradPreview(docsBatch);
         setFolioNum(resultsDocs);
         createPagination(getParamKey("page"), cardsPerPage, resultsDocs.length);
