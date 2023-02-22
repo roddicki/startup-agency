@@ -1874,6 +1874,13 @@ function getPreloadedImgs(){
   return preloadedImgUrls;
 }
 
+// get upload image portrait url - return an object with all the new upload image urls
+function getProfileImageUrl(){
+  const imageDiv = document.querySelector('#edit-details #display-image');
+  const url = imageDiv.style.backgroundImage.slice(5, -2);
+  //console.log(images);
+  return url; 
+}
 
 // OLD
 // watch for new uploaded images add edit caption icon
@@ -2007,13 +2014,7 @@ function showPreview(selectedTags){
 }*/
 
 
-// get upload image portrait url - return an object with all the new upload image urls
-function getProfileImageUrl(){
-  const imageDiv = document.querySelector('#edit-details #display-image');
-  const url = imageDiv.style.backgroundImage.slice(5, -2);
-  //console.log(images);
-  return url; 
-}
+
 
 
 // old check if needed before delete
@@ -2419,79 +2420,6 @@ function messageSentConfirmation(vals) {
 }
 
 
-// ======POST JOB FUNCTIONS======
-// create tag checkboxes
-/*function createTagCheckboxes() {
-  let checkboxContainer = document.querySelector("#tag-checkboxes");
-  for (var i = 0; i < tags.length; i++) {
-    let str = tags[i].replaceAll("-", ' ');
-    let val = tags[i].toLowerCase();
-    let div = document.createElement("div");
-    div.className = "form-check";
-
-    let checkbox = document.createElement("input");
-    checkbox.className = "form-check-input tag";
-    checkbox.type = "checkbox";
-    checkbox.value = val;
-    checkbox.dataset.label = tags[i];
-    checkbox.name = "tag"+tags[i];
-    checkbox.id = "tag"+tags[i];
-    checkbox.onchange = addTagBadge;
-
-    let label = document.createElement("label");
-    label.className = "form-check-label";
-    label.for = "tag"+tags[i];
-    label.innerHTML = str;
-
-    div.appendChild(checkbox);
-    div.appendChild(label);
-
-    checkboxContainer.appendChild(div);
-  }
-}*/
-
-
-// add tag badge on change
-/*function addTagBadge(){
-  const tagList = document.querySelector('#tag-list');
-  let name = this.dataset.label;
-  let checkbox = document.querySelector("input[data-label='"+name+"']");
-  let badge;
-  if (!checkbox.checked) {
-    // remove tag
-    badge = document.querySelector("span[data-label='"+name+"']");
-    if (badge) {
-      badge.remove();
-    }
-  }
-  else {
-    // create tag
-    badge = document.createElement("span");
-    //badge.href = "#";
-    badge.className = "badge rounded-pill bg-secondary";
-    badge.style = "margin: 3px;"
-    badge.dataset.label = name;
-    badge.innerHTML = name.replaceAll("-", ' ');
-
-    tagList.appendChild(badge);
-  }
-}*/
-
-
-// return checked tags
-/*function getTags(){
-  let tags = [];
-  // get tags
-  const tagCheckboxes = document.querySelector('#tag-checkboxes').getElementsByTagName('input');
-  for (var i = 0; i < tagCheckboxes.length; i++) {
-    if (tagCheckboxes[i].checked) {
-      tags.push(tagCheckboxes[i].value);
-    }
-  }
-  return tags;
-}*/
-
-
 // ======ACCOUNT SETTINGS FUNCTIONS======
 
 // disable the availability tag
@@ -2516,6 +2444,7 @@ function populateAcccountDetails(vals){
   settingsForm.email.value = vals.email;
 }
 
+// save account changes
 async function saveDetails(uid) {
   const settingsForm = document.querySelector('.edit-details-form');
   const successMsg = document.querySelector('.edit-details-form .save-success');
