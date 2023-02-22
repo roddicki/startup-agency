@@ -160,7 +160,8 @@ function createUserList(userData) {
     } 
     let idProfile = "approve-profile-"+i;
     let profileApproved = document.createElement("td");
-    profileApproved.innerHTML = '<div class="form-check profile-approved form-switch"><input class="form-check-input" type="checkbox" id="'+idProfile+'" data-id="'+userData[i].id+'" '+approvedProfile+'></div>';
+    profileApproved.classList = "d-none";
+    profileApproved.innerHTML = '<div class="form-check profile-approved form-switch d-none"><input class="form-check-input" type="checkbox" id="'+idProfile+'" data-id="'+userData[i].id+'" '+approvedProfile+'></div>';
 
     let profileLink = document.createElement("td");
     profileLink.className = "d-none d-md-table-cell";
