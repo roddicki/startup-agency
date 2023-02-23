@@ -238,7 +238,6 @@ export function getAllCurrentJobData(sort, fn) {
       else {
         sortedArr = jobCollection;
       }  
-      console.log(sortedArr);
       fn(sortedArr);
     })
     .catch(function(err) {
@@ -326,7 +325,6 @@ export function getAllUserData(tag, fn) {
 
 // get random docs
 export async function getRandomDocs(n){
-  console.log("docs = " + n);
   let docs = [];
   // get all uids & data
   const querySnapshot = await getDocs(collection(db, "users"));

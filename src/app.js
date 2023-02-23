@@ -1071,7 +1071,7 @@ function displaySingleJob(jobData) {
     console.log(categoryObj);
     let tagBtn = document.createElement("span");
     tagBtn.setAttribute("style", "text-transform: capitalize;cursor: default;");
-    tagBtn.className = "btn btn-primary filtertag";
+    tagBtn.className = "filter-tag-profile text-capitalize";
     tagBtn.name = category;
     //tagBtn.href = "#";
     tagBtn.innerHTML = categoryObj.description;
@@ -1883,7 +1883,6 @@ function populateShowcasesNav(vals) {
 async function populateShowcases(vals) {
   const showcaseContainer = document.querySelector('#project-showcase');
   // exit if no project showcases
-  console.log("vals.projects", vals.projects);
   if (vals.projects == null || Object.keys(vals.projects).length === 0) {
     // if no projects add no showcase projects placeholder image
     showcaseContainer.innerHTML = '<div class="text-center"><img class="img-fluid" alt="No showcase projects to show" src="assets/img/no-projects-placeholder.svg"><h2 class="pt-5">Whoops!!</h2><p>No projects to showcase yet!<br>Stay tuned!!</p></div>';
