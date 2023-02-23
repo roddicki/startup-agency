@@ -893,6 +893,7 @@ h5{
 	margin-bottom: 5px;
 	height:330px;
 	position: relative;
+	min-width: 370px;
 	/*max-width: 350px;*/
 }
 
