@@ -203,6 +203,20 @@ export function resetPassword(email) {
 //*****************************************
 // firebase general  functions
 
+// SEND EMAIL FUNCTIONS
+// create doc to send email // this uses a a google cloud function to auto send a a mail onCreate() // see functions > index.js
+export async function createSentEmailDoc(to, from, msg){
+  //const modalHelp = new bootstrap.Modal(document.querySelector('#help'));
+  //const modalThankYou = new bootstrap.Modal(document.querySelector('#help-thank-you'));
+  // add doc to collection
+  addDoc(collection(db, "sentmails"), {
+    to: to,
+    from: from,
+    message: msg
+  })
+}
+
+
 // get all current jobs and order by application deadline date
 export function getAllCurrentJobData(sort, fn) {
   // collection ref - in this case books

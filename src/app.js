@@ -1,5 +1,5 @@
 
-import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, updateUserDoc, isUserSignedIn, getUserUid, getAllJobData, getAllCurrentJobData, getSingleJob, getAllUserData, resetPassword, getRandomDocs} from './firebase-library.js';
+import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, updateUserDoc, isUserSignedIn, getUserUid, getAllJobData, getAllCurrentJobData, getSingleJob, getAllUserData, resetPassword, getRandomDocs, createSentEmailDoc} from './firebase-library.js';
 
 import {getSkillsTags, getCategories} from './tags-categories.js';
 
@@ -72,7 +72,7 @@ async function getCurrentUserDetails(uid) {
 
 // SEND EMAIL FUNCTIONS
 // create doc to send email // this uses a a google cloud function to auto send a a mail onCreate() // see functions > index.js
-async function createSentEmailDoc(to, from, msg){
+/*async function createSentEmailDoc(to, from, msg){
   const modalHelp = new bootstrap.Modal(document.querySelector('#help'));
   const modalThankYou = new bootstrap.Modal(document.querySelector('#help-thank-you'));
   // add doc to collection
@@ -81,7 +81,7 @@ async function createSentEmailDoc(to, from, msg){
     from: from,
     message: msg
   })
-}
+}*/
 
 // get form values to send help email 
 function getHelpFormValues() {

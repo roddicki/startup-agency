@@ -1,5 +1,5 @@
 
-import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, updateUserDoc,isUserSignedIn, getUserUid, getAllCurrentJobData, getAllJobData, getSingleJob, updateJobDoc, getAllUserData} from './firebase-library.js';
+import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, updateUserDoc,isUserSignedIn, getUserUid, getAllCurrentJobData, getAllJobData, getSingleJob, updateJobDoc, getAllUserData, createSentEmailDoc} from './firebase-library.js';
 
 import {getSkillsTags, getCategories} from './tags-categories.js';
 
@@ -254,13 +254,18 @@ function createJobList(userData) {
   let jobListContainer = document.querySelector(".job-list tbody");
   const noOfJobs = document.querySelector(".no-of-jobs");
   noOfJobs.innerHTML = "("+userData.length + " Jobs)";
+
+  // variables for the send email job modal
+  let emailList = [];
+  let selectedJob;
   
   for (var i = 0; i < userData.length; i++) {
     //userData[i]
     const tr = document.createElement("tr");
 
-    const jobTitle = document.createElement("td");
-    jobTitle.innerHTML = userData[i].title;
+    const jobTitle = userData[i].title;
+    const jobTitleEl = document.createElement("td");
+    jobTitleEl.innerHTML = jobTitle;
 
     let applicationDeadline = new Date(userData[i].applicationdeadline.seconds*1000);
     let applicationDeadlineStr = applicationDeadline.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"});
@@ -284,11 +289,16 @@ function createJobList(userData) {
     editLink.className = "d-none d-md-table-cell";
     editLink.innerHTML = '<a style="white-space: nowrap;" href="jobedit.html?id='+userData[i].id+'" class="btn btn-primary">Edit Job</a>';
 
-    tr.appendChild(jobTitle);
+    const sendMail = document.createElement("td");
+    sendMail.className = "d-none d-md-table-cell";
+    sendMail.innerHTML = '<a style="white-space: nowrap;" href="#" class="btn btn-primary" id="sendmail-'+i+'" data-bs-toggle="modal" data-bs-target="#SendMailModal" data-id="'+userData[i].id+'">Send Email</a>';
+
+    tr.appendChild(jobTitleEl);
     tr.appendChild(deadline);
     tr.appendChild(userApproved);
     tr.appendChild(preview);
     tr.appendChild(editLink);
+    tr.appendChild(sendMail);
     jobListContainer.appendChild(tr);
 
     // add event listeners for the switch
@@ -299,8 +309,113 @@ function createJobList(userData) {
       // update user doc with key val
       updateJobDoc(approveSwitch.dataset.id, "approved", approveSwitch.checked); 
     });
+
+    // add event listener for the send mail
+    const sendMailBtn = document.querySelector("#sendmail-"+i);
+    sendMailBtn.addEventListener('click', function(){
+      // find users 
+      getSingleJob (sendMailBtn.dataset.id, function(jobData){
+        findUsers(jobData).then(function(results){
+          console.log("job:", results);
+          // add the id to the job details
+          jobData.id = sendMailBtn.dataset.id;
+          emailList = results; // set email list
+          selectedJob = jobData; // set selected job details
+          // populate modal
+          populateModal(results, jobData.categories, jobTitle);
+        });
+      });
+    });
+
+  }
+  // add event listener for the send btn in modal
+  const sendBtn = document.querySelector("#SendMailModal #send-email");
+  sendBtn.addEventListener('click', function() {
+    prepSendEmail(emailList, selectedJob)
+  });
+}
+
+// find users
+async function findUsers(data) {
+  // find category for job
+  let categories = data.categories;
+  if (data.categories == null) {
+    return;
+  }
+  // query and match with users
+  let vals = [];
+  try {
+    const q = query(collection(db, "users"), where('categories', 'array-contains-any', categories));
+    const querySnapshot = await getDocs(q);
+    let docData;
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      if (doc.data().approved) {
+        console.log(doc.id, doc.data().email, doc.data().forename, doc.data().surname);
+        docData = doc.data();
+        docData.id = doc.id;
+        vals.push(docData);
+      }
+    });
+  }
+  catch(err) {
+    //console.log("no categories");
+    return null;
+  }
+  
+  return vals; 
+}
+
+// populate send email Modal
+function populateModal(valsArr, categories, jobTitle) {
+  const modalBody = document.querySelector("#SendMailModal .modal-body .modal-text");
+  const sendMailBtn = document.querySelector("#SendMailModal #send-email");
+  sendMailBtn.removeAttribute('disabled');
+  modalBody.innerHTML = "<h2>Job: "+jobTitle+"</h2>"
+  if (valsArr == null) {
+    modalBody.innerHTML += "This Job has no categories so emails cannot be sent<br>";
+    sendMailBtn.setAttribute('disabled', '');
+    return;
+  } 
+  modalBody.innerHTML += "This Job has Categories:<br>";
+  for (var i = 0; i < categories.length; i++) {
+    modalBody.innerHTML += "<strong style='text-transform: capitalize;'>"+categories[i]+"</strong><br>";
+  }
+  if (valsArr == "") {
+    modalBody.innerHTML += "<br>There were no email matches<br>";
+    sendMailBtn.setAttribute('disabled', '');
+    return;
+  }
+  modalBody.innerHTML += "<br>Emails will be sent to:<br>";
+  for (var i = 0; i < valsArr.length; i++) {
+    modalBody.innerHTML += "<strong>"+valsArr[i].forename+" "+valsArr[i].surname+"</strong>: "+valsArr[i].email+"<br>";
   }
 }
+
+// compile list of names and emails to send with job info
+function prepSendEmail(users, job) {
+  const sendMailBtn = document.querySelector("#SendMailModal #send-email");
+  let thisDomain = window.location.hostname;
+  // Remove all parameters from the URL
+  //let amendedUrl = new URL(thisUrl.split('/')[0]);
+  sendMailBtn.innerHTML = "Sending...";
+  for (var i = 0; i < users.length; i++) {
+    // send email if help modal validated
+    const modalMsgText = document.querySelector("#SendMailModal .modal-body form #msg-text");
+    let message = "Initial email test from admin > Jobs<br>" +modalMsgText.value+ "<br>" +users[i].forename+ " " +users[i].surname+ "<br>" +job.title+ "<br>https://www."+thisDomain+ "/job-details.html?id=" +job.id;
+    console.log(message);
+    createSentEmailDoc(users[i].email, adminEmail, message).then(function(){
+      // when sent change message and graphic
+      console.log("Email sent");
+      sendMailBtn.classList.remove('btn-primary');
+      sendMailBtn.classList.add('btn-success');
+      sendMailBtn.innerHTML = "Emails sent";
+    });
+  }
+  console.log(job.title, job.id);
+  console.log(job);
+}
+
 
 // Display job
 function displayJobDetails(jobData) {
@@ -317,12 +432,8 @@ function displayJobDetails(jobData) {
   jobDetailsForm.budget.value = jobData.budget;
   jobDetailsForm.duration.value = jobData.duration;
   jobDetailsForm.hourlyrate.value = jobData.hourlyrate;
-  
-  const deadline = new Date(jobData.deadline.seconds*1000);
-  jobDetailsForm.deadline.value = deadline.toLocaleDateString('en-CA');
-
-  const applicationDeadline = new Date(jobData.applicationdeadline.seconds*1000);
-  jobDetailsForm.applicationdeadline.value = applicationDeadline.toLocaleDateString('en-CA');
+  jobDetailsForm.deadline.valueAsDate = new Date(jobData.deadline.seconds*1000);
+  jobDetailsForm.applicationdeadline.valueAsDate = new Date(jobData.applicationdeadline.seconds*1000);
 
   // skills tags
   const tagContainer = document.querySelector('#tag-checkboxes');
@@ -453,8 +564,6 @@ function loadPages(){
     getAllJobData(function(jobData){
       console.log(jobData);
       createJobList(jobData);
-      //displayAllJobs(itemsPerPage, getParamKey("page"), jobData); // err
-      //createPagination(getParamKey("page"), itemsPerPage, jobData.length);
     });  
   };
 
