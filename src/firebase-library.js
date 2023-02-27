@@ -205,13 +205,14 @@ export function resetPassword(email) {
 
 // SEND EMAIL FUNCTIONS
 // create doc to send email // this uses a a google cloud function to auto send a a mail onCreate() // see functions > index.js
-export async function createSentEmailDoc(to, from, msg){
+export async function createSentEmailDoc(to, from, msg, subject){
   //const modalHelp = new bootstrap.Modal(document.querySelector('#help'));
   //const modalThankYou = new bootstrap.Modal(document.querySelector('#help-thank-you'));
   // add doc to collection
   addDoc(collection(db, "sentmails"), {
     to: to,
     from: from,
+    subject: subject,
     message: msg
   })
 }

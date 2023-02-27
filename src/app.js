@@ -2171,7 +2171,7 @@ modalHelpButton.addEventListener('click', function (e) {
     // get form values and close and open modal
     let formValues = getHelpFormValues();
     // send email if help modal validated
-    createSentEmailDoc(formValues.to, formValues.from, formValues.message).then(function(){
+    createSentEmailDoc(formValues.to, formValues.from, formValues.message, 'Stiwdio Agency: help posting a job').then(function(){
       // when sent change message and graphic
       emailSentConfirmation();
     });
@@ -2222,7 +2222,7 @@ if (page == "home") {
       // get form vals and create email message
       let formValues = getContactFormValues();
       // send email if help modal validated
-      createSentEmailDoc(formValues.to, formValues.from, formValues.message).then(function(){
+      createSentEmailDoc(formValues.to, formValues.from, formValues.message, 'Stiwdio Agency: general contact form').then(function(){
         console.log("email sent success");
         homepageMessageSent(); // when sent change message and graphic
         getInTouchForm.reset();  // reset form
@@ -2552,68 +2552,11 @@ if (page == "edit-profile") {
     if (document.visibilityState == "hidden" && pageEdited) {
       //console.log("edit page: ",document.visibilityState);
       let msg = "User " + currentUserData.forename + " " + currentUserData.surname + ", user ID: " + currentUserData.uid + " has updated their profile<br><br>Please view it here: https://studio-freelancer-agency.web.app/profile.html?id=" + currentUserData.uid;
-      createSentEmailDoc("stiwdiofreelanceragency@gmail.com", "stiwdiofreelanceragency@gmail.com", msg);
+      createSentEmailDoc("stiwdiofreelanceragency@gmail.com", "stiwdiofreelanceragency@gmail.com", msg, 'Stiwdio Agency: user profile updated alert');
     }
   });
 
 }
-
-
-// ADD PROFILE PAGE add-profile.html
-/*if (page == "add-profile") {
-  console.log("add-profile page");
-  // show name on page load on add-profile page
-  onAuthStateChanged(auth, function(user) {
-    if (user) {
-        // User logged in already or has just logged in.
-        console.log("user "+user.uid+" logged in");
-        getCurrentUserDetails(user.uid).then(function(vals){
-          if (signedInName) {
-            signedInName.innerHTML = vals.forename;
-          }
-        });
-      } 
-
-  })
-
-  // create tag system
-  createTagCheckboxes();
-
-  // watch for new uploaded images add edit caption icon
-  uploadImageWatcher();
-
-  // load any existing profile info
-  getUserData(getParam()).then(function(vals){
-      showProfileData(vals);
-    });
-
-  // save edited caption from modal
-  const captionModal = document.querySelector('#captionModal .save-caption');
-  captionModal.addEventListener('click', saveCaption);
-  const captionSwitch = document.querySelector('#captionModal #hero-image-switch');
-  captionSwitch.addEventListener('change', saveHero);
-
-  // show profile preview 
-  const previewBtn = document.querySelector('.show-preview');
-  previewBtn.addEventListener('click', function () {
-    showPreview(getTags());
-  });
-
-  // upload and save
-  const uploadBtn = document.querySelector('.save-and-upload');
-  uploadBtn.addEventListener('click', function(e){
-    // add profile info
-    addToProfile(e, getTags());
-  	// get urls of images to upload - resolve promise > upload
-    getImageUrls(e).then(function(result) { 
-         //console.log(result);
-         uploadImage(result).then(function(){
-         	console.log('complete');
-         });
-      });
-  }); 
-
-}*/
 
 
 // SHOW PROFILE
@@ -2654,7 +2597,7 @@ if (page == "single-profile") {
           // get form vals and create email message
           let formValues = getContactMeFormValues(vals);
           // send email if help modal validated
-          createSentEmailDoc(formValues.to, formValues.from, formValues.message).then(function(){
+          createSentEmailDoc(formValues.to, formValues.from, formValues.message, 'Stiwdio Agency: message to freelancer').then(function(){
             // when sent change message and graphic
             console.log("email sent success");
             messageSentConfirmation(vals);
@@ -2745,7 +2688,7 @@ if (page == "job-details") {
       // get form values inc user data from global currentUserData
       let formValues = getApplyForJobValues(currentUserData, currentJobData);
       // send email if help modal validated
-      createSentEmailDoc(formValues.to, formValues.from, formValues.message).then(function(){
+      createSentEmailDoc(formValues.to, formValues.from, formValues.message, 'Stiwdio Agency: job application').then(function(){
         // when sent change message and graphic
         applicationSentConfirmation();
       });

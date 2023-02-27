@@ -29,12 +29,8 @@ exports.sendEmail = functions.firestore
         const mailOptions = {
             from: 'stiwdiofreelanceragency@gmail.com',
             to: snap.data().to,
-            subject: 'Stiwdio Agency message',
-            html: `<h3>Email from Stiwdio Agency</h3>
-                      <p>
-                          <b>Email from: </b>${snap.data().from}
-                          <br>${snap.data().message}
-                      </p>`
+            subject: snap.data().subject,
+            html: `${snap.data().message}`
         };
         //Returning result
         return transporter.sendMail(mailOptions, (error, data) => {

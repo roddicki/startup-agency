@@ -331,11 +331,12 @@ function createJobList(userData) {
   // add event listener for the send btn in modal
   const sendBtn = document.querySelector("#SendMailModal #send-email");
   sendBtn.addEventListener('click', function() {
-    prepSendEmail(emailList, selectedJob)
+    sendJobEmail(emailList, selectedJob)
   });
 }
 
-// find users
+
+// find users to send job emails to
 async function findUsers(data) {
   // find category for job
   let categories = data.categories;
@@ -366,6 +367,7 @@ async function findUsers(data) {
   return vals; 
 }
 
+
 // populate send email Modal
 function populateModal(valsArr, categories, jobTitle) {
   const modalBody = document.querySelector("#SendMailModal .modal-body .modal-text");
@@ -373,11 +375,11 @@ function populateModal(valsArr, categories, jobTitle) {
   sendMailBtn.removeAttribute('disabled');
   modalBody.innerHTML = "<h2>Job: "+jobTitle+"</h2>"
   if (valsArr == null) {
-    modalBody.innerHTML += "This Job has no categories so emails cannot be sent<br>";
+    modalBody.innerHTML += "This Job listing has no categories so emails cannot be sent, you can add categories by editing the job listing<br>";
     sendMailBtn.setAttribute('disabled', '');
     return;
   } 
-  modalBody.innerHTML += "This Job has Categories:<br>";
+  modalBody.innerHTML += "This Job listing has the categories:<br>";
   for (var i = 0; i < categories.length; i++) {
     modalBody.innerHTML += "<strong style='text-transform: capitalize;'>"+categories[i]+"</strong><br>";
   }
@@ -392,8 +394,43 @@ function populateModal(valsArr, categories, jobTitle) {
   }
 }
 
+// Create email alert for job
+function createJobAlertEmail(job, customMsg, user) {
+  console.log(job);
+  let thisDomain = window.location.hostname;
+  let cost = "";
+  let emailMsg = "";
+  let categories = "";
+  // doesn't work
+  let applicationdeadline = job.applicationdeadline.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"}); // doesn't work
+  const category = {"3d": "3D Design", "animation": "Computer Animation", "fashion":"Fashion", "graphics": "Graphic Design", "music": "Music and Sound", "performance": "Performance", "photography": "Photography", "video": "Video Production", "games": "Video Games", "vfx": "Visual Effects", "web": "Web Design / Development", "writing": "Writing and Copy"};
+  // budget or hourly
+  if(job.usebudget) {
+    cost = "Budget: £" +job.budget+ "<br>";
+  }
+  else if (job.usehourly) {
+    cost = "Budget (hourly rate): £" +job.hourlyrate+ " per hour<br>";
+  }
+  // add categories
+  for (var i = 0; i < job.categories.length; i++) {
+    if (i > 0) {
+      categories += " / "
+    }
+    categories += category[job.categories[i]];
+  }
+  emailMsg += "Dear "+user+ "<br>";
+  emailMsg += "<br>"+customMsg+"<br>";
+  emailMsg += "Good news!<br>The Stiwdio Agency has received the following job brief \""+job.title+"\" and you listed "+categories+" as one / some of your key skill/s.<br>";
+  emailMsg += cost;
+  emailMsg += "This job's location: " +job.location+ "<br><br>";
+  emailMsg += "<br>If you are interested, don't forget to submit your proposal before "+applicationdeadline.valueAsDate+" and read the full job description here <br><a href='https://"+thisDomain+ "/job-details.html?id=" +job.id+"'>https://"+thisDomain+ "/job-details.html?id=" +job.id+"</a><br>";
+
+  return emailMsg;
+}
+
+
 // compile list of names and emails to send with job info
-function prepSendEmail(users, job) {
+function sendJobEmail(users, job) {
   const sendMailBtn = document.querySelector("#SendMailModal #send-email");
   let thisDomain = window.location.hostname;
   // Remove all parameters from the URL
@@ -402,10 +439,11 @@ function prepSendEmail(users, job) {
   for (var i = 0; i < users.length; i++) {
     // send email if help modal validated
     const modalMsgText = document.querySelector("#SendMailModal .modal-body form #msg-text");
-    let message = "Initial email test from admin > Jobs<br>" +modalMsgText.value+ "<br>" +users[i].forename+ " " +users[i].surname+ "<br>" +job.title+ "<br>https://www."+thisDomain+ "/job-details.html?id=" +job.id;
+    let message = createJobAlertEmail(job, modalMsgText.value, users[i].forename+ " " +users[i].surname);
     console.log(message);
-    createSentEmailDoc(users[i].email, adminEmail, message).then(function(){
-      // when sent change message and graphic
+
+    createSentEmailDoc(users[i].email, adminEmail, message, 'Stiwdio Agency Job alert // rhybudd swydd asiantaeth Stiwdio').then(function(){
+      // when sent change message and btn
       console.log("Email sent");
       sendMailBtn.classList.remove('btn-primary');
       sendMailBtn.classList.add('btn-success');
