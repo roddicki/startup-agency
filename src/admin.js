@@ -372,7 +372,11 @@ async function findUsers(data) {
 function populateModal(valsArr, categories, jobTitle) {
   const modalBody = document.querySelector("#SendMailModal .modal-body .modal-text");
   const sendMailBtn = document.querySelector("#SendMailModal #send-email");
+  // reset send btn
   sendMailBtn.removeAttribute('disabled');
+  sendMailBtn.classList.remove('btn-success');
+  sendMailBtn.classList.add('btn-primary');
+  sendMailBtn.innerHTML = "Send";
   modalBody.innerHTML = "<h2>Job: "+jobTitle+"</h2>"
   if (valsArr == null) {
     modalBody.innerHTML += "This Job listing has no categories so emails cannot be sent, you can add categories by editing the job listing<br>";
@@ -394,42 +398,72 @@ function populateModal(valsArr, categories, jobTitle) {
   }
 }
 
-// Create email alert for job
+// Create text for job email alert to freelancers
 function createJobAlertEmail(job, customMsg, user) {
   console.log(job);
   let thisDomain = window.location.hostname;
-  let cost = "";
+  let costEng = "";
+  let costWelsh = "";
   let emailMsg = "";
   let categories = "";
-  // doesn't work
-  let applicationdeadline = job.applicationdeadline.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"}); // doesn't work
-  const category = {"3d": "3D Design", "animation": "Computer Animation", "fashion":"Fashion", "graphics": "Graphic Design", "music": "Music and Sound", "performance": "Performance", "photography": "Photography", "video": "Video Production", "games": "Video Games", "vfx": "Visual Effects", "web": "Web Design / Development", "writing": "Writing and Copy"};
-  // budget or hourly
-  if(job.usebudget) {
-    cost = "Budget: £" +job.budget+ "<br>";
-  }
-  else if (job.usehourly) {
-    cost = "Budget (hourly rate): £" +job.hourlyrate+ " per hour<br>";
-  }
+  let completionDateEng = "";
+  let completionDateWelsh = "";
+  const applicationdeadline = job.applicationdeadline.toDate().toDateString();
+  // categories array in separate file
+  const categoriesList = getCategories(); // from tags-categories.js
   // add categories
   for (var i = 0; i < job.categories.length; i++) {
     if (i > 0) {
       categories += " / "
     }
-    categories += category[job.categories[i]];
+    // compare job categories with list of all categories to get description of category
+    for (var j = 0; j < categoriesList.length; j++) {
+      if (job.categories[i] == categoriesList[j].category) {
+        categories += categoriesList[j].description;
+      }
+    }
   }
-  emailMsg += "Dear "+user+ "<br>";
-  emailMsg += "<br>"+customMsg+"<br>";
+  // budget or hourly
+  if (job.usehourly) {
+    costEng = "Budget (hourly rate): £" +job.hourlyrate+ " per hour<br>";
+    costWelsh = "Cyllideb (cyfradd yr awr): £" +job.hourlyrate+ " yr awr<br>";
+  }
+  else {
+    costEng = "Budget: £" +job.budget+ "<br>";
+    costWelsh = "Cyllideb: £" +job.budget+ "<br>";
+  }
+  // custom message
+  if (customMsg != "") {
+    customMsg = customMsg+"<br><br>";
+  }
+  // completion date/ duration
+  if (job.duration != "" && job.duration) {
+    completionDateEng = job.duration+ " days";
+    completionDateWelsh = job.duration+ " dyddiau";
+  }
+  else {
+    completionDateEng = job.deadline.toDate().toDateString();
+    completionDateWelsh = job.deadline.toDate().toDateString();
+  }
+  emailMsg += "Dear "+user+ "<br><br>";
+  emailMsg += customMsg;
   emailMsg += "Good news!<br>The Stiwdio Agency has received the following job brief \""+job.title+"\" and you listed "+categories+" as one / some of your key skill/s.<br>";
-  emailMsg += cost;
+  emailMsg += costEng;
+  emailMsg += "Timescale: " +completionDateEng+ "<br>";
   emailMsg += "This job's location: " +job.location+ "<br><br>";
-  emailMsg += "<br>If you are interested, don't forget to submit your proposal before "+applicationdeadline.valueAsDate+" and read the full job description here <br><a href='https://"+thisDomain+ "/job-details.html?id=" +job.id+"'>https://"+thisDomain+ "/job-details.html?id=" +job.id+"</a><br>";
+  emailMsg += "If you are interested, don't forget to submit your proposal before <b>"+applicationdeadline+"</b> and read the full job description here <br><a href='https://"+thisDomain+ "/job-details.html?id=" +job.id+"'>https://"+thisDomain+ "/job-details.html?id=" +job.id+"</a><br>";
+  emailMsg += "<br>//<br>";
+  emailMsg += "Newyddion da!<br>Mae Asiantaeth Stiwdio wedi derbyn teitl briffio \""+job.title+"\" ac fe wnaethoch chi restru "+categories+" fel rhai o'ch sgiliau allweddol.<br>";
+  emailMsg += costWelsh;
+  emailMsg += "Amserlen: " +completionDateWelsh+ "<br>";
+  emailMsg += "Lleoliad: " +job.location+ "<br><br>";
+  emailMsg += "Os oes gennych ddiddordeb, peidiwch ag anghofio cyflwyno eich cynnig cyn <b>"+applicationdeadline+"</b> yma, lle gallwch hefyd ddarllen y disgrifiad swydd llawn: <br><a href='https://"+thisDomain+ "/job-details.html?id=" +job.id+"'>https://"+thisDomain+ "/job-details.html?id=" +job.id+"</a><br>";
 
   return emailMsg;
 }
 
 
-// compile list of names and emails to send with job info
+// send email AND compile list of names  with job info
 function sendJobEmail(users, job) {
   const sendMailBtn = document.querySelector("#SendMailModal #send-email");
   let thisDomain = window.location.hostname;
@@ -440,8 +474,7 @@ function sendJobEmail(users, job) {
     // send email if help modal validated
     const modalMsgText = document.querySelector("#SendMailModal .modal-body form #msg-text");
     let message = createJobAlertEmail(job, modalMsgText.value, users[i].forename+ " " +users[i].surname);
-    console.log(message);
-
+    // send email
     createSentEmailDoc(users[i].email, adminEmail, message, 'Stiwdio Agency Job alert // rhybudd swydd asiantaeth Stiwdio').then(function(){
       // when sent change message and btn
       console.log("Email sent");

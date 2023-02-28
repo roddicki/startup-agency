@@ -2207,7 +2207,7 @@ if (signupForm) {
 if (page == "home") {
   console.log("home page");
   // populate page with profiles
-  getRandomDocs(8).then(function(docs){
+  getRandomDocs(12).then(function(docs){
     createGradPreview(docs);
   });
 

@@ -344,12 +344,18 @@ export async function getRandomDocs(n){
   // get all uids & data
   const querySnapshot = await getDocs(collection(db, "users"));
   querySnapshot.forEach((doc) => {
-    let obj = {}
-    obj.id = doc.id;
-    let merged = {...obj, ...doc.data()};
-    docs.push(merged);
-    //console.log(doc.data());
+    // add doc if approved
+    if (doc.data().approved) {
+      let obj = {}
+      obj.id = doc.id;
+      let merged = {...obj, ...doc.data()};
+      docs.push(merged);
+    }
   })
+  console.log("docs.length", docs.length)
+  if (docs.length < n) {
+    n = docs.length;
+  }
   // get n random docs
   const shuffled = docs.sort(() => 0.5 - Math.random());
   let selected = shuffled.slice(0, n);
