@@ -1,5 +1,5 @@
 
-import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, updateUserDoc, isUserSignedIn, getUserUid, getAllJobData, getAllCurrentJobData, getSingleJob, getAllUserData, resetPassword, getRandomDocs} from './firebase-library.js';
+import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, updateUserDoc, isUserSignedIn, getUserUid, getAllJobData, getAllCurrentJobData, getSingleJob, getAllUserData, resetPassword, getRandomDocs, createSentEmailDoc} from './firebase-library.js';
 
 import {getSkillsTags, getCategories} from './tags-categories.js';
 
@@ -72,7 +72,7 @@ async function getCurrentUserDetails(uid) {
 
 // SEND EMAIL FUNCTIONS
 // create doc to send email // this uses a a google cloud function to auto send a a mail onCreate() // see functions > index.js
-async function createSentEmailDoc(to, from, msg){
+/*async function createSentEmailDoc(to, from, msg){
   const modalHelp = new bootstrap.Modal(document.querySelector('#help'));
   const modalThankYou = new bootstrap.Modal(document.querySelector('#help-thank-you'));
   // add doc to collection
@@ -81,7 +81,7 @@ async function createSentEmailDoc(to, from, msg){
     from: from,
     message: msg
   })
-}
+}*/
 
 // get form values to send help email 
 function getHelpFormValues() {
@@ -108,7 +108,7 @@ function emailSentConfirmation() {
 
 // create graduate preview cards
 async function createGradPreview(docsArray) {
-  console.log(docsArray);
+  //console.log(docsArray);
   const container = document.querySelector('#grad-preview-container');
   // empty the container
   container.innerHTML = "";
@@ -123,17 +123,17 @@ async function createGradPreview(docsArray) {
  
   // create grad preview cards
   for (var i = 0; i < docsArray.length; i++) {
-    console.log(docsArray[i].id, docsArray[i].forename+' '+docsArray[i].surname);
+    //console.log(docsArray[i].id, docsArray[i].forename+' '+docsArray[i].surname);
     let location = "<p></p>";
     if (docsArray[i].location) {
-      location = '<p><img src="assets/img/mapicon.svg"> '+docsArray[i].location+'</p>';
+      location = '<p><img alt="map icon" src="assets/img/mapicon.svg"> '+docsArray[i].location+'</p>';
     }
     let available = '<p class="cant-work"><i class="bi bi-circle-fill"></i> Not available</p>';
     if (docsArray[i].available && docsArray[i].available == true){
       available = '<p class="can-work"><i class="bi bi-circle-fill"></i> Available for work</p>';
     }
     // create card
-    let previewCard = '<!-- grad preview card --> <div id="id-'+docsArray[i].id+'" class="grad-preview-card col col-md-6 col-sm-12"> <div class="grad-preview-block"> <div class="row"> <div class="col-xl-auto col-sm-4 col-4 padding-left-0"> <div style="width:85px; height:85px; background-size:cover; background-image:url(\'assets/img/generic-profile.jpg\');" class="rounded-circle profile-pic"> </div> </div> <div class="col-xl-auto col-sm-8 col-8 grad-preview"> <h5><Strong class="grad-preview-name">'+docsArray[i].forename+' '+docsArray[i].surname+'</Strong></h5> <h6>Fashion Designer</h6> '+location+available+' </div> </div> <div id="images-container" class="lineheightjob row mt-3">  </div> <div class="job-footer row"> <div class="col-12 padding-left-0"> <a href="profile.html?id='+docsArray[i].id+'">View more details</a> </div> </div> </div> </div> <!-- grad preview card -->';
+    let previewCard = '<!-- grad preview card --> <div id="id-'+docsArray[i].id+'" class="grad-preview-card col col-md-6 col-sm-12"> <div class="grad-preview-block"> <div class="row"> <div class="col-xl-auto col-sm-4 col-4 padding-left-0"> <div style="width:85px; height:85px; background-size:cover; background-image:url(\'assets/img/generic-profile.jpg\');" class="rounded-circle profile-pic"> </div> </div> <div class="col-xl-auto col-sm-8 col-8 grad-preview"> <h5><Strong class="grad-preview-name">'+docsArray[i].forename+' '+docsArray[i].surname+'</Strong></h5> <h6>'+docsArray[i].jobTitle+'</h6> '+location+available+' </div> </div> <div id="images-container" class="lineheightjob row mt-3">  </div> <div class="job-footer row"> <div class="col-12 padding-left-0"> <a href="profile.html?id='+docsArray[i].id+'">View / Contact me</a> </div> </div> </div> </div> <!-- grad preview card -->';
     // insert into page
     container.innerHTML += carouselLi + previewCard + carouselLiClose;
   }
@@ -179,7 +179,7 @@ async function createGradPreview(docsArray) {
               .then(function(url) {
                 //console.log(url);
                 // add to card as col + image
-                projectPicContainer.innerHTML += '<div class="col grad-preview-images-container"> <img class="grad-preview-images" src="'+url+'">';
+                projectPicContainer.innerHTML += '<div class="col grad-preview-images-container"> <img alt="graduate artwork" class="grad-preview-images" src="'+url+'">';
               });
           }
         }
@@ -229,6 +229,7 @@ function setCategoryParams() {
   // check category check sub categories 
   const categoryCheckboxes = document.querySelectorAll('#filters input.category');
   let currentUrl = new URL(window.location); 
+  currentUrl.searchParams.delete('searchField'); // delete search param
   for (var i = 0; i < categoryCheckboxes.length; i++) {
     if (categoryCheckboxes[i].type === 'checkbox') {
       categoryCheckboxes[i].onclick = function(e) {
@@ -267,6 +268,7 @@ function setTagParams() {
     if (checkboxes[i].type === 'checkbox') {
       checkboxes[i].onclick = function(e) {
         let currentUrl = new URL(window.location); 
+        currentUrl.searchParams.delete('searchField'); // delete search param
         if (this.checked && this.dataset.skills != undefined) {
           // if a category
           currentUrl.searchParams.append(this.dataset.skills, 'tag');
@@ -358,6 +360,7 @@ function paramsExist() {
 // query / filter users by tag
 async function filterUsers(allParams) {
   //console.log("\nFiltered docs");
+  //console.log("allParams", allParams);
   let tags = [];
   let docs = [];
   let docIds = [];
@@ -368,8 +371,9 @@ async function filterUsers(allParams) {
       tags.push(allParams[i].tag);
     }
   }
+  console.log(tags);
   // while tags array is not empty
-  while (tags.length > 1) {
+  while (tags.length > 0) {
     // create tag sub array / batch of 10
     let tagsBatch = [];
     let n = 10; // get batches of 10 tags
@@ -384,7 +388,7 @@ async function filterUsers(allParams) {
     const q = query(collection(db, "users"), where('tags', 'array-contains-any', tagsBatch));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      // doc has not already been added to array of docs
+      // doc has not already been added to array of docs and is approved
       const notInArr = !docIds.includes(doc.id);
       if (notInArr) {
         docIds.push(doc.id);
@@ -393,10 +397,10 @@ async function filterUsers(allParams) {
         obj.id = doc.id;
         let merged = {...obj, ...doc.data()};
         docs.push(merged);
-        console.log(doc.data().forename, " => ", doc.id);
       }
     });
   }
+  //console.log("filterUsers - docs results", docs);
   return docs;
 } 
 
@@ -408,7 +412,6 @@ function setFolioNum(docs) {
 
 // return the docs to display accroding to the 'page='' param
 function getDocsBatch(itemsPerPage, page, docs) {
-  //console.log("itemsPerPage =",itemsPerPage, "| page =",page, "| docs.length =",docs.length);
   // get initial start and end items 
   let start = 0;
   let end;
@@ -427,36 +430,97 @@ function getDocsBatch(itemsPerPage, page, docs) {
       end = docs.length; 
     }
   }
-  console.log(docs.slice(start, end));
+  //console.log(docs.slice(start, end));
   return(docs.slice(start, end));
 }
 
-// search keyword
-async function searchKeyword(e) {
-  e.preventDefault();
+// filter out users not approved 
+function filterApproved(allDocs) {
+  let docs = [];
+  for (var i = 0; i < allDocs.length; i++) {
+    if (allDocs[i].approved) {
+      docs.push(allDocs[i])
+    }
+  }
+  return docs;
+}
+
+// if no filter or search results
+function ifNoResults(docs) {
+  //console.log("ifNoResults", docs.length);
+  if (docs.length == 0) {
+    // inject message
+    const container = document.querySelector('#grad-preview-container');
+    container.innerHTML = '<h2 class="text-center pt-5">It looks like there were no results...</h2><p class="text-center">Try a different filter or search term:<br>Search terms are best as a single keyword, like "Fashion" or "Smith".</p>';
+  }
+}
+
+
+// get search term from form
+function getSearchTerm() {
   const searchForm = document.querySelector('#search');
-  console.log(search.searchField.value);
-  let searchTerm = search.searchField.value;
-  // create query
+  let searchTerm = search.searchField.value.trim();
+  return searchTerm;
+}
+
+// uncheck all Filters / check boxes and amend params
+function uncheckAllFilters() {
+  const allCheckboxes = document.querySelectorAll('#filters input');
+  for (var i = 0; i < allCheckboxes.length; i++) {
+    allCheckboxes[i].checked = false;
+  }
+  // delete all params then re add bar page and search
+  //let page = getParamKey("page");
+  let thisUrl = window.location.href;
+  // Remove all parameters from the URL
+  let amendedUrl = new URL(thisUrl.split('?')[0]);
+  //if (page) {amendedUrl.searchParams.append("page", page)}
+  window.history.pushState({}, '', amendedUrl);
+}
+
+// search keyword
+async function searchKeyword(allDocs, searchStr) {
+  searchStr = searchStr.trim();
+  let searchArr = searchStr.split(' ');
   let docs = [];
   let docIds = [];
-  const queryOne = query(collection(db, "users"), where('tags', 'array-contains-any', ['graphics-brand-design', 'graphics-concept-art', 'graphics-illustration','graphics-logo-design']));
-  //const queryOne = query(collection(db, "users"), where('tags', 'array-contains', searchTerm));
-  const querySnapshot = await getDocs(queryOne);
-  querySnapshot.forEach((doc) => {
-    console.log(doc.data().forename, " => ", doc.id);
-    // doc has not already been added to array of docs
-    /*const notInArr = !docIds.includes(doc.id);
-    if (notInArr) {
-      docIds.push(doc.id);
-      // add dod.id to doc & push to docs array
-      let obj = {}
-      obj.id = doc.id;
-      let merged = {...obj, ...doc.data()};
-      docs.push(merged);
-      console.log(doc.data().forename, " => ", doc.id);
-    }*/
-  });
+  let searchTerm
+  let currentUrl = new URL(window.location);
+  // loop through each word of the search terms
+  for (var j = 0; j < searchArr.length; j++) {
+    searchTerm = searchArr[j].trim();
+    searchTerm = searchTerm.toLowerCase();
+    // test all fields of all user docs for searchTerm
+    for (var i = 0; i < allDocs.length; i++) {
+      let isMatched = false;
+      for (const [key, value] of Object.entries(allDocs[i])) {
+        // test any value that is in string form
+        if (typeof value === 'string') {
+          let searchStr = value.toLowerCase();
+          isMatched = searchStr.includes(searchTerm);
+        }
+        // test any value that is an array (categories etc)
+        else if (Array.isArray(value)) {
+          isMatched = value.includes(searchTerm);
+        }
+        // found add to results array docs
+        if (isMatched) {
+          const notInArr = !docIds.includes(allDocs[i].id);
+          // if not already added to results (docIds) and approved
+          if (notInArr && allDocs[i].approved) {
+            docIds.push(allDocs[i].id);
+            docs.push(allDocs[i]);
+          }
+        }
+      }
+    }
+  }
+  // manage the parameters
+  // delete search params then re add 
+  currentUrl.searchParams.delete("searchField");
+  currentUrl.searchParams.append("searchField", searchStr);
+  window.history.pushState({}, '', currentUrl);
+  return docs;
 }
 
 
@@ -505,7 +569,6 @@ function createJobDoc() {
     const thankYou = document.querySelector("#thankYouModal");
     thankYou.innerHTML = "Thank you for your submission!";
     const spinner = document.querySelector(".submitting-spinner");
-    console.log(spinner);
     spinner.style.display = "none";
     const thankYouTick = document.querySelector(".thank-you-tick");
     thankYouTick.style.display = "inline";
@@ -686,88 +749,6 @@ function confirmDeletion(){
 }
 
 
-// upload image - argument is an object - {upload url : blob url}
-// inserts a reference to the uploaded image/s into the logged in users profile
-/*async function uploadImage(urls) {
-  // update user data with image urls
-  let docRef = doc(db, 'users', currentUserData.uid);
-  // delete image urls from user profile
-  updateDoc(docRef, {
-    images: []
-  })
-  .then(function () {
-    console.log("deleted image references");
-  })
-
-  for (var i = 0; i < urls.length; i++) {
-    console.log(urls[i]);
-    let uploadUrl = urls[i].url;
-    let newImageRef = {};
-    newImageRef.url = uploadUrl;
-    newImageRef.hero = urls[i].hero;
-    newImageRef.caption = urls[i].caption;
-    console.log(newImageRef);
-    // upload new blob image & upload reference
-    if (urls[i].sourceUrl.includes('blob')) {
-      let blobUrl = urls[i].sourceUrl;
-      console.log(blobUrl);
-      let blob = await fetch(blobUrl).then(response => response.blob());
-      // upload
-      const storageRef = ref(storage, uploadUrl);
-      // upload file - 'blob' comes from the Blob or File API
-      uploadBytes(storageRef, blob).then(function(snapshot) {
-        console.log('Uploaded image blob file!');
-        
-        // update user profile with image urls
-        updateDoc(docRef, {
-          images: arrayUnion(newImageRef)
-        })
-        .then(function () {
-          console.log("added new image reference to user profile");
-        })
-      });
-    }
-    // existing imgae - upload reference only
-    else {
-      // update user profile with image urls
-      updateDoc(docRef, {
-        images: arrayUnion(newImageRef)
-      })
-      .then(function () {
-        console.log("added existing image reference to user profile");
-      })
-    }
-  }
-
-}*/
-
-
-// add to profile 
-/*function addToProfile(e, tags) {
-  e.preventDefault()
-  const profileForm = document.querySelector('.add-profile');
-  let bio = profileForm.bio.value.replace(/\n\r?/g, '<br>');
-  let docRef = doc(db, 'users', currentUserData.uid);
-  //console.log(tags, bio);
-
-  updateDoc(docRef, {
-    bio: bio,
-    website: profileForm.website.value,
-    tags: tags,
-    profileCreatedAt: serverTimestamp(),
-    profileApproved: false
-  })
-  .then(function(){
-    console.log("successfully added bio and tags to profile");
-    // go to profile on completion
-    //window.location.href = "index.html";
-  });
-}*/
-
-
-
-
-
 //===========================================
 //===========================================
 //===========DOM FUNCTIONS===================
@@ -794,6 +775,11 @@ function getParam() {
       //console.log(`${key}:${value}`);
       return value; // only works with one param at the mo
   }
+}
+
+function deleteParam(key) {
+  const urlParams = new URLSearchParams(location.search);
+  urlParams.delete(key)
 }
 
 // ======SHOW JOB FUNCTIONS======
@@ -865,10 +851,10 @@ function displayAllJobs (itemsPerPage, page, jobCollection) {
       jobDetails.className = "lineheightjob";
 
       let cost;
-      if(jobCollection[i].budget != null) {
+      if(jobCollection[i].budget != "") {
         cost = "£"+jobCollection[i].budget;
       } 
-      else if(jobCollection[i].hourlyrate != null){
+      else if(jobCollection[i].hourlyrate != ""){
         cost = jobCollection[i].hourlyrate + " p/h";
       }
       let budget = document.createElement("p");
@@ -883,12 +869,14 @@ function displayAllJobs (itemsPerPage, page, jobCollection) {
       location.innerHTML = "<i class='fa-solid fa-location-dot'></i>  Location: <strong>"+jobCollection[i].location+"</strong>";
       
       let completionVal;
-      if(jobCollection[i].deadline != null){
-        let completionDate = new Date(jobCollection[i].deadline.seconds*1000);
-        completionVal = completionDate.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"});
-      } else if(jobCollection[i].duration != null){
+      if(jobCollection[i].duration != ""){
         completionVal = jobCollection[i].duration + " days";
       }
+      else if(jobCollection[i].deadline != ""){
+        let completionDate = new Date(jobCollection[i].deadline.seconds*1000);
+        completionVal = completionDate.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"});
+      } 
+
       let completion = document.createElement("p");
       completion.innerHTML = "<i class='fa-solid fa-arrow-trend-up'></i>  Completion: <strong>"+completionVal+"</strong>";
 
@@ -1035,10 +1023,10 @@ function displaySingleJob(jobData) {
 
   let jobDetails = document.querySelector(".quickjobspec");
   let cost;
-  if(jobData.budget != null) {
+  if(jobData.budget != "") {
     cost = "£"+jobData.budget;
   } 
-  else if(jobData.hourlyrate != null){
+  else if(jobData.hourlyrate != ""){
     cost = jobData.hourlyrate + " p/h";
   }
   let budget = document.createElement("p");
@@ -1053,12 +1041,14 @@ function displaySingleJob(jobData) {
   location.innerHTML = "<i class='fa-solid fa-location-dot'></i>  Location: <strong>"+jobData.location+"</strong>";
   
   let completionVal;
-  if(jobData.deadline != null){
-    let completionDate = new Date(jobData.deadline.seconds*1000);
-    completionVal = completionDate.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"});
-  } else if(jobData.duration != null){
+  if(jobData.duration != ""){
     completionVal = jobData.duration + " days";
   }
+  else if(jobData.deadline != ""){
+    let completionDate = new Date(jobData.deadline.seconds*1000);
+    completionVal = completionDate.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"});
+  } 
+
   let completion = document.createElement("p");
   completion.innerHTML = "<i class='fa-solid fa-arrow-trend-up'></i>  Completion: <strong>"+completionVal+"</strong>";
 
@@ -1081,7 +1071,7 @@ function displaySingleJob(jobData) {
     console.log(categoryObj);
     let tagBtn = document.createElement("span");
     tagBtn.setAttribute("style", "text-transform: capitalize;cursor: default;");
-    tagBtn.className = "btn btn-primary filtertag";
+    tagBtn.className = "filter-tag-profile text-capitalize";
     tagBtn.name = category;
     //tagBtn.href = "#";
     tagBtn.innerHTML = categoryObj.description;
@@ -1689,13 +1679,14 @@ function populateProjectShowcases(vals) {
     // add html
     showcaseTotal ++;
     let description = '';
-    if (value.description != "") {description = '<p>'+value.description+'</p>'}
+    if (value.description != "") {description = '<p id="'+key+'-description">'+value.description+'</p>'}
     let link = '';
     if (value.link != "") {link = '<p><a class="underline" href="'+value.link+'" target="_blank">'+value.link+'</a></p>'}
     /*let valueStr = JSON.stringify(value);
     console.log(valueStr);*/
-
-    let showcaseComponent = '<!--start of project showcase--> <div class="col-lg-6 col-md-12 mt-4"> <div class="port-block"> <div id="'+key+'-hero-img" class="row"> <!-- inject hero col and image --> </div><div id="'+key+'-thumbs" class="row d-flex justify-content-evenly"> <!-- inject thumbs --> </div> <div class="row"> <div class="col-10 mt-4"> <h2><strong>'+value.name+'</strong></h2> </div> <div class="col-2 mt-4"> <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> <i class="bi bi-pencil-square cursor-pointer edit-size" height="16px"> </i> </button> <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"> <li> <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editProject" data-id="'+key+'" onclick="populateProjectModal(\''+key+'\',\''+value.name+'\',\''+value.link+'\',\''+value.description+'\')" href="#">Edit Project </a> </li> <li> <hr class="dropdown-divider"> </li> <li> <a class="dropdown-item text-danger" data-id="'+key+'" href="#" data-bs-toggle="modal" data-bs-target="#deleteShowcase" onclick="populateDeleteModal(\''+key+'\')">Delete Project </a> </li> </ul> </div> </div> <div class="row"> <div class="col-12">'+description+link+'</div> </div> </div> </div> <!--end of project showcase--> ';
+    let projectName = value.name;
+    console.log(projectName);
+    let showcaseComponent = '<!--start of project showcase--> <div class="col-lg-6 col-md-12 mt-4"> <div class="port-block"> <div id="'+key+'-hero-img" class="row"> <!-- inject hero col and image --> </div><div id="'+key+'-thumbs" class="row d-flex justify-content-evenly"> <!-- inject thumbs --> </div> <div class="row"> <div class="col-10 mt-4"> <h2><strong id="'+key+'-name">'+value.name+'</strong></h2> </div> <div class="col-2 mt-4"> <button class="dropdown-edit float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> <i class="bi bi-pencil-square cursor-pointer edit-size" height="16px"> </i> </button> <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"> <li> <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editProject" data-id="'+key+'" onclick="populateProjectModal(\''+key+'\',\''+value.link+'\')" href="#">Edit Project </a> </li> <li> <hr class="dropdown-divider"> </li> <li> <a class="dropdown-item text-danger" data-id="'+key+'" href="#" data-bs-toggle="modal" data-bs-target="#deleteShowcase" onclick="populateDeleteModal(\''+key+'\')">Delete Project </a> </li> </ul> </div> </div> <div class="row"> <div class="col-12">'+description+link+'</div> </div> </div> </div> <!--end of project showcase--> ';
     // add showcase
     showcaseContainer.innerHTML += showcaseComponent;    
     // get and add images
@@ -1709,9 +1700,9 @@ function populateProjectShowcases(vals) {
       getDownloadURL(storageRef)
         .then(function(url) {
           // add thumbnail
-          document.querySelector('#'+key+'-thumbs').innerHTML += '<div class="col-4 mt-4 d-flex align-items-center port-edit-img"> <img class="rounded-3 img-fluid" onclick="swapHeroImg(this, \'hero-'+key+'\')" src="'+url+'" data-imgurl="'+imgUrl+'"> </div>';
+          document.querySelector('#'+key+'-thumbs').innerHTML += '<div class="col-4 mt-4 d-flex align-items-center port-edit-img"> <img alt="graduate artwork" class="rounded-3 img-fluid" onclick="swapHeroImg(this, \'hero-'+key+'\')" src="'+url+'" data-imgurl="'+imgUrl+'"> </div>';
           // add hero
-          document.querySelector('#'+key+'-hero-img').innerHTML = '<div class="col-12"> <img class="port-edit-img-main" id="hero-'+key+'" src="'+url+'"> </div> ';
+          document.querySelector('#'+key+'-hero-img').innerHTML = '<div class="col-12"> <img alt="graduate artwork" class="port-edit-img-main" id="hero-'+key+'" src="'+url+'"> </div> ';
           
         })
         .catch(function(err){
@@ -1763,9 +1754,13 @@ async function updateProjectShowcase(uid, imageUrls){
   if (! projectForm.projectId.value) {
     projectId = randomStr;
   }
-  projectDetails.name = projectForm.projectName.value;
+  let projectName = projectForm.projectName.value;
+  projectName = projectName.replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+  projectDetails.name = projectName;
   projectDetails.link = projectForm.projectLink.value;
-  projectDetails.description = projectForm.projectDescription.value;
+  let projectDescription = projectForm.projectDescription.value;
+  projectDescription = projectDescription.replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+  projectDetails.description = projectDescription;
   projectDetails.images = imageUrls;
   project[projectId] = projectDetails;
   // update doc
@@ -1807,139 +1802,6 @@ function getPreloadedImgs(){
   return preloadedImgUrls;
 }
 
-
-// OLD
-// watch for new uploaded images add edit caption icon
-/*function uploadImageWatcher(){
-  const captionImg = document.querySelector('#caption-image');
-  // add edit icon to each new upload image
-  const observer = new MutationObserver(function(mutations_list) {
-    mutations_list.forEach(function(mutation) {
-      mutation.addedNodes.forEach(function(added_node) {
-        if(added_node.className == 'uploaded-image') {
-          let randStr = Math.random().toString(36).substr(2, 5);
-          // create hidden input to store caption
-          let captionInput = document.createElement('input');
-          captionInput.type = 'hidden';
-          captionInput.className = 'form-control caption-text';
-          captionInput.name = 'caption-'+randStr;
-          added_node.appendChild(captionInput);
-
-          // create hidden input to stor hero image
-          let heroInput = document.createElement('input');
-          heroInput.type = 'hidden';
-          heroInput.className = 'form-control hero-image';
-          heroInput.name = 'hero-'+randStr;
-          added_node.appendChild(heroInput);
-
-          let btn = document.createElement('button');
-          btn.className = 'edit-image';
-          btn.onclick = function(e) {
-            e.preventDefault();
-            captionImg.src = this.parentElement.querySelector('img').src;
-            document.querySelector('#captionModal #caption').value = captionInput.value;
-            document.querySelector('#captionModal #caption').name = 'caption-'+randStr;
-            if (heroInput.value == 'true') {
-              document.querySelector('#captionModal #hero-image-switch').checked = true;
-            } else {
-              document.querySelector('#captionModal #hero-image-switch').checked = false;
-            }
-            //document.querySelector('#captionModal #hero-image-switch').value = heroInput.value;
-            document.querySelector('#captionModal #hero-image-switch').name = 'hero-'+randStr;
-            $("#captionModal").modal("show");
-          }
-
-          let icon = document.createElement('i');
-          icon.className = 'material-icons';
-          icon.innerHTML = 'edit';
-          btn.appendChild(icon);
-          added_node.appendChild(btn);
-
-          console.log('#child has been added');
-          //observer.disconnect();
-        }
-      });
-    });
-  });
-
-  observer.observe(document.querySelector("#image-uploader"), { subtree: true, childList: true });
-}*/
-
-// OLD
-// save edited caption from caption modal to hidden input for upload image
-/*function saveCaption(e) {
-	e.preventDefault();
-	// copy value from caption modal input to hidden imput
-	const captionModalInput = document.querySelector('#captionModal #caption');
-	const hiddenInputName = captionModalInput.name;
-	const hiddenInput = document.querySelector('.add-profile [name="'+hiddenInputName+'"]');
-	hiddenInput.value = captionModalInput.value;
-	// close modal
-	$("#captionModal").modal("hide");	
-}*/
-
-// save edited hero switch from caption modal to hidden input for upload image
-/*function saveHero(e) {
-  e.preventDefault();
-  // copy switch value from caption modal input to hidden imput
-  const heroModalSwitch = document.querySelector('#captionModal #hero-image-switch');
-  const hiddenInputName = heroModalSwitch.name;
-  const hiddenInput = document.querySelector('.add-profile [name="'+hiddenInputName+'"]');
-  hiddenInput.value = heroModalSwitch.checked;
-  // if checked is true set all others to not checked / false
-  console.log(hiddenInputName, hiddenInput.value);
-  if (heroModalSwitch.checked == true) {
-    const div = document.querySelectorAll('.uploaded-image');
-    for (var i = 0; i < div.length; i++) {
-      if (div[i].querySelector('.hero-image').name != hiddenInputName) {
-        div[i].querySelector('.hero-image').value = 'false';
-      }
-    }
-  }
-}*/
-
-// OLD
-/*// show profile preview
-function showPreview(selectedTags){
-  const profileForm = document.querySelector('.add-profile');
-  const gallery = document.querySelector('.gallery');
-  const bio = document.querySelector('.bio');
-  const link = document.querySelector('.link');
-  const userData = document.querySelector('.user-data');
-  const tags = document.querySelector('.selected-tags');
-  const imageDivs = document.querySelectorAll('.uploaded-image');
-  gallery.innerHTML = "";
-
-  for (var i = 0; i < imageDivs.length; i++) {
-    let image = document.createElement('img');
-    image.src = imageDivs[i].querySelector('img').src;
-    image.className = 'img-fluid';
-    image.style = 'width:25%;padding:10px;';
-    
-    gallery.appendChild(image);
-  }
-
-  for (var i = 0; i < selectedTags.length; i++) {
-    // create tag
-    let badge = document.createElement("span");
-    //badge.href = "#";
-    badge.className = "badge rounded-pill bg-secondary";
-    badge.style = "margin: 3px;"
-    badge.innerHTML = selectedTags[i].replaceAll("-", ' ');
-
-    tags.appendChild(badge);
-  }
-
-  bio.innerHTML = profileForm.bio.value.replace(/\n\r?/g, '<br>');
-  link.innerHTML = profileForm.website.value;
-  let data = "";
-  for (const property in currentUserData) {
-    data += `${property}: ${currentUserData[property]}<br>`
-  }
-  userData.innerHTML = data;
-}*/
-
-
 // get upload image portrait url - return an object with all the new upload image urls
 function getProfileImageUrl(){
   const imageDiv = document.querySelector('#edit-details #display-image');
@@ -1948,218 +1810,6 @@ function getProfileImageUrl(){
   return url; 
 }
 
-
-// old check if needed before delete
-// get upload image urls - return an object with all the new upload image urls
-/*async function getImageUrls(e){
-  e.preventDefault();
-  const suffix = {'image/jpeg':'jpg', 'image/png':'png', 'image/gif':'gif'};
-  // all upload images
-  const imageDivs = document.querySelectorAll('.uploaded-image');
-  let images = [];
-  let uploadUrl = "";
-
-  for (var i = 0; i < imageDivs.length; i++) {
-    let img = {};
-    let caption = imageDivs[i].querySelector('.caption-text').value;
-    img.caption = caption;
-    let hero = imageDivs[i].querySelector('.hero-image').value;
-    img.hero = hero;
-
-    let url = imageDivs[i].querySelector('img').src;
-    // if http - existing - images
-    if (url.includes('https://firebasestorage.googleapis.com')) {
-    	uploadUrl = url.split('/o/').pop().split('?')[0];
-    	uploadUrl = uploadUrl.replace(/%2F/g, "/")
-    	//images[uploadUrl] = url;
-      img.url = uploadUrl;
-      img.sourceUrl = url;
-      images.push(img);
-    }
-    // blob url
-    else {
-	    let blob = await fetch(url).then(response => response.blob());
-	    // get blob filename suffix
-	    let fileSuffix = suffix[blob.type];
-	    let randStr = Math.random().toString(36).substr(2, 5);
-	    uploadUrl = "images/"+currentUserData.uid+ "/img-" + randStr + "." + fileSuffix;
-    	//images[uploadUrl] = url;
-      img.url = uploadUrl;
-      img.sourceUrl = url;
-      images.push(img);
-    }
-    
-  }
-  //console.log(images);
-  return images; 
-}*/
-
-// OLD
-// show all existing profile data in form fields
-/*function showProfileData(userData) {
-  console.log("show user data", userData.tags);
-  const welcomeMsg = document.querySelector('.welcome-msg');
-  const profileForm = document.querySelector('.add-profile');
-  welcomeMsg.innerHTML = "edit your profile";
-  profileForm.website.value = userData.website;
-  profileForm.bio.value = userData.bio.replace(/<br>/gi, '\n');
-  profileForm.bio.style.height = profileForm.bio.scrollHeight+3+'px';
-
-  const tagList = document.querySelector('#tag-list');
-  // check check box tags
-  const checkboxes = document.querySelectorAll('.form-check-input.tag');
-  for (var i = 0; i < checkboxes.length; i++) {
-    if (userData.tags.includes(checkboxes[i].value)) {
-      checkboxes[i].checked = true; // check checkbox
-      // add badge
-      let badge = document.createElement("span");
-      //badge.href = "#";
-      badge.className = "badge rounded-pill bg-secondary";
-      badge.style = "margin: 3px;"
-      badge.dataset.label = checkboxes[i].value;
-      badge.innerHTML = checkboxes[i].value.replaceAll("-", ' ');
-      tagList.appendChild(badge);
-    }
-    
-  }
-
-  // if images exist get url and show
-  if (userData.images) {
-    const uploadedDiv = document.querySelector('.existing-images');
-    const imageUploaderDiv = document.querySelector('.image-uploader');
-    //imageUploaderDiv.classList.add("has-files");
-    // show images
-    for (var i = 0; i < userData.images.length; i++) {
-      let uploadedImageDiv = document.createElement('div');
-      uploadedImageDiv.className = 'uploaded-image image-'+i;
-      uploadedImageDiv.dataset.index = i;
-      //uploadedImageDiv.style.zIndex = '100';
-
-      // create random string
-      let randStr = Math.random().toString(36).substr(2, 5);
-      // create hidden input to store caption
-      let captionInput = document.createElement('input');
-      captionInput.type = 'hidden';
-      captionInput.className = 'form-control caption-text';
-      captionInput.name = 'caption-'+randStr;
-      captionInput.value = userData.images[i].caption;
-      uploadedImageDiv.appendChild(captionInput);
-
-      // create hidden input to stor hero image
-      let heroInput = document.createElement('input');
-      heroInput.type = 'hidden';
-      heroInput.className = 'form-control hero-image';
-      heroInput.name = 'hero-'+randStr;
-      heroInput.value = userData.images[i].hero;
-      uploadedImageDiv.appendChild(heroInput);
-
-
-      // create delete image btn & icon
-      let btn = document.createElement('button');
-      btn.className = 'delete-image';
-      btn.onclick = function(e) {
-        e.preventDefault();
-        this.parentElement.remove();
-      }
-
-      let icon = document.createElement('i');
-      icon.className = 'material-icons';
-      icon.innerHTML = 'clear';
-      btn.appendChild(icon);
-
-      // create edit caption btn & icon
-      let editBtn = document.createElement('button');
-      editBtn.className = 'edit-image';
-      editBtn.onclick = function(e) {
-        e.preventDefault();
-        // populate modal with existing image, caption and hero bool
-        const captionImg = document.querySelector('#caption-image');
-        captionImg.src = this.parentElement.querySelector('img').src;
-        document.querySelector('#captionModal #caption').value = captionInput.value;
-        document.querySelector('#captionModal #caption').name = 'caption-'+randStr;
-        //console.log('hero-'+randStr+' : '+heroInput.value);
-        if (heroInput.value === 'true') {
-          document.querySelector('#captionModal #hero-image-switch').checked = true;
-        } else {
-          document.querySelector('#captionModal #hero-image-switch').checked = false;
-        }
-        document.querySelector('#captionModal #hero-image-switch').name = 'hero-'+randStr;
-        $("#captionModal").modal("show");
-      }
-
-      let editIcon = document.createElement('i');
-      editIcon.className = 'material-icons';
-      editIcon.innerHTML = 'edit';
-      editBtn.appendChild(editIcon);
-
-      // get image
-      getDownloadURL(ref(storage, userData.images[i].url))
-        .then((url) => {
-          let imageTag = document.createElement('img');
-          imageTag.src = url;
-          uploadedImageDiv.appendChild(imageTag);
-          uploadedImageDiv.appendChild(btn);
-          uploadedImageDiv.appendChild(editBtn);
-          uploadedDiv.appendChild(uploadedImageDiv);
-        })
-    }
-  }
-}*/
-
-
-
-
-// show profile 
-/*function showProfile(userData) {
-  console.log(userData);
-  const forename = document.querySelector('.single-profile .forename');
-  const surname = document.querySelector('.single-profile .surname');
-  const bio = document.querySelector('.single-profile .bio');
-  const tagList = document.querySelector('.single-profile .tags');
-  const website = document.querySelector('.single-profile .website');
-  const course = document.querySelector('.single-profile .course');
-  const gallery = document.querySelector('.single-profile .gallery');
-
-  forename.innerHTML = userData.forename;
-  surname.innerHTML = userData.surname;
-  bio.innerHTML = userData.bio;
-  course.innerHTML = userData.course;
-  website.innerHTML = userData.website;
-
-  // if tags exist create badges
-  if (userData.tags) {
-    // create tag badges
-    for (var i = 0; i < userData.tags.length; i++) {
-      // create tag
-      let badge = document.createElement("span");
-      //badge.href = "#";
-      badge.className = "badge rounded-pill bg-secondary";
-      badge.style = "margin: 3px;"
-      badge.dataset.label = userData.tags[i];
-      badge.innerHTML = userData.tags[i].replaceAll("-", ' ');
-      tagList.appendChild(badge);
-    }
-  }
-
-  // if images exist get url and show
-  if (userData.images) {
-    // show images
-    for (var i = 0; i < userData.images.length; i++) {
-      // caption
-      let caption = userData.images[i].caption;
-      // get image
-      getDownloadURL(ref(storage, userData.images[i].url))
-        .then((url) => {
-          let imageTag = document.createElement('img');
-          imageTag.src = url;
-          gallery.appendChild(imageTag);
-          let captionTag = document.createElement('span');
-          captionTag.innerHTML = "caption: " + caption;
-          gallery.appendChild(captionTag);
-        })
-    }
-  }
-}*/
 
 // ======PROFILE FUNCTIONS======
 
@@ -2191,7 +1841,7 @@ function showEditBtn (userID, paramID) {
 // using https://splidejs.com/
 function populateShowcasesNav(vals) {
   // exit if no project showcases
-  if (vals.projects == null) {
+  if (vals.projects == null || Object.keys(vals.projects).length === 0) {
     return;
   }
   const showcaseNavContainer = document.querySelector('#project-showcase-nav');
@@ -2233,9 +1883,9 @@ function populateShowcasesNav(vals) {
 async function populateShowcases(vals) {
   const showcaseContainer = document.querySelector('#project-showcase');
   // exit if no project showcases
-  if (vals.projects == null) {
+  if (vals.projects == null || Object.keys(vals.projects).length === 0) {
     // if no projects add no showcase projects placeholder image
-    showcaseContainer.innerHTML = '<div class="text-center"><img class="img-fluid" alt="No showcase projects to show" src="https://via.placeholder.com/600x600/e9ecef?text=No+project+showcase+placeholder"></div>';
+    showcaseContainer.innerHTML = '<div class="text-center"><img class="img-fluid" alt="No showcase projects to show" src="assets/img/no-projects-placeholder.svg"><h2 class="pt-5">Whoops!!</h2><p>No projects to showcase yet!<br>Stay tuned!!</p></div>';
     return;
   }
   let index = 0;
@@ -2352,79 +2002,6 @@ function messageSentConfirmation(vals) {
 }
 
 
-// ======POST JOB FUNCTIONS======
-// create tag checkboxes
-/*function createTagCheckboxes() {
-  let checkboxContainer = document.querySelector("#tag-checkboxes");
-  for (var i = 0; i < tags.length; i++) {
-    let str = tags[i].replaceAll("-", ' ');
-    let val = tags[i].toLowerCase();
-    let div = document.createElement("div");
-    div.className = "form-check";
-
-    let checkbox = document.createElement("input");
-    checkbox.className = "form-check-input tag";
-    checkbox.type = "checkbox";
-    checkbox.value = val;
-    checkbox.dataset.label = tags[i];
-    checkbox.name = "tag"+tags[i];
-    checkbox.id = "tag"+tags[i];
-    checkbox.onchange = addTagBadge;
-
-    let label = document.createElement("label");
-    label.className = "form-check-label";
-    label.for = "tag"+tags[i];
-    label.innerHTML = str;
-
-    div.appendChild(checkbox);
-    div.appendChild(label);
-
-    checkboxContainer.appendChild(div);
-  }
-}*/
-
-
-// add tag badge on change
-/*function addTagBadge(){
-  const tagList = document.querySelector('#tag-list');
-  let name = this.dataset.label;
-  let checkbox = document.querySelector("input[data-label='"+name+"']");
-  let badge;
-  if (!checkbox.checked) {
-    // remove tag
-    badge = document.querySelector("span[data-label='"+name+"']");
-    if (badge) {
-      badge.remove();
-    }
-  }
-  else {
-    // create tag
-    badge = document.createElement("span");
-    //badge.href = "#";
-    badge.className = "badge rounded-pill bg-secondary";
-    badge.style = "margin: 3px;"
-    badge.dataset.label = name;
-    badge.innerHTML = name.replaceAll("-", ' ');
-
-    tagList.appendChild(badge);
-  }
-}*/
-
-
-// return checked tags
-/*function getTags(){
-  let tags = [];
-  // get tags
-  const tagCheckboxes = document.querySelector('#tag-checkboxes').getElementsByTagName('input');
-  for (var i = 0; i < tagCheckboxes.length; i++) {
-    if (tagCheckboxes[i].checked) {
-      tags.push(tagCheckboxes[i].value);
-    }
-  }
-  return tags;
-}*/
-
-
 // ======ACCOUNT SETTINGS FUNCTIONS======
 
 // disable the availability tag
@@ -2449,6 +2026,7 @@ function populateAcccountDetails(vals){
   settingsForm.email.value = vals.email;
 }
 
+// save account changes
 async function saveDetails(uid) {
   const settingsForm = document.querySelector('.edit-details-form');
   const successMsg = document.querySelector('.edit-details-form .save-success');
@@ -2593,7 +2171,7 @@ modalHelpButton.addEventListener('click', function (e) {
     // get form values and close and open modal
     let formValues = getHelpFormValues();
     // send email if help modal validated
-    createSentEmailDoc(formValues.to, formValues.from, formValues.message).then(function(){
+    createSentEmailDoc(formValues.to, formValues.from, formValues.message, 'Stiwdio Agency: help posting a job').then(function(){
       // when sent change message and graphic
       emailSentConfirmation();
     });
@@ -2629,7 +2207,7 @@ if (signupForm) {
 if (page == "home") {
   console.log("home page");
   // populate page with profiles
-  getRandomDocs(8).then(function(docs){
+  getRandomDocs(12).then(function(docs){
     createGradPreview(docs);
   });
 
@@ -2644,7 +2222,7 @@ if (page == "home") {
       // get form vals and create email message
       let formValues = getContactFormValues();
       // send email if help modal validated
-      createSentEmailDoc(formValues.to, formValues.from, formValues.message).then(function(){
+      createSentEmailDoc(formValues.to, formValues.from, formValues.message, 'Stiwdio Agency: general contact form').then(function(){
         console.log("email sent success");
         homepageMessageSent(); // when sent change message and graphic
         getInTouchForm.reset();  // reset form
@@ -2670,21 +2248,38 @@ if (page == "portfolios") {
   // display cards based on params onload
   const cardsPerPage = 6;
   filterUsers(allParams).then(function(docs) {
-    console.log("filtered docs", docs);
+    //console.log("filtered docs", docs);
     let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), docs); 
     createGradPreview(docsBatch);
     setFolioNum(docs);
     createPagination(getParamKey("page"), cardsPerPage, docs.length);
+    //ifNoResults(docs);
   });
 
   // if no params (filters set) get all get all cards
   let noParams = paramsExist();
-  if (noParams) {
+  
+  // if search param - load search results - paginated
+  if (getParamKey("searchField")) {
+    getAllUserData(undefined, function(allDocs){ 
+      let searchInput = getParamKey("searchField");
+      searchKeyword(allDocs, searchInput).then(function(resultsDocs){
+        let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), resultsDocs); 
+        createGradPreview(docsBatch);
+        setFolioNum(resultsDocs);
+        createPagination(getParamKey("page"), cardsPerPage, resultsDocs.length);
+        ifNoResults(resultsDocs);
+      });
+    });
+  }
+  // if no params (filters set) get all get all cards
+  else if (noParams) {
     getAllUserData(undefined, function(allDocs){
-      let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), allDocs); 
+      let filteredDocs = filterApproved(allDocs);
+      let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), filteredDocs); 
       createGradPreview(docsBatch);
-      setFolioNum(allDocs);
-      createPagination(getParamKey("page"), cardsPerPage, allDocs.length);
+      setFolioNum(filteredDocs);
+      createPagination(getParamKey("page"), cardsPerPage, filteredDocs.length);
     });
   }
   
@@ -2692,15 +2287,17 @@ if (page == "portfolios") {
   const allCheckboxes = document.querySelectorAll('#filters input');
   for (var i = 0; i < allCheckboxes.length; i++) {
     allCheckboxes[i].addEventListener("click", function() {
+      console.log("clicked Checkbox");
       // set page param to 1
       setParam("page", 1);
       allParams = getAllParams();
-      filterUsers(allParams).then(function(docs) {
-        console.log("filtered docs", docs);
+      filterUsers(allParams).then(function(resultsDocs) {
+        let docs = filterApproved(resultsDocs);
         let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), docs); 
         createGradPreview(docsBatch);
         setFolioNum(docs);
         createPagination(getParamKey("page"), cardsPerPage, docs.length);
+        ifNoResults(docs);
       });
       // if no params (filters set) get all get all cards
       let noParams = paramsExist();
@@ -2719,7 +2316,19 @@ if (page == "portfolios") {
   // search keywords
   const searchBtn = document.querySelector('#search #search-keyword');
   searchBtn.addEventListener('click', function(e){
-    searchKeyword(e);
+    e.preventDefault();
+    uncheckAllFilters();
+    getAllUserData(undefined, function(allDocs){
+      let searchInput = getSearchTerm();
+      searchKeyword(allDocs, searchInput).then(function(docs){
+        let resultsDocs = filterApproved(docs);
+        let docsBatch = getDocsBatch(cardsPerPage, getParamKey("page"), resultsDocs);
+        createGradPreview(docsBatch);
+        setFolioNum(resultsDocs);
+        createPagination(getParamKey("page"), cardsPerPage, resultsDocs.length);
+        ifNoResults(resultsDocs);
+      });
+    });
   })
 }
 
@@ -2943,68 +2552,11 @@ if (page == "edit-profile") {
     if (document.visibilityState == "hidden" && pageEdited) {
       //console.log("edit page: ",document.visibilityState);
       let msg = "User " + currentUserData.forename + " " + currentUserData.surname + ", user ID: " + currentUserData.uid + " has updated their profile<br><br>Please view it here: https://studio-freelancer-agency.web.app/profile.html?id=" + currentUserData.uid;
-      createSentEmailDoc("stiwdiofreelanceragency@gmail.com", "stiwdiofreelanceragency@gmail.com", msg);
+      createSentEmailDoc("stiwdiofreelanceragency@gmail.com", "stiwdiofreelanceragency@gmail.com", msg, 'Stiwdio Agency: user profile updated alert');
     }
   });
 
 }
-
-
-// ADD PROFILE PAGE add-profile.html
-/*if (page == "add-profile") {
-  console.log("add-profile page");
-  // show name on page load on add-profile page
-  onAuthStateChanged(auth, function(user) {
-    if (user) {
-        // User logged in already or has just logged in.
-        console.log("user "+user.uid+" logged in");
-        getCurrentUserDetails(user.uid).then(function(vals){
-          if (signedInName) {
-            signedInName.innerHTML = vals.forename;
-          }
-        });
-      } 
-
-  })
-
-  // create tag system
-  createTagCheckboxes();
-
-  // watch for new uploaded images add edit caption icon
-  uploadImageWatcher();
-
-  // load any existing profile info
-  getUserData(getParam()).then(function(vals){
-      showProfileData(vals);
-    });
-
-  // save edited caption from modal
-  const captionModal = document.querySelector('#captionModal .save-caption');
-  captionModal.addEventListener('click', saveCaption);
-  const captionSwitch = document.querySelector('#captionModal #hero-image-switch');
-  captionSwitch.addEventListener('change', saveHero);
-
-  // show profile preview 
-  const previewBtn = document.querySelector('.show-preview');
-  previewBtn.addEventListener('click', function () {
-    showPreview(getTags());
-  });
-
-  // upload and save
-  const uploadBtn = document.querySelector('.save-and-upload');
-  uploadBtn.addEventListener('click', function(e){
-    // add profile info
-    addToProfile(e, getTags());
-  	// get urls of images to upload - resolve promise > upload
-    getImageUrls(e).then(function(result) { 
-         //console.log(result);
-         uploadImage(result).then(function(){
-         	console.log('complete');
-         });
-      });
-  }); 
-
-}*/
 
 
 // SHOW PROFILE
@@ -3045,7 +2597,7 @@ if (page == "single-profile") {
           // get form vals and create email message
           let formValues = getContactMeFormValues(vals);
           // send email if help modal validated
-          createSentEmailDoc(formValues.to, formValues.from, formValues.message).then(function(){
+          createSentEmailDoc(formValues.to, formValues.from, formValues.message, 'Stiwdio Agency: message to freelancer').then(function(){
             // when sent change message and graphic
             console.log("email sent success");
             messageSentConfirmation(vals);
@@ -3136,7 +2688,7 @@ if (page == "job-details") {
       // get form values inc user data from global currentUserData
       let formValues = getApplyForJobValues(currentUserData, currentJobData);
       // send email if help modal validated
-      createSentEmailDoc(formValues.to, formValues.from, formValues.message).then(function(){
+      createSentEmailDoc(formValues.to, formValues.from, formValues.message, 'Stiwdio Agency: job application').then(function(){
         // when sent change message and graphic
         applicationSentConfirmation();
       });

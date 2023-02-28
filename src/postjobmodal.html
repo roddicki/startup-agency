@@ -57,30 +57,30 @@
             </div>
             <form class="row g-3 needs-validation post-job-form0" novalidate>
               <div class="col-md-6 col-sm-12">
-                <label for="validationCustom01" class="form-label">First name*</label>
-                <input type="text" class="form-control" name="firstname" id="validationCustom01" placeholder="Your first name" required>
+                <label for="post-job-firstname" class="form-label">First name*</label>
+                <input type="text" class="form-control" name="firstname" id="post-job-firstname" placeholder="Your first name" required>
                 <div class="invalid-feedback">
                     Please add your forename.
                   </div>
               </div>
               <div class="col-md-6 col-sm-12">
-                <label for="validationCustom02" class="form-label">Last name*</label>
-                <input type="text" class="form-control" name="lastname" id="validationCustom02" placeholder="Your surname" required>
+                <label for="post-job-surname" class="form-label">Last name*</label>
+                <input type="text" class="form-control" name="lastname" id="post-job-surname" placeholder="Your surname" required>
                 <div class="invalid-feedback">
                     Please add your surname.
                   </div>
               </div>
               <div class="col-md-6 col-sm-12">
-                <label for="validationCustom03" class="form-label">Email*</label>
-                <input type="email" class="form-control" name="email" id="validationCustom03" placeholder="Your email" required>
+                <label for="post-job-email" class="form-label">Email*</label>
+                <input type="email" class="form-control" name="email" id="post-job-email" placeholder="Your email" required>
                 <div class="invalid-feedback">
                   Please provide a valid Email.
                 </div>
               </div>
               
               <div class="col-md-6 col-sm-12">
-                <label for="validationCustom05" class="form-label">Phone Number*</label>
-                <input type="tel" class="form-control" name="phone" id="validationCustom05" placeholder="Your phone no" required>
+                <label for="post-job-phone" class="form-label">Phone Number*</label>
+                <input type="tel" class="form-control" name="phone" id="post-job-phone" placeholder="Your phone no" required>
                 <div class="invalid-feedback">
                   Please provide a valid phone number.
                 </div>
@@ -120,8 +120,8 @@
       <form class="needs-validation post-job-form1" novalidate>
       <div class="row g-3">
         <div class="col-md-12">
-          <label for="validationCustom06" class="form-label">Job title*</label>
-          <input type="text" class="form-control" name="title" id="validationCustom06" maxlength="50" placeholder="Descriptive job title" required>
+          <label for="post-job-title" class="form-label">Job title*</label>
+          <input type="text" class="form-control" name="title" id="post-job-title" maxlength="50" placeholder="Descriptive job title" required>
           <div class="invalid-feedback">
               Please add a job title
           </div>
@@ -130,8 +130,8 @@
 
       <div class="row pt-3">
         <div class="col-md-6 col-sm-12">
-          <label for="validationCustom04" class="form-label">Company name*</label>
-          <input type="text" class="form-control" name="company" id="validationCustom07" maxlength="30" placeholder="Your company" required>
+          <label for="post-job-company" class="form-label">Company name*</label>
+          <input type="text" class="form-control" name="company" id="post-job-company" maxlength="30" placeholder="Your company" required>
           <div class="invalid-feedback">
               Please add your company name
           </div>
@@ -181,7 +181,7 @@
       <div class="row">
         <div class="col-md-6 col-sm-12">
           <label for="validationCustom04" class="form-label pb-2">Deadline to apply for this job*</label>
-          <input class="date-input" id="deadline-date" name="applicationDeadline" min="01/01/2023" type="date" name="applicationDeadline" value="now" min="2023-01-01" max="2099-09-13" required>
+          <input class="date-input" id="deadline-date" name="applicationDeadline" min="01/01/2023" type="date" name="applicationDeadline" min="2023-01-01" max="2099-09-13" required>
           <!-- <div id="datewarn"></div> -->
           <div class="invalid-feedback">
               Please add a application deadline
@@ -220,8 +220,7 @@
           Completion date
         </label>
       </div>  
-      <input class="date-input date-margin" id="completion-date" type="date"  name="completionDate"
-          value="now" required disabled>
+      <input class="date-input date-margin" id="completion-date" type="date"  name="completionDate"  required disabled>
     </div>
   
     <div class="col-md-6 col-sm-12 ">

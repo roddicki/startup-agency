@@ -555,7 +555,7 @@
               <button type="button" data-skills="music-composition" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Composition</button>
               <button type="button" data-skills="music-dj" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">DJ</button>
               <button type="button" data-skills="music-dubbing-and-subtitles" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Dubbing / Subtitles</button>
-              <button type="button" data-skills="music-live-perforamnce" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Live performance</button>
+              <button type="button" data-skills="music-live-performance" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Live performance</button>
               <button type="button" data-skills="music-podcasting" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Podcasting</button>
               <button type="button" data-skills="music-radio" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Radio</button>
               <button type="button" data-skills="music-sound-effects" class="btn btn-primary filtertag" data-bs-toggle="button" autocomplete="off">Sound effects</button>
@@ -582,7 +582,7 @@
             <button class="nav-link nav-link-categroies" id="home-tab" data-bs-toggle="tab" data-bs-target="#photography-tab" type="button" role="tab" aria-controls="home" aria-selected="false">PHOTOGRAPHY</button>
           </li>
           <li class="nav-item nav-item-categroies nav-skills" role="presentation">
-            <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#video-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">VIDEO</button>
+            <button class="nav-link nav-link-categroies" id="profile-tab" data-bs-toggle="tab" data-bs-target="#video-tab" type="button" role="tab" aria-controls="profile" aria-selected="false">VIDEO PRODUCTION</button>
           </li>
           <li class="nav-item nav-item-categroies nav-skills" role="presentation">
             <button class="nav-link nav-link-categroies" id="contact-tab" data-bs-toggle="tab" data-bs-target="#video-games" type="button" role="tab" aria-controls="contact" aria-selected="false">VIDEO GAMES</button>
@@ -869,8 +869,12 @@
   let preloadedImages = [];
 
   // populate project showcase modal
-  async function populateProjectModal(projectId, name, link, description) {
-    //console.log(projectId, name, description, link);
+  async function populateProjectModal(projectId, link) {
+    const descriptionContainer = document.querySelector('#'+projectId+'-description');
+    const description = descriptionContainer.innerHTML;
+    const nameContainer = document.querySelector('#'+projectId+'-name');
+    const name = nameContainer.innerHTML;
+    console.log(projectId, name, description, link);
     // get form content
     const projectForm = document.querySelector('#editProject .edit-project-form');
     projectForm.projectId.value = projectId;

@@ -141,7 +141,6 @@ const submitJobModal2 = document.querySelector('#submit2'); // preview
 const jobModalStep3 = new bootstrap.Modal(document.querySelector('#post-job-modal3'));
 // Loop over them and prevent submission
 submitJobModal2.addEventListener('click', function (event) {
-  console.log("preview job clicked");
   if (!jobForm1.checkValidity()) {
     event.preventDefault();
     event.stopPropagation();
@@ -180,7 +179,6 @@ console.log("modal help submit clicked");
 
 // show job preview on preview modal
 function createJobPreview() {
-  console.log("job preview");
   // first modal
   const form0 = document.querySelector('.post-job-form0');
   //console.log(form0.firstname.value, form0.lastname.value, form0.email.value, form0.phone.value);
@@ -235,7 +233,7 @@ function createJobPreview() {
   tagsPreview.innerHTML = ""; // remove previous tags
   for (var i = 0; i < allCategoryTags.length; i++) {
     // show preview tags
-    let previewTag = "<span class=\"btn btn-primary filtertag\">"+allCategoryTags[i].innerHTML+"</span>"
+    let previewTag = "<span class=\"filter-tag-profile text-capitalize\">"+allCategoryTags[i].innerHTML+"</span>"
     tagsPreview.innerHTML += previewTag;
   }
   console.log(allCategoryTags);

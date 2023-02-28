@@ -32,16 +32,21 @@ body {
 	background-size: 75%;
     background-repeat: repeat;
 	background-repeat: repeat-y;
-	    /* Set a specific height */
-		min-height: 500px; 
-  
-		/* Create the parallax scrolling effect */
-		background-attachment: fixed;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-  }
-  a:link {
+    /* Set a specific height */
+	min-height: 500px; 
+
+	/* Create the parallax scrolling effect */
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#header {
+	height: 112px;
+}
+
+a:link {
 	text-decoration: none;
 }
 
@@ -58,9 +63,6 @@ a:active {
 }
 
 .home-header{
-
-
-	
 	font-style: normal;
 	font-weight: 700;
 	font-size: 85px;
@@ -78,7 +80,6 @@ h4{
 
 	/* Indigo */
 	color: #572F88;
-
 }
 
 h5{
@@ -681,6 +682,17 @@ h5{
 	padding-top:13px;
   }
 
+  .search-icon {
+  	background-color: #572F88;
+    border-color: #572F88;
+    color: #ffffff;
+  }
+
+  .search-icon:hover {
+  	background-color: #0d6efd;
+  	border-color: #0d6efd;
+  }
+
   .filter-checkbox{
 	background: #FFFFFF;
 	border: 1px solid #EDEBEE;
@@ -919,6 +931,7 @@ h5{
 	margin-bottom: 5px;
 	height:330px;
 	position: relative;
+	min-width: 370px;
 	/*max-width: 350px;*/
 }
 
@@ -1529,7 +1542,7 @@ margin-bottom: 10px;
 		z-index: 2005;
 		position:absolute;
 		float:right;
-		right: 0px;
+		right: -15px;
 		width: 18em;
 		display: none;
 		top: 0px;

@@ -1,5 +1,5 @@
 
-import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, updateUserDoc,isUserSignedIn, getUserUid, getAllCurrentJobData, getAllJobData, getSingleJob, updateJobDoc, getAllUserData} from './firebase-library.js';
+import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentUserEmail, createUserDoc, updateUserDoc,isUserSignedIn, getUserUid, getAllCurrentJobData, getAllJobData, getSingleJob, updateJobDoc, getAllUserData, createSentEmailDoc} from './firebase-library.js';
 
 import {getSkillsTags, getCategories} from './tags-categories.js';
 
@@ -31,6 +31,7 @@ const auth = getAuth();
 const storage = getStorage();
 
 let currentUserData = {};
+const adminEmail = "stiwdiofreelanceragency@gmail.com";
 
 // on login state change
 onAuthStateChanged(auth, function(user) {
@@ -55,7 +56,8 @@ function signInAdmin(e) {
   const loginForm = document.querySelector('.login');
   let email = loginForm.email.value;
   let password = loginForm.password.value;
-  signInWithEmailAndPassword(auth, email, password)
+  if (email == adminEmail) {
+    signInWithEmailAndPassword(auth, email, password)
     .then(function(cred){
       console.log("Signed in", cred.user.uid);
       loginForm.reset();
@@ -66,6 +68,12 @@ function signInAdmin(e) {
       console.log(err.message);
       document.querySelector("#login-err").removeAttribute("hidden");
     });
+  }
+  else {
+    document.querySelector("#login-err-admin").removeAttribute("hidden");
+  }
+  
+  
 }
 
 // show signed in user
@@ -152,7 +160,8 @@ function createUserList(userData) {
     } 
     let idProfile = "approve-profile-"+i;
     let profileApproved = document.createElement("td");
-    profileApproved.innerHTML = '<div class="form-check profile-approved form-switch"><input class="form-check-input" type="checkbox" id="'+idProfile+'" data-id="'+userData[i].id+'" '+approvedProfile+'></div>';
+    profileApproved.classList = "d-none";
+    profileApproved.innerHTML = '<div class="form-check profile-approved form-switch d-none"><input class="form-check-input" type="checkbox" id="'+idProfile+'" data-id="'+userData[i].id+'" '+approvedProfile+'></div>';
 
     let profileLink = document.createElement("td");
     profileLink.className = "d-none d-md-table-cell";
@@ -245,13 +254,18 @@ function createJobList(userData) {
   let jobListContainer = document.querySelector(".job-list tbody");
   const noOfJobs = document.querySelector(".no-of-jobs");
   noOfJobs.innerHTML = "("+userData.length + " Jobs)";
+
+  // variables for the send email job modal
+  let emailList = [];
+  let selectedJob;
   
   for (var i = 0; i < userData.length; i++) {
     //userData[i]
     const tr = document.createElement("tr");
 
-    const jobTitle = document.createElement("td");
-    jobTitle.innerHTML = userData[i].title;
+    const jobTitle = userData[i].title;
+    const jobTitleEl = document.createElement("td");
+    jobTitleEl.innerHTML = jobTitle;
 
     let applicationDeadline = new Date(userData[i].applicationdeadline.seconds*1000);
     let applicationDeadlineStr = applicationDeadline.toLocaleString("en-GB", {day: "numeric", month: "numeric", year: "numeric"});
@@ -275,11 +289,16 @@ function createJobList(userData) {
     editLink.className = "d-none d-md-table-cell";
     editLink.innerHTML = '<a style="white-space: nowrap;" href="jobedit.html?id='+userData[i].id+'" class="btn btn-primary">Edit Job</a>';
 
-    tr.appendChild(jobTitle);
+    const sendMail = document.createElement("td");
+    sendMail.className = "d-none d-md-table-cell";
+    sendMail.innerHTML = '<a style="white-space: nowrap;" href="#" class="btn btn-primary" id="sendmail-'+i+'" data-bs-toggle="modal" data-bs-target="#SendMailModal" data-id="'+userData[i].id+'">Send Email</a>';
+
+    tr.appendChild(jobTitleEl);
     tr.appendChild(deadline);
     tr.appendChild(userApproved);
     tr.appendChild(preview);
     tr.appendChild(editLink);
+    tr.appendChild(sendMail);
     jobListContainer.appendChild(tr);
 
     // add event listeners for the switch
@@ -290,8 +309,185 @@ function createJobList(userData) {
       // update user doc with key val
       updateJobDoc(approveSwitch.dataset.id, "approved", approveSwitch.checked); 
     });
+
+    // add event listener for the send mail
+    const sendMailBtn = document.querySelector("#sendmail-"+i);
+    sendMailBtn.addEventListener('click', function(){
+      // find users 
+      getSingleJob (sendMailBtn.dataset.id, function(jobData){
+        findUsers(jobData).then(function(results){
+          console.log("job:", results);
+          // add the id to the job details
+          jobData.id = sendMailBtn.dataset.id;
+          emailList = results; // set email list
+          selectedJob = jobData; // set selected job details
+          // populate modal
+          populateModal(results, jobData.categories, jobTitle);
+        });
+      });
+    });
+
+  }
+  // add event listener for the send btn in modal
+  const sendBtn = document.querySelector("#SendMailModal #send-email");
+  sendBtn.addEventListener('click', function() {
+    sendJobEmail(emailList, selectedJob)
+  });
+}
+
+
+// find users to send job emails to
+async function findUsers(data) {
+  // find category for job
+  let categories = data.categories;
+  if (data.categories == null) {
+    return;
+  }
+  // query and match with users
+  let vals = [];
+  try {
+    const q = query(collection(db, "users"), where('categories', 'array-contains-any', categories));
+    const querySnapshot = await getDocs(q);
+    let docData;
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      if (doc.data().approved) {
+        console.log(doc.id, doc.data().email, doc.data().forename, doc.data().surname);
+        docData = doc.data();
+        docData.id = doc.id;
+        vals.push(docData);
+      }
+    });
+  }
+  catch(err) {
+    //console.log("no categories");
+    return null;
+  }
+  
+  return vals; 
+}
+
+
+// populate send email Modal
+function populateModal(valsArr, categories, jobTitle) {
+  const modalBody = document.querySelector("#SendMailModal .modal-body .modal-text");
+  const sendMailBtn = document.querySelector("#SendMailModal #send-email");
+  // reset send btn
+  sendMailBtn.removeAttribute('disabled');
+  sendMailBtn.classList.remove('btn-success');
+  sendMailBtn.classList.add('btn-primary');
+  sendMailBtn.innerHTML = "Send";
+  modalBody.innerHTML = "<h2>Job: "+jobTitle+"</h2>"
+  if (valsArr == null) {
+    modalBody.innerHTML += "This Job listing has no categories so emails cannot be sent, you can add categories by editing the job listing<br>";
+    sendMailBtn.setAttribute('disabled', '');
+    return;
+  } 
+  modalBody.innerHTML += "This Job listing has the categories:<br>";
+  for (var i = 0; i < categories.length; i++) {
+    modalBody.innerHTML += "<strong style='text-transform: capitalize;'>"+categories[i]+"</strong><br>";
+  }
+  if (valsArr == "") {
+    modalBody.innerHTML += "<br>There were no email matches<br>";
+    sendMailBtn.setAttribute('disabled', '');
+    return;
+  }
+  modalBody.innerHTML += "<br>Emails will be sent to:<br>";
+  for (var i = 0; i < valsArr.length; i++) {
+    modalBody.innerHTML += "<strong>"+valsArr[i].forename+" "+valsArr[i].surname+"</strong>: "+valsArr[i].email+"<br>";
   }
 }
+
+// Create text for job email alert to freelancers
+function createJobAlertEmail(job, customMsg, user) {
+  console.log(job);
+  let thisDomain = window.location.hostname;
+  let costEng = "";
+  let costWelsh = "";
+  let emailMsg = "";
+  let categories = "";
+  let completionDateEng = "";
+  let completionDateWelsh = "";
+  const applicationdeadline = job.applicationdeadline.toDate().toDateString();
+  // categories array in separate file
+  const categoriesList = getCategories(); // from tags-categories.js
+  // add categories
+  for (var i = 0; i < job.categories.length; i++) {
+    if (i > 0) {
+      categories += " / "
+    }
+    // compare job categories with list of all categories to get description of category
+    for (var j = 0; j < categoriesList.length; j++) {
+      if (job.categories[i] == categoriesList[j].category) {
+        categories += categoriesList[j].description;
+      }
+    }
+  }
+  // budget or hourly
+  if (job.usehourly) {
+    costEng = "Budget (hourly rate): £" +job.hourlyrate+ " per hour<br>";
+    costWelsh = "Cyllideb (cyfradd yr awr): £" +job.hourlyrate+ " yr awr<br>";
+  }
+  else {
+    costEng = "Budget: £" +job.budget+ "<br>";
+    costWelsh = "Cyllideb: £" +job.budget+ "<br>";
+  }
+  // custom message
+  if (customMsg != "") {
+    customMsg = customMsg+"<br><br>";
+  }
+  // completion date/ duration
+  if (job.duration != "" && job.duration) {
+    completionDateEng = job.duration+ " days";
+    completionDateWelsh = job.duration+ " dyddiau";
+  }
+  else {
+    completionDateEng = job.deadline.toDate().toDateString();
+    completionDateWelsh = job.deadline.toDate().toDateString();
+  }
+  emailMsg += "Dear "+user+ "<br><br>";
+  emailMsg += customMsg;
+  emailMsg += "Good news!<br>The Stiwdio Agency has received the following job brief \""+job.title+"\" and you listed "+categories+" as one / some of your key skill/s.<br>";
+  emailMsg += costEng;
+  emailMsg += "Timescale: " +completionDateEng+ "<br>";
+  emailMsg += "This job's location: " +job.location+ "<br><br>";
+  emailMsg += "If you are interested, don't forget to submit your proposal before <b>"+applicationdeadline+"</b> and read the full job description here <br><a href='https://"+thisDomain+ "/job-details.html?id=" +job.id+"'>https://"+thisDomain+ "/job-details.html?id=" +job.id+"</a><br>";
+  emailMsg += "<br>//<br>";
+  emailMsg += "Newyddion da!<br>Mae Asiantaeth Stiwdio wedi derbyn teitl briffio \""+job.title+"\" ac fe wnaethoch chi restru "+categories+" fel rhai o'ch sgiliau allweddol.<br>";
+  emailMsg += costWelsh;
+  emailMsg += "Amserlen: " +completionDateWelsh+ "<br>";
+  emailMsg += "Lleoliad: " +job.location+ "<br><br>";
+  emailMsg += "Os oes gennych ddiddordeb, peidiwch ag anghofio cyflwyno eich cynnig cyn <b>"+applicationdeadline+"</b> yma, lle gallwch hefyd ddarllen y disgrifiad swydd llawn: <br><a href='https://"+thisDomain+ "/job-details.html?id=" +job.id+"'>https://"+thisDomain+ "/job-details.html?id=" +job.id+"</a><br>";
+  emailMsg += "<br><br>As ever, keep creating!<br>//<br>Fel erioed, daliwch ati i greu!";
+
+  return emailMsg;
+}
+
+
+// send email AND compile list of names  with job info
+function sendJobEmail(users, job) {
+  const sendMailBtn = document.querySelector("#SendMailModal #send-email");
+  let thisDomain = window.location.hostname;
+  // Remove all parameters from the URL
+  //let amendedUrl = new URL(thisUrl.split('/')[0]);
+  sendMailBtn.innerHTML = "Sending...";
+  for (var i = 0; i < users.length; i++) {
+    // send email if help modal validated
+    const modalMsgText = document.querySelector("#SendMailModal .modal-body form #msg-text");
+    let message = createJobAlertEmail(job, modalMsgText.value, users[i].forename+ " " +users[i].surname);
+    // send email
+    createSentEmailDoc(users[i].email, adminEmail, message, 'Stiwdio Agency Job alert // rhybudd swydd asiantaeth Stiwdio').then(function(){
+      // when sent change message and btn
+      console.log("Email sent");
+      sendMailBtn.classList.remove('btn-primary');
+      sendMailBtn.classList.add('btn-success');
+      sendMailBtn.innerHTML = "Emails sent";
+    });
+  }
+  console.log(job.title, job.id);
+  console.log(job);
+}
+
 
 // Display job
 function displayJobDetails(jobData) {
@@ -308,12 +504,8 @@ function displayJobDetails(jobData) {
   jobDetailsForm.budget.value = jobData.budget;
   jobDetailsForm.duration.value = jobData.duration;
   jobDetailsForm.hourlyrate.value = jobData.hourlyrate;
-  
-  const deadline = new Date(jobData.deadline.seconds*1000);
-  jobDetailsForm.deadline.value = deadline.toLocaleDateString('en-CA');
-
-  const applicationDeadline = new Date(jobData.applicationdeadline.seconds*1000);
-  jobDetailsForm.applicationdeadline.value = applicationDeadline.toLocaleDateString('en-CA');
+  jobDetailsForm.deadline.valueAsDate = new Date(jobData.deadline.seconds*1000);
+  jobDetailsForm.applicationdeadline.valueAsDate = new Date(jobData.applicationdeadline.seconds*1000);
 
   // skills tags
   const tagContainer = document.querySelector('#tag-checkboxes');
@@ -444,8 +636,6 @@ function loadPages(){
     getAllJobData(function(jobData){
       console.log(jobData);
       createJobList(jobData);
-      //displayAllJobs(itemsPerPage, getParamKey("page"), jobData); // err
-      //createPagination(getParamKey("page"), itemsPerPage, jobData.length);
     });  
   };
 

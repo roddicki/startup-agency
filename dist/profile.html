@@ -24,9 +24,11 @@
 <section>
   <div class="container">
     <div class="row d-flex align-items-center profile-top">
-      <div class="col-9 mb-4 edit-profile-back-container"></div>
+      <div class="col-9 mb-4 edit-profile-back-container">
+        <a onclick="history.back()" href="#"><i class="bi bi-chevron-left"></i> Back</a>
+      </div>
       <div class="col-3 mb-4 edit-profile-btn-container">
-        <!-- inject edit profil if logged in -->
+        <!-- inject edit profile if logged in -->
       </div>
     </div>
 
@@ -137,7 +139,7 @@
                 <div class="skills-tags"></div>
               </div>
               <div class="col-12 d-none pb-4" data-category="video">
-                <p><strong>Video</strong></p>
+                <p><strong>Video Production</strong></p>
                 <div class="skills-tags"></div>
               </div>
               <div class="col-12 d-none pb-4" data-category="games">
@@ -239,7 +241,7 @@
           </div>
           <!--This is for the genral message-->
           <div class="col-md-12" id="general-message">
-            <label for="validationCustom04" class="form-label">General message*</label>
+            <label for="validationCustom04" class="form-label">General message (if relevant please include a budget and deadline)*</label>
             <textarea type="text" class="form-control" id="general-message-contact-grad" rows="3" name="message" placeholder="Your message"  required></textarea>
             <div class="invalid-feedback">
               Please add a messsage

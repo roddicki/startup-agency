@@ -203,6 +203,21 @@ export function resetPassword(email) {
 //*****************************************
 // firebase general  functions
 
+// SEND EMAIL FUNCTIONS
+// create doc to send email // this uses a a google cloud function to auto send a a mail onCreate() // see functions > index.js
+export async function createSentEmailDoc(to, from, msg, subject){
+  //const modalHelp = new bootstrap.Modal(document.querySelector('#help'));
+  //const modalThankYou = new bootstrap.Modal(document.querySelector('#help-thank-you'));
+  // add doc to collection
+  addDoc(collection(db, "sentmails"), {
+    to: to,
+    from: from,
+    subject: subject,
+    message: msg
+  })
+}
+
+
 // get all current jobs and order by application deadline date
 export function getAllCurrentJobData(sort, fn) {
   // collection ref - in this case books
@@ -238,7 +253,6 @@ export function getAllCurrentJobData(sort, fn) {
       else {
         sortedArr = jobCollection;
       }  
-      console.log(sortedArr);
       fn(sortedArr);
     })
     .catch(function(err) {
@@ -326,17 +340,22 @@ export function getAllUserData(tag, fn) {
 
 // get random docs
 export async function getRandomDocs(n){
-  console.log("docs = " + n);
   let docs = [];
   // get all uids & data
   const querySnapshot = await getDocs(collection(db, "users"));
   querySnapshot.forEach((doc) => {
-    let obj = {}
-    obj.id = doc.id;
-    let merged = {...obj, ...doc.data()};
-    docs.push(merged);
-    //console.log(doc.data());
+    // add doc if approved
+    if (doc.data().approved) {
+      let obj = {}
+      obj.id = doc.id;
+      let merged = {...obj, ...doc.data()};
+      docs.push(merged);
+    }
   })
+  console.log("docs.length", docs.length)
+  if (docs.length < n) {
+    n = docs.length;
+  }
   // get n random docs
   const shuffled = docs.sort(() => 0.5 - Math.random());
   let selected = shuffled.slice(0, n);
