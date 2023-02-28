@@ -458,6 +458,7 @@ function createJobAlertEmail(job, customMsg, user) {
   emailMsg += "Amserlen: " +completionDateWelsh+ "<br>";
   emailMsg += "Lleoliad: " +job.location+ "<br><br>";
   emailMsg += "Os oes gennych ddiddordeb, peidiwch ag anghofio cyflwyno eich cynnig cyn <b>"+applicationdeadline+"</b> yma, lle gallwch hefyd ddarllen y disgrifiad swydd llawn: <br><a href='https://"+thisDomain+ "/job-details.html?id=" +job.id+"'>https://"+thisDomain+ "/job-details.html?id=" +job.id+"</a><br>";
+  emailMsg += "<br><br>As ever, keep creating!<br>//<br>Fel erioed, daliwch ati i greu!";
 
   return emailMsg;
 }
