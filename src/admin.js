@@ -298,6 +298,7 @@ function createJobList(userData) {
     tr.appendChild(userApproved);
     tr.appendChild(preview);
     tr.appendChild(editLink);
+    console.log("append SenMail");
     tr.appendChild(sendMail);
     jobListContainer.appendChild(tr);
 
