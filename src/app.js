@@ -1438,17 +1438,23 @@ function populateBio(vals) {
   name.innerHTML = vals.forename + " " + vals.surname;
   // title
   let jobTitle = document.querySelector("section #personal-details-title");
-  jobTitle.innerHTML = vals.jobTitle;
+  if (vals.jobTitle) {jobTitle.innerHTML = vals.jobTitle}
   // website
   let website = document.querySelector("section #personal-details-link");
-  website.innerHTML = "<a target='_blank' href='"+vals.website+"'>"+vals.website+"</a>";
+  if (vals.website) {website.innerHTML = "<a target='_blank' href='"+vals.website+"'>"+vals.website+"</a>"}
   // location
   let location = document.querySelector("section #personal-details-location");
-  location.innerHTML = vals.location;
+  let locationContainer = document.querySelector("section #personal-details-location-container");
+  if (vals.location) {
+    location.innerHTML = vals.location;
+  }
+  else {
+    locationContainer.classList.add("d-none");
+  }
   // bio
   try {
     let bio = document.querySelector("section #personal-details-bio");
-    bio.innerHTML = vals.bio;
+    if (vals.bio) {bio.innerHTML = vals.bio} 
   }
    catch(err) {
     console.log(err.message);
@@ -2055,15 +2061,16 @@ async function saveDetails(uid) {
 }
 
 // delete profile
+// not working as 
 async function deleteProfile(uid){
   const user = auth.currentUser;
   deleteUser(user).then(function() {
     console.log("user deleted");
-    window.location.href = "index.html";
     // delete use then delete doc
     deleteDoc(doc(db, 'users', uid))
       .then(function(){
         console.log("user doc deleted");
+        window.location.href = "index.html";
       });
   }).catch(function(error) {
     console.log("error deleting profile", error);
@@ -2071,7 +2078,7 @@ async function deleteProfile(uid){
     const deleteModalTitle = document.querySelector('#deleteAccount .signinheader');
     deleteModalTitle.innerHTML = "Oops... account not deleted..."
     const deleteModalText = document.querySelector('#deleteAccount .modal-body');
-    deleteModalText.innerHTML = "<p>To delete your account you must be recently logged in.</p><p>Please log out and log back in, then try deleting your account again.</p>";
+    deleteModalText.innerHTML = "<h3>To delete your account you must be recently logged in.<strong></h3><p>Please log out and log back in, then try deleting your account again.</p>";
   });
 }
 

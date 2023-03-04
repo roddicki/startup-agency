@@ -4,7 +4,7 @@ import { initializeApp } from 'firebase/app';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import { getFirestore, collection, onSnapshot, getDocs, addDoc, deleteDoc, doc, query, where, orderBy, getDoc, serverTimestamp, updateDoc, setDoc,  Timestamp, arrayUnion} from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, sendEmailVerification } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAq7-QGjZ8O1RVe_seOfdYjVLCjLdwrHYE",
@@ -45,6 +45,12 @@ export function signUpUser(e) {
   createUserWithEmailAndPassword(auth, email, password)
     .then(function(cred){
       console.log('user created:', cred.user);
+      // send email verification
+      sendEmailVerification(auth.currentUser)
+        .then(() => {
+          // Email verification sent!
+          console.log('Email verification sent!');
+        });
       // create doc for user
       createUserDoc(cred.user.uid, email);
     })
