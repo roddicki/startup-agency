@@ -42,17 +42,24 @@ export function signUpUser(e) {
   const signupForm = document.querySelector('.reg-form2');
   let email = signupForm.email.value;
   let password = signupForm.password.value;
+  let emailWelcomeSubject = "Welcome to the Stiwdio Agency";
+  let emailWelcomeMsg = "<p><strong>Thank you for signing up with the Stiwdio Agency</strong> - paid, degree-related work is at your fingertips.<br>Once your details have been approved, our admin will be in touch with the final steps...</p><p>In the meantime, please verify your email. And feel free to edit your profile to ensure you have your best portfolio pieces on show.</p><p>For more info on how to change your details and what you can upload, check out our 'how it works' section</p><p>All the best, and keep creating!<br>The Stiwdio Agency team</p>";
   createUserWithEmailAndPassword(auth, email, password)
-    .then(function(cred){
+    .then(function(cred) {
       console.log('user created:', cred.user);
       // send email verification
-      sendEmailVerification(auth.currentUser)
-        .then(() => {
-          // Email verification sent!
-          console.log('Email verification sent!');
-        });
+      sendEmailVerification(auth.currentUser);
+      return cred;
+    })
+    .then(function(cred) {
+      // Email verification sent!
+      console.log('Email verification sent!');
       // create doc for user
       createUserDoc(cred.user.uid, email);
+      return email;
+    })
+    .then(function(email){
+      createSentEmailDoc(email, "noreply@startupagency.wales", emailWelcomeMsg, emailWelcomeSubject);
     })
     .catch(function(err) {
       console.log(err.message);
@@ -60,7 +67,7 @@ export function signUpUser(e) {
         document.querySelector("#register-modal2 .alert-danger").innerHTML += "Email already in use, please try another or reset your password";
       }
       else {
-        document.querySelector("#register-modal2 .alert-danger").innerHTML += "Error registering";
+        document.querySelector("#register-modal2 .alert-danger").innerHTML += "Error registering, please try again or contact us";
       }
       document.querySelector("#register-modal2 .alert-danger").removeAttribute("hidden");
     });
@@ -71,6 +78,7 @@ export function signUpUser(e) {
 export function createUserDoc(uid, userEmail) {
   console.log(uid, userEmail);
   const signupForm = document.querySelector('.reg-form1');
+  const emailNewSignupMsg = "<h2>Auto-generated email from the Stiwdio Agency</h2><p>"+signupForm.forename.value+" "+signupForm.surname.value+", "+userEmail+" has registered with the Stiwdio Agency</p><p>Please approve them (log in as admin) <a href='https://studio-freelancer-agency.web.app/admin/userinfo.html?id="+uid+"'>https://studio-freelancer-agency.web.app/admin/userinfo.html?id="+uid+"</a></p>";
   //console.log(signupForm.forename.value, signupForm.surname.value, signupForm.studentid.value, signupForm.coursename.value, signupForm.graduation.value);
   setDoc(doc(db, "users", uid), {
     forename: signupForm.forename.value,
@@ -84,6 +92,8 @@ export function createUserDoc(uid, userEmail) {
   })
   .then(function(){
     console.log("successfully created");
+    // send email to admin
+    createSentEmailDoc("stiwdiofreelanceragency@gmail.com", "noreply@startupagency.wales", emailNewSignupMsg, "New Registration with the Stiwdio Agency");
     // go to add profile on completion
     window.location.href = "edit-profile.html?id="+uid+"&intro=true";
   });
@@ -148,20 +158,6 @@ export async function getUserData(uid) {
   }
 }
 
-// get profile data for signed in user
-/*export async function getCurrentUserDetails(uid) {
-  const docRef = doc(db, 'users', uid);
-  const singleDoc = await getDoc(docRef);
-  if (singleDoc.exists()) {
-    console.log("Logged in user document data:", singleDoc.data());
-    currentUserData = singleDoc.data();
-    currentUserData.uid = uid;
-    return singleDoc.data();
-  } else {
-    // doc.data() will be undefined in this case
-    console.log("No such document!");
-  }
-}*/
 
 // Returns the signed-in user's email 
 export function getCurrentUserEmail(){
@@ -212,8 +208,6 @@ export function resetPassword(email) {
 // SEND EMAIL FUNCTIONS
 // create doc to send email // this uses a a google cloud function to auto send a a mail onCreate() // see functions > index.js
 export async function createSentEmailDoc(to, from, msg, subject){
-  //const modalHelp = new bootstrap.Modal(document.querySelector('#help'));
-  //const modalThankYou = new bootstrap.Modal(document.querySelector('#help-thank-you'));
   // add doc to collection
   addDoc(collection(db, "sentmails"), {
     to: to,

@@ -2060,26 +2060,40 @@ async function saveDetails(uid) {
   });
 }
 
-// delete profile
-// not working as 
+// delete account and profile
 async function deleteProfile(uid){
   const user = auth.currentUser;
-  deleteUser(user).then(function() {
-    console.log("user deleted");
-    // delete use then delete doc
+  const deleteModalTitle = document.querySelector('#deleteAccount .signinheader');
+  const errorTitle = "Oops... account not deleted...";
+  const deleteModalText = document.querySelector('#deleteAccount .modal-body');
+  const errorTxt = "<h3>To delete your account you must be recently logged in.<strong></h3><p>Please log out and log back in, then try deleting your account again.</p>";
+  let now = new Date();
+  let loginTime = new Date(user.metadata.lastSignInTime);
+  // check last logged in within 3 mins
+  if ( (now - loginTime) < 180000 ) {
+    // delete doc code
     deleteDoc(doc(db, 'users', uid))
       .then(function(){
         console.log("user doc deleted");
-        window.location.href = "index.html";
+        deleteUser(user).then(function(){
+          console.log(user, "deleted");
+          window.location.href = "index.html";
+        });
+      })
+      .catch(function(error) {
+        console.log("error deleting profile", error);
+        // show alert
+        deleteModalTitle.innerHTML = errorTitle;
+        deleteModalText.innerHTML = errorTxt;
       });
-  }).catch(function(error) {
-    console.log("error deleting profile", error);
+  }
+  else {
+    console.log("NOT within 3 mins", now - loginTime);
+    // error
     // show alert
-    const deleteModalTitle = document.querySelector('#deleteAccount .signinheader');
-    deleteModalTitle.innerHTML = "Oops... account not deleted..."
-    const deleteModalText = document.querySelector('#deleteAccount .modal-body');
-    deleteModalText.innerHTML = "<h3>To delete your account you must be recently logged in.<strong></h3><p>Please log out and log back in, then try deleting your account again.</p>";
-  });
+    deleteModalTitle.innerHTML = errorTitle;
+    deleteModalText.innerHTML = errorTxt;
+  }
 }
 
 
