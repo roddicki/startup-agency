@@ -3,6 +3,8 @@ import {loadCheck, signUpUser, signOutUser, signInUser, getUserData, getCurrentU
 
 import {getSkillsTags, getCategories} from './tags-categories.js';
 
+import {setActiveNav} from './header.js';
+
 loadCheck();
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -2124,12 +2126,8 @@ const signedInName = document.querySelector('.welcome-name');
 window.addEventListener('DOMContentLoaded', function(){
   // load category buttons into the post job modal
   createCategoryButtons();
-  //getTag();
-  /*if(allUserData) {
-    getAllUserData(getParam(), function(userData){
-      displayAllUserData("user data:", userData);
-    });
-  }*/
+  // set active nav
+  setActiveNav();
 });
 
 //===========NON PAGE SPECIFIC EVENT LISTENERS AND PROCESSES===================
@@ -2723,4 +2721,4 @@ if (page == "job-details") {
 
 
 
-console.log('hello from index.js tucked at the bottom');
+console.log('app.js check');
