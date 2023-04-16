@@ -296,6 +296,7 @@ h5{
     box-shadow: 5px 5px 5px rgba(0, 0, 0, .05);
 	margin-right: 15px;
 	margin-bottom: 10px;
+	min-height: 200px;
 	
   }
   .centre-block{
@@ -922,7 +923,7 @@ h5{
 
 .grad-preview-block{
 	box-sizing: border-box;
-	padding: 30px;
+	padding: 25px;
 	gap: 24px;
 	background: rgba(255, 255, 255, 0.95);
 	border: 1px solid #EDEBEE;
@@ -931,7 +932,7 @@ h5{
 	margin-bottom: 5px;
 	height:330px;
 	position: relative;
-	min-width: 370px;
+	min-width: 300px;
 	/*max-width: 350px;*/
 }
 
@@ -1165,18 +1166,7 @@ h5{
 
   }
 
-  
-  /*#project-img-showcase-edit-2{
-	display: none;
-  }
 
-  #project-img-showcase-edit-3{
-	display: none;
-  }
-
-  #project-img-edit-1{
-	border: 2px solid #244F8E;
-  }*/
 
   @media(max-width: 991px){
 	.steps{
@@ -1365,9 +1355,18 @@ margin-bottom: 10px;
 		display: flex;
     	flex-wrap: wrap;
 	}
+
+	last-item{
+		display: none;
+	}
 	
 
-	
+	.home-top{
+		margin-top: 0px;
+		margin-bottom: 0px;
+		padding-bottom: 50px;
+		padding-top:50px;
+	}
 
 	.carousel-showcase-hero {
 		flex-grow: 0;
