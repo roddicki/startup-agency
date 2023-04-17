@@ -235,7 +235,7 @@ function setCategoryParams() {
   for (var i = 0; i < categoryCheckboxes.length; i++) {
     if (categoryCheckboxes[i].type === 'checkbox') {
       categoryCheckboxes[i].onclick = function(e) {
-        console.log("clicked category", this.dataset.skills);
+        //console.log("clicked category", this.dataset.skills);
         const tags = document.querySelectorAll('#filters .tag input[data-category="'+this.dataset.skills+'"]');
         if (this.checked && this.dataset.skills != undefined) {
           // add category search param 
@@ -373,7 +373,7 @@ async function filterUsers(allParams) {
       tags.push(allParams[i].tag);
     }
   }
-  console.log(tags);
+  //console.log(tags);
   // while tags array is not empty
   while (tags.length > 0) {
     // create tag sub array / batch of 10
@@ -759,7 +759,7 @@ function confirmDeletion(){
 function setParam(key, value) {
   let currentUrl = new URL(window.location); 
   currentUrl.searchParams.set(key, value);
-  console.log(currentUrl); // "foo=1&bar=2&baz=3"
+  //console.log(currentUrl); // "foo=1&bar=2&baz=3"
   window.history.pushState({}, '', currentUrl);
 }
 
@@ -2306,7 +2306,7 @@ if (page == "portfolios") {
   const allCheckboxes = document.querySelectorAll('#filters input');
   for (var i = 0; i < allCheckboxes.length; i++) {
     allCheckboxes[i].addEventListener("click", function() {
-      console.log("clicked Checkbox");
+      //console.log("clicked Checkbox");
       // set page param to 1
       setParam("page", 1);
       allParams = getAllParams();
