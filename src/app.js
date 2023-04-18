@@ -497,13 +497,20 @@ async function searchKeyword(allDocs, searchStr) {
       let isMatched = false;
       for (const [key, value] of Object.entries(allDocs[i])) {
         // test any value that is in string form
+        //console.log(value);
         if (typeof value === 'string') {
           let searchStr = value.toLowerCase();
           isMatched = searchStr.includes(searchTerm);
         }
-        // test any value that is an array (categories etc)
+        // test any value that is an array. test all values in array (categories, tags etc)
         else if (Array.isArray(value)) {
-          isMatched = value.includes(searchTerm);
+          for (var k = 0; k < value.length; k++) {
+            let str = String(value[k]); // convert to string
+            // if string value includes search term
+            if (str.includes(searchTerm)) {
+              isMatched = true;
+            }
+          }
         }
         // found add to results array docs
         if (isMatched) {
